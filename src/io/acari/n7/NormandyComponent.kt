@@ -1,3 +1,5 @@
+package io.acari.n7
+
 import com.intellij.ide.ui.LafManager
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.BaseComponent
@@ -14,12 +16,13 @@ class NormandyComponent : BaseComponent {
     lateinit var messageBus: MessageBusConnection
     override fun initComponent() {
         messageBus = ApplicationManager.getApplication().messageBus.connect()
+        setNormandyUI()
+        LafManager.getInstance().addLafManagerListener { lafManager -> setNormandyUI() }
+    }
 
-        LafManager.getInstance().addLafManagerListener { lafManager ->
-            UIManager.put("ProgressBarUI", NormandyUI::javaClass.name)
-            UIManager.getDefaults().put(NormandyUI::javaClass.name, NormandyUI::javaClass)
-
-        }
+    private fun setNormandyUI() {
+        UIManager.put("ProgressBarUI", NormandyUI::javaClass.name)
+        UIManager.getDefaults().put(NormandyUI::javaClass.name, NormandyUI::javaClass)
     }
 
     override fun disposeComponent() {

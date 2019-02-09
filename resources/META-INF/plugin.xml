@@ -24,7 +24,7 @@
 
 <application-components>
   <component>
-    <implementation-class>NormandyComponent</implementation-class>
+    <implementation-class>io.acari.n7.NormandyComponent</implementation-class>
   </component>
 </application-components>
 </idea-plugin>
