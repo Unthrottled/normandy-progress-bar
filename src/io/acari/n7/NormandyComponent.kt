@@ -21,8 +21,8 @@ class NormandyComponent : BaseComponent {
     }
 
     private fun setNormandyUI() {
-        UIManager.put("ProgressBarUI", NormandyUI::javaClass.name)
-        UIManager.getDefaults().put(NormandyUI::javaClass.name, NormandyUI::javaClass)
+        UIManager.put("ProgressBarUI", NormandyUIFactory::class.java.name)
+        UIManager.getDefaults().put(NormandyUIFactory::class.java.name, NormandyUIFactory::class.java)
     }
 
     override fun disposeComponent() {
