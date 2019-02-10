@@ -1,8 +1,8 @@
 package io.acari.n7
 
 import com.intellij.openapi.util.IconLoader
+import com.intellij.ui.ColorUtil
 import com.intellij.ui.Gray
-import com.intellij.ui.JBColor
 import com.intellij.util.ui.GraphicsUtil
 import com.intellij.util.ui.JBUI
 import com.intellij.util.ui.JBUI.scale
@@ -15,11 +15,18 @@ import javax.swing.JComponent
 import javax.swing.plaf.ComponentUI
 import javax.swing.plaf.basic.BasicProgressBarUI
 
-/**
- * Forged in the flames of battle by alex.
- */
+val jetWashColor = { _: Color -> ColorUtil.fromHex("#d6f5f8") }
+val outerJetWashColor = { _: Color -> ColorUtil.fromHex("#a38dbe") }
+val backgroundColorFunction = { backgroundColor: Color -> backgroundColor }
 
-val SCALING_FACTOR = 1.0f / 2.0f
+val colors = arrayOf(outerJetWashColor, jetWashColor,
+    outerJetWashColor, jetWashColor,
+    outerJetWashColor, backgroundColorFunction, backgroundColorFunction, outerJetWashColor,
+    jetWashColor, outerJetWashColor,
+    jetWashColor, outerJetWashColor)
+val SCALING_FACTOR = 1.0f / colors.size
+val jetWashScales = colors.mapIndexed { index, _ -> SCALING_FACTOR * index }
+    .toFloatArray()
 
 open class NormandyUI : BasicProgressBarUI() {
 
@@ -58,12 +65,15 @@ open class NormandyUI : BasicProgressBarUI() {
           //SET BACKGROUND
           val R = JBUI.scale(8f)
           val containingRoundRect = Area(RoundRectangle2D.Float(1f, 1f, componentWidth - 2f, componentHeight - 2f, R, R))
+          val parent = component.parent
+          val backgroundColor = if (parent != null) parent.background else UIUtil.getPanelBackground()
+
           graphic.paint = LinearGradientPaint(0f,
               scale(2f),
               0f,
               componentHeight - scale(6f),
-              floatArrayOf(SCALING_FACTOR * 1, SCALING_FACTOR * 2),
-              arrayOf(Color.RED, Color.ORANGE)
+              jetWashScales,
+              colors.map { jetWashColorFunction -> jetWashColorFunction(backgroundColor) }.toTypedArray()
           )
           graphic.fill(containingRoundRect)
 
@@ -130,8 +140,8 @@ open class NormandyUI : BasicProgressBarUI() {
               scale(2f),
               0f,
               componentHeight - scale(6f),
-              floatArrayOf(SCALING_FACTOR * 1, SCALING_FACTOR * 2),
-              arrayOf(Color.RED, Color.ORANGE)
+              jetWashScales,
+              colors.map { jetWashColorFunction -> jetWashColorFunction(backgroundColor) }.toTypedArray()
           )
 
           graphic.fill(RoundRectangle2D.Float(2f * off, 2f * off, amountFull - JBUI.scale(5f), componentHeight - JBUI.scale(5f), JBUI.scale(7f), JBUI.scale(7f)))
