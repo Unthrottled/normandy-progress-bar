@@ -30,91 +30,77 @@ open class NormandyUI : BasicProgressBarUI() {
     }
   }
 
-
   override fun getPreferredSize(c: JComponent?): Dimension =
       Dimension(super.getPreferredSize(c).width, scale(20))
 
-  override fun paintIndeterminate(g2d: Graphics?, c: JComponent) {
-    if (g2d !is Graphics2D) {
-      return
-    }
-    val g = g2d
+  override fun paintIndeterminate(g: Graphics, c: JComponent) {
+    getCorrectGraphic(g)
+        .ifPresent { dimensionsAndGraphic ->
+          val graphic = dimensionsAndGraphic.third
+
+          graphic.color = JBColor(Gray._240.withAlpha(50), Gray._128.withAlpha(50))
+          val componentWidth = c.width
+          var componentHeight = c.preferredSize.height
+          if ((c.height - componentHeight) % 2 != 0) componentHeight++
+
+          val baseRainbowPaint = LinearGradientPaint(0f,
+              scale(2f),
+              0f,
+              componentHeight - scale(6f),
+              floatArrayOf(SCALING_FACTOR * 1, SCALING_FACTOR * 2),
+              arrayOf(Color.RED, Color.ORANGE)
+          )
+
+          graphic.paint = baseRainbowPaint
+
+          val heightDifference = (c.height - componentHeight) / 2
+          if (c.isOpaque) {
+            graphic.fillRect(0, heightDifference, componentWidth, componentHeight)
+          }
+          graphic.color = JBColor(Gray._165.withAlpha(50), Gray._88.withAlpha(50))
+          val config = GraphicsUtil.setupAAPainting(graphic)
+          graphic.translate(0, heightDifference)
+          val x = 0
+
+          val old = graphic.paint
+          graphic.paint = baseRainbowPaint
+
+          val R = JBUI.scale(8f)
+          val R2 = JBUI.scale(9f)
+          val containingRoundRect = Area(RoundRectangle2D.Float(1f, 1f, componentWidth - 2f, componentHeight - 2f, R, R))
+          graphic.fill(containingRoundRect)
+          graphic.paint = old
+
+          val area = Area(Rectangle2D.Float(0f, 0f, componentWidth.toFloat(), componentHeight.toFloat()))
+          area.subtract(Area(RoundRectangle2D.Float(1f, 1f, componentWidth - 2f, componentHeight - 2f, R, R)))
+          graphic.paint = Gray._128
+          if (c.isOpaque) {
+            graphic.fill(area)
+          }
+
+          area.subtract(Area(RoundRectangle2D.Float(0f, 0f, componentWidth.toFloat(), componentHeight.toFloat(), R2, R2)))
+
+          val parent = c.parent
+          val background = if (parent != null) parent.background else UIUtil.getPanelBackground()
+          graphic.paint = background
+          if (c.isOpaque) {
+            graphic.fill(area)
+          }
 
 
-    val b = progressBar.insets // area for border
-    val barRectWidth = progressBar.width - (b.right + b.left)
-    val barRectHeight = progressBar.height - (b.top + b.bottom)
+          graphic.draw(RoundRectangle2D.Float(1f, 1f, componentWidth.toFloat() - 2f - 1f, componentHeight.toFloat() - 2f - 1f, R, R))
+          graphic.translate(0, -(c.height - componentHeight) / 2)
 
-    if (barRectWidth <= 0 || barRectHeight <= 0) {
-      return
-    }
-    g.color = JBColor(Gray._240.withAlpha(50), Gray._128.withAlpha(50))
-    val w = c.width
-    var h = c.preferredSize.height
-    if ((c.height - h) % 2 != 0) h++
+          config.restore()
 
-    val baseRainbowPaint = LinearGradientPaint(0f,
-        scale(2f),
-        0f,
-        h - scale(6f),
-        floatArrayOf(SCALING_FACTOR * 1, SCALING_FACTOR * 2),
-        arrayOf(Color.RED, Color.ORANGE)
-    )
-
-    g.paint = baseRainbowPaint
-
-    if (c.isOpaque) {
-      g.fillRect(0, (c.height - h) / 2, w, h)
-    }
-    g.color = JBColor(Gray._165.withAlpha(50), Gray._88.withAlpha(50))
-    val config = GraphicsUtil.setupAAPainting(g)
-    g.translate(0, (c.height - h) / 2)
-    val x = 0
-
-    val old = g.paint
-    g.paint = baseRainbowPaint
-
-    val R = JBUI.scale(8f)
-    val R2 = JBUI.scale(9f)
-    val containingRoundRect = Area(RoundRectangle2D.Float(1f, 1f, w - 2f, h - 2f, R, R))
-    g.fill(containingRoundRect)
-    g.paint = old
-
-    val area = Area(Rectangle2D.Float(0f, 0f, w.toFloat(), h.toFloat()))
-    area.subtract(Area(RoundRectangle2D.Float(1f, 1f, w - 2f, h - 2f, R, R)))
-    g.paint = Gray._128
-    if (c.isOpaque) {
-      g.fill(area)
-    }
-
-    area.subtract(Area(RoundRectangle2D.Float(0f, 0f, w.toFloat(), h.toFloat(), R2, R2)))
-
-    val parent = c.parent
-    val background = if (parent != null) parent.background else UIUtil.getPanelBackground()
-    g.paint = background
-    if (c.isOpaque) {
-      g.fill(area)
-    }
-
-
-    g.draw(RoundRectangle2D.Float(1f, 1f, w.toFloat() - 2f - 1f, h.toFloat() - 2f - 1f, R, R))
-    g.translate(0, -(c.height - h) / 2)
-
-    config.restore()
+        }
   }
 
   //todo: vertical progress bars
   override fun paintDeterminate(g: Graphics, component: JComponent) {
-    val insets = progressBar.insets
-    Optional.of(g)
-        .filter { it is Graphics2D}
-        .map { it as Graphics2D }
-        .map {
-          Triple(progressBar.width - (insets.right + insets.left),
-              progressBar.height - (insets.top + insets.bottom), it)
-        }
-        .filter { it.first > 0 || it.second > 0 }
+    getCorrectGraphic(g)
         .ifPresent {dimensionsAndGraphic->
+          val insets = progressBar.insets
           val graphic = dimensionsAndGraphic.third
           val graphicsConfig = GraphicsUtil.setupAAPainting(graphic)
           val componentWidth = component.width
@@ -137,7 +123,6 @@ open class NormandyUI : BasicProgressBarUI() {
           val R = JBUI.scale(8f)
           val R2 = JBUI.scale(9f)
           val off = JBUI.scale(1f)
-
 
           graphic.translate(0, (component.height - componentHeight) / 2)
           graphic.color = progressBar.foreground
@@ -165,6 +150,16 @@ open class NormandyUI : BasicProgressBarUI() {
 //      return
 //    }
   }
+
+  private fun getCorrectGraphic(g: Graphics): Optional<Triple<Int, Int, Graphics2D>> = Optional.of(g)
+      .filter { it is Graphics2D }
+      .map { it as Graphics2D }
+      .map {
+        val insets = progressBar.insets
+        Triple(progressBar.width - (insets.right + insets.left),
+            progressBar.height - (insets.top + insets.bottom), it)
+      }
+      .filter { it.first > 0 || it.second > 0 }
 
   override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
 
