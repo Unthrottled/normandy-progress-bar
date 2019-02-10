@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="84.570114mm"
-   height="185.74757mm"
-   viewBox="0 0 84.570114 185.74757"
+   width="59.421116mm"
+   height="27.803162mm"
+   viewBox="0 0 59.421114 27.803161"
    version="1.1"
    id="svg844"
    inkscape:version="0.92.3 (unknown)"
@@ -25,17 +25,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.63574219"
-     inkscape:cx="209.59709"
-     inkscape:cy="4.9803299"
+     inkscape:zoom="0.86889874"
+     inkscape:cx="138.05816"
+     inkscape:cy="6.9521782"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1080"
-     inkscape:window-height="1886"
-     inkscape:window-x="1080"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
+     inkscape:window-width="857"
+     inkscape:window-height="495"
+     inkscape:window-x="1249"
+     inkscape:window-y="478"
+     inkscape:window-maximized="0"
      inkscape:pagecheckerboard="true"
      fit-margin-top="1"
      fit-margin-bottom="1"
@@ -57,20 +57,20 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Layer 3"
-     transform="translate(-52.708845,-48.667335)" />
+     transform="translate(-65.283508,-127.6397)" />
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Layer 2"
-     transform="translate(-52.708845,-48.667335)" />
+     transform="translate(-65.283508,-127.6397)" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-52.708845,-48.667335)">
+     transform="translate(-65.283508,-127.6397)">
     <g
        id="g1719"
-       transform="rotate(-0.67200036,831.40587,76.905014)">
+       transform="matrix(0.00366511,0.3124785,-0.31247851,0.0036651,136.17682,111.59169)">
       <g
          transform="translate(-15.398669,-13.317768)"
          id="g1625">

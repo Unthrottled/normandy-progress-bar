@@ -39,19 +39,33 @@ open class NormandyUI : BasicProgressBarUI() {
   override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
 
   override fun getPreferredSize(c: JComponent?): Dimension =
-      Dimension(super.getPreferredSize(c).width, scale(20))
+      Dimension(super.getPreferredSize(c).width, scale(25))
 
-  override fun paintIndeterminate(g: Graphics, c: JComponent) {
+  override fun paintIndeterminate(g: Graphics, component: JComponent) {
     getCorrectGraphic(g)
         .ifPresent { dimensionsAndGraphic ->
           val graphic = dimensionsAndGraphic.third
 
           graphic.color = JBColor(Gray._240.withAlpha(50), Gray._128.withAlpha(50))
-          val componentWidth = c.width
-          var componentHeight = c.preferredSize.height
-          if ((c.height - componentHeight) % 2 != 0) componentHeight++
 
-          val baseRainbowPaint = LinearGradientPaint(0f,
+          val componentWidth = component.width
+          val preferredHeight = component.preferredSize.height
+          val componentHeight = if (component.height - preferredHeight % 2 != 0) preferredHeight + 1 else preferredHeight
+
+
+          val heightDifference = (component.height - componentHeight) / 2
+
+          if (component.isOpaque) {
+            graphic.fillRect(0, 0, componentWidth, componentHeight)
+          }
+
+          graphic.color = JBColor(Gray._165.withAlpha(50), Gray._88.withAlpha(50))
+
+          val graphicsConfig = GraphicsUtil.setupAAPainting(graphic)
+
+          //SET BACKGROUND
+          graphic.translate(0, heightDifference)
+          graphic.paint = LinearGradientPaint(0f,
               scale(2f),
               0f,
               componentHeight - scale(6f),
@@ -59,40 +73,12 @@ open class NormandyUI : BasicProgressBarUI() {
               arrayOf(Color.RED, Color.ORANGE)
           )
 
-          graphic.paint = baseRainbowPaint
-
-          val heightDifference = (c.height - componentHeight) / 2
-          if (c.isOpaque) {
-            graphic.fillRect(0, heightDifference, componentWidth, componentHeight)
-          }
-          graphic.color = JBColor(Gray._165.withAlpha(50), Gray._88.withAlpha(50))
-          val config = GraphicsUtil.setupAAPainting(graphic)
-          graphic.translate(0, heightDifference)
-
-          val old = graphic.paint
-          graphic.paint = baseRainbowPaint
-
+          //PAINT BACKGROUND COMPONENT
           val R = JBUI.scale(8f)
-          val R2 = JBUI.scale(9f)
           val containingRoundRect = Area(RoundRectangle2D.Float(1f, 1f, componentWidth - 2f, componentHeight - 2f, R, R))
           graphic.fill(containingRoundRect)
-          graphic.paint = old
 
-          val area = Area(Rectangle2D.Float(0f, 0f, componentWidth.toFloat(), componentHeight.toFloat()))
-          area.subtract(Area(RoundRectangle2D.Float(1f, 1f, componentWidth - 2f, componentHeight - 2f, R, R)))
-          graphic.paint = Gray._128
-          if (c.isOpaque) {
-            graphic.fill(area)
-          }
-
-          area.subtract(Area(RoundRectangle2D.Float(0f, 0f, componentWidth.toFloat(), componentHeight.toFloat(), R2, R2)))
-
-          val parent = c.parent
-          val background = if (parent != null) parent.background else UIUtil.getPanelBackground()
-          graphic.paint = background
-          if (c.isOpaque) {
-            graphic.fill(area)
-          }
+          graphic.paint = Gray._200
 
           distanceFromCitadel =
               if (distanceFromCitadel < 2) {
@@ -106,11 +92,11 @@ open class NormandyUI : BasicProgressBarUI() {
               }
           distanceFromCitadel += velocityFromCitadel
 
-          NORMANDY.paintIcon(progressBar, graphic, distanceFromCitadel - scale(10), -scale(6))
-          graphic.draw(RoundRectangle2D.Float(1f, 1f, componentWidth.toFloat() - 2f - 1f, componentHeight.toFloat() - 2f - 1f, R, R))
-          graphic.translate(0, -(c.height - componentHeight) / 2)
+          NORMANDY.paintIcon(progressBar, graphic, distanceFromCitadel - scale(5), -scale(2))
+          graphic.draw(RoundRectangle2D.Float(1f, 1f, componentWidth.toFloat() - 2f - 1f, componentHeight - JBUI.scale(5f), JBUI.scale(7f), JBUI.scale(7f)))
+          graphic.translate(0, -(component.height - componentHeight) / 2)
 
-          config.restore()
+          graphicsConfig.restore()
 
         }
   }
@@ -119,35 +105,30 @@ open class NormandyUI : BasicProgressBarUI() {
   override fun paintDeterminate(g: Graphics, component: JComponent) {
     getCorrectGraphic(g)
         .ifPresent { dimensionsAndGraphic ->
-          val insets = progressBar.insets
           val graphic = dimensionsAndGraphic.third
-          val graphicsConfig = GraphicsUtil.setupAAPainting(graphic)
+
           val componentWidth = component.width
           val preferredHeight = component.preferredSize.height
           val componentHeight = if (component.height - preferredHeight % 2 != 0) preferredHeight + 1 else preferredHeight
-          val barRectWidth = componentWidth - (insets.right + insets.left)
-          val barRectHeight = componentHeight - (insets.top + insets.bottom)
 
-
-          val amountFull = getAmountFull(insets, barRectWidth, barRectHeight)
-          val parent = component.parent
-          val backgroundColor = if (parent != null) parent.background else UIUtil.getPanelBackground()
-
-          graphic.color = backgroundColor
           if (component.isOpaque) {
             graphic.fillRect(0, 0, componentWidth, componentHeight)
           }
 
+          graphic.color = progressBar.foreground
 
+          val graphicsConfig = GraphicsUtil.setupAAPainting(graphic)
+
+          graphic.translate(0, (component.height - componentHeight) / 2)
           val R = JBUI.scale(8f)
           val R2 = JBUI.scale(9f)
           val off = JBUI.scale(1f)
-
-          graphic.translate(0, (component.height - componentHeight) / 2)
-          graphic.color = progressBar.foreground
           graphic.fill(RoundRectangle2D.Float(0f, 0f, componentWidth - off, componentHeight - off, R2, R2))
 
+          val parent = component.parent
+          val backgroundColor = if (parent != null) parent.background else UIUtil.getPanelBackground()
           graphic.color = backgroundColor
+
           graphic.fill(RoundRectangle2D.Float(off, off, componentWidth.toFloat() - 2f * off - off, componentHeight.toFloat() - 2f * off - off, R, R))
           graphic.paint = LinearGradientPaint(0f,
               scale(2f),
@@ -157,7 +138,12 @@ open class NormandyUI : BasicProgressBarUI() {
               arrayOf(Color.RED, Color.ORANGE)
           )
 
-          NORMANDY.paintIcon(progressBar, graphic, amountFull - scale(10), -scale(6))
+          val insets = progressBar.insets
+          val barRectWidth = componentWidth - (insets.right + insets.left)
+          val barRectHeight = componentHeight - (insets.top + insets.bottom)
+          val amountFull = getAmountFull(insets, barRectWidth, barRectHeight)
+
+          NORMANDY.paintIcon(progressBar, graphic, amountFull - scale(5), -scale(2))
           graphic.fill(RoundRectangle2D.Float(2f * off, 2f * off, amountFull - JBUI.scale(5f), componentHeight - JBUI.scale(5f), JBUI.scale(7f), JBUI.scale(7f)))
           graphic.translate(0, -(component.height - componentHeight) / 2)
 
