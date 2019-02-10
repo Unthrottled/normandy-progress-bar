@@ -1,5 +1,6 @@
 package io.acari.n7
 
+import com.intellij.openapi.util.IconLoader
 import com.intellij.ui.Gray
 import com.intellij.ui.JBColor
 import com.intellij.util.ui.GraphicsUtil
@@ -24,6 +25,8 @@ val SCALING_FACTOR = 1.0f / 2.0f
 open class NormandyUI : BasicProgressBarUI() {
 
   companion object {
+    val NORMANDY = IconLoader.getIcon("/normandy.png")
+
     fun createUi(jComponent: JComponent): ComponentUI {
       jComponent.border = JBUI.Borders.empty().asUIResource()
       return NormandyUI()
@@ -101,7 +104,7 @@ open class NormandyUI : BasicProgressBarUI() {
   //todo: vertical progress bars
   override fun paintDeterminate(g: Graphics, component: JComponent) {
     getCorrectGraphic(g)
-        .ifPresent {dimensionsAndGraphic->
+        .ifPresent { dimensionsAndGraphic ->
           val insets = progressBar.insets
           val graphic = dimensionsAndGraphic.third
           val graphicsConfig = GraphicsUtil.setupAAPainting(graphic)
@@ -140,6 +143,7 @@ open class NormandyUI : BasicProgressBarUI() {
               arrayOf(Color.RED, Color.ORANGE)
           )
 
+          NORMANDY.paintIcon(progressBar, graphic, amountFull - scale(10), -scale(6))
           graphic.fill(RoundRectangle2D.Float(2f * off, 2f * off, amountFull - JBUI.scale(5f), componentHeight - JBUI.scale(5f), JBUI.scale(7f), JBUI.scale(7f)))
           graphic.translate(0, -(component.height - componentHeight) / 2)
 
