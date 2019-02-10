@@ -25,7 +25,7 @@ val SCALING_FACTOR = 1.0f / 2.0f
 open class NormandyUI : BasicProgressBarUI() {
 
   companion object {
-    val NORMANDY = IconLoader.getIcon("/normandy.png")
+    val NORMANDY = IconLoader.getIcon("/normandy.svg")
 
     fun createUi(jComponent: JComponent): ComponentUI {
       jComponent.border = JBUI.Borders.empty().asUIResource()
