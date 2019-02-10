@@ -30,6 +30,8 @@ open class NormandyUI : BasicProgressBarUI() {
     }
   }
 
+  override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
+
   override fun getPreferredSize(c: JComponent?): Dimension =
       Dimension(super.getPreferredSize(c).width, scale(20))
 
@@ -160,8 +162,6 @@ open class NormandyUI : BasicProgressBarUI() {
             progressBar.height - (insets.top + insets.bottom), it)
       }
       .filter { it.first > 0 || it.second > 0 }
-
-  override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
 
 
 }
