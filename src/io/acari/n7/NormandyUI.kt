@@ -2,13 +2,11 @@ package io.acari.n7
 
 import com.intellij.openapi.util.IconLoader
 import com.intellij.ui.ColorUtil
-import com.intellij.ui.Gray
 import com.intellij.util.ui.GraphicsUtil
 import com.intellij.util.ui.JBUI
 import com.intellij.util.ui.JBUI.scale
 import com.intellij.util.ui.UIUtil
 import java.awt.*
-import java.awt.geom.Area
 import java.awt.geom.RoundRectangle2D
 import java.util.*
 import javax.swing.JComponent
@@ -39,8 +37,8 @@ open class NormandyUI : BasicProgressBarUI() {
     }
   }
 
-  private var distanceFromCitadel = 0
-  private var velocityFromCitadel = 1
+  private var distanceFromCitadel = 20
+  private var velocityFromCitadel = -1
 
   override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
 
@@ -63,10 +61,18 @@ open class NormandyUI : BasicProgressBarUI() {
           val graphicsConfig = GraphicsUtil.setupAAPainting(graphic)
 
           //SET BACKGROUND
-          val R = JBUI.scale(8f)
-          val containingRoundRect = Area(RoundRectangle2D.Float(1f, 1f, componentWidth - 2f, componentHeight - 2f, R, R))
+          val R2 = JBUI.scale(9f)
+          val off = JBUI.scale(1f)
+          graphic.color = progressBar.foreground
+          graphic.fill(RoundRectangle2D.Float(0f, 0f, componentWidth - off, componentHeight - off, R2, R2))
+
+          //Draw Border
           val parent = component.parent
           val backgroundColor = if (parent != null) parent.background else UIUtil.getPanelBackground()
+          graphic.color = backgroundColor
+          val R = JBUI.scale(8f)
+          graphic.fill(RoundRectangle2D.Float(off, off, componentWidth.toFloat() - 2f * off - off, componentHeight.toFloat() - 2f * off - off, R, R))
+
 
           graphic.paint = LinearGradientPaint(0f,
               scale(2f),
@@ -75,12 +81,6 @@ open class NormandyUI : BasicProgressBarUI() {
               jetWashScales,
               colors.map { jetWashColorFunction -> jetWashColorFunction(backgroundColor) }.toTypedArray()
           )
-          graphic.fill(containingRoundRect)
-
-          //Paint Border
-          graphic.paint = Gray._200
-          graphic.draw(RoundRectangle2D.Float(1f, 1f, componentWidth.toFloat() - 2f - 1f, componentHeight - JBUI.scale(5f), JBUI.scale(7f), JBUI.scale(7f)))
-
 
           distanceFromCitadel =
               if (distanceFromCitadel < 2) {
@@ -90,12 +90,24 @@ open class NormandyUI : BasicProgressBarUI() {
                 velocityFromCitadel = -1
                 componentWidth - scale(15)
               } else {
-                distanceFromCitadel
+                distanceFromCitadel + velocityFromCitadel
               }
-          distanceFromCitadel += velocityFromCitadel
+
+          val distanceBetweenCitadelAndNormandy = distanceFromCitadel - JBUI.scale(5f)
+          val headingToCitadel = velocityFromCitadel < 1
+          val startingX = if (headingToCitadel) distanceBetweenCitadelAndNormandy else 2f * off
+          val distanceBetweenNormandyAndOmega = componentWidth - distanceBetweenCitadelAndNormandy
+          val lengthOfJetWash = if(headingToCitadel) distanceBetweenNormandyAndOmega else distanceBetweenCitadelAndNormandy
+
+            graphic.fill(RoundRectangle2D.Float(startingX, 2f * off, lengthOfJetWash,
+                componentHeight - JBUI.scale(5f), JBUI.scale(7f), JBUI.scale(7f)))
+
           graphic.translate(0, -(component.height - componentHeight) / 2)
 
-          NORMANDY.paintIcon(progressBar, graphic, distanceFromCitadel - scale(5), -scale(2))
+
+          graphic.translate(0, -(component.height - componentHeight) / 2)
+
+          NORMANDY.paintIcon(progressBar, graphic, distanceBetweenCitadelAndNormandy.toInt(), -scale(2))
 
           graphicsConfig.restore()
 
@@ -146,7 +158,6 @@ open class NormandyUI : BasicProgressBarUI() {
 
           graphic.fill(RoundRectangle2D.Float(2f * off, 2f * off, amountFull - JBUI.scale(5f), componentHeight - JBUI.scale(5f), JBUI.scale(7f), JBUI.scale(7f)))
           graphic.translate(0, -(component.height - componentHeight) / 2)
-
 
           NORMANDY.paintIcon(progressBar, graphic, amountFull - scale(5), -scale(2))
 
