@@ -9,7 +9,6 @@ import com.intellij.util.ui.JBUI.scale
 import com.intellij.util.ui.UIUtil
 import java.awt.*
 import java.awt.geom.Area
-import java.awt.geom.Rectangle2D
 import java.awt.geom.RoundRectangle2D
 import java.util.*
 import javax.swing.JComponent
@@ -52,9 +51,6 @@ open class NormandyUI : BasicProgressBarUI() {
           val preferredHeight = component.preferredSize.height
           val componentHeight = if (component.height - preferredHeight % 2 != 0) preferredHeight + 1 else preferredHeight
 
-
-          val heightDifference = (component.height - componentHeight) / 2
-
           if (component.isOpaque) {
             graphic.fillRect(0, 0, componentWidth, componentHeight)
           }
@@ -64,7 +60,7 @@ open class NormandyUI : BasicProgressBarUI() {
           val graphicsConfig = GraphicsUtil.setupAAPainting(graphic)
 
           //SET BACKGROUND
-          graphic.translate(0, heightDifference)
+          graphic.translate(0, (component.height - componentHeight) / 2)
           graphic.paint = LinearGradientPaint(0f,
               scale(2f),
               0f,
@@ -78,7 +74,10 @@ open class NormandyUI : BasicProgressBarUI() {
           val containingRoundRect = Area(RoundRectangle2D.Float(1f, 1f, componentWidth - 2f, componentHeight - 2f, R, R))
           graphic.fill(containingRoundRect)
 
+          //Paint Border
           graphic.paint = Gray._200
+          graphic.draw(RoundRectangle2D.Float(1f, 1f, componentWidth.toFloat() - 2f - 1f, componentHeight - JBUI.scale(5f), JBUI.scale(7f), JBUI.scale(7f)))
+
 
           distanceFromCitadel =
               if (distanceFromCitadel < 2) {
@@ -93,7 +92,7 @@ open class NormandyUI : BasicProgressBarUI() {
           distanceFromCitadel += velocityFromCitadel
 
           NORMANDY.paintIcon(progressBar, graphic, distanceFromCitadel - scale(5), -scale(2))
-          graphic.draw(RoundRectangle2D.Float(1f, 1f, componentWidth.toFloat() - 2f - 1f, componentHeight - JBUI.scale(5f), JBUI.scale(7f), JBUI.scale(7f)))
+
           graphic.translate(0, -(component.height - componentHeight) / 2)
 
           graphicsConfig.restore()
@@ -119,17 +118,27 @@ open class NormandyUI : BasicProgressBarUI() {
 
           val graphicsConfig = GraphicsUtil.setupAAPainting(graphic)
 
+          //SET BACKGROUND
           graphic.translate(0, (component.height - componentHeight) / 2)
-          val R = JBUI.scale(8f)
           val R2 = JBUI.scale(9f)
           val off = JBUI.scale(1f)
           graphic.fill(RoundRectangle2D.Float(0f, 0f, componentWidth - off, componentHeight - off, R2, R2))
 
+          //Draw Border
           val parent = component.parent
           val backgroundColor = if (parent != null) parent.background else UIUtil.getPanelBackground()
           graphic.color = backgroundColor
-
+          val R = JBUI.scale(8f)
           graphic.fill(RoundRectangle2D.Float(off, off, componentWidth.toFloat() - 2f * off - off, componentHeight.toFloat() - 2f * off - off, R, R))
+
+          val insets = progressBar.insets
+          val barRectWidth = componentWidth - (insets.right + insets.left)
+          val barRectHeight = componentHeight - (insets.top + insets.bottom)
+          val amountFull = getAmountFull(insets, barRectWidth, barRectHeight)
+
+
+          NORMANDY.paintIcon(progressBar, graphic, amountFull - scale(5), -scale(2))
+
           graphic.paint = LinearGradientPaint(0f,
               scale(2f),
               0f,
@@ -138,13 +147,8 @@ open class NormandyUI : BasicProgressBarUI() {
               arrayOf(Color.RED, Color.ORANGE)
           )
 
-          val insets = progressBar.insets
-          val barRectWidth = componentWidth - (insets.right + insets.left)
-          val barRectHeight = componentHeight - (insets.top + insets.bottom)
-          val amountFull = getAmountFull(insets, barRectWidth, barRectHeight)
-
-          NORMANDY.paintIcon(progressBar, graphic, amountFull - scale(5), -scale(2))
           graphic.fill(RoundRectangle2D.Float(2f * off, 2f * off, amountFull - JBUI.scale(5f), componentHeight - JBUI.scale(5f), JBUI.scale(7f), JBUI.scale(7f)))
+
           graphic.translate(0, -(component.height - componentHeight) / 2)
 
           graphicsConfig.restore()
