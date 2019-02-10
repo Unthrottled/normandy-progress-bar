@@ -33,6 +33,9 @@ open class NormandyUI : BasicProgressBarUI() {
     }
   }
 
+  private var distanceFromCitadel = 0
+  private var velocityFromCitadel = 1
+
   override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
 
   override fun getPreferredSize(c: JComponent?): Dimension =
@@ -65,7 +68,6 @@ open class NormandyUI : BasicProgressBarUI() {
           graphic.color = JBColor(Gray._165.withAlpha(50), Gray._88.withAlpha(50))
           val config = GraphicsUtil.setupAAPainting(graphic)
           graphic.translate(0, heightDifference)
-          val x = 0
 
           val old = graphic.paint
           graphic.paint = baseRainbowPaint
@@ -92,7 +94,19 @@ open class NormandyUI : BasicProgressBarUI() {
             graphic.fill(area)
           }
 
+          distanceFromCitadel =
+              if (distanceFromCitadel < 2) {
+                velocityFromCitadel = 1
+                2
+              } else if (distanceFromCitadel >= componentWidth - scale(15)) {
+                velocityFromCitadel = -1
+                componentWidth - scale(15)
+              } else {
+                distanceFromCitadel
+              }
+          distanceFromCitadel += velocityFromCitadel
 
+          NORMANDY.paintIcon(progressBar, graphic, distanceFromCitadel - scale(10), -scale(6))
           graphic.draw(RoundRectangle2D.Float(1f, 1f, componentWidth.toFloat() - 2f - 1f, componentHeight.toFloat() - 2f - 1f, R, R))
           graphic.translate(0, -(c.height - componentHeight) / 2)
 
