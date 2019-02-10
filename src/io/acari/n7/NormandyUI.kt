@@ -37,8 +37,8 @@ open class NormandyUI : BasicProgressBarUI() {
     }
   }
 
-  private var distanceFromCitadel = 20
-  private var velocityFromCitadel = -1
+  private var distanceFromCitadel = 0.0f
+  private var velocityFromCitadel = 1.5f
 
   override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
 
@@ -84,11 +84,11 @@ open class NormandyUI : BasicProgressBarUI() {
 
           distanceFromCitadel =
               if (distanceFromCitadel < 2) {
-                velocityFromCitadel = 1
-                2
+                velocityFromCitadel = 1.0f
+                2f
               } else if (distanceFromCitadel >= componentWidth - scale(15)) {
-                velocityFromCitadel = -1
-                componentWidth - scale(15)
+                velocityFromCitadel = -1.0f
+                componentWidth.toFloat() - scale(15)
               } else {
                 distanceFromCitadel + velocityFromCitadel
               }
@@ -102,10 +102,6 @@ open class NormandyUI : BasicProgressBarUI() {
             graphic.fill(RoundRectangle2D.Float(startingX, 2f * off, lengthOfJetWash,
                 componentHeight - JBUI.scale(5f), JBUI.scale(7f), JBUI.scale(7f)))
 
-          graphic.translate(0, -(component.height - componentHeight) / 2)
-
-
-          graphic.translate(0, -(component.height - componentHeight) / 2)
 
           NORMANDY.paintIcon(progressBar, graphic, distanceBetweenCitadelAndNormandy.toInt(), -scale(2))
 
@@ -156,10 +152,15 @@ open class NormandyUI : BasicProgressBarUI() {
               colors.map { jetWashColorFunction -> jetWashColorFunction(backgroundColor) }.toTypedArray()
           )
 
-          graphic.fill(RoundRectangle2D.Float(2f * off, 2f * off, amountFull - JBUI.scale(5f), componentHeight - JBUI.scale(5f), JBUI.scale(7f), JBUI.scale(7f)))
-          graphic.translate(0, -(component.height - componentHeight) / 2)
+          val startingX = 2f * off
+          val lengthOfJetwash = componentHeight - JBUI.scale(5f)
+          val distanceBetweenCitadelAndNormandy = amountFull - scale(5)
 
-          NORMANDY.paintIcon(progressBar, graphic, amountFull - scale(5), -scale(2))
+          graphic.fill(RoundRectangle2D.Float(startingX, 2f * off,
+              amountFull - JBUI.scale(5f), lengthOfJetwash,
+              JBUI.scale(7f), JBUI.scale(7f)))
+
+          NORMANDY.paintIcon(progressBar, graphic, distanceBetweenCitadelAndNormandy, -scale(2))
 
           graphicsConfig.restore()
 
