@@ -38,7 +38,7 @@ open class NormandyUI : BasicProgressBarUI() {
   }
 
   private var distanceFromCitadel = 0.0f
-  private var velocityFromCitadel = 1.5f
+  private var velocityFromCitadel = 2f
 
   override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
 
@@ -46,72 +46,45 @@ open class NormandyUI : BasicProgressBarUI() {
       Dimension(super.getPreferredSize(c).width, scale(25))
 
   override fun paintIndeterminate(g: Graphics, component: JComponent) {
-    getCorrectGraphic(g)
-        .ifPresent { dimensionsAndGraphic ->
-          val graphic = dimensionsAndGraphic.third
-
-          val componentWidth = component.width
-          val preferredHeight = component.preferredSize.height
-          val componentHeight = if (component.height - preferredHeight % 2 != 0) preferredHeight + 1 else preferredHeight
-
-          if (component.isOpaque) {
-            graphic.fillRect(0, 0, componentWidth, componentHeight)
+    drawNormandyProgress(g, component) { componentWidth, componentHeight, offset ->
+      distanceFromCitadel =
+          if (distanceFromCitadel < 2) {
+            velocityFromCitadel = 1.0f
+            2f
+          } else if (distanceFromCitadel >= componentWidth - scale(15)) {
+            velocityFromCitadel = -1.0f
+            componentWidth.toFloat() - scale(15)
+          } else {
+            distanceFromCitadel
           }
 
-          val graphicsConfig = GraphicsUtil.setupAAPainting(graphic)
+      distanceFromCitadel += velocityFromCitadel
 
-          //SET BACKGROUND
-          val R2 = JBUI.scale(9f)
-          val off = JBUI.scale(1f)
-          graphic.color = progressBar.foreground
-          graphic.fill(RoundRectangle2D.Float(0f, 0f, componentWidth - off, componentHeight - off, R2, R2))
-
-          //Draw Border
-          val parent = component.parent
-          val backgroundColor = if (parent != null) parent.background else UIUtil.getPanelBackground()
-          graphic.color = backgroundColor
-          val R = JBUI.scale(8f)
-          graphic.fill(RoundRectangle2D.Float(off, off, componentWidth.toFloat() - 2f * off - off, componentHeight.toFloat() - 2f * off - off, R, R))
-
-
-          graphic.paint = LinearGradientPaint(0f,
-              scale(2f),
-              0f,
-              componentHeight - scale(6f),
-              jetWashScales,
-              colors.map { jetWashColorFunction -> jetWashColorFunction(backgroundColor) }.toTypedArray()
-          )
-
-          distanceFromCitadel =
-              if (distanceFromCitadel < 2) {
-                velocityFromCitadel = 1.0f
-                2f
-              } else if (distanceFromCitadel >= componentWidth - scale(15)) {
-                velocityFromCitadel = -1.0f
-                componentWidth.toFloat() - scale(15)
-              } else {
-                distanceFromCitadel + velocityFromCitadel
-              }
-
-          val distanceBetweenCitadelAndNormandy = distanceFromCitadel - JBUI.scale(5f)
-          val headingToCitadel = velocityFromCitadel < 1
-          val startingX = if (headingToCitadel) distanceBetweenCitadelAndNormandy else 2f * off
-          val distanceBetweenNormandyAndOmega = componentWidth - distanceBetweenCitadelAndNormandy
-          val lengthOfJetWash = if(headingToCitadel) distanceBetweenNormandyAndOmega else distanceBetweenCitadelAndNormandy
-
-            graphic.fill(RoundRectangle2D.Float(startingX, 2f * off, lengthOfJetWash,
-                componentHeight - JBUI.scale(5f), JBUI.scale(7f), JBUI.scale(7f)))
-
-
-          NORMANDY.paintIcon(progressBar, graphic, distanceBetweenCitadelAndNormandy.toInt(), -scale(2))
-
-          graphicsConfig.restore()
-
-        }
+      val distanceBetweenCitadelAndNormandy = distanceFromCitadel - JBUI.scale(5f)
+      val headingToCitadel = velocityFromCitadel < 1
+      val startingX = if (headingToCitadel) distanceBetweenCitadelAndNormandy else 2f * offset
+      val distanceBetweenNormandyAndOmega = componentWidth - distanceBetweenCitadelAndNormandy
+      val lengthOfJetWash = if (headingToCitadel) distanceBetweenNormandyAndOmega else distanceBetweenCitadelAndNormandy
+      NormandyPositionData(startingX, lengthOfJetWash, distanceBetweenCitadelAndNormandy.toInt())
+    }
   }
 
-  //todo: vertical progress bars
   override fun paintDeterminate(g: Graphics, component: JComponent) {
+    drawNormandyProgress(g, component) { componentWidth, componentHeight, offset ->
+      val insets = progressBar.insets
+      val barRectWidth = componentWidth - (insets.right + insets.left)
+      val barRectHeight = componentHeight - (insets.top + insets.bottom)
+      val amountFull = getAmountFull(insets, barRectWidth, barRectHeight)
+
+      val startingX = 2f * offset
+      val lengthOfJetwash = amountFull - JBUI.scale(5f)
+      val distanceBetweenCitadelAndNormandy = amountFull - scale(5)
+      NormandyPositionData(startingX, lengthOfJetwash, distanceBetweenCitadelAndNormandy)
+    }
+  }
+
+
+  private fun drawNormandyProgress(g: Graphics, component: JComponent, positionDataFunction: (Int, Int, Float) -> NormandyPositionData) {
     getCorrectGraphic(g)
         .ifPresent { dimensionsAndGraphic ->
           val graphic = dimensionsAndGraphic.third
@@ -139,10 +112,6 @@ open class NormandyUI : BasicProgressBarUI() {
           val R = JBUI.scale(8f)
           graphic.fill(RoundRectangle2D.Float(off, off, componentWidth.toFloat() - 2f * off - off, componentHeight.toFloat() - 2f * off - off, R, R))
 
-          val insets = progressBar.insets
-          val barRectWidth = componentWidth - (insets.right + insets.left)
-          val barRectHeight = componentHeight - (insets.top + insets.bottom)
-          val amountFull = getAmountFull(insets, barRectWidth, barRectHeight)
 
           graphic.paint = LinearGradientPaint(0f,
               scale(2f),
@@ -152,20 +121,19 @@ open class NormandyUI : BasicProgressBarUI() {
               colors.map { jetWashColorFunction -> jetWashColorFunction(backgroundColor) }.toTypedArray()
           )
 
-          val startingX = 2f * off
-          val lengthOfJetwash = componentHeight - JBUI.scale(5f)
-          val distanceBetweenCitadelAndNormandy = amountFull - scale(5)
+          val (startingX, lengthOfJetWash, distanceBetweenCitadelAndNormandy) =
+              positionDataFunction(componentWidth, componentHeight, off)
 
           graphic.fill(RoundRectangle2D.Float(startingX, 2f * off,
-              amountFull - JBUI.scale(5f), lengthOfJetwash,
+              lengthOfJetWash, componentHeight - JBUI.scale(5f),
               JBUI.scale(7f), JBUI.scale(7f)))
 
           NORMANDY.paintIcon(progressBar, graphic, distanceBetweenCitadelAndNormandy, -scale(2))
 
           graphicsConfig.restore()
-
         }
   }
+
 
   private fun getCorrectGraphic(g: Graphics): Optional<Triple<Int, Int, Graphics2D>> = Optional.of(g)
       .filter { it is Graphics2D }
@@ -176,6 +144,5 @@ open class NormandyUI : BasicProgressBarUI() {
             progressBar.height - (insets.top + insets.bottom), it)
       }
       .filter { it.first > 0 || it.second > 0 }
-
 
 }
