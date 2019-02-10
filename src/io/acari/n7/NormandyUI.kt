@@ -6,14 +6,12 @@ import com.intellij.util.ui.GraphicsUtil
 import com.intellij.util.ui.JBUI
 import com.intellij.util.ui.JBUI.scale
 import com.intellij.util.ui.UIUtil
-import sun.swing.SwingUtilities2
 import java.awt.*
-import java.awt.geom.AffineTransform
 import java.awt.geom.Area
 import java.awt.geom.Rectangle2D
 import java.awt.geom.RoundRectangle2D
+import java.util.*
 import javax.swing.JComponent
-import javax.swing.SwingConstants
 import javax.swing.plaf.ComponentUI
 import javax.swing.plaf.basic.BasicProgressBarUI
 
@@ -50,7 +48,6 @@ open class NormandyUI : BasicProgressBarUI() {
     if (barRectWidth <= 0 || barRectHeight <= 0) {
       return
     }
-    //boxRect = getBox(boxRect);
     g.color = JBColor(Gray._240.withAlpha(50), Gray._128.withAlpha(50))
     val w = c.width
     var h = c.preferredSize.height
@@ -103,112 +100,70 @@ open class NormandyUI : BasicProgressBarUI() {
     g.draw(RoundRectangle2D.Float(1f, 1f, w.toFloat() - 2f - 1f, h.toFloat() - 2f - 1f, R, R))
     g.translate(0, -(c.height - h) / 2)
 
-    // Deal with possible text painting
-    if (progressBar.isStringPainted) {
-      if (progressBar.orientation == SwingConstants.HORIZONTAL) {
-        paintString(g, b.left, b.top, barRectWidth, barRectHeight, boxRect.x, boxRect.width)
-      } else {
-        paintString(g, b.left, b.top, barRectWidth, barRectHeight, boxRect.y, boxRect.height)
-      }
-    }
     config.restore()
   }
 
-  private fun paintString(g: Graphics, x: Int, y: Int, w: Int, h: Int, fillStart: Int, amountFull: Int) {
-    if (g !is Graphics2D) {
-      return
-    }
+  //todo: vertical progress bars
+  override fun paintDeterminate(g: Graphics, component: JComponent) {
+    val insets = progressBar.insets
+    Optional.of(g)
+        .filter { it is Graphics2D}
+        .map { it as Graphics2D }
+        .map {
+          Triple(progressBar.width - (insets.right + insets.left),
+              progressBar.height - (insets.top + insets.bottom), it)
+        }
+        .filter { it.first > 0 || it.second > 0 }
+        .ifPresent {dimensionsAndGraphic->
+          val graphic = dimensionsAndGraphic.third
+          val graphicsConfig = GraphicsUtil.setupAAPainting(graphic)
+          val componentWidth = component.width
+          val preferredHeight = component.preferredSize.height
+          val componentHeight = if (component.height - preferredHeight % 2 != 0) preferredHeight + 1 else preferredHeight
+          val barRectWidth = componentWidth - (insets.right + insets.left)
+          val barRectHeight = componentHeight - (insets.top + insets.bottom)
 
-    val progressString = progressBar.string
-    g.font = progressBar.font
-    var renderLocation = getStringPlacement(g, progressString,
-        x, y, w, h)
-    val oldClip = g.clipBounds
 
-    if (progressBar.orientation == SwingConstants.HORIZONTAL) {
-      g.color = selectionBackground
-      SwingUtilities2.drawString(progressBar, g, progressString,
-          renderLocation.x, renderLocation.y)
-      g.color = selectionForeground
-      g.clipRect(fillStart, y, amountFull, h)
-      SwingUtilities2.drawString(progressBar, g, progressString,
-          renderLocation.x, renderLocation.y)
-    } else { // VERTICAL
-      g.color = selectionBackground
-      val rotate = AffineTransform.getRotateInstance(Math.PI / 2)
-      g.font = progressBar.font.deriveFont(rotate)
-      renderLocation = getStringPlacement(g, progressString,
-          x, y, w, h)
-      SwingUtilities2.drawString(progressBar, g, progressString,
-          renderLocation.x, renderLocation.y)
-      g.color = selectionForeground
-      g.clipRect(x, fillStart, w, amountFull)
-      SwingUtilities2.drawString(progressBar, g, progressString,
-          renderLocation.x, renderLocation.y)
-    }
-    g.clip = oldClip
-  }
+          val amountFull = getAmountFull(insets, barRectWidth, barRectHeight)
+          val parent = component.parent
+          val backgroundColor = if (parent != null) parent.background else UIUtil.getPanelBackground()
 
-  override fun paintDeterminate(g: Graphics?, c: JComponent) {
+          graphic.color = backgroundColor
+          if (component.isOpaque) {
+            graphic.fillRect(0, 0, componentWidth, componentHeight)
+          }
 
-    if (g !is Graphics2D) {
-      return
-    }
 
-    if (progressBar.orientation != SwingConstants.HORIZONTAL || !c.componentOrientation.isLeftToRight) {
-      super.paintDeterminate(g, c)
-      return
-    }
-    val config = GraphicsUtil.setupAAPainting(g)
-    val b = progressBar.insets // area for border
-    val w = progressBar.width
-    var h = progressBar.preferredSize.height
-    if ((c.height - h) % 2 != 0) h++
+          val R = JBUI.scale(8f)
+          val R2 = JBUI.scale(9f)
+          val off = JBUI.scale(1f)
 
-    val barRectWidth = w - (b.right + b.left)
-    val barRectHeight = h - (b.top + b.bottom)
 
-    if (barRectWidth <= 0 || barRectHeight <= 0) {
-      return
-    }
+          graphic.translate(0, (component.height - componentHeight) / 2)
+          graphic.color = progressBar.foreground
+          graphic.fill(RoundRectangle2D.Float(0f, 0f, componentWidth - off, componentHeight - off, R2, R2))
 
-    val amountFull = getAmountFull(b, barRectWidth, barRectHeight)
+          graphic.color = backgroundColor
+          graphic.fill(RoundRectangle2D.Float(off, off, componentWidth.toFloat() - 2f * off - off, componentHeight.toFloat() - 2f * off - off, R, R))
+          graphic.paint = LinearGradientPaint(0f,
+              scale(2f),
+              0f,
+              componentHeight - scale(6f),
+              floatArrayOf(SCALING_FACTOR * 1, SCALING_FACTOR * 2),
+              arrayOf(Color.RED, Color.ORANGE)
+          )
 
-    val parent = c.parent
-    val background = if (parent != null) parent.background else UIUtil.getPanelBackground()
+          graphic.fill(RoundRectangle2D.Float(2f * off, 2f * off, amountFull - JBUI.scale(5f), componentHeight - JBUI.scale(5f), JBUI.scale(7f), JBUI.scale(7f)))
+          graphic.translate(0, -(component.height - componentHeight) / 2)
 
-    g.setColor(background)
-    if (c.isOpaque) {
-      g.fillRect(0, 0, w, h)
-    }
+          graphicsConfig.restore()
 
-    val R = JBUI.scale(8f)
-    val R2 = JBUI.scale(9f)
-    val off = JBUI.scale(1f)
+        }
 
-    g.translate(0, (c.height - h) / 2)
-    g.color = progressBar.foreground
-    g.fill(RoundRectangle2D.Float(0f, 0f, w - off, h - off, R2, R2))
-    g.color = background
-    g.fill(RoundRectangle2D.Float(off, off, w.toFloat() - 2f * off - off, h.toFloat() - 2f * off - off, R, R))
-    g.paint = LinearGradientPaint(0f,
-        scale(2f),
-        0f,
-        h - scale(6f),
-        floatArrayOf(SCALING_FACTOR * 1, SCALING_FACTOR * 2),
-        arrayOf(Color.RED, Color.ORANGE)
-    )
-
-    g.fill(RoundRectangle2D.Float(2f * off, 2f * off, amountFull - JBUI.scale(5f), h - JBUI.scale(5f), JBUI.scale(7f), JBUI.scale(7f)))
-    g.translate(0, -(c.height - h) / 2)
-
-    // Deal with possible text painting
-    if (progressBar.isStringPainted) {
-      paintString(g, b.left, b.top,
-          barRectWidth, barRectHeight,
-          amountFull, b)
-    }
-    config.restore()
+//    if (progressBar.orientation != SwingConstants.HORIZONTAL || !component.componentOrientation.isLeftToRight) {
+//      super.paintDeterminate(graphic, component)
+//      return
+//    }
   }
 
   override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
