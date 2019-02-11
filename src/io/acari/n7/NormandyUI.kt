@@ -1,6 +1,5 @@
 package io.acari.n7
 
-import com.intellij.openapi.util.IconLoader
 import com.intellij.ui.ColorUtil
 import com.intellij.util.ui.GraphicsUtil
 import com.intellij.util.ui.JBUI
@@ -29,7 +28,8 @@ val jetWashScales = colors.mapIndexed { index, _ -> SCALING_FACTOR * index }
 open class NormandyUI : BasicProgressBarUI() {
 
   companion object {
-    val NORMANDY = IconLoader.getIcon("/normandy.svg")
+
+    val NORMANDY = NormandyIconComponent.getNormandyIcon()
 
     fun createUi(jComponent: JComponent): ComponentUI {
       jComponent.border = JBUI.Borders.empty().asUIResource()

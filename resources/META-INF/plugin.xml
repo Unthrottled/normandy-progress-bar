@@ -26,5 +26,8 @@
   <component>
     <implementation-class>io.acari.n7.NormandyComponent</implementation-class>
   </component>
+  <component>
+    <implementation-class>io.acari.n7.NormandyIconComponent</implementation-class>
+  </component>
 </application-components>
 </idea-plugin>
