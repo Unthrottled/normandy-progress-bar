@@ -13,15 +13,15 @@ import org.w3c.dom.Element
 class NormandyIconComponent : BaseComponent {
 
     companion object {
-        val colorPatcher = NormandyColorPatcher()
+        private val colorPatcher = NormandyColorPatcher()
 
         init {
-            setColorPatecher()
+            setColorPatcher()
         }
 
         fun getNormandyIcon() = IconLoader.getIcon("/normandy.svg")
 
-        private fun setColorPatecher() {
+        private fun setColorPatcher() {
             SVGLoader.setColorPatcher(colorPatcher)
         }
     }
@@ -51,6 +51,18 @@ class NormandyColorPatcher : SVGLoader.SvgColorPatcher {
         } else if (themedSecondary == "true") {
             svg.setAttribute("fill", "#447A3A")
 
+        }
+        patchChildren(svg)
+    }
+
+    private fun patchChildren(svg: Element) {
+        val nodes = svg.childNodes
+        val length = nodes.length
+        for (i in 0 until length) {
+            val item = nodes.item(i)
+            if (item is Element) {
+                patchColors(item)
+            }
         }
     }
 

@@ -25,8 +25,8 @@ val SCALING_FACTOR = 1.0f / colors.size
 val jetWashScales = colors.mapIndexed { index, _ -> SCALING_FACTOR * index }
     .toFloatArray()
 
-val DEFAULT_VELOCITY_FROM_CITADEL = 2f
-val DEFAULT_DISTANCE_FROM_CITADEL = 0f
+const val DEFAULT_VELOCITY_FROM_CITADEL = 2f
+const val DEFAULT_DISTANCE_FROM_CITADEL = 0f
 
 open class NormandyUI : BasicProgressBarUI() {
 
