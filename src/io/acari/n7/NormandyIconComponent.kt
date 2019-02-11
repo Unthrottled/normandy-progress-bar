@@ -12,58 +12,59 @@ import org.w3c.dom.Element
  */
 class NormandyIconComponent : BaseComponent {
 
-    companion object {
-        private val colorPatcher = NormandyColorPatcher()
+  companion object {
+    private val colorPatcher = NormandyColorPatcher()
 
-        init {
-            setColorPatcher()
-        }
-
-        fun getNormandyIcon() = IconLoader.getIcon("/normandy.svg")
-
-        private fun setColorPatcher() {
-            SVGLoader.setColorPatcher(colorPatcher)
-        }
+    init {
+      setColorPatcher()
     }
 
-    lateinit var messageBus: MessageBusConnection
+    fun getNormandyIcon() = IconLoader.getIcon("/normandy.svg")
+    fun getNormandyToCitadelIcon() = IconLoader.getIcon("/normandyToCitadel.svg")
 
-    override fun initComponent() {
-
-        messageBus = ApplicationManager.getApplication().messageBus.connect()
+    private fun setColorPatcher() {
+      SVGLoader.setColorPatcher(colorPatcher)
     }
+  }
 
-    override fun disposeComponent() {
-        if (this::messageBus.isInitialized) {
-            messageBus.disconnect()
-        }
+  lateinit var messageBus: MessageBusConnection
+
+  override fun initComponent() {
+
+    messageBus = ApplicationManager.getApplication().messageBus.connect()
+  }
+
+  override fun disposeComponent() {
+    if (this::messageBus.isInitialized) {
+      messageBus.disconnect()
     }
+  }
 }
 
 class NormandyColorPatcher : SVGLoader.SvgColorPatcher {
 
-    override fun patchColors(svg: Element) {
-        val themedPrimary = svg.getAttribute("themedPrimary")
-        val themedSecondary = svg.getAttribute("themedSecondary")
+  override fun patchColors(svg: Element) {
+    val themedPrimary = svg.getAttribute("themedPrimary")
+    val themedSecondary = svg.getAttribute("themedSecondary")
 
         if (themedPrimary == "true") {
 
         } else if (themedSecondary == "true") {
             svg.setAttribute("fill", "#447A3A")
 
-        }
-        patchChildren(svg)
     }
+    patchChildren(svg)
+  }
 
-    private fun patchChildren(svg: Element) {
-        val nodes = svg.childNodes
-        val length = nodes.length
-        for (i in 0 until length) {
-            val item = nodes.item(i)
-            if (item is Element) {
-                patchColors(item)
-            }
-        }
+  private fun patchChildren(svg: Element) {
+    val nodes = svg.childNodes
+    val length = nodes.length
+    for (i in 0 until length) {
+      val item = nodes.item(i)
+      if (item is Element) {
+        patchColors(item)
+      }
     }
+  }
 
 }
