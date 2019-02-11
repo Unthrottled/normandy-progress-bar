@@ -25,6 +25,9 @@ val SCALING_FACTOR = 1.0f / colors.size
 val jetWashScales = colors.mapIndexed { index, _ -> SCALING_FACTOR * index }
     .toFloatArray()
 
+val DEFAULT_VELOCITY_FROM_CITADEL = 2f
+val DEFAULT_DISTANCE_FROM_CITADEL = 0f
+
 open class NormandyUI : BasicProgressBarUI() {
 
   companion object {
@@ -37,8 +40,8 @@ open class NormandyUI : BasicProgressBarUI() {
     }
   }
 
-  private var distanceFromCitadel = 0.0f
-  private var velocityFromCitadel = 2f
+  private var distanceFromCitadel = DEFAULT_DISTANCE_FROM_CITADEL
+  private var velocityFromCitadel = DEFAULT_VELOCITY_FROM_CITADEL
 
   override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
 
@@ -49,10 +52,10 @@ open class NormandyUI : BasicProgressBarUI() {
     drawNormandyProgress(g, component) { componentWidth, _, offset ->
       distanceFromCitadel =
           if (distanceFromCitadel < 2) {
-            velocityFromCitadel = 1.0f
+            velocityFromCitadel = DEFAULT_VELOCITY_FROM_CITADEL
             2f
           } else if (distanceFromCitadel >= componentWidth - scale(15)) {
-            velocityFromCitadel = -1.0f
+            velocityFromCitadel = -DEFAULT_VELOCITY_FROM_CITADEL
             componentWidth.toFloat() - scale(15)
           } else {
             distanceFromCitadel
@@ -70,6 +73,7 @@ open class NormandyUI : BasicProgressBarUI() {
   }
 
   override fun paintDeterminate(g: Graphics, component: JComponent) {
+    resetVelocity()
     drawNormandyProgress(g, component) { componentWidth, componentHeight, offset ->
       val insets = progressBar.insets
       val barRectWidth = componentWidth - (insets.right + insets.left)
@@ -81,6 +85,14 @@ open class NormandyUI : BasicProgressBarUI() {
       val distanceBetweenCitadelAndNormandy = amountFull - scale(5)
       NormandyPositionData(startingX, lengthOfJetwash, distanceBetweenCitadelAndNormandy)
     }
+  }
+
+  /**
+   * Fixes jumping
+   */
+  private fun resetVelocity(){
+    velocityFromCitadel = DEFAULT_VELOCITY_FROM_CITADEL
+    distanceFromCitadel = DEFAULT_DISTANCE_FROM_CITADEL
   }
 
 
