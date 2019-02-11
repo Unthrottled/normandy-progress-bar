@@ -17,7 +17,7 @@ class NormandyComponent : BaseComponent {
     override fun initComponent() {
         messageBus = ApplicationManager.getApplication().messageBus.connect()
         setNormandyUI()
-        LafManager.getInstance().addLafManagerListener { lafManager -> setNormandyUI() }
+        LafManager.getInstance().addLafManagerListener { setNormandyUI() }
     }
 
     private fun setNormandyUI() {

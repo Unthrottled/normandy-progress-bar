@@ -46,7 +46,7 @@ open class NormandyUI : BasicProgressBarUI() {
       Dimension(super.getPreferredSize(c).width, scale(25))
 
   override fun paintIndeterminate(g: Graphics, component: JComponent) {
-    drawNormandyProgress(g, component) { componentWidth, componentHeight, offset ->
+    drawNormandyProgress(g, component) { componentWidth, _, offset ->
       distanceFromCitadel =
           if (distanceFromCitadel < 2) {
             velocityFromCitadel = 1.0f
