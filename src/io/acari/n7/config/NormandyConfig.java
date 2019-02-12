@@ -11,10 +11,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 @State(
-    name = "NormandyUIConfig",
-    storages = @Storage("normandy_ui_theme.xml")
+    name = "NormandyConfig",
+    storages = @Storage("normandy_theme.xml")
 )
-public class NormandyUIConfig implements PersistentStateComponent<NormandyUIConfig>, Cloneable {
+public class NormandyConfig implements PersistentStateComponent<NormandyConfig>, Cloneable {
 
   // They are public so they can be serialized
   public String primaryThemeColor = "#FFFFFF";
@@ -24,11 +24,11 @@ public class NormandyUIConfig implements PersistentStateComponent<NormandyUIConf
   public boolean allowedToBeOverridden = false;
 
 
-  public NormandyUIConfig() {
+  public NormandyConfig() {
   }
 
-  public static Optional<NormandyUIConfig> getInstance() {
-    return Optional.ofNullable(ServiceManager.getService(NormandyUIConfig.class));
+  public static Optional<NormandyConfig> getInstance() {
+    return Optional.ofNullable(ServiceManager.getService(NormandyConfig.class));
   }
 
   public String getPrimaryThemeColor() {
@@ -93,7 +93,7 @@ public class NormandyUIConfig implements PersistentStateComponent<NormandyUIConf
    */
   @Nullable
   @Override
-  public NormandyUIConfig getState() {
+  public NormandyConfig getState() {
     return this;
   }
 
@@ -103,7 +103,7 @@ public class NormandyUIConfig implements PersistentStateComponent<NormandyUIConf
    * @param state the MTConfig instance
    */
   @Override
-  public void loadState(@NotNull final NormandyUIConfig state) {
+  public void loadState(@NotNull final NormandyConfig state) {
     XmlSerializerUtil.copyBean(state, this);
   }
 

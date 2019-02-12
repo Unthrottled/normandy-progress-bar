@@ -5,7 +5,7 @@ import com.intellij.util.ui.JBUI
 import com.intellij.util.ui.JBUI.scale
 import com.intellij.util.ui.UIUtil
 import io.acari.n7.GuidanceSystem.isHeadingToCitadel
-import io.acari.n7.theme.NormandyUITheme
+import io.acari.n7.theme.NormandyTheme
 import java.awt.*
 import java.awt.geom.RoundRectangle2D
 import java.util.*
@@ -27,7 +27,7 @@ open class NormandyUI : BasicProgressBarUI() {
     }
   }
 
-  private val borderColor: Color = NormandyUITheme.borderColor()
+  private val borderColor: Color = NormandyTheme.borderColor()
 
   override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
 
@@ -90,8 +90,8 @@ open class NormandyUI : BasicProgressBarUI() {
               scale(2f),
               0f,
               componentHeight - scale(6f),
-              NormandyUITheme.jetWashScales,
-              NormandyUITheme.colors
+              NormandyTheme.jetWashScales,
+              NormandyTheme.colors
                   .map { jetWashColorFunction -> jetWashColorFunction(backgroundColor) } // Allows transparency
                   .toTypedArray()
           )

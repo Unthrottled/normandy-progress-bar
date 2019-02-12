@@ -3,7 +3,7 @@ package io.acari.n7.config
 import com.intellij.openapi.options.SearchableConfigurable
 import javax.swing.JComponent
 
-class NormandyUIConfigComponent : SearchableConfigurable {
+class NormandyConfigComponent : SearchableConfigurable {
   companion object {
     const val CONFIG_ID = "io.acari.n7.config.theme"
   }
@@ -15,7 +15,7 @@ class NormandyUIConfigComponent : SearchableConfigurable {
   override fun apply() {
   }
 
-  override fun createComponent(): JComponent? = NormandyUIForm().content
+  override fun createComponent(): JComponent? = NormandyForm().content
 
   //todo: implement
   override fun isModified(): Boolean = false

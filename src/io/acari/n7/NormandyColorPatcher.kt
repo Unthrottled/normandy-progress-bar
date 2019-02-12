@@ -1,7 +1,7 @@
 package io.acari.n7
 
 import com.intellij.util.SVGLoader
-import io.acari.n7.theme.NormandyUITheme
+import io.acari.n7.theme.NormandyTheme
 import org.w3c.dom.Element
 
 class NormandyColorPatcher : SVGLoader.SvgColorPatcher {
@@ -11,9 +11,9 @@ class NormandyColorPatcher : SVGLoader.SvgColorPatcher {
     val themedSecondary = svg.getAttribute("themedSecondary")
 
     if (themedPrimary == "true") {
-      svg.setAttribute("fill", NormandyUITheme.primaryColorString())
+      svg.setAttribute("fill", NormandyTheme.primaryColorString())
     } else if (themedSecondary == "true") {
-      svg.setAttribute("fill", NormandyUITheme.secondaryColorString())
+      svg.setAttribute("fill", NormandyTheme.secondaryColorString())
 
     }
     patchChildren(svg)

@@ -45,7 +45,7 @@ import java.awt.*;
     "PublicMethodNotExposedInInterface",
     "Duplicates",
     "ClassWithTooManyMethods"})
-public final class NormandyUIForm {
+public final class NormandyForm {
 
   // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
   // Generated using JFormDesigner non-commercial license
@@ -63,7 +63,7 @@ public final class NormandyUIForm {
   private ColorPanel selectionBackgroundColor;
   private JButton resetTabDefaultsBtn;
   @SuppressWarnings("FeatureEnvy")
-  public NormandyUIForm() {
+  public NormandyForm() {
     initComponents();
 
     // Reset tab defaults
