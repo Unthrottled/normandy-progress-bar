@@ -15,7 +15,7 @@ class NormandyConfigComponent : SearchableConfigurable {
   override fun apply() {
   }
 
-  override fun createComponent(): JComponent? = NormandyForm().content
+  override fun createComponent(): JComponent? = NormandyForm().getContent()
 
   //todo: implement
   override fun isModified(): Boolean = false
