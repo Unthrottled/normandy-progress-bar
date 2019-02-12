@@ -1,12 +1,10 @@
 package io.acari.n7
 
-import com.intellij.ui.ColorUtil
-import com.intellij.ui.Gray
 import com.intellij.util.ui.GraphicsUtil
 import com.intellij.util.ui.JBUI
 import com.intellij.util.ui.JBUI.scale
 import com.intellij.util.ui.UIUtil
-import io.acari.n7.config.NormandyUIConfig
+import io.acari.n7.GuidanceSystem.isHeadingToCitadel
 import io.acari.n7.theme.NormandyUITheme
 import java.awt.*
 import java.awt.geom.RoundRectangle2D
@@ -15,22 +13,6 @@ import javax.swing.Icon
 import javax.swing.JComponent
 import javax.swing.plaf.ComponentUI
 import javax.swing.plaf.basic.BasicProgressBarUI
-
-val jetWashColor = { _: Color -> ColorUtil.fromHex("#d6f5f8") }
-val outerJetWashColor = { _: Color -> ColorUtil.fromHex("#a38dbe") }
-val backgroundColorFunction = { backgroundColor: Color -> backgroundColor }
-
-val colors = arrayOf(outerJetWashColor, jetWashColor,
-    outerJetWashColor, jetWashColor,
-    outerJetWashColor, backgroundColorFunction, backgroundColorFunction, outerJetWashColor,
-    jetWashColor, outerJetWashColor,
-    jetWashColor, outerJetWashColor)
-val SCALING_FACTOR = 1.0f / colors.size
-val jetWashScales = colors.mapIndexed { index, _ -> SCALING_FACTOR * index }
-    .toFloatArray()
-
-const val DEFAULT_VELOCITY_FROM_CITADEL = 2f
-const val DEFAULT_DISTANCE_FROM_CITADEL = 0f
 
 open class NormandyUI : BasicProgressBarUI() {
 
@@ -45,8 +27,6 @@ open class NormandyUI : BasicProgressBarUI() {
     }
   }
 
-  private var distanceFromCitadel: Float = 120f
-  private var velocityFromCitadel: Float = -1f
   private val borderColor: Color = NormandyUITheme.borderColor()
 
   override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
@@ -55,33 +35,13 @@ open class NormandyUI : BasicProgressBarUI() {
       Dimension(super.getPreferredSize(c).width, scale(25))
 
   override fun paintIndeterminate(g: Graphics, component: JComponent) {
-    drawNormandyProgress(g, component, { if (isHeadingToCitadel()) NORMANDY_TO_CITADEL else NORMANDY }) { componentWidth, _, offset ->
-      distanceFromCitadel =
-          if (distanceFromCitadel < 2) {
-            velocityFromCitadel = DEFAULT_VELOCITY_FROM_CITADEL
-            2f
-          } else if (distanceFromCitadel >= componentWidth - scale(15)) {
-            velocityFromCitadel = -DEFAULT_VELOCITY_FROM_CITADEL
-            componentWidth.toFloat() - scale(15)
-          } else {
-            distanceFromCitadel
-          }
-
-      distanceFromCitadel += velocityFromCitadel
-
-      val distanceBetweenCitadelAndNormandy = distanceFromCitadel - scale(5f)
-      val headingToCitadel = isHeadingToCitadel()
-      val startingX = if (headingToCitadel) distanceBetweenCitadelAndNormandy else 2f * offset
-      val distanceBetweenNormandyAndOmega = componentWidth - distanceBetweenCitadelAndNormandy
-      val lengthOfJetWash = if (headingToCitadel) distanceBetweenNormandyAndOmega else distanceBetweenCitadelAndNormandy
-      val positionOfNormandy = if (headingToCitadel) distanceBetweenCitadelAndNormandy - NORMANDY_TO_CITADEL.iconWidth else distanceBetweenCitadelAndNormandy
-      NormandyPositionData(startingX, lengthOfJetWash, positionOfNormandy.toInt())
-    }
+    drawNormandyProgress(g, component, { if (isHeadingToCitadel()) NORMANDY_TO_CITADEL else NORMANDY },
+        GuidanceSystem.calculateCurrentLocation())
   }
 
   override fun paintDeterminate(g: Graphics, component: JComponent) {
-    resetVelocity()
     drawNormandyProgress(g, component, { NORMANDY }) { componentWidth, componentHeight, offset ->
+      GuidanceSystem.reCalibrate()
       val insets = progressBar.insets
       val barRectWidth = componentWidth - (insets.right + insets.left)
       val barRectHeight = componentHeight - (insets.top + insets.bottom)
@@ -97,12 +57,6 @@ open class NormandyUI : BasicProgressBarUI() {
   /**
    * Fixes jumping
    */
-  private fun resetVelocity() {
-    velocityFromCitadel = DEFAULT_VELOCITY_FROM_CITADEL
-    distanceFromCitadel = DEFAULT_DISTANCE_FROM_CITADEL
-  }
-
-  private fun isHeadingToCitadel() = velocityFromCitadel < 0
 
   private fun drawNormandyProgress(g: Graphics, component: JComponent, getNormandyIcon: () -> Icon, positionDataFunction: (Int, Int, Float) -> NormandyPositionData) {
     getCorrectGraphic(g)
@@ -137,8 +91,8 @@ open class NormandyUI : BasicProgressBarUI() {
               scale(2f),
               0f,
               componentHeight - scale(6f),
-              jetWashScales,
-              colors.map { jetWashColorFunction -> jetWashColorFunction(backgroundColor) }.toTypedArray()
+              NormandyUITheme.jetWashScales,
+              NormandyUITheme.colors.map { jetWashColorFunction -> jetWashColorFunction(backgroundColor) }.toTypedArray()
           )
 
           val (startingX, lengthOfJetWash, distanceBetweenCitadelAndNormandy) =
