@@ -21,6 +21,7 @@ public class NormandyUIConfig implements PersistentStateComponent<NormandyUIConf
   public String secondaryThemeColor = "#000000";
   public String jetWash = "";
   public String borderColor = "#EFEFEF";
+  public boolean allowedToBeOverridden = false;
 
 
   public NormandyUIConfig() {
@@ -60,6 +61,14 @@ public class NormandyUIConfig implements PersistentStateComponent<NormandyUIConf
 
   public void setBorderColor(String borderColor) {
     this.borderColor = borderColor;
+  }
+
+  public boolean isAllowedToBeOverridden() {
+    return allowedToBeOverridden;
+  }
+
+  public void setAllowedToBeOverridden(boolean allowedToBeOverridden) {
+    this.allowedToBeOverridden = allowedToBeOverridden;
   }
 
   @Override

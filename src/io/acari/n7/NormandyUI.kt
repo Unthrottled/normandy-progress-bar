@@ -41,7 +41,8 @@ open class NormandyUI : BasicProgressBarUI() {
 
   override fun paintDeterminate(g: Graphics, component: JComponent) {
     drawNormandyProgress(g, component, { NORMANDY }) { componentWidth, componentHeight, offset ->
-      GuidanceSystem.reCalibrate()
+      GuidanceSystem.reCalibrate()// Fixes the jumping between the two progress bars
+
       val insets = progressBar.insets
       val barRectWidth = componentWidth - (insets.right + insets.left)
       val barRectHeight = componentHeight - (insets.top + insets.bottom)
@@ -54,11 +55,8 @@ open class NormandyUI : BasicProgressBarUI() {
     }
   }
 
-  /**
-   * Fixes jumping
-   */
-
-  private fun drawNormandyProgress(g: Graphics, component: JComponent, getNormandyIcon: () -> Icon, positionDataFunction: (Int, Int, Float) -> NormandyPositionData) {
+  private fun drawNormandyProgress(g: Graphics, component: JComponent, getNormandyIcon: () -> Icon,
+                                   positionDataFunction: (Int, Int, Float) -> NormandyPositionData) {
     getCorrectGraphic(g)
         .ifPresent { dimensionsAndGraphic ->
           val graphic = dimensionsAndGraphic.third
@@ -87,12 +85,15 @@ open class NormandyUI : BasicProgressBarUI() {
           graphic.fill(RoundRectangle2D.Float(off, off, componentWidth.toFloat() - 2f * off - off, componentHeight.toFloat() - 2f * off - off, R, R))
 
 
+          //Draw Jetwash Background
           graphic.paint = LinearGradientPaint(0f,
               scale(2f),
               0f,
               componentHeight - scale(6f),
               NormandyUITheme.jetWashScales,
-              NormandyUITheme.colors.map { jetWashColorFunction -> jetWashColorFunction(backgroundColor) }.toTypedArray()
+              NormandyUITheme.colors
+                  .map { jetWashColorFunction -> jetWashColorFunction(backgroundColor) } // Allows transparency
+                  .toTypedArray()
           )
 
           val (startingX, lengthOfJetWash, distanceBetweenCitadelAndNormandy) =
@@ -102,6 +103,7 @@ open class NormandyUI : BasicProgressBarUI() {
               lengthOfJetWash, componentHeight - JBUI.scale(5f),
               JBUI.scale(7f), JBUI.scale(7f)))
 
+          //Draw Normandy
           getNormandyIcon().paintIcon(progressBar, graphic, distanceBetweenCitadelAndNormandy, -scale(2))
 
           graphicsConfig.restore()
