@@ -8,6 +8,8 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
+
 @State(
     name = "NormandyUIConfig",
     storages = @Storage("normandy_ui_theme.xml")
@@ -15,17 +17,17 @@ import org.jetbrains.annotations.Nullable;
 public class NormandyUIConfig implements PersistentStateComponent<NormandyUIConfig>, Cloneable {
 
   // They are public so they can be serialized
-  public String primaryThemeColor = "";
-  public String secondaryThemeColor = "";
+  public String primaryThemeColor = "#FFFFFF";
+  public String secondaryThemeColor = "#000000";
   public String jetWash = "";
-  public String borderColor = "";
+  public String borderColor = "#EFEFEF";
 
 
   public NormandyUIConfig() {
   }
 
-  public static NormandyUIConfig getInstance() {
-    return ServiceManager.getService(NormandyUIConfig.class);
+  public static Optional<NormandyUIConfig> getInstance() {
+    return Optional.ofNullable(ServiceManager.getService(NormandyUIConfig.class));
   }
 
   public String getPrimaryThemeColor() {

@@ -1,10 +1,13 @@
 package io.acari.n7
 
 import com.intellij.ui.ColorUtil
+import com.intellij.ui.Gray
 import com.intellij.util.ui.GraphicsUtil
 import com.intellij.util.ui.JBUI
 import com.intellij.util.ui.JBUI.scale
 import com.intellij.util.ui.UIUtil
+import io.acari.n7.config.NormandyUIConfig
+import io.acari.n7.theme.NormandyUITheme
 import java.awt.*
 import java.awt.geom.RoundRectangle2D
 import java.util.*
@@ -44,6 +47,7 @@ open class NormandyUI : BasicProgressBarUI() {
 
   private var distanceFromCitadel: Float = 120f
   private var velocityFromCitadel: Float = -1f
+  private val borderColor: Color = NormandyUITheme.borderColor()
 
   override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
 
@@ -118,7 +122,7 @@ open class NormandyUI : BasicProgressBarUI() {
           //SET BACKGROUND
           val R2 = JBUI.scale(9f)
           val off = JBUI.scale(1f)
-          graphic.color = progressBar.foreground
+          graphic.color = borderColor
           graphic.fill(RoundRectangle2D.Float(0f, 0f, componentWidth - off, componentHeight - off, R2, R2))
 
           //Draw Border
