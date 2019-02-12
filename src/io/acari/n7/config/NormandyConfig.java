@@ -19,7 +19,7 @@ public class NormandyConfig implements PersistentStateComponent<NormandyConfig>,
   // They are public so they can be serialized
   public String primaryThemeColor = "#FFFFFF";
   public String secondaryThemeColor = "#000000";
-  public String jetWash = "";
+  public String jetWash = "#a38dbe,#d6f5f8,#a38dbe,#d6f5f8,#a38dbe,TRANSPARENT,TRANSPARENT,#a38dbe,#d6f5f8,#a38dbe,#d6f5f8,#a38dbe";
   public String borderColor = "#EFEFEF";
   public boolean allowedToBeOverridden = false;
 
