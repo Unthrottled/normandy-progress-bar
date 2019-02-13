@@ -35,84 +35,84 @@ import javax.swing.border.TitledBorder
 import javax.swing.plaf.ColorUIResource
 import java.awt.*
 
-class NormandyForm {
+class ThemeConfigurations(
+    val borderColor: Color = NormandyForm.NormandyThemeDefaults.borderColor,
+    val primaryColor: Color = NormandyForm.NormandyThemeDefaults.primaryColor,
+    val secondaryColor: Color = NormandyForm.NormandyThemeDefaults.secondaryColor,
+    val shouldOverride: Boolean = true
+)
 
-  // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-  // Generated using JFormDesigner non-commercial license
+class NormandyForm(themeConfigurations: ThemeConfigurations) {
+
   private var content: JPanel? = null
-  private var explLabel: JLabel? = null
-  private var expTextArea: JTextArea? = null
-  private var separator1: JSeparator? = null
-  private var backgroundColorLabel: JLabel? = null
-  private var backgroundColor: ColorPanel? = null
-  private var foregroundColorLabel: JLabel? = null
-  private var foregroundColor: ColorPanel? = null
-  private var labelColorLabel: JLabel? = null
-  private var labelColor: ColorPanel? = null
-  private var selectionBackgroundColorLabel: JLabel? = null
-  private var selectionBackgroundColor: ColorPanel? = null
+  private var borderColorLabel: JLabel? = null
+  private var borderColor: ColorPanel? = null
+  private var primaryColorLabel: JLabel? = null
+  private var primaryColor: ColorPanel? = null
+  private var secondaryColorLabel: JLabel? = null
+  private var secondaryColor: ColorPanel? = null
   private var resetTabDefaultsBtn: JButton? = null
-  private var isContrastModeCheckbox: JCheckBox? = null
+  private var shouldOverrideCheckbox: JCheckBox? = null
 
   var textColor: Color?
-    get() = labelColor!!.selectedColor
-    private set(labelColor) {
-      this.labelColor!!.selectedColor = labelColor
+    get() = secondaryColor!!.selectedColor
+    private set(secondaryColor) {
+      this.secondaryColor!!.selectedColor = secondaryColor
     }
 
-  var isContrastMode: Boolean
-    get() = isContrastModeCheckbox!!.isSelected
-    private set(isContrastMode) {
-      isContrastModeCheckbox!!.isSelected = isContrastMode
+  var shouldOverride: Boolean
+    get() = shouldOverrideCheckbox!!.isSelected
+    private set(shouldOverride) {
+      shouldOverrideCheckbox!!.isSelected = shouldOverride
     }
 
   init {
     initComponents()
-    loadConfigs()
+    loadConfigs(themeConfigurations)
 
     // Reset tab defaults
     resetTabDefaultsBtn!!.addActionListener { e ->
-      setSelectionBackgroundColor(MTCustomDefaults.selectionBackgroundColor)
-      textColor = MTCustomDefaults.textColor
-      setForegroundColor(MTCustomDefaults.foregroundColor)
-      setBackgroundColor(MTCustomDefaults.backgroundColor)
+      textColor = NormandyThemeDefaults.secondaryColor
+      setPrimaryColor(NormandyThemeDefaults.primaryColor)
+      setBorderColor(NormandyThemeDefaults.borderColor)
     }
   }
 
-  private fun loadConfigs() {
-    setSelectionBackgroundColor(MTCustomDefaults.selectionBackgroundColor)
-    textColor = MTCustomDefaults.textColor
-    setForegroundColor(MTCustomDefaults.foregroundColor)
-    setBackgroundColor(MTCustomDefaults.backgroundColor)
+  private fun loadConfigs(themeConfigurations: ThemeConfigurations) {
+    setPrimaryColor(themeConfigurations.primaryColor)
+    setSecondary(themeConfigurations.secondaryColor)
+    setBorderColor(themeConfigurations.borderColor)
+    shouldOverride = themeConfigurations.shouldOverride
   }
 
   fun getContent(): JComponent? {
     return content
   }
 
-  fun getBackgroundColor(): Color? {
-    return backgroundColor!!.selectedColor
+  fun getBorderColor(): Color? {
+    return borderColor!!.selectedColor
   }
 
-  private fun setBackgroundColor(backgroundColor: Color) {
-    this.backgroundColor!!.selectedColor = backgroundColor
+  private fun setBorderColor(borderColor: Color) {
+    this.borderColor!!.selectedColor = borderColor
   }
 
-  fun getForegroundColor(): Color? {
-    return foregroundColor!!.selectedColor
+  fun getPrimaryColor(): Color? {
+    return primaryColor!!.selectedColor
   }
 
-  private fun setForegroundColor(foregroundColor: Color) {
-    this.foregroundColor!!.selectedColor = foregroundColor
+  fun getSecondaryColor(): Color? {
+    return secondaryColor!!.selectedColor
   }
 
-  fun getSelectionBackgroundColor(): Color? {
-    return selectionBackgroundColor!!.selectedColor
+  private fun setPrimaryColor(primaryColor: Color) {
+    this.primaryColor!!.selectedColor = primaryColor
   }
 
-  private fun setSelectionBackgroundColor(selectionBackgroundColor: Color) {
-    this.selectionBackgroundColor!!.selectedColor = selectionBackgroundColor
+  private fun setSecondary(primaryColor: Color) {
+    this.secondaryColor!!.selectedColor = primaryColor
   }
+
 
   // JFormDesigner - End of variables declaration  //GEN-END:variables
 
@@ -121,19 +121,14 @@ class NormandyForm {
     // Generated using JFormDesigner non-commercial license
     content = JPanel()
     val panel1 = JPanel()
-    explLabel = JLabel()
-    expTextArea = JTextArea()
-    separator1 = JSeparator()
-    backgroundColorLabel = JLabel()
-    backgroundColor = ColorPanel()
-    foregroundColorLabel = JLabel()
-    foregroundColor = ColorPanel()
-    labelColorLabel = JLabel()
-    labelColor = ColorPanel()
-    selectionBackgroundColorLabel = JLabel()
-    selectionBackgroundColor = ColorPanel()
+    borderColorLabel = JLabel()
+    borderColor = ColorPanel()
+    primaryColorLabel = JLabel()
+    primaryColor = ColorPanel()
+    secondaryColorLabel = JLabel()
+    secondaryColor = ColorPanel()
     resetTabDefaultsBtn = JButton()
-    isContrastModeCheckbox = JCheckBox()
+    shouldOverrideCheckbox = JCheckBox()
 
 
     //======== content ========
@@ -146,87 +141,50 @@ class NormandyForm {
 
       //======== panel1 ========
       run {
-        panel1.border = TitledBorder(EtchedBorder(), "MTForm.customColorsTitle")
+        panel1.border = TitledBorder(EtchedBorder(), "Normandy Theme Customization")
         panel1.layout = GridLayoutManager(18, 2, Insets(0, 3, 0, 0), -1, -1)
 
-        //---- explLabel ----
-        explLabel!!.text = "MTForm.explLabel.text"
-        explLabel!!.foreground = UIManager.getColor("#FFFFFF")
-        panel1.add(explLabel!!, GridConstraints(0, 0, 1, 1,
-            GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-
-        //---- expTextArea ----
-        expTextArea!!.background = UIManager.getColor("Panel.background")
-        expTextArea!!.font = UIManager.getFont("Panel.font")
-        expTextArea!!.text = "MTForm.expTextArea.text"
-        expTextArea!!.rows = 2
-        expTextArea!!.wrapStyleWord = true
-        expTextArea!!.isEditable = false
-        expTextArea!!.border = null
-        panel1.add(expTextArea!!, GridConstraints(1, 0, 1, 1,
+        //---- borderColorLabel ----
+        borderColorLabel!!.text = "Border Color"
+        borderColorLabel!!.toolTipText = "The progress bar border color."
+        panel1.add(borderColorLabel!!, GridConstraints(3, 0, 1, 1,
             GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-        panel1.add(separator1!!, GridConstraints(2, 0, 1, 1,
-            GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-
-        //---- backgroundColorLabel ----
-        backgroundColorLabel!!.text = "MTColorForm.background"
-        backgroundColorLabel!!.toolTipText = "MTCustomThemeForm.backgroundColor.toolTipText"
-        panel1.add(backgroundColorLabel!!, GridConstraints(3, 0, 1, 1,
-            GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-        panel1.add(backgroundColor!!, GridConstraints(3, 1, 1, 1,
+        panel1.add(borderColor!!, GridConstraints(3, 1, 1, 1,
             GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
-        //---- foregroundColorLabel ----
-        foregroundColorLabel!!.text = "MTForm.foregroundColorLabel.text"
-        foregroundColorLabel!!.toolTipText = "MTForm.foregroundColorLabel.toolTipText"
-        panel1.add(foregroundColorLabel!!, GridConstraints(4, 0, 1, 1,
+        //---- primaryColorLabel ----
+        primaryColorLabel!!.text = "Normandy's Primary Color"
+        primaryColorLabel!!.toolTipText = "The upper half of the Normandy"
+        panel1.add(primaryColorLabel!!, GridConstraints(4, 0, 1, 1,
             GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-        panel1.add(foregroundColor!!, GridConstraints(4, 1, 1, 1,
+        panel1.add(primaryColor!!, GridConstraints(4, 1, 1, 1,
             GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
-        //---- labelColorLabel ----
-        labelColorLabel!!.text = "MTForm.labelColorLabel.text"
-        labelColorLabel!!.toolTipText = "MTForm.labelColorLabel.toolTipText"
-        panel1.add(labelColorLabel!!, GridConstraints(5, 0, 1, 1,
+        //---- secondaryColor ----
+        secondaryColorLabel!!.text = "Normandy's Secondary Color"
+        secondaryColorLabel!!.toolTipText = "The lower half of the Normandy."
+        panel1.add(secondaryColorLabel!!, GridConstraints(5, 0, 1, 1,
             GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-        panel1.add(labelColor!!, GridConstraints(5, 1, 1, 1,
+        panel1.add(secondaryColor!!, GridConstraints(5, 1, 1, 1,
             GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
-        //---- selectionBackgroundColorLabel ----
-        selectionBackgroundColorLabel!!.text = "MTForm.selectionBackgroundColorLabel.text"
-        selectionBackgroundColorLabel!!.toolTipText = "MTForm.selectionBackgroundColorLabel.toolTipText"
-        panel1.add(selectionBackgroundColorLabel!!, GridConstraints(6, 0, 1, 1,
-            GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-        panel1.add(selectionBackgroundColor!!, GridConstraints(6, 1, 1, 1,
-            GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-
-        //---- isContrastModeCheckbox ----
-        isContrastModeCheckbox!!.label = "mt.contrast"
-        isContrastModeCheckbox!!.text = "mt.contrast"
-        isContrastModeCheckbox!!.toolTipText = "mt.contrast.tooltip"
-        panel1.add(isContrastModeCheckbox!!, GridConstraints(7, 1, 1, 1,
+        //---- shouldOverrideCheckbox ----
+        shouldOverrideCheckbox!!.label = "Allow Theme Override"
+        shouldOverrideCheckbox!!.text = "Allow Theme Override"
+        shouldOverrideCheckbox!!.toolTipText = "Allow other application to override your theme."
+        panel1.add(shouldOverrideCheckbox!!, GridConstraints(7, 1, 1, 1,
             GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
@@ -238,8 +196,8 @@ class NormandyForm {
           GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
       //---- resetTabDefaultsBtn ----
-      resetTabDefaultsBtn!!.text = "mt.resetCustomTheme.title"
-      resetTabDefaultsBtn!!.toolTipText = "mt.resetdefaults.tooltip"
+      resetTabDefaultsBtn!!.text = "Restore Defaults"
+      resetTabDefaultsBtn!!.toolTipText = "Restore Defaults"
       panel1.add(resetTabDefaultsBtn!!, GridConstraints(17, 0, 1, 1,
           GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
           GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
@@ -251,14 +209,13 @@ class NormandyForm {
   /**
    * Default colors for Custom theme
    */
-  enum class MTCustomDefaults {
+  enum class NormandyThemeDefaults {
     ;
 
     companion object {
-      val selectionBackgroundColor = ColorUIResource(0x546E7A)
-      val textColor = ColorUIResource(0x607D8B)
-      val foregroundColor = ColorUIResource(0xB0BEC5)
-      val backgroundColor = ColorUIResource(0x263238)
+      val secondaryColor = ColorUIResource(0x607D8B)
+      val primaryColor = ColorUIResource(0xB0BEC5)
+      val borderColor = ColorUIResource(0x263238)
     }
   }
 

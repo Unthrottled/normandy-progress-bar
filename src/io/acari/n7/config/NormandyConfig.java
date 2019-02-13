@@ -21,7 +21,7 @@ public class NormandyConfig implements PersistentStateComponent<NormandyConfig>,
   public String secondaryThemeColor = "#000000";
   public String jetWash = "#a38dbe,#d6f5f8,#a38dbe,#d6f5f8,#a38dbe,TRANSPARENT,TRANSPARENT,#a38dbe,#d6f5f8,#a38dbe,#d6f5f8,#a38dbe";
   public String borderColor = "#EFEFEF";
-  public boolean allowedToBeOverridden = false;
+  public boolean allowedToBeOverridden = true;
 
 
   public NormandyConfig() {
