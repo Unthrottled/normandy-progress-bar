@@ -20,18 +20,18 @@ object NormandyTheme {
       .toFloatArray()
 
 
-  fun borderColor(): Color = NormandyConfig.getInstance()
+  fun borderColor(): Color = NormandyConfig.instance
       .map { it.borderColor }
       .map(ColorUtil::fromHex)
       .orElseGet { Gray._240 }
 
   fun primaryColorString(): String =
-      NormandyConfig.getInstance()
+      NormandyConfig.instance
           .map { it.primaryThemeColor }
           .orElseGet { ColorUtil.toHex(Color.CYAN) }
 
   fun secondaryColorString(): String =
-      NormandyConfig.getInstance()
+      NormandyConfig.instance
           .map { it.secondaryThemeColor }
           .orElseGet { ColorUtil.toHex(Color.PINK) }
 }

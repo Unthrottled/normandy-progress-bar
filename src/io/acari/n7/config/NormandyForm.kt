@@ -32,13 +32,12 @@ import com.intellij.uiDesigner.core.GridLayoutManager
 import javax.swing.*
 import javax.swing.border.EtchedBorder
 import javax.swing.border.TitledBorder
-import javax.swing.plaf.ColorUIResource
 import java.awt.*
 
 class ThemeConfigurations(
-    val borderColor: Color = NormandyForm.NormandyThemeDefaults.borderColor,
-    val primaryColor: Color = NormandyForm.NormandyThemeDefaults.primaryColor,
-    val secondaryColor: Color = NormandyForm.NormandyThemeDefaults.secondaryColor,
+    val borderColor: Color = NormandyThemeDefaults.borderColor,
+    val primaryColor: Color = NormandyThemeDefaults.primaryColor,
+    val secondaryColor: Color = NormandyThemeDefaults.secondaryColor,
     val shouldOverride: Boolean = true
 )
 
@@ -72,7 +71,7 @@ class NormandyForm(themeConfigurations: ThemeConfigurations) {
 
     // Reset tab defaults
     resetTabDefaultsBtn!!.addActionListener { e ->
-      textColor = NormandyThemeDefaults.secondaryColor
+      setSecondary(NormandyThemeDefaults.secondaryColor)
       setPrimaryColor(NormandyThemeDefaults.primaryColor)
       setBorderColor(NormandyThemeDefaults.borderColor)
     }
@@ -206,17 +205,5 @@ class NormandyForm(themeConfigurations: ThemeConfigurations) {
     // JFormDesigner - End of component initialization  //GEN-END:initComponents
   }
 
-  /**
-   * Default colors for Custom theme
-   */
-  enum class NormandyThemeDefaults {
-    ;
-
-    companion object {
-      val secondaryColor = ColorUIResource(0x607D8B)
-      val primaryColor = ColorUIResource(0xB0BEC5)
-      val borderColor = ColorUIResource(0x263238)
-    }
-  }
-
 }
+

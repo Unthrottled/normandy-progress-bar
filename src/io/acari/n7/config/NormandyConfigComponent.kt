@@ -10,13 +10,13 @@ class NormandyConfigComponent : SearchableConfigurable {
   }
 
   private val normandyForm = lazy {
-    val themeConfigurations = NormandyConfig.getInstance()
+    val themeConfigurations = NormandyConfig.instance
         .map {
           ThemeConfigurations(
               com.intellij.ui.ColorUtil.fromHex(it.borderColor),
               com.intellij.ui.ColorUtil.fromHex(it.primaryThemeColor),
               com.intellij.ui.ColorUtil.fromHex(it.secondaryThemeColor),
-              it.allowedToBeOverridden
+              it.isAllowedToBeOverridden
           )
         }.orElseGet { ThemeConfigurations() }
     NormandyForm(themeConfigurations)
@@ -28,9 +28,9 @@ class NormandyConfigComponent : SearchableConfigurable {
   override fun getDisplayName(): String = "Normandy UI Config"
 
   override fun apply() {
-    NormandyConfig.getInstance()
+    NormandyConfig.instance
         .ifPresent {
-          it.allowedToBeOverridden = normandyForm.value.shouldOverride
+          it.isAllowedToBeOverridden = normandyForm.value.shouldOverride
           it.borderColor = ColorUtil.toHexString(normandyForm.value.getBorderColor())
           it.primaryThemeColor = ColorUtil.toHexString(normandyForm.value.getPrimaryColor())
           it.secondaryThemeColor = ColorUtil.toHexString(normandyForm.value.getSecondaryColor())
