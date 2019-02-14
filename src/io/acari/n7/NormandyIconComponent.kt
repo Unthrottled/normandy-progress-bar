@@ -36,7 +36,6 @@ class NormandyIconComponent : BaseComponent {
     messageBus = ApplicationManager.getApplication().messageBus.connect()
     messageBus.subscribe(CONFIGURATION_TOPIC, NormandyConfigurationSubscriber {
       setColorPatcher()
-      IconLoader.clearCache()//todo: just remove the normandy from the cache
       //todo: set color patcher back.
     })
   }
