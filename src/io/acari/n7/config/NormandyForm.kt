@@ -34,7 +34,7 @@ import javax.swing.border.EtchedBorder
 import javax.swing.border.TitledBorder
 import java.awt.*
 
-class ThemeConfigurations(
+data class ThemeConfigurations(
     val borderColor: Color = NormandyThemeDefaults.borderColor,
     val primaryColor: Color = NormandyThemeDefaults.primaryColor,
     val secondaryColor: Color = NormandyThemeDefaults.secondaryColor,
