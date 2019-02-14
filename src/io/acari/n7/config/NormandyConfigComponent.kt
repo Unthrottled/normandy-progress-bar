@@ -38,7 +38,7 @@ class NormandyConfigComponent : SearchableConfigurable {
           it.secondaryThemeColor = ColorUtil.toHexString(normandyForm.value.getSecondaryColor())
           ApplicationManager.getApplication().messageBus
               .syncPublisher(CONFIGURATION_TOPIC)
-              .configurationChanged(configToThemConfig(it))
+              .consumeChanges(configToThemConfig(it))
         }
   }
 
