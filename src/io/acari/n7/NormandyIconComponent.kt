@@ -1,5 +1,6 @@
 package io.acari.n7
 
+import com.intellij.ide.ui.LafManager
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.BaseComponent
 import com.intellij.openapi.util.IconLoader
@@ -34,7 +35,9 @@ class NormandyIconComponent : BaseComponent {
 
     messageBus = ApplicationManager.getApplication().messageBus.connect()
     messageBus.subscribe(CONFIGURATION_TOPIC, NormandyConfigurationSubscriber {
-      println("I gots dis $it")
+      setColorPatcher()
+      IconLoader.clearCache()//todo: just remove the normandy from the cache
+      //todo: set color patcher back.
     })
   }
 
