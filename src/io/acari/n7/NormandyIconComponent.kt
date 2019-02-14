@@ -37,6 +37,7 @@ class NormandyIconComponent : BaseComponent {
       //todo: set color patcher back.
     })
 
+    //todo: should just put in the laf theme changes listener instead for now.
     messageBus.subscribe(DOKI_DOKI_THEME_TOPIC, DokiDokiThemeSubcriber {
       println("Doki Doki theme changed")
     })

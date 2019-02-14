@@ -23,9 +23,9 @@ object GuidanceSystem {
             if (distanceFromCitadel < 2) {
               velocityFromCitadel = DEFAULT_VELOCITY_FROM_CITADEL
               2f
-            } else if (distanceFromCitadel >= componentWidth - JBUI.scale(15)) {
+            } else if (distanceFromCitadel >= componentWidth) {
               velocityFromCitadel = -DEFAULT_VELOCITY_FROM_CITADEL
-              componentWidth.toFloat() - JBUI.scale(15)
+              componentWidth.toFloat()
             } else {
               distanceFromCitadel
             }
