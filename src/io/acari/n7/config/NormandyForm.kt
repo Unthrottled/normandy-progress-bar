@@ -53,11 +53,6 @@ class NormandyForm(themeConfigurations: ThemeConfigurations) {
   private var resetTabDefaultsBtn: JButton? = null
   private var shouldOverrideCheckbox: JCheckBox? = null
 
-  var textColor: Color?
-    get() = secondaryColor!!.selectedColor
-    private set(secondaryColor) {
-      this.secondaryColor!!.selectedColor = secondaryColor
-    }
 
   var shouldOverride: Boolean
     get() = shouldOverrideCheckbox!!.isSelected
@@ -113,11 +108,7 @@ class NormandyForm(themeConfigurations: ThemeConfigurations) {
   }
 
 
-  // JFormDesigner - End of variables declaration  //GEN-END:variables
-
   private fun initComponents() {
-    // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-    // Generated using JFormDesigner non-commercial license
     content = JPanel()
     val panel1 = JPanel()
     borderColorLabel = JLabel()
@@ -202,7 +193,6 @@ class NormandyForm(themeConfigurations: ThemeConfigurations) {
           GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
           GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
     }
-    // JFormDesigner - End of component initialization  //GEN-END:initComponents
   }
 
 }

@@ -12,6 +12,6 @@ enum class NormandyThemeDefaults {
   companion object {
     val secondaryColor = ColorUIResource(0x000000)
     val primaryColor = ColorUIResource(0xFFFFFF)
-    val borderColor = ColorUIResource(0xEFEFEF)
+    val borderColor = ColorUIResource(0xEFEFEF)// todo: should be something like set foreground
   }
 }
