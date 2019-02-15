@@ -9,13 +9,9 @@ import com.intellij.util.messages.MessageBusConnection
 import io.acari.n7.config.CONFIGURATION_TOPIC
 import io.acari.n7.config.NormandyConfigurationSubcriber
 
-/**
- * Forged in the flames of battle by alex.
- */
 class NormandyIconComponent : BaseComponent {
 
   companion object {
-    private val colorPatcher = NormandyColorPatcher()
 
     init {
       setColorPatcher()
@@ -25,22 +21,25 @@ class NormandyIconComponent : BaseComponent {
     fun getNormandyToCitadelIcon() = IconLoader.getIcon("/normandyToCitadel.svg")
 
     private fun setColorPatcher() {
-      SVGLoader.setColorPatcher(colorPatcher)
+      SVGLoader.setColorPatcher(SvgLoaderHacker.collectOtherPatcher()
+          .map { NormandyColorPatcher(it) }
+          .orElseGet { NormandyColorPatcher() })
     }
   }
 
   lateinit var messageBus: MessageBusConnection
 
   override fun initComponent() {
-
+    setColorPatcher()
     messageBus = ApplicationManager.getApplication().messageBus.connect()
+
+    //todo: listen for the project initializiation
     messageBus.subscribe(CONFIGURATION_TOPIC, NormandyConfigurationSubcriber {
       setColorPatcher()
-      //todo: set color patcher back.
     })
 
     LafManager.getInstance().addLafManagerListener {
-      println("theme changed")
+      setColorPatcher()
     }
   }
 
