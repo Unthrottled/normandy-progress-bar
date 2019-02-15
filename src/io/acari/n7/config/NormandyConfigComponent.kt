@@ -10,11 +10,11 @@ class NormandyConfigComponent : SearchableConfigurable {
     const val CONFIG_ID = "io.acari.n7.config.theme"
   }
 
-  private val normandyForm = lazy {
+  private var normandyForm = {
     val themeConfigurations = NormandyConfig.instance
         .map { configToThemConfig(it) }.orElseGet { ThemeConfigurations() }
     NormandyForm(themeConfigurations)
-  }
+  }()
 
   private fun configToThemConfig(it: NormandyConfig): ThemeConfigurations {
     return ThemeConfigurations(
@@ -32,10 +32,11 @@ class NormandyConfigComponent : SearchableConfigurable {
   override fun apply() {
     NormandyConfig.instance
         .ifPresent {
-          it.isAllowedToBeOverridden = normandyForm.value.shouldOverride
-          it.borderColor = ColorUtil.toHexString(normandyForm.value.getBorderColor())
-          it.primaryThemeColor = ColorUtil.toHexString(normandyForm.value.getPrimaryColor())
-          it.secondaryThemeColor = ColorUtil.toHexString(normandyForm.value.getSecondaryColor())
+          it.isAllowedToBeOverridden = normandyForm.shouldOverride
+          it.borderColor = ColorUtil.toHexString(normandyForm.getBorderColor())
+          it.primaryThemeColor = ColorUtil.toHexString(normandyForm.getPrimaryColor())
+          it.secondaryThemeColor = ColorUtil.toHexString(normandyForm.getSecondaryColor())
+          normandyForm = NormandyForm(configToThemConfig(it))
           ApplicationManager.getApplication().messageBus
               .syncPublisher(CONFIGURATION_TOPIC)
               .consumeChanges(configToThemConfig(it))
@@ -43,11 +44,11 @@ class NormandyConfigComponent : SearchableConfigurable {
   }
 
   override fun createComponent(): JComponent? {
-    return normandyForm.value.getContent()
+    return normandyForm.getContent()
   }
 
   //todo: implement
-  override fun isModified(): Boolean = true
+  override fun isModified(): Boolean = normandyForm.isModified()
 
 }
 

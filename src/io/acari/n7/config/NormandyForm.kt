@@ -28,11 +28,11 @@ package io.acari.n7.config
 import com.intellij.ui.ColorPanel
 import com.intellij.uiDesigner.core.GridConstraints
 import com.intellij.uiDesigner.core.GridLayoutManager
-
+import java.awt.Color
+import java.awt.Insets
 import javax.swing.*
 import javax.swing.border.EtchedBorder
 import javax.swing.border.TitledBorder
-import java.awt.*
 
 data class ThemeConfigurations(
     val borderColor: Color = NormandyThemeDefaults.borderColor,
@@ -41,7 +41,7 @@ data class ThemeConfigurations(
     val shouldOverride: Boolean = true
 )
 
-class NormandyForm(themeConfigurations: ThemeConfigurations) {
+class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
 
   private var content: JPanel? = null
   private var borderColorLabel: JLabel? = null
@@ -53,6 +53,12 @@ class NormandyForm(themeConfigurations: ThemeConfigurations) {
   private var resetTabDefaultsBtn: JButton? = null
   private var shouldOverrideCheckbox: JCheckBox? = null
 
+
+  fun isModified(): Boolean =
+      themeConfigurations.shouldOverride != shouldOverride ||
+          themeConfigurations.borderColor != getBorderColor() ||
+          themeConfigurations.primaryColor != getPrimaryColor() ||
+          themeConfigurations.secondaryColor != getSecondaryColor()
 
   var shouldOverride: Boolean
     get() = shouldOverrideCheckbox!!.isSelected

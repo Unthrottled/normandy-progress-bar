@@ -23,18 +23,6 @@ class NormandyConfig : PersistentStateComponent<NormandyConfig>, Cloneable {
     return XmlSerializerUtil.createCopy(this)
   }
 
-
-  /**
-   * Convenience method to reset settings
-   */
-  fun resetSettings() {
-    primaryThemeColor = ""
-    secondaryThemeColor = ""
-    jetWash = ""
-    borderColor = ""
-  }
-
-
   override fun getState(): NormandyConfig? {
     return this
   }
