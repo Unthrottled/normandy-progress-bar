@@ -5,7 +5,7 @@ import io.acari.n7.theme.NormandyTheme
 import org.w3c.dom.Element
 import java.util.*
 
-class NormandyColorPatcher(val theOther: SVGLoader.SvgColorPatcher = SVGLoader.SvgColorPatcher{}) : SVGLoader.SvgColorPatcher {
+class NormandyColorPatcher(val theOther: SVGLoader.SvgColorPatcher = SVGLoader.SvgColorPatcher {}) : SVGLoader.SvgColorPatcher {
 
   override fun patchColors(svg: Element) {
     theOther.patchColors(svg)
@@ -33,26 +33,27 @@ class NormandyColorPatcher(val theOther: SVGLoader.SvgColorPatcher = SVGLoader.S
   }
 }
 
+//todo: optimize dis
 object SvgLoaderHacker {
 
   lateinit var otherColorPatcher: SVGLoader.SvgColorPatcher
 
   fun collectOtherPatcher(): Optional<SVGLoader.SvgColorPatcher> =
-    Optional.ofNullable(SVGLoader::class.java.declaredFields
-        .firstOrNull { it.name == "ourColorPatcher" })
-        .map { ourColorPatcherField ->
-          ourColorPatcherField.isAccessible = true
-          ourColorPatcherField.get(null) }
-        .filter { it is SVGLoader.SvgColorPatcher }
-        .filter { !(it is NormandyColorPatcher) }
-        .map {
-          val otherPatcher = it as SVGLoader.SvgColorPatcher
-          this.otherColorPatcher = otherPatcher
-          otherPatcher
-        }
-        .map { Optional.of(it) }
-        .orElseGet { retriveOtherColorPatcher() }
-
+      Optional.ofNullable(SVGLoader::class.java.declaredFields
+          .firstOrNull { it.name == "ourColorPatcher" })
+          .map { ourColorPatcherField ->
+            ourColorPatcherField.isAccessible = true
+            ourColorPatcherField.get(null)
+          }
+          .filter { it is SVGLoader.SvgColorPatcher }
+          .filter { !(it is NormandyColorPatcher) }
+          .map {
+            val otherPatcher = it as SVGLoader.SvgColorPatcher
+            this.otherColorPatcher = otherPatcher
+            otherPatcher
+          }
+          .map { Optional.of(it) }
+          .orElseGet { retriveOtherColorPatcher() }
 
 
   fun retriveOtherColorPatcher(): Optional<SVGLoader.SvgColorPatcher> =

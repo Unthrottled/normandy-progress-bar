@@ -1,9 +1,13 @@
 package io.acari.n7
 
+import com.intellij.ide.AppLifecycleListener
 import com.intellij.ide.ui.LafManager
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.BaseComponent
+import com.intellij.openapi.progress.util.ProgressWindow
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.IconLoader
+import com.intellij.openapi.util.Ref
 import com.intellij.util.SVGLoader
 import com.intellij.util.messages.MessageBusConnection
 import io.acari.n7.config.CONFIGURATION_TOPIC
@@ -33,8 +37,15 @@ class NormandyIconComponent : BaseComponent {
     setColorPatcher()
     messageBus = ApplicationManager.getApplication().messageBus.connect()
 
-    //todo: listen for the project initializiation
     messageBus.subscribe(CONFIGURATION_TOPIC, NormandyConfigurationSubcriber {
+      setColorPatcher()
+    })
+
+    messageBus.subscribe(ProgressWindow.TOPIC, ProgressWindow.Listener {
+      setColorPatcher()
+    })
+
+    messageBus.subscribe(AppLifecycleListener.TOPIC, AppLifecycleSubscriber {
       setColorPatcher()
     })
 
@@ -48,6 +59,13 @@ class NormandyIconComponent : BaseComponent {
       messageBus.disconnect()
     }
   }
+}
+
+class AppLifecycleSubscriber(private val fundy: () -> Unit) : AppLifecycleListener {
+
+  override fun appFrameCreated(commandLineArgs: Array<out String>?, willOpenProject: Ref<Boolean>) = fundy()
+
+  override fun appStarting(projectFromCommandLine: Project?) = fundy()
 }
 
 
