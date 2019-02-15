@@ -36,4 +36,16 @@
     <implementation-class>io.acari.n7.NormandyIconComponent</implementation-class>
   </component>
 </application-components>
+  
+  <actions>
+    <action class="io.acari.n7.actions.ConfigAction"
+            id="Config Action"
+            text="Normandy Configuration"
+            icon="/normandy.svg">
+      <add-to-group group-id="ToolsMenu"/>
+      <add-to-group group-id="MainToolBar" anchor="last"/>
+      <add-to-group group-id="ChangeScheme" anchor="after"/>
+    </action>
+  </actions>
+  
 </idea-plugin>
