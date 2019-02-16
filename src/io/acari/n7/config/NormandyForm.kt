@@ -176,6 +176,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
+
         //---- shouldOverrideCheckbox ----
         shouldOverrideCheckbox!!.label = "Allow Theme Override"
         shouldOverrideCheckbox!!.text = "Allow Theme Override"
@@ -186,7 +187,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
       }
-      content!!.add(panel1, GridConstraints(0, 0, 1, 1,
+      content!!.add(JetWashColorsConfigurablePanel(), GridConstraints(0, 0, 1, 1,
           GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH,
           GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
           GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
