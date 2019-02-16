@@ -47,7 +47,6 @@ class NormandyConfigComponent : SearchableConfigurable {
     return normandyForm.getContent()
   }
 
-  //todo: implement
   override fun isModified(): Boolean = normandyForm.isModified()
 
 }
