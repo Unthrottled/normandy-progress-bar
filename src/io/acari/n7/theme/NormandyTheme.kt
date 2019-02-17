@@ -12,7 +12,7 @@ object NormandyTheme {
 
   val colors = arrayOf(outerJetWashColor, jetWashColor,
       outerJetWashColor, jetWashColor,
-      outerJetWashColor, backgroundColorFunction, backgroundColorFunction, outerJetWashColor,
+      outerJetWashColor, backgroundColorFunction, backgroundColorFunction, backgroundColorFunction, outerJetWashColor,
       jetWashColor, outerJetWashColor,
       jetWashColor, outerJetWashColor)
   val SCALING_FACTOR = 1.0f / colors.size

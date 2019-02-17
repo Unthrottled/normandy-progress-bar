@@ -27,7 +27,7 @@ class NormandyConfigComponent : SearchableConfigurable {
 
   override fun getId(): String = CONFIG_ID
 
-  override fun getDisplayName(): String = "Normandy UI Config"
+  override fun getDisplayName(): String = "SSV Normandy Configuration"
 
   override fun apply() {
     NormandyConfig.instance
