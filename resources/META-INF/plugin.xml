@@ -1,11 +1,11 @@
 <idea-plugin>
   <id>io.acari.normandy.progress.bar</id>
-  <name>Normandy N7 Progress Bar</name>
+  <name>SSV Normandy Progress Bar</name>
   <version>1.0</version>
   <vendor email="alexsimons9999@gmail.com" url="https://acari.io">cyclic-reference</vendor>
 
   <description><![CDATA[
-      Makes the N7 Normandy traveling at FTL speeds as your loading progress bar.
+      Makes th SSV Normandy SR-1 traveling at FTL as your loading progress bar.
     ]]></description>
 
   <change-notes><![CDATA[
