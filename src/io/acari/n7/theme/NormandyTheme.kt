@@ -7,7 +7,7 @@ import java.awt.Color
 
 object NormandyTheme {
   val jetWashColor = { _: Color -> ColorUtil.fromHex("#d6f5f8") }
-  val outerJetWashColor = { _: Color -> ColorUtil.fromHex("#a38dbe") }
+  val outerJetWashColor = { _: Color -> ColorUtil.fromHex("#A47FD8") }
   val backgroundColorFunction = { backgroundColor: Color -> backgroundColor }
 
   val colors = arrayOf(outerJetWashColor, jetWashColor,
@@ -16,7 +16,7 @@ object NormandyTheme {
       jetWashColor, outerJetWashColor,
       jetWashColor, outerJetWashColor)
   val SCALING_FACTOR = 1.0f / colors.size
-  val jetWashScales = colors.mapIndexed { index, _ -> SCALING_FACTOR * index }
+  val jetWashScales = colors.mapIndexed { index, _ -> SCALING_FACTOR * (index + 1) }
       .toFloatArray()
 
 
