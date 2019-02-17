@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -7,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="63.658218"
-   height="30.616163"
-   viewBox="0 0 16.842903 8.1005263"
+   width="216.94499"
+   height="101.758"
+   viewBox="0 0 57.400028 26.923469"
    version="1.1"
    id="svg844"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
@@ -23,23 +25,25 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="6.9511899"
-     inkscape:cx="-8.9423126"
-     inkscape:cy="20.346681"
+     inkscape:zoom="1.2288084"
+     inkscape:cx="184.21299"
+     inkscape:cy="38.354951"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="857"
      inkscape:window-height="495"
-     inkscape:window-x="1249"
-     inkscape:window-y="478"
+     inkscape:window-x="1380"
+     inkscape:window-y="275"
      inkscape:window-maximized="0"
      inkscape:pagecheckerboard="true"
      fit-margin-top="1"
      fit-margin-bottom="1"
      fit-margin-right="1"
      fit-margin-left="1"
-     units="px" />
+     units="px"
+     scale-x="1e-05"
+     width="63.65822px" />
   <metadata
      id="metadata841">
     <rdf:RDF>
@@ -48,7 +52,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -56,20 +60,20 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Layer 3"
-     transform="translate(-66.019116,-146.60711)" />
+     transform="translate(-74.369969,-127.78416)" />
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Layer 2"
-     transform="translate(-66.019116,-146.60711)" />
+     transform="translate(-74.369969,-127.78416)" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-66.019116,-146.60711)">
+     transform="translate(-74.369969,-127.78416)">
     <g
        id="g1719"
-       transform="matrix(-0.00104128,0.09168982,0.08877731,0.00107544,62.740262,141.86934)">
+       transform="matrix(-0.00362997,0.31963731,0.30948411,0.00374907,62.281872,110.61017)">
       <g
          transform="translate(-15.398669,-13.317768)"
          id="g1625">
