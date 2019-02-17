@@ -16,12 +16,16 @@ class NormandyColorPatcher(val theOther: SVGLoader.SvgColorPatcher = SVGLoader.S
     val themedPrimary = svg.getAttribute("themedPrimary")
     val themedSecondary = svg.getAttribute("themedSecondary")
 
-    if (themedPrimary == "true") {
-      svg.setAttribute("fill", NormandyTheme.primaryColorString())
-    } else if (themedSecondary == "true") {
-      svg.setAttribute("fill", NormandyTheme.secondaryColorString())
-
+    when(themedPrimary){
+      "fill"-> svg.setAttribute("fill", NormandyTheme.primaryColorString())
+      "stroke"-> svg.setAttribute("stroke", NormandyTheme.primaryColorString())
     }
+
+    when(themedSecondary){
+      "fill"-> svg.setAttribute("fill", NormandyTheme.secondaryColorString())
+      "stroke"-> svg.setAttribute("stroke", NormandyTheme.secondaryColorString())
+    }
+
     val nodes = svg.childNodes
     val length = nodes.length
     for (i in 0 until length) {
