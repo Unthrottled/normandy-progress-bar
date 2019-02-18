@@ -3,11 +3,12 @@ package io.acari.n7.theme
 import com.intellij.ui.ColorUtil
 import com.intellij.ui.Gray
 import io.acari.n7.config.NormandyConfigPersistence
+import io.acari.n7.config.NormandyConfiguration
 import java.awt.Color
 
 object NormandyTheme {
-  val jetWashColor = { _: Color -> ColorUtil.fromHex("#d6f5f8") }
-  val outerJetWashColor = { _: Color -> ColorUtil.fromHex("#A47FD8") }
+  val jetWashColor = { _: Color -> ColorUtil.fromHex(NormandyConfiguration.jetWashColor.orElse("#d6f5f8")) }
+  val outerJetWashColor = { _: Color -> ColorUtil.fromHex("#d6f5f8") }
   val backgroundColorFunction = { backgroundColor: Color -> backgroundColor }
 
   val colors = arrayOf(outerJetWashColor, jetWashColor,
@@ -20,18 +21,15 @@ object NormandyTheme {
       .toFloatArray()
 
 
-  fun borderColor(): Color = NormandyConfigPersistence.instance
-      .map { it.borderColor }
+  fun borderColor(): Color = NormandyConfiguration.borderColor
       .map(ColorUtil::fromHex)
       .orElseGet { Gray._240 }
 
   fun primaryColorString(): String =
-      NormandyConfigPersistence.instance
-          .map { it.primaryThemeColor }
+      NormandyConfiguration.primaryThemeColor
           .orElseGet { ColorUtil.toHex(Color.CYAN) }
 
   fun secondaryColorString(): String =
-      NormandyConfigPersistence.instance
-          .map { it.secondaryThemeColor }
+      NormandyConfiguration.secondaryThemeColor
           .orElseGet { ColorUtil.toHex(Color.PINK) }
 }

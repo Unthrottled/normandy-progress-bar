@@ -1,5 +1,6 @@
 package io.acari.n7
 
+import com.google.gson.Gson
 import com.intellij.compiler.server.CustomBuilderMessageHandler
 import com.intellij.ide.AppLifecycleListener
 import com.intellij.ide.ui.LafManager
@@ -12,7 +13,10 @@ import com.intellij.openapi.util.Ref
 import com.intellij.util.SVGLoader
 import com.intellij.util.messages.MessageBusConnection
 import io.acari.n7.config.CONFIGURATION_TOPIC
+import io.acari.n7.config.ExternalThemeIntegrations
 import io.acari.n7.config.NormandyConfigurationSubcriber
+import io.acari.n7.theme.AccentChangedInformation
+import io.acari.n7.theme.ThemeChangedInformation
 
 class NormandyIconComponent : BaseComponent {
 
@@ -49,7 +53,10 @@ class NormandyIconComponent : BaseComponent {
     messageBus.subscribe(CustomBuilderMessageHandler.TOPIC, CustomBuilderMessageHandler{
       messageId,messageType,payload->
       when(messageId){
-        "io.acari.DDLCTheme", "com.chrisrm.idea.MaterialThemeUI" -> handleThemedChanged(messageType, payload)
+        "io.acari.DDLCTheme", "com.chrisrm.idea.MaterialThemeUI" -> {
+          handleThemedChanged(messageType, payload)
+          setColorPatcher()
+        }
       }
     })
 
@@ -65,10 +72,12 @@ class NormandyIconComponent : BaseComponent {
   private fun handleThemedChanged(changeType: String, payload: String) {
     when(changeType){
       "Theme Changed" -> {
-
+        val delta = Gson().fromJson(payload, ThemeChangedInformation::class.java)
+        ExternalThemeIntegrations.consumeThemeChangedInformation(delta)
       }
       "Accent Changed"-> {
-
+        val delta = Gson().fromJson(payload, AccentChangedInformation::class.java)
+        ExternalThemeIntegrations.consumeAccentChangedInformation(delta)
       }
     }
 
