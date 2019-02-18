@@ -1,4 +1,4 @@
-package io.acari.n7.config
+package io.acari.n7.config.ui
 
 import com.intellij.ui.ColorUtil
 import com.intellij.ui.tabs.ColorButtonBase

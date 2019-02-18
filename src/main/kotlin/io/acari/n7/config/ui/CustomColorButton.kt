@@ -1,4 +1,4 @@
-package io.acari.n7.config
+package io.acari.n7.config.ui
 
 import com.intellij.ui.ColorChooser
 import com.intellij.ui.ColorUtil
@@ -9,7 +9,7 @@ import java.awt.Color
 import java.awt.event.ActionEvent
 import javax.swing.plaf.ButtonUI
 
-class CustomColorButton constructor() : ColorButton(ColorSelectionComponent.CUSTOM_COLOR_NAME, JBColor.WHITE) {
+class CustomColorButton : ColorButton(ColorSelectionComponent.CUSTOM_COLOR_NAME, JBColor.WHITE) {
 
   val color: Color = ColorUtil.fromHex("#FFFFFF")
 //    get() = if (myColor == null) JBColor.WHITE else myColor

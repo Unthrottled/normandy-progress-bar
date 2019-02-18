@@ -13,7 +13,7 @@ import com.intellij.openapi.util.Ref
 import com.intellij.util.SVGLoader
 import com.intellij.util.messages.MessageBusConnection
 import io.acari.n7.config.CONFIGURATION_TOPIC
-import io.acari.n7.config.ExternalThemeIntegrations
+import io.acari.n7.theme.ExternalThemeIntegrations
 import io.acari.n7.config.NormandyConfigurationSubcriber
 import io.acari.n7.theme.AccentChangedInformation
 import io.acari.n7.theme.ThemeChangedInformation

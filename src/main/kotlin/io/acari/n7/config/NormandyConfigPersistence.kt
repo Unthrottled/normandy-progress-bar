@@ -5,8 +5,6 @@ import com.intellij.openapi.components.ServiceManager
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.util.xmlb.XmlSerializerUtil
-import io.acari.n7.theme.AccentChangedInformation
-import io.acari.n7.theme.ThemeChangedInformation
 
 import java.util.Optional
 
@@ -47,59 +45,6 @@ class NormandyConfigPersistence : PersistentStateComponent<NormandyConfigPersist
   }
 }
 
-object NormandyConfiguration {
-
-  val primaryThemeColor: Optional<String>
-    get() {
-      return getChanges({ it.primaryThemeColor }) { Optional.empty() }
-    }
-
-  val secondaryThemeColor: Optional<String>
-    get() {
-      return getChanges({ it.secondaryThemeColor }) { ExternalThemeIntegrations.secondaryThemeColor }
-    }
-
-  val borderColor: Optional<String>
-    get() {
-      return getChanges({ it.borderColor }) { Optional.empty() }
-    }
-
-  val jetWashColor: Optional<String>
-    get() {
-      return getChanges({ it.jetWashColor }) { ExternalThemeIntegrations.jetWashColor }
-    }
-
-  private fun <T> getChanges(userConfiguration: (NormandyConfigPersistence) -> T, externalConfiguration: () -> Optional<T>): Optional<T> =
-      NormandyConfigPersistence.instance
-          .flatMap {
-            if (it.isAllowedToBeOverridden) externalConfiguration().map { it.toOptional() }
-                .orElseGet { userConfiguration(it).toOptional() }
-            else userConfiguration(it).toOptional()
-          }
-
-}
-
 fun <T> T?.toOptional(): Optional<T> = Optional.ofNullable(this)
 
 
-object ExternalThemeIntegrations {
-
-  private lateinit var _secondaryThemeColor: String
-  private lateinit var _jetWashColor: String
-
-  val secondaryThemeColor: Optional<String>
-    get() = if (this::_secondaryThemeColor.isInitialized) _secondaryThemeColor.toOptional() else Optional.empty()
-
-  val jetWashColor: Optional<String>
-    get() = if (this::_jetWashColor.isInitialized) _jetWashColor.toOptional() else Optional.empty()
-
-  fun consumeThemeChangedInformation(themeChangedInformation: ThemeChangedInformation) {
-    _secondaryThemeColor = "#${themeChangedInformation.contrastColor}"
-    _jetWashColor = "#${themeChangedInformation.accentColor}"
-
-  }
-
-  fun consumeAccentChangedInformation(accentChangedInformation: AccentChangedInformation) {
-    _jetWashColor = "#${accentChangedInformation.accentColor}"
-  }
-}

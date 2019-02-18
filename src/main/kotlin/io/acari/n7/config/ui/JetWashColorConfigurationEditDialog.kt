@@ -1,24 +1,14 @@
-package io.acari.n7.config
+package io.acari.n7.config.ui
 
-import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogWrapper
-import com.intellij.openapi.util.text.StringUtil
-import com.intellij.psi.search.scope.packageSet.CustomScopesProviderEx
 import com.intellij.psi.search.scope.packageSet.NamedScope
-import com.intellij.psi.search.scope.packageSet.NamedScopeManager
-import com.intellij.psi.search.scope.packageSet.NamedScopesHolder
-import com.intellij.ui.ColorUtil
 import com.intellij.ui.ComboboxSpeedSearch
 import com.intellij.ui.tabs.ColorSelectionComponent
 import com.intellij.util.ArrayUtil
 import com.intellij.util.ui.JBUI
 
 import javax.swing.*
-import javax.swing.event.ChangeEvent
-import javax.swing.event.ChangeListener
 import java.awt.*
-import java.awt.event.ActionEvent
-import java.awt.event.ActionListener
 import java.util.*
 
 class JetWashColorConfigurationEditDialog(configuration: JetWashColorConfiguration?) : DialogWrapper(true) {

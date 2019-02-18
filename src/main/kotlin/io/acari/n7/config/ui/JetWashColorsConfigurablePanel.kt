@@ -1,21 +1,12 @@
-package io.acari.n7.config
+package io.acari.n7.config.ui
 
-import com.intellij.icons.AllIcons
 import com.intellij.ide.ui.UISettings
-import com.intellij.ide.util.scopeChooser.EditScopesDialog
 import com.intellij.openapi.Disposable
-import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.ui.MessageType
-import com.intellij.ui.AnActionButton
 import com.intellij.ui.IdeBorderFactory
-import com.intellij.ui.ToolbarDecorator
 import com.intellij.util.ui.JBUI
-import com.intellij.util.ui.UIUtil
 
 import javax.swing.*
 import java.awt.*
-import java.awt.event.ActionEvent
-import java.awt.event.ActionListener
 import java.util.ArrayList
 
 /**
@@ -40,7 +31,7 @@ class JetWashColorsConfigurablePanel : JPanel(), Disposable {
     mainPanel.preferredSize = JBUI.size(300, 500)
     mainPanel.border = BorderFactory.createEmptyBorder(5, 5, 0, 0)
 
-    val localConfigurations = mutableListOf(JetWashColorConfiguration("#FFFFFF","#FFFFFF"))
+    val localConfigurations = mutableListOf(JetWashColorConfiguration("#FFFFFF", "#FFFFFF"))
     myLocalTable = object : FileColorSettingsTable(localConfigurations) {
       override fun apply(configurations: List<JetWashColorConfiguration>) {
         val copied = ArrayList<JetWashColorConfiguration>()

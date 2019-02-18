@@ -34,13 +34,6 @@ import javax.swing.*
 import javax.swing.border.EtchedBorder
 import javax.swing.border.TitledBorder
 
-data class ThemeConfigurations(
-    val borderColor: Color = NormandyThemeDefaults.borderColor,
-    val primaryColor: Color = NormandyThemeDefaults.primaryColor,
-    val secondaryColor: Color = NormandyThemeDefaults.secondaryColor,
-    val shouldOverride: Boolean = true
-)
-
 class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
 
   private var content: JPanel? = null

@@ -1,18 +1,14 @@
-package io.acari.n7.config
+package io.acari.n7.config.ui
 
 import com.intellij.ui.ColorUtil
-import com.intellij.ui.FileColorManager
 import com.intellij.ui.table.JBTable
 import com.intellij.util.ui.ColorIcon
 import com.intellij.util.ui.EditableModel
-import com.intellij.util.ui.EmptyIcon
 import com.intellij.util.ui.JBUI
 
 import javax.swing.*
 import javax.swing.table.AbstractTableModel
 import javax.swing.table.DefaultTableCellRenderer
-import javax.swing.table.TableColumn
-import javax.swing.table.TableColumnModel
 import java.awt.*
 import java.awt.event.MouseEvent
 import java.util.ArrayList
@@ -22,7 +18,7 @@ import java.util.EventObject
 data class JetWashColorConfiguration(val colorValue: String, val colorName: String)
 
 abstract class FileColorSettingsTable(private val myOriginal: MutableList<JetWashColorConfiguration>) :
-    JBTable(FileColorSettingsTable.ModelAdapter(copy(myOriginal))) {
+    JBTable(ModelAdapter(copy(myOriginal))) {
 
   val isModified: Boolean
     get() {
@@ -48,13 +44,13 @@ abstract class FileColorSettingsTable(private val myOriginal: MutableList<JetWas
 
     val columnModel = getColumnModel()
     val colorColumn = columnModel.getColumn(COLOR_COLUMN)
-    colorColumn.cellRenderer = FileColorSettingsTable.ColorCellRenderer()
+    colorColumn.cellRenderer = ColorCellRenderer()
   }
 
   protected abstract fun apply(configurations: List<JetWashColorConfiguration>)
 
-  override fun getModel(): FileColorSettingsTable.ModelAdapter {
-    return super.getModel() as FileColorSettingsTable.ModelAdapter
+  override fun getModel(): ModelAdapter {
+    return super.getModel() as ModelAdapter
   }
 
   override fun editCellAt(row: Int, column: Int, e: EventObject): Boolean {
