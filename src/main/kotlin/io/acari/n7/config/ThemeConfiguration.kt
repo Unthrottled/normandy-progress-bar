@@ -28,7 +28,8 @@ object ThemeConfiguration {
   private fun <T> getChanges(userConfiguration: (ConfigurationPersistence) -> T, externalConfiguration: () -> Optional<T>): Optional<T> =
       ConfigurationPersistence.instance
           .flatMap {
-            if (it.isAllowedToBeOverridden) externalConfiguration().map { it.toOptional() }
+            if (it.isAllowedToBeOverridden) externalConfiguration()
+                .map { it.toOptional() }
                 .orElseGet { userConfiguration(it).toOptional() }
             else userConfiguration(it).toOptional()
           }

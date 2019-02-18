@@ -17,7 +17,7 @@ class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersisten
   var secondaryThemeColor = "#000000"
   var jetWash = "#a38dbe,#d6f5f8,#a38dbe,#d6f5f8,#a38dbe,TRANSPARENT,TRANSPARENT,#a38dbe,#d6f5f8,#a38dbe,#d6f5f8,#a38dbe"
   var borderColor = "#EFEFEF"
-  var jetWashColor = "#d6f5f8"
+  var jetWashColor = "#A47FD8"
   var isAllowedToBeOverridden = true
 
   public override fun clone(): Any {

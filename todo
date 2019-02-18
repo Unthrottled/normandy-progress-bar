@@ -5,6 +5,8 @@ HARD:
 
 EZ:
 - SVG auto scaling
+- is Dark
+- persist theme override
 
 Final:
 - Refracture codebase

@@ -14,7 +14,7 @@ object NormandyTheme {
       outerJetWashColor, jetWashColor,
       outerJetWashColor, backgroundColorFunction, backgroundColorFunction, backgroundColorFunction, outerJetWashColor,
       jetWashColor, outerJetWashColor,
-      jetWashColor, outerJetWashColor)
+      jetWashColor, outerJetWashColor, jetWashColor, outerJetWashColor)
   val SCALING_FACTOR = 1.0f / colors.size
   val jetWashScales = colors.mapIndexed { index, _ -> SCALING_FACTOR * (index + 1) }
       .toFloatArray()

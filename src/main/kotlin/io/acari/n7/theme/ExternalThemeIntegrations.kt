@@ -9,10 +9,12 @@ object ExternalThemeIntegrations {
   private lateinit var _jetWashColor: String
 
   val secondaryThemeColor: Optional<String>
-    get() = if (this::_secondaryThemeColor.isInitialized) _secondaryThemeColor.toOptional() else Optional.empty()
+    get() = if (this::_secondaryThemeColor.isInitialized) _secondaryThemeColor.toOptional()
+    else Optional.empty()
 
   val jetWashColor: Optional<String>
-    get() = if (this::_jetWashColor.isInitialized) _jetWashColor.toOptional() else Optional.empty()
+    get() = if (this::_jetWashColor.isInitialized) _jetWashColor.toOptional()
+    else Optional.empty()
 
   fun consumeThemeChangedInformation(themeChangedInformation: ThemeChangedInformation) {
     _secondaryThemeColor = "#${themeChangedInformation.contrastColor}"
