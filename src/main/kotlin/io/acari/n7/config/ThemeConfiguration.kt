@@ -3,7 +3,7 @@ package io.acari.n7.config
 import io.acari.n7.theme.ExternalThemeIntegrations
 import java.util.*
 
-object NormandyConfiguration {
+object ThemeConfiguration {
 
   val primaryThemeColor: Optional<String>
     get() {

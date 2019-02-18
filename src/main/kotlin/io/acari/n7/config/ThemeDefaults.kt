@@ -5,7 +5,7 @@ import javax.swing.plaf.ColorUIResource
 /**
  * Default colors for Custom theme
  */
-enum class NormandyThemeDefaults {
+enum class ThemeDefaults {
   ;
 
   //    todo: should probably make these actually what they are

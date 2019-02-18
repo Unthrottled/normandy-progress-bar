@@ -4,7 +4,6 @@ import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.options.SearchableConfigurable
 import io.acari.n7.config.CONFIGURATION_TOPIC
 import io.acari.n7.config.ConfigurationPersistence
-import io.acari.n7.config.NormandyForm
 import io.acari.n7.config.ThemeConfigurations
 import org.jdesktop.swingx.color.ColorUtil
 import javax.swing.JComponent

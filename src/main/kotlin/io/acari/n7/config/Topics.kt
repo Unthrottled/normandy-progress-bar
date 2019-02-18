@@ -5,6 +5,7 @@ import com.intellij.util.messages.Topic
 val CONFIGURATION_TOPIC: Topic<NormandyConfigurationListener> = Topic.create("Normandy Progress Bar UI Configuration Changed", NormandyConfigurationListener::class.java)
 
 interface NormandyConfigurationListener : BaseListener<ThemeConfigurations>
+
 class NormandyConfigurationSubcriber(consumer: (ThemeConfigurations) -> Unit) :
     NormandyConfigurationListener, ASubscriber<ThemeConfigurations>(consumer)
 

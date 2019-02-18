@@ -23,11 +23,13 @@
  *
  */
 
-package io.acari.n7.config
+package io.acari.n7.config.ui
 
 import com.intellij.ui.ColorPanel
 import com.intellij.uiDesigner.core.GridConstraints
 import com.intellij.uiDesigner.core.GridLayoutManager
+import io.acari.n7.config.ThemeDefaults
+import io.acari.n7.config.ThemeConfigurations
 import java.awt.Color
 import java.awt.Insets
 import javax.swing.*
@@ -65,9 +67,9 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
 
     // Reset tab defaults
     resetTabDefaultsBtn!!.addActionListener { e ->
-      setSecondary(NormandyThemeDefaults.secondaryColor)
-      setPrimaryColor(NormandyThemeDefaults.primaryColor)
-      setBorderColor(NormandyThemeDefaults.borderColor)
+      setSecondary(ThemeDefaults.secondaryColor)
+      setPrimaryColor(ThemeDefaults.primaryColor)
+      setBorderColor(ThemeDefaults.borderColor)
     }
   }
 
