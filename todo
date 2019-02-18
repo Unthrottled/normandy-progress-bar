@@ -6,7 +6,6 @@ HARD:
 EZ:
 - SVG auto scaling
 - is Dark
-- persist theme override
 - notify when theme is overridden.
 
 Final:
