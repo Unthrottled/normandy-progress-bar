@@ -4,6 +4,7 @@ import com.intellij.ide.ui.LafManager
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.BaseComponent
 import com.intellij.util.messages.MessageBusConnection
+import io.acari.java.n7.NormandyUIFactory
 import javax.swing.UIManager
 
 /**
