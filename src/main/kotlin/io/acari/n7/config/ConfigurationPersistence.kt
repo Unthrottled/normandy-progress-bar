@@ -10,7 +10,7 @@ import java.util.Optional
 
 
 @State(name = "NormandyConfig", storages = [Storage("normandy_theme.xml")])
-class NormandyConfigPersistence : PersistentStateComponent<NormandyConfigPersistence>, Cloneable {
+class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersistence>, Cloneable {
 
   // They are public so they can be serialized
   var primaryThemeColor = "#FFFFFF"
@@ -24,24 +24,24 @@ class NormandyConfigPersistence : PersistentStateComponent<NormandyConfigPersist
     return XmlSerializerUtil.createCopy(this)
   }
 
-  override fun getState(): NormandyConfigPersistence? {
+  override fun getState(): ConfigurationPersistence? {
     return this
   }
 
   /**
    * Load the state from XML
    *
-   * @param state the NormandyConfigPersistence instance
+   * @param state the ConfigurationPersistence instance
    */
-  override fun loadState(state: NormandyConfigPersistence) {
+  override fun loadState(state: ConfigurationPersistence) {
     XmlSerializerUtil.copyBean(state, this)
   }
 
   companion object {
 
     @JvmStatic
-    val instance: Optional<NormandyConfigPersistence>
-      get() = Optional.ofNullable(ServiceManager.getService(NormandyConfigPersistence::class.java))
+    val instance: Optional<ConfigurationPersistence>
+      get() = Optional.ofNullable(ServiceManager.getService(ConfigurationPersistence::class.java))
   }
 }
 

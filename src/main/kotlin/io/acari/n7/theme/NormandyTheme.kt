@@ -2,7 +2,6 @@ package io.acari.n7.theme
 
 import com.intellij.ui.ColorUtil
 import com.intellij.ui.Gray
-import io.acari.n7.config.NormandyConfigPersistence
 import io.acari.n7.config.NormandyConfiguration
 import java.awt.Color
 

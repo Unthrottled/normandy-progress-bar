@@ -3,7 +3,7 @@ package io.acari.n7.config.ui
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.options.SearchableConfigurable
 import io.acari.n7.config.CONFIGURATION_TOPIC
-import io.acari.n7.config.NormandyConfigPersistence
+import io.acari.n7.config.ConfigurationPersistence
 import io.acari.n7.config.NormandyForm
 import io.acari.n7.config.ThemeConfigurations
 import org.jdesktop.swingx.color.ColorUtil
@@ -15,12 +15,12 @@ class NormandyConfigComponent : SearchableConfigurable {
   }
 
   private var normandyForm = {
-    val themeConfigurations = NormandyConfigPersistence.instance
+    val themeConfigurations = ConfigurationPersistence.instance
         .map { configToThemConfig(it) }.orElseGet { ThemeConfigurations() }
     NormandyForm(themeConfigurations)
   }()
 
-  private fun configToThemConfig(it: NormandyConfigPersistence): ThemeConfigurations {
+  private fun configToThemConfig(it: ConfigurationPersistence): ThemeConfigurations {
     return ThemeConfigurations(
         com.intellij.ui.ColorUtil.fromHex(it.borderColor),
         com.intellij.ui.ColorUtil.fromHex(it.primaryThemeColor),
@@ -34,7 +34,7 @@ class NormandyConfigComponent : SearchableConfigurable {
   override fun getDisplayName(): String = "SSV Normandy Configuration"
 
   override fun apply() {
-    NormandyConfigPersistence.instance
+    ConfigurationPersistence.instance
         .ifPresent {
           it.isAllowedToBeOverridden = normandyForm.shouldOverride
           it.borderColor = ColorUtil.toHexString(normandyForm.getBorderColor())

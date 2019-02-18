@@ -25,8 +25,8 @@ object NormandyConfiguration {
       return getChanges({ it.jetWashColor }) { ExternalThemeIntegrations.jetWashColor }
     }
 
-  private fun <T> getChanges(userConfiguration: (NormandyConfigPersistence) -> T, externalConfiguration: () -> Optional<T>): Optional<T> =
-      NormandyConfigPersistence.instance
+  private fun <T> getChanges(userConfiguration: (ConfigurationPersistence) -> T, externalConfiguration: () -> Optional<T>): Optional<T> =
+      ConfigurationPersistence.instance
           .flatMap {
             if (it.isAllowedToBeOverridden) externalConfiguration().map { it.toOptional() }
                 .orElseGet { userConfiguration(it).toOptional() }
