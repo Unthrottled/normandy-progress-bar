@@ -1,28 +1,38 @@
 package io.acari.n7.theme
 
+import io.acari.n7.config.ConfigurationPersistence
+import io.acari.n7.config.NOT_SET
 import io.acari.n7.config.toOptional
 import java.util.*
 
 object ExternalThemeIntegrations {
 
-  private lateinit var _secondaryThemeColor: String
-  private lateinit var _jetWashColor: String
-
   val secondaryThemeColor: Optional<String>
-    get() = if (this::_secondaryThemeColor.isInitialized) _secondaryThemeColor.toOptional()
-    else Optional.empty()
+    get() = getExternalThemeFromConfig { it.externalSecondaryColor }
 
   val jetWashColor: Optional<String>
-    get() = if (this::_jetWashColor.isInitialized) _jetWashColor.toOptional()
-    else Optional.empty()
+    get() = getExternalThemeFromConfig { it.externalJetWashColor }
+
+  private fun getExternalThemeFromConfig(valueExtractor3000: (ConfigurationPersistence)->String): Optional<String> {
+    return ConfigurationPersistence.instance.filter { it.externalThemeSet }
+        .filter { it.isAllowedToBeOverridden }
+        .map(valueExtractor3000)
+        .filter { it != NOT_SET }
+  }
 
   fun consumeThemeChangedInformation(themeChangedInformation: ThemeChangedInformation) {
-    _secondaryThemeColor = "#${themeChangedInformation.contrastColor}"
-    _jetWashColor = "#${themeChangedInformation.accentColor}"
 
+    ConfigurationPersistence.instance.ifPresent {
+      it.externalSecondaryColor = "#${themeChangedInformation.contrastColor}"
+      it.externalJetWashColor = "#${themeChangedInformation.accentColor}"
+      it.externalThemeSet = true
+    }
   }
 
   fun consumeAccentChangedInformation(accentChangedInformation: AccentChangedInformation) {
-    _jetWashColor = "#${accentChangedInformation.accentColor}"
+    ConfigurationPersistence.instance.ifPresent {
+      it.externalJetWashColor = "#${accentChangedInformation.accentColor}"
+      it.externalThemeSet = true
+    }
   }
 }
