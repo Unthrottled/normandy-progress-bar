@@ -22,7 +22,7 @@
   <depends>com.intellij.modules.lang</depends>
   -->
   <extensions defaultExtensionNs="com.intellij">
-    <applicationService serviceImplementation="io.acari.n7.config.NormandyConfig"/>
+    <applicationService serviceImplementation="io.acari.n7.config.NormandyConfigPersistence"/>
     <applicationConfigurable instance="io.acari.n7.config.NormandyConfigComponent"
                              groupId="appearance"
                              id="io.acari.n7.config"/>

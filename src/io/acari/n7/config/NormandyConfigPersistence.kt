@@ -10,7 +10,7 @@ import java.util.Optional
 
 
 @State(name = "NormandyConfig", storages = [Storage("normandy_theme.xml")])
-class NormandyConfig : PersistentStateComponent<NormandyConfig>, Cloneable {
+class NormandyConfigPersistence : PersistentStateComponent<NormandyConfigPersistence>, Cloneable {
 
   // They are public so they can be serialized
   var primaryThemeColor = "#FFFFFF"
@@ -23,25 +23,45 @@ class NormandyConfig : PersistentStateComponent<NormandyConfig>, Cloneable {
     return XmlSerializerUtil.createCopy(this)
   }
 
-  override fun getState(): NormandyConfig? {
+  override fun getState(): NormandyConfigPersistence? {
     return this
   }
 
   /**
    * Load the state from XML
    *
-   * @param state the MTConfig instance
+   * @param state the NormandyConfigPersistence instance
    */
-  override fun loadState(state: NormandyConfig) {
+  override fun loadState(state: NormandyConfigPersistence) {
     XmlSerializerUtil.copyBean(state, this)
   }
 
   companion object {
 
     @JvmStatic
-    val instance: Optional<NormandyConfig>
-      get() = Optional.ofNullable(ServiceManager.getService(NormandyConfig::class.java))
+    val instance: Optional<NormandyConfigPersistence>
+      get() = Optional.ofNullable(ServiceManager.getService(NormandyConfigPersistence::class.java))
   }
+}
 
+object NormandyConfiguration {
+
+  val primaryThemeColor: String
+    get() {
+      return "aoeu"
+    }
+  val secondaryThemeColor: String
+    get() {
+      return "aoeu"
+    }
+
+  val borderColor: String
+    get() {
+      return "aoeu"
+    }
+
+}
+
+object ExternalThemeIntegrations {
 
 }

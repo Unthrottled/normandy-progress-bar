@@ -1,5 +1,6 @@
 package io.acari.n7
 
+import com.intellij.compiler.server.CustomBuilderMessageHandler
 import com.intellij.ide.AppLifecycleListener
 import com.intellij.ide.ui.LafManager
 import com.intellij.openapi.application.ApplicationManager
@@ -31,7 +32,7 @@ class NormandyIconComponent : BaseComponent {
     }
   }
 
-  lateinit var messageBus: MessageBusConnection
+  private lateinit var messageBus: MessageBusConnection
 
   override fun initComponent() {
     setColorPatcher()
@@ -45,6 +46,13 @@ class NormandyIconComponent : BaseComponent {
       setColorPatcher()
     })
 
+    messageBus.subscribe(CustomBuilderMessageHandler.TOPIC, CustomBuilderMessageHandler{
+      messageId,messageType,payload->
+      when(messageId){
+        "io.acari.DDLCTheme", "com.chrisrm.idea.MaterialThemeUI" -> handleThemedChanged(messageType, payload)
+      }
+    })
+
     messageBus.subscribe(AppLifecycleListener.TOPIC, AppLifecycleSubscriber {
       setColorPatcher()
     })
@@ -52,6 +60,18 @@ class NormandyIconComponent : BaseComponent {
     LafManager.getInstance().addLafManagerListener {
       setColorPatcher()
     }
+  }
+
+  private fun handleThemedChanged(changeType: String, payload: String) {
+    when(changeType){
+      "Theme Changed" -> {
+
+      }
+      "Accent Changed"-> {
+
+      }
+    }
+
   }
 
   override fun disposeComponent() {

@@ -11,12 +11,12 @@ class NormandyConfigComponent : SearchableConfigurable {
   }
 
   private var normandyForm = {
-    val themeConfigurations = NormandyConfig.instance
+    val themeConfigurations = NormandyConfigPersistence.instance
         .map { configToThemConfig(it) }.orElseGet { ThemeConfigurations() }
     NormandyForm(themeConfigurations)
   }()
 
-  private fun configToThemConfig(it: NormandyConfig): ThemeConfigurations {
+  private fun configToThemConfig(it: NormandyConfigPersistence): ThemeConfigurations {
     return ThemeConfigurations(
         com.intellij.ui.ColorUtil.fromHex(it.borderColor),
         com.intellij.ui.ColorUtil.fromHex(it.primaryThemeColor),
@@ -30,7 +30,7 @@ class NormandyConfigComponent : SearchableConfigurable {
   override fun getDisplayName(): String = "SSV Normandy Configuration"
 
   override fun apply() {
-    NormandyConfig.instance
+    NormandyConfigPersistence.instance
         .ifPresent {
           it.isAllowedToBeOverridden = normandyForm.shouldOverride
           it.borderColor = ColorUtil.toHexString(normandyForm.getBorderColor())

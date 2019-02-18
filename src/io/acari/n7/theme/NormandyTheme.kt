@@ -2,7 +2,7 @@ package io.acari.n7.theme
 
 import com.intellij.ui.ColorUtil
 import com.intellij.ui.Gray
-import io.acari.n7.config.NormandyConfig
+import io.acari.n7.config.NormandyConfigPersistence
 import java.awt.Color
 
 object NormandyTheme {
@@ -20,18 +20,18 @@ object NormandyTheme {
       .toFloatArray()
 
 
-  fun borderColor(): Color = NormandyConfig.instance
+  fun borderColor(): Color = NormandyConfigPersistence.instance
       .map { it.borderColor }
       .map(ColorUtil::fromHex)
       .orElseGet { Gray._240 }
 
   fun primaryColorString(): String =
-      NormandyConfig.instance
+      NormandyConfigPersistence.instance
           .map { it.primaryThemeColor }
           .orElseGet { ColorUtil.toHex(Color.CYAN) }
 
   fun secondaryColorString(): String =
-      NormandyConfig.instance
+      NormandyConfigPersistence.instance
           .map { it.secondaryThemeColor }
           .orElseGet { ColorUtil.toHex(Color.PINK) }
 }
