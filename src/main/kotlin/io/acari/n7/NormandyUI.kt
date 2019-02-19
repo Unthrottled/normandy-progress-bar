@@ -1,5 +1,6 @@
 package io.acari.n7
 
+import com.intellij.ui.ColorUtil
 import com.intellij.util.ui.GraphicsUtil
 import com.intellij.util.ui.JBUI
 import com.intellij.util.ui.JBUI.scale
@@ -72,16 +73,14 @@ open class NormandyUI : BasicProgressBarUI() {
           val graphicsConfig = GraphicsUtil.setupAAPainting(graphic)
 
           //SET BACKGROUND
-          val R2 = JBUI.scale(9f)
-          val off = JBUI.scale(1f)
-          graphic.color = borderColor
-          graphic.fill(RoundRectangle2D.Float(0f, 0f, componentWidth - off, componentHeight - off, R2, R2))
-
-          //Draw Border
           val parent = component.parent
           val backgroundColor = if (parent != null) parent.background else UIUtil.getPanelBackground()
-          graphic.color = backgroundColor
+          val tintedBackgroundColor =
+              if (ColorUtil.isDark(backgroundColor)) ColorUtil.brighter(backgroundColor, 3)
+              else ColorUtil.darker(backgroundColor, 3)
+          graphic.color = tintedBackgroundColor
           val R = JBUI.scale(8f)
+          val off = JBUI.scale(1f)
           graphic.fill(RoundRectangle2D.Float(off, off, componentWidth.toFloat() - 2f * off - off, componentHeight.toFloat() - 2f * off - off, R, R))
 
 
