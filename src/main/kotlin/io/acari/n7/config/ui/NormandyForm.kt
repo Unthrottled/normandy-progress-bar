@@ -30,6 +30,7 @@ import com.intellij.uiDesigner.core.GridConstraints
 import com.intellij.uiDesigner.core.GridLayoutManager
 import io.acari.n7.config.ThemeDefaults
 import io.acari.n7.config.ThemeConfigurations
+import io.acari.n7.theme.ExternalTheme
 import java.awt.Color
 import java.awt.Insets
 import javax.swing.*
@@ -44,6 +45,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
   private var primaryColorLabel: JLabel? = null
   private var primaryColor: ColorPanel? = null
   private var secondaryColorLabel: JLabel? = null
+  private var externalThemeLabel: JLabel? = null
   private var secondaryColor: ColorPanel? = null
   private var resetTabDefaultsBtn: JButton? = null
   private var shouldOverrideCheckbox: JCheckBox? = null
@@ -117,6 +119,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
     primaryColorLabel = JLabel()
     primaryColor = ColorPanel()
     secondaryColorLabel = JLabel()
+    externalThemeLabel = JLabel()
     secondaryColor = ColorPanel()
     resetTabDefaultsBtn = JButton()
     shouldOverrideCheckbox = JCheckBox()
@@ -180,6 +183,14 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
             GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
+        if(themeConfigurations.externalTheme != ExternalTheme.NOT_SET && themeConfigurations.shouldOverride){
+          externalThemeLabel!!.text = "${themeConfigurations.externalTheme.displayName} is set to override!"
+          externalThemeLabel!!.toolTipText = "The lower half of the Normandy."
+          panel1.add(externalThemeLabel!!, GridConstraints(8, 1, 1, 1,
+              GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
+              GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
+              GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
+        }
 
       }
       content!!.add(panel1, GridConstraints(0, 0, 1, 1,

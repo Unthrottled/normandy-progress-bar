@@ -5,6 +5,7 @@ import com.intellij.openapi.options.SearchableConfigurable
 import io.acari.n7.config.CONFIGURATION_TOPIC
 import io.acari.n7.config.ConfigurationPersistence
 import io.acari.n7.config.ThemeConfigurations
+import io.acari.n7.theme.ExternalTheme
 import org.jdesktop.swingx.color.ColorUtil
 import javax.swing.JComponent
 
@@ -24,7 +25,8 @@ class NormandyConfigComponent : SearchableConfigurable {
         com.intellij.ui.ColorUtil.fromHex(it.borderColor),
         com.intellij.ui.ColorUtil.fromHex(it.primaryThemeColor),
         com.intellij.ui.ColorUtil.fromHex(it.secondaryThemeColor),
-        it.isAllowedToBeOverridden
+        it.isAllowedToBeOverridden,
+        ExternalTheme.byName(it.externalThemeSet)
     )
   }
 

@@ -14,7 +14,7 @@ object ExternalThemeIntegrations {
     get() = getExternalThemeFromConfig { it.externalJetWashColor }
 
   private fun getExternalThemeFromConfig(valueExtractor3000: (ConfigurationPersistence)->String): Optional<String> {
-    return ConfigurationPersistence.instance.filter { it.externalThemeSet }
+    return ConfigurationPersistence.instance.filter { it.externalThemeSet != NOT_SET}
         .filter { it.isAllowedToBeOverridden }
         .map(valueExtractor3000)
         .filter { it != NOT_SET }
@@ -25,14 +25,14 @@ object ExternalThemeIntegrations {
     ConfigurationPersistence.instance.ifPresent {
       it.externalSecondaryColor = "#${themeChangedInformation.contrastColor}"
       it.externalJetWashColor = "#${themeChangedInformation.accentColor}"
-      it.externalThemeSet = true
+      it.externalThemeSet = themeChangedInformation.externalTheme.name
     }
   }
 
   fun consumeAccentChangedInformation(accentChangedInformation: AccentChangedInformation) {
     ConfigurationPersistence.instance.ifPresent {
       it.externalJetWashColor = "#${accentChangedInformation.accentColor}"
-      it.externalThemeSet = true
+      it.externalThemeSet = accentChangedInformation.externalTheme.name
     }
   }
 }

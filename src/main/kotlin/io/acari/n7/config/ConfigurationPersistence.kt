@@ -22,7 +22,7 @@ class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersisten
 
   var externalSecondaryColor = NOT_SET
   var externalJetWashColor = NOT_SET
-  var externalThemeSet = false
+  var externalThemeSet = NOT_SET
 
   public override fun clone(): Any {
     return XmlSerializerUtil.createCopy(this)
@@ -52,4 +52,4 @@ class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersisten
 fun <T> T?.toOptional(): Optional<T> = Optional.ofNullable(this)
 
 
-const val NOT_SET = "NOT SET"
+const val NOT_SET = "NOT_SET"

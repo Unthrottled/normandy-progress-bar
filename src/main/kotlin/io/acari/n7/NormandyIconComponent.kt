@@ -16,7 +16,11 @@ import io.acari.n7.config.CONFIGURATION_TOPIC
 import io.acari.n7.theme.ExternalThemeIntegrations
 import io.acari.n7.config.NormandyConfigurationSubcriber
 import io.acari.n7.theme.AccentChangedInformation
+import io.acari.n7.theme.ExternalTheme
 import io.acari.n7.theme.ThemeChangedInformation
+
+val DOKI_DOKI = "io.acari.DDLCTheme"
+val MATERIAL_UI = "com.chrisrm.idea.MaterialThemeUI"
 
 class NormandyIconComponent : BaseComponent {
 
@@ -53,8 +57,8 @@ class NormandyIconComponent : BaseComponent {
     messageBus.subscribe(CustomBuilderMessageHandler.TOPIC, CustomBuilderMessageHandler{
       messageId,messageType,payload->
       when(messageId){
-        "io.acari.DDLCTheme", "com.chrisrm.idea.MaterialThemeUI" -> {
-          handleThemedChanged(messageType, payload)
+        DOKI_DOKI, MATERIAL_UI -> {
+          handleThemedChanged(messageType, payload, getExternalTheme(messageId))
           setColorPatcher()
         }
       }
@@ -69,15 +73,22 @@ class NormandyIconComponent : BaseComponent {
     }
   }
 
-  private fun handleThemedChanged(changeType: String, payload: String) {
+  private fun getExternalTheme(pluginId: String): ExternalTheme =
+      when(pluginId){
+        DOKI_DOKI -> ExternalTheme.DOKI_DOKI
+        MATERIAL_UI -> ExternalTheme.MATERIAL_UI
+        else -> ExternalTheme.NOT_SET
+      }
+
+  private fun handleThemedChanged(changeType: String, payload: String, externalTheme: ExternalTheme) {
     when(changeType){
       "Theme Changed" -> {
         val delta = Gson().fromJson(payload, ThemeChangedInformation::class.java)
-        ExternalThemeIntegrations.consumeThemeChangedInformation(delta)
+        ExternalThemeIntegrations.consumeThemeChangedInformation(delta.copy(externalTheme = externalTheme))
       }
       "Accent Changed"-> {
         val delta = Gson().fromJson(payload, AccentChangedInformation::class.java)
-        ExternalThemeIntegrations.consumeAccentChangedInformation(delta)
+        ExternalThemeIntegrations.consumeAccentChangedInformation(delta.copy(externalTheme = externalTheme))
       }
     }
 
