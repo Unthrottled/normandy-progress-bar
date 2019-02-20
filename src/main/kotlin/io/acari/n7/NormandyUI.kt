@@ -103,7 +103,7 @@ open class NormandyUI : BasicProgressBarUI() {
               JBUI.scale(7f), JBUI.scale(7f)))
 
           //Draw Normandy
-          getNormandyIcon().paintIcon(progressBar, graphic, distanceBetweenCitadelAndNormandy, -scale(2))
+          getNormandyIcon().paintIcon(progressBar, graphic, distanceBetweenCitadelAndNormandy, scale(0))
 
           graphicsConfig.restore()
         }

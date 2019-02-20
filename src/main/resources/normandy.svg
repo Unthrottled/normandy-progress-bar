@@ -9,12 +9,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="216.94499"
-   height="101.758"
-   viewBox="0 0 57.400028 26.923469"
+   width="51.269012"
+   height="24.866213"
+   viewBox="0 0 13.564926 6.5791848"
    version="1.1"
    id="svg844"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:version="0.92.3 (unknown)"
    sodipodi:docname="normandy.svg">
   <defs
      id="defs838" />
@@ -25,16 +25,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.2288084"
-     inkscape:cx="184.21299"
-     inkscape:cy="38.354951"
+     inkscape:zoom="1.7377975"
+     inkscape:cx="203.50166"
+     inkscape:cy="41.467559"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="857"
+     inkscape:window-width="1033"
      inkscape:window-height="495"
-     inkscape:window-x="1380"
-     inkscape:window-y="275"
+     inkscape:window-x="1125"
+     inkscape:window-y="268"
      inkscape:window-maximized="0"
      inkscape:pagecheckerboard="true"
      fit-margin-top="1"
@@ -60,20 +60,20 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Layer 3"
-     transform="translate(-74.369969,-127.78416)" />
+     transform="translate(-74.369966,-148.12844)" />
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Layer 2"
-     transform="translate(-74.369969,-127.78416)" />
+     transform="translate(-74.369966,-148.12844)" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-74.369969,-127.78416)">
+     transform="translate(-74.369966,-148.12844)">
     <g
        id="g1719"
-       transform="matrix(0.00362997,0.31963731,-0.30948411,0.00374907,143.8581,110.61017)">
+       transform="matrix(8.3205149e-4,0.07326625,-0.07093897,8.5934815e-4,90.501751,144.39581)">
       <g
          transform="translate(-15.398669,-13.317768)"
          id="g1625">

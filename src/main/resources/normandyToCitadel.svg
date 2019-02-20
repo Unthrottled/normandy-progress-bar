@@ -9,12 +9,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="216.94499"
-   height="101.758"
-   viewBox="0 0 57.400028 26.923469"
+   width="51.269012"
+   height="24.866213"
+   viewBox="0 0 13.564926 6.5791848"
    version="1.1"
    id="svg844"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:version="0.92.3 (unknown)"
    sodipodi:docname="normandyToCitadel.svg">
   <defs
      id="defs838" />
@@ -25,16 +25,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.2288084"
-     inkscape:cx="184.21299"
-     inkscape:cy="38.354951"
+     inkscape:zoom="1.7377975"
+     inkscape:cx="42.378168"
+     inkscape:cy="18.449917"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="857"
+     inkscape:window-width="1033"
      inkscape:window-height="495"
-     inkscape:window-x="1380"
-     inkscape:window-y="275"
+     inkscape:window-x="1125"
+     inkscape:window-y="268"
      inkscape:window-maximized="0"
      inkscape:pagecheckerboard="true"
      fit-margin-top="1"
@@ -60,20 +60,20 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Layer 3"
-     transform="translate(-74.369969,-127.78416)" />
+     transform="translate(-74.369966,-148.12844)" />
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Layer 2"
-     transform="translate(-74.369969,-127.78416)" />
+     transform="translate(-74.369966,-148.12844)" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-74.369969,-127.78416)">
+     transform="translate(-74.369966,-148.12844)">
     <g
        id="g1719"
-       transform="matrix(-0.00362997,0.31963731,0.30948411,0.00374907,62.281872,110.61017)">
+       transform="matrix(-8.3205149e-4,0.07326625,0.07093897,8.5934815e-4,71.803107,144.39581)">
       <g
          transform="translate(-15.398669,-13.317768)"
          id="g1625">
@@ -305,17 +305,17 @@
              inkscape:connector-curvature="0"
              sodipodi:nodetypes="ccccc" />
           <path
-              fill="#000000"
              style="fill-opacity:1;stroke:#000000;stroke-width:0.26499999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
              themedSecondary="fill"
+             fill="#000000"
              d="m 101.11229,155.83687 -0.79828,60.75006 h -4.37747 l 0.220712,-50.87432 c 1.087726,0.0419 2.201167,0.10271 3.192815,-0.0476 l -0.01086,-5.41508 c -0.839265,-0.21155 -1.38333,-0.52055 -3.163552,-0.11038 l 0.643747,-38.79028 c -0.609237,-3.16204 -1.634156,-6.04695 -2.648554,-8.93888 0.71564,-14.130308 -3.680125,40.921 0.874324,103.59048 -2.337263,-8.64408 -5.46912,-76.00164 -0.914249,-116.185541 0.410535,-4.486378 0.806028,-8.91055 1.226161,-13.484005 0.840267,-9.14691 1.779093,-18.890947 3.133925,-30.924003 0.303271,-0.329086 0.455685,-0.485209 0.611919,-0.520223 -1.220277,11.601024 -2.837055,22.739661 -3.277418,34.803071 0.393463,0.487599 2.577247,1.553525 2.757194,3.329443 -0.944747,20.819908 -1.262842,41.917438 -1.281056,62.778178 1.278664,-0.0328 2.504545,-0.0624 3.810642,0.0391 z"
              id="path1647"
              inkscape:connector-curvature="0"
              sodipodi:nodetypes="cccccccccccsccccccc" />
           <path
-              fill="#000000"
              style="fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
              themedSecondary="fill"
+             fill="#000000"
              d="m 94.53869,200.10703 c -0.765999,2.87672 -1.457262,5.81573 -2.501413,8.46066 -0.261207,0.13717 -0.206967,-1.22403 -0.294283,-1.91284 -0.8405,0.46591 -0.928954,7.18808 -0.956423,10.00565 l 0.588568,-0.0736 c 0.02567,-0.13844 -0.0206,-0.95261 0.147143,-1.39785 1.239381,-2.86124 2.340266,-5.54936 3.384264,-8.16637 l 0.147143,-6.69496 z"
              id="path1649"
              inkscape:connector-curvature="0"
@@ -329,9 +329,9 @@
              inkscape:connector-curvature="0"
              sodipodi:nodetypes="cccc" />
           <path
-              fill="#000000"
              style="fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
              themedSecondary="fill"
+             fill="#000000"
              d="m 86.997666,155.37589 c 0.747972,-1.10539 1.495943,-2.25651 2.243915,-2.64856 0.931919,-3.46653 1.257462,-3.71926 1.728917,-4.74533 -0.116727,2.93284 -0.164217,5.92107 -0.03679,9.04923 h -0.809281 l 0.03678,1.39785 -0.331067,-0.0368 -0.03679,-1.14035 c -1.285176,-0.19778 -2.004525,1.46638 -2.979623,2.46462 0.01214,-1.96318 0.0737,-3.40747 0.183939,-4.34066 z"
              id="path1653"
              inkscape:connector-curvature="0"
