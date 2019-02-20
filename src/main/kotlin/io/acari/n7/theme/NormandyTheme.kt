@@ -7,7 +7,7 @@ import java.awt.Color
 
 object NormandyTheme {
   val jetWashColor = { _: Color -> ColorUtil.fromHex(ThemeConfiguration.jetWashColor.orElse("#A47FD8")) }
-  val outerJetWashColor = { _: Color -> ColorUtil.fromHex("#d6f5f8") }
+  val outerJetWashColor = { _: Color -> ColorUtil.fromHex("#C0DADD") }
   val backgroundColorFunction = { backgroundColor: Color -> backgroundColor }
 
   val colors = arrayOf(outerJetWashColor, jetWashColor,

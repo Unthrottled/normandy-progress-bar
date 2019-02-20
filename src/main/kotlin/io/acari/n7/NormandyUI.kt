@@ -76,8 +76,8 @@ open class NormandyUI : BasicProgressBarUI() {
           val parent = component.parent
           val backgroundColor = if (parent != null) parent.background else UIUtil.getPanelBackground()
           val tintedBackgroundColor =
-              if (ColorUtil.isDark(backgroundColor)) ColorUtil.brighter(backgroundColor, 3)
-              else ColorUtil.darker(backgroundColor, 3)
+              if (ColorUtil.isDark(backgroundColor)) ColorUtil.brighter(backgroundColor, 4)
+              else ColorUtil.darker(backgroundColor, 2)
           graphic.color = tintedBackgroundColor
           val R = JBUI.scale(8f)
           val off = JBUI.scale(1f)
@@ -86,12 +86,12 @@ open class NormandyUI : BasicProgressBarUI() {
 
           //Draw Jetwash Background
           graphic.paint = LinearGradientPaint(0f,
-              scale(2f),
+              scale(0f),
               0f,
-              componentHeight - scale(6f),
+              componentHeight.toFloat(),
               NormandyTheme.jetWashScales,
               NormandyTheme.colors
-                  .map { jetWashColorFunction -> jetWashColorFunction(backgroundColor) } // Allows transparency
+                  .map { jetWashColorFunction -> jetWashColorFunction(tintedBackgroundColor) } // Allows transparency
                   .toTypedArray()
           )
 
