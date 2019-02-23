@@ -178,19 +178,14 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
         shouldOverrideCheckbox!!.label = "Allow Theme Override"
         shouldOverrideCheckbox!!.text = "Allow Theme Override"
         shouldOverrideCheckbox!!.toolTipText = "Allow other application to override your theme."
+        shouldOverrideCheckbox!!.addItemListener {
+          removeOldMessage(panel1)
+          displayOverride(it.stateChange == 1, panel1)
+        }
         panel1.add(shouldOverrideCheckbox!!, GridConstraints(7, 1, 1, 1,
             GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-        if(themeConfigurations.externalTheme != ExternalTheme.NOT_SET && themeConfigurations.shouldOverride){
-          externalThemeLabel!!.text = "${themeConfigurations.externalTheme.displayName} is set to override!"
-          externalThemeLabel!!.toolTipText = "The lower half of the Normandy."
-          panel1.add(externalThemeLabel!!, GridConstraints(8, 1, 1, 1,
-              GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
-              GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-              GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-        }
-
       }
       content!!.add(panel1, GridConstraints(0, 0, 1, 1,
           GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH,
@@ -204,6 +199,26 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
           GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
           GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
           GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
+    }
+  }
+
+  private fun displayOverride(shouldShow: Boolean, panel1: JPanel) {
+    if(themeConfigurations.externalTheme != ExternalTheme.NOT_SET
+        && shouldShow){
+      externalThemeLabel!!.text = "${themeConfigurations.externalTheme.displayName} is set to override!"
+      externalThemeLabel!!.toolTipText = "The lower half of the Normandy."
+      panel1.add(externalThemeLabel!!, GridConstraints(8, 1, 1, 1,
+          GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
+          GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
+          GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
+    }
+  }
+
+  private fun removeOldMessage(panel1: JPanel) {
+    try {
+      panel1.remove(8)
+    } catch (e: Throwable) {
+
     }
   }
 

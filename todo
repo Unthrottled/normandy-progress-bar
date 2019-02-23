@@ -5,7 +5,6 @@ HARD:
     - should primary and secondary colors be changed by the theme?
 
 EZ:
-- Form needs to updated when checking and unchecking the override box.
 
 Final:
 - Refracture codebase
