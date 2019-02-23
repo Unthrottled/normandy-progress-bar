@@ -1,10 +1,10 @@
 HARD:
 - Configurable Contrail. (Post MVP)
 
-- Auto Theming
-    - should primary and secondary colors be changed by the theme?
-
 EZ:
+- Null Safety
+- SVG borked?
+
 
 Final:
 - Refracture codebase

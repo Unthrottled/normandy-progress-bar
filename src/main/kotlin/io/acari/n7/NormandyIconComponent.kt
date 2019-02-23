@@ -40,11 +40,10 @@ class NormandyIconComponent : BaseComponent {
     }
   }
 
-  private lateinit var messageBus: MessageBusConnection
+  private val messageBus: MessageBusConnection = ApplicationManager.getApplication().messageBus.connect()
 
   override fun initComponent() {
     setColorPatcher()
-    messageBus = ApplicationManager.getApplication().messageBus.connect()
 
     messageBus.subscribe(CONFIGURATION_TOPIC, NormandyConfigurationSubcriber {
       setColorPatcher()
@@ -95,11 +94,9 @@ class NormandyIconComponent : BaseComponent {
   }
 
   override fun disposeComponent() {
-    if (this::messageBus.isInitialized) {
       messageBus.disconnect()
     }
   }
-}
 
 class AppLifecycleSubscriber(private val fundy: () -> Unit) : AppLifecycleListener {
 
