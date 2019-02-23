@@ -2,7 +2,6 @@ package io.acari.n7.theme
 
 import io.acari.n7.config.ConfigurationPersistence
 import io.acari.n7.config.NOT_SET
-import io.acari.n7.config.toOptional
 import java.util.*
 
 object ExternalThemeIntegrations {
@@ -11,7 +10,7 @@ object ExternalThemeIntegrations {
     get() = getExternalThemeFromConfig { it.externalSecondaryColor }
 
   val jetWashColor: Optional<String>
-    get() = getExternalThemeFromConfig { it.externalJetWashColor }
+    get() = getExternalThemeFromConfig { it.externalContrailColor }
 
   private fun getExternalThemeFromConfig(valueExtractor3000: (ConfigurationPersistence)->String): Optional<String> {
     return ConfigurationPersistence.instance.filter { it.externalThemeSet != NOT_SET}
@@ -24,14 +23,14 @@ object ExternalThemeIntegrations {
 
     ConfigurationPersistence.instance.ifPresent {
       it.externalSecondaryColor = "#${themeChangedInformation.contrastColor}"
-      it.externalJetWashColor = "#${themeChangedInformation.accentColor}"
+      it.externalContrailColor = "#${themeChangedInformation.accentColor}"
       it.externalThemeSet = themeChangedInformation.externalTheme.name
     }
   }
 
   fun consumeAccentChangedInformation(accentChangedInformation: AccentChangedInformation) {
     ConfigurationPersistence.instance.ifPresent {
-      it.externalJetWashColor = "#${accentChangedInformation.accentColor}"
+      it.externalContrailColor = "#${accentChangedInformation.accentColor}"
       it.externalThemeSet = accentChangedInformation.externalTheme.name
     }
   }

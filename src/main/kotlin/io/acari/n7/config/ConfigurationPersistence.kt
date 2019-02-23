@@ -19,7 +19,7 @@ class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersisten
   var isAllowedToBeOverridden = true
 
   var externalSecondaryColor = NOT_SET
-  var externalJetWashColor = NOT_SET
+  var externalContrailColor = NOT_SET
   var externalThemeSet = NOT_SET
 
   public override fun clone(): Any {
