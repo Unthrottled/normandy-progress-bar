@@ -3,7 +3,6 @@ package io.acari.n7
 import com.intellij.util.SVGLoader
 import java.util.*
 
-//todo: optimize dis
 object SvgLoaderHacker {
 
   private lateinit var otherColorPatcher: SVGLoader.SvgColorPatcher
@@ -23,10 +22,10 @@ object SvgLoaderHacker {
             otherPatcher
           }
           .map { Optional.of(it) }
-          .orElseGet { retriveOtherColorPatcher() }
+          .orElseGet { useFallBackPatcher() }
 
 
-  fun retriveOtherColorPatcher(): Optional<SVGLoader.SvgColorPatcher> =
+  private fun useFallBackPatcher(): Optional<SVGLoader.SvgColorPatcher> =
       if (this::otherColorPatcher.isInitialized) Optional.of(otherColorPatcher)
       else Optional.empty()
 
