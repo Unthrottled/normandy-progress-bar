@@ -37,8 +37,8 @@ object GuidanceSystem {
         val headingToCitadel = isHeadingToCitadel()
         val startingX = if (headingToCitadel) { distanceBetweenCitadelAndNormandy + iconWidth } else 2f * offset
         val distanceBetweenNormandyAndOmega = componentWidth - distanceBetweenCitadelAndNormandy
-        val lengthOfJetWash = if (headingToCitadel) distanceBetweenNormandyAndOmega else distanceBetweenCitadelAndNormandy - iconWidth
+        val lengthOfContrail = if (headingToCitadel) distanceBetweenNormandyAndOmega else distanceBetweenCitadelAndNormandy - iconWidth
         val positionOfNormandy = if (headingToCitadel) distanceBetweenCitadelAndNormandy else distanceBetweenCitadelAndNormandy - iconWidth
-        NormandyPositionData(startingX, lengthOfJetWash, positionOfNormandy.toInt())
+        NormandyPositionData(startingX, lengthOfContrail, positionOfNormandy.toInt())
       }
 }

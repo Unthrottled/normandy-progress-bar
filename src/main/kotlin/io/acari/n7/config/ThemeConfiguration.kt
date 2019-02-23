@@ -17,7 +17,7 @@ object ThemeConfiguration {
 
   val contrailColor: Optional<String>
     get() {
-      return getChanges({ it.contrailColor }) { ExternalThemeIntegrations.jetWashColor }
+      return getChanges({ it.contrailColor }) { ExternalThemeIntegrations.contrailColor }
     }
 
   private fun <T> getChanges(userConfiguration: (ConfigurationPersistence) -> T, externalConfiguration: () -> Optional<T>): Optional<T> =

@@ -10,7 +10,7 @@ object ExternalThemeIntegrations {
   val secondaryThemeColor: Optional<String>
     get() = getExternalThemeFromConfig { it.externalSecondaryColor }
 
-  val jetWashColor: Optional<String>
+  val contrailColor: Optional<String>
     get() = getExternalThemeFromConfig { it.externalContrailColor }
 
   private fun getExternalThemeFromConfig(valueExtractor3000: (ConfigurationPersistence) -> String): Optional<String> {

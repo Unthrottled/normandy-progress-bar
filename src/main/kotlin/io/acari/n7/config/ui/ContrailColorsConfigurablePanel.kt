@@ -13,7 +13,7 @@ import java.util.ArrayList
  * @author spleaner
  * @author Konstantin Bulenkov
  */
-class JetWashColorsConfigurablePanel : JPanel(), Disposable {
+class ContrailColorsConfigurablePanel : JPanel(), Disposable {
   private val myLocalTable: FileColorSettingsTable
 
   val isModified: Boolean
@@ -31,10 +31,10 @@ class JetWashColorsConfigurablePanel : JPanel(), Disposable {
     mainPanel.preferredSize = JBUI.size(300, 500)
     mainPanel.border = BorderFactory.createEmptyBorder(5, 5, 0, 0)
 
-    val localConfigurations = mutableListOf(JetWashColorConfiguration("#FFFFFF", "#FFFFFF"))
+    val localConfigurations = mutableListOf(ContrailColorConfiguration("#FFFFFF", "#FFFFFF"))
     myLocalTable = object : FileColorSettingsTable(localConfigurations) {
-      override fun apply(configurations: List<JetWashColorConfiguration>) {
-        val copied = ArrayList<JetWashColorConfiguration>()
+      override fun apply(configurations: List<ContrailColorConfiguration>) {
+        val copied = ArrayList<ContrailColorConfiguration>()
         try {
           for (configuration in configurations) {
             copied.add(configuration.copy())

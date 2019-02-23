@@ -18,7 +18,6 @@ import javax.swing.plaf.basic.BasicProgressBarUI
 open class NormandyUI : BasicProgressBarUI() {
 
   companion object {
-
     val NORMANDY = NormandyIconComponent.getNormandyIcon()
     val NORMANDY_TO_CITADEL = NormandyIconComponent.getNormandyToCitadelIcon()
 
@@ -48,9 +47,9 @@ open class NormandyUI : BasicProgressBarUI() {
       val amountFull = getAmountFull(insets, barRectWidth, barRectHeight)
 
       val startingX = 2f * offset
-      val lengthOfJetwash = amountFull - JBUI.scale(5f)
+      val lengthOfContrail = amountFull - JBUI.scale(5f)
       val distanceBetweenCitadelAndNormandy = amountFull - scale(5)
-      NormandyPositionData(startingX, lengthOfJetwash, distanceBetweenCitadelAndNormandy)
+      NormandyPositionData(startingX, lengthOfContrail, distanceBetweenCitadelAndNormandy)
     }
   }
 
@@ -82,22 +81,22 @@ open class NormandyUI : BasicProgressBarUI() {
           graphic.fill(RoundRectangle2D.Float(off, off, componentWidth.toFloat() - 2f * off - off, componentHeight.toFloat() - 2f * off - off, R, R))
 
 
-          //Draw Jetwash Background
+          //Draw Contrail Background
           graphic.paint = LinearGradientPaint(0f,
               scale(0f),
               0f,
               componentHeight.toFloat(),
-              NormandyTheme.jetWashScales,
+              NormandyTheme.contrailScales,
               NormandyTheme.colors
-                  .map { jetWashColorFunction -> jetWashColorFunction(tintedBackgroundColor) } // Allows transparency
+                  .map { contrailColorFunction -> contrailColorFunction(tintedBackgroundColor) } // Allows transparency
                   .toTypedArray()
           )
 
-          val (startingX, lengthOfJetWash, distanceBetweenCitadelAndNormandy) =
+          val (startingX, lengthOfContrail, distanceBetweenCitadelAndNormandy) =
               positionDataFunction(componentWidth, componentHeight, off)
 
           graphic.fill(RoundRectangle2D.Float(startingX, 2f * off,
-              lengthOfJetWash, componentHeight - JBUI.scale(5f),
+              lengthOfContrail, componentHeight - JBUI.scale(5f),
               JBUI.scale(7f), JBUI.scale(7f)))
 
           //Draw Normandy

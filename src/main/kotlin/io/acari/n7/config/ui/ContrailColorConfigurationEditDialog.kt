@@ -11,8 +11,8 @@ import javax.swing.*
 import java.awt.*
 import java.util.*
 
-class JetWashColorConfigurationEditDialog(configuration: JetWashColorConfiguration?) : DialogWrapper(true) {
-  var configuration: JetWashColorConfiguration? = null
+class ContrailColorConfigurationEditDialog(configuration: ContrailColorConfiguration?) : DialogWrapper(true) {
+  var configuration: ContrailColorConfiguration? = null
     private set
   var scopeComboBox: JComboBox<*>? = null
     private set
@@ -106,7 +106,7 @@ class JetWashColorConfigurationEditDialog(configuration: JetWashColorConfigurati
 //      configuration!!.setScopeName(scopeComboBox!!.selectedItem as String)
 //      configuration!!.setColorName(colorName)
     } else {
-//      configuration = JetWashColorConfiguration(scopeComboBox!!.selectedItem as String, colorName)
+//      configuration = ContrailColorConfiguration(scopeComboBox!!.selectedItem as String, colorName)
     }
   }
 

@@ -15,9 +15,9 @@ import java.util.ArrayList
 import java.util.EventObject
 
 
-data class JetWashColorConfiguration(val colorValue: String, val colorName: String)
+data class ContrailColorConfiguration(val colorValue: String, val colorName: String)
 
-abstract class FileColorSettingsTable(private val myOriginal: MutableList<JetWashColorConfiguration>) :
+abstract class FileColorSettingsTable(private val myOriginal: MutableList<ContrailColorConfiguration>) :
     JBTable(ModelAdapter(copy(myOriginal))) {
 
   val isModified: Boolean
@@ -47,7 +47,7 @@ abstract class FileColorSettingsTable(private val myOriginal: MutableList<JetWas
     colorColumn.cellRenderer = ColorCellRenderer()
   }
 
-  protected abstract fun apply(configurations: List<JetWashColorConfiguration>)
+  protected abstract fun apply(configurations: List<ContrailColorConfiguration>)
 
   override fun getModel(): ModelAdapter {
     return super.getModel() as ModelAdapter
@@ -55,8 +55,8 @@ abstract class FileColorSettingsTable(private val myOriginal: MutableList<JetWas
 
   override fun editCellAt(row: Int, column: Int, e: EventObject): Boolean {
     if (e == null || e is MouseEvent && e.clickCount == 1) return false
-    val at = model.getValueAt(row, column) as? JetWashColorConfiguration ?: return false
-    val dialog = JetWashColorConfigurationEditDialog(at as JetWashColorConfiguration)
+    val at = model.getValueAt(row, column) as? ContrailColorConfiguration ?: return false
+    val dialog = ContrailColorConfigurationEditDialog(at as ContrailColorConfiguration)
     dialog.scopeComboBox?.isEnabled = false
     dialog.show()
     return false
@@ -102,7 +102,7 @@ abstract class FileColorSettingsTable(private val myOriginal: MutableList<JetWas
     }
   }
 
-  fun removeConfiguration(index: Int): JetWashColorConfiguration {
+  fun removeConfiguration(index: Int): ContrailColorConfiguration {
     val removed = model.remove(index)
 
     val rowCount = rowCount
@@ -117,13 +117,13 @@ abstract class FileColorSettingsTable(private val myOriginal: MutableList<JetWas
     return removed
   }
 
-  fun addConfiguration(configuration: JetWashColorConfiguration) {
+  fun addConfiguration(configuration: ContrailColorConfiguration) {
     model.add(configuration)
   }
 
-  class ModelAdapter constructor(private var myConfigurations: MutableList<JetWashColorConfiguration>) : AbstractTableModel(), EditableModel {
+  class ModelAdapter constructor(private var myConfigurations: MutableList<ContrailColorConfiguration>) : AbstractTableModel(), EditableModel {
 
-    var configurations: MutableList<JetWashColorConfiguration>
+    var configurations: MutableList<ContrailColorConfiguration>
       get() = myConfigurations
       set(original) {
         myConfigurations = copy(original)
@@ -149,13 +149,13 @@ abstract class FileColorSettingsTable(private val myOriginal: MutableList<JetWas
         null
     }
 
-    fun remove(index: Int): JetWashColorConfiguration {
+    fun remove(index: Int): ContrailColorConfiguration {
       val removed = myConfigurations!!.removeAt(index)
       fireTableRowsDeleted(index, index)
       return removed
     }
 
-    fun add(configuration: JetWashColorConfiguration) {
+    fun add(configuration: ContrailColorConfiguration) {
       myConfigurations!!.add(configuration)
       fireTableRowsInserted(myConfigurations!!.size - 1, myConfigurations!!.size - 1)
     }
@@ -185,7 +185,7 @@ abstract class FileColorSettingsTable(private val myOriginal: MutableList<JetWas
     }
 
     override fun addRow() {
-      val dialog = JetWashColorConfigurationEditDialog(null)
+      val dialog = ContrailColorConfigurationEditDialog(null)
       dialog.show()
 
       if (dialog.exitCode == 0) {
@@ -218,7 +218,7 @@ abstract class FileColorSettingsTable(private val myOriginal: MutableList<JetWas
     override fun setValue(value: Any?) {
       var icon: Icon? = null
       var text: String? = null
-      if (value is JetWashColorConfiguration) {
+      if (value is ContrailColorConfiguration) {
         icon = getIcon(value)
         text = getText(value)
       }
@@ -226,12 +226,12 @@ abstract class FileColorSettingsTable(private val myOriginal: MutableList<JetWas
       setText(text ?: "")
     }
 
-    internal fun getIcon(configuration: JetWashColorConfiguration): Icon {
+    internal fun getIcon(configuration: ContrailColorConfiguration): Icon {
       val color = ColorUtil.fromHex(configuration.colorName)
       return JBUI.scale(ColorIcon(16, 13, color, true))
     }
 
-    internal fun getText(configuration: JetWashColorConfiguration): String {
+    internal fun getText(configuration: ContrailColorConfiguration): String {
       return configuration.colorName
     }
 
@@ -241,8 +241,8 @@ abstract class FileColorSettingsTable(private val myOriginal: MutableList<JetWas
     private val NAME_COLUMN = 0
     private val COLOR_COLUMN = 1
 
-    private fun copy(configurations: List<JetWashColorConfiguration>): MutableList<JetWashColorConfiguration> {
-      val result = ArrayList<JetWashColorConfiguration>()
+    private fun copy(configurations: List<ContrailColorConfiguration>): MutableList<ContrailColorConfiguration> {
+      val result = ArrayList<ContrailColorConfiguration>()
       for (c in configurations) {
         try {
           result.add(c.copy())
