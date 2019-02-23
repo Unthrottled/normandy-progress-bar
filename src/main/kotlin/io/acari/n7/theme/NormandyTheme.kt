@@ -5,16 +5,16 @@ import io.acari.n7.config.ThemeConfiguration
 import java.awt.Color
 
 object NormandyTheme {
-  val jetWashColor = { _: Color -> ColorUtil.fromHex(ThemeConfiguration.contrailColor.orElse("#A47FD8")) }
-  val outerJetWashColor = { _: Color -> ColorUtil.fromHex("#C0DADD") }
-  val backgroundColorFunction = { backgroundColor: Color -> backgroundColor }
+  private val jetWashColor = { _: Color -> ColorUtil.fromHex(ThemeConfiguration.contrailColor.orElse("#A47FD8")) }
+  private val outerJetWashColor = { backgroundColor: Color -> backgroundColor }
+  private val backgroundColorFunction = { backgroundColor: Color -> backgroundColor }
 
   val colors = arrayOf(outerJetWashColor, jetWashColor,
       outerJetWashColor, jetWashColor,
       outerJetWashColor, backgroundColorFunction, backgroundColorFunction, backgroundColorFunction, outerJetWashColor,
       jetWashColor, outerJetWashColor,
       jetWashColor, outerJetWashColor, jetWashColor, outerJetWashColor)
-  val SCALING_FACTOR = 1.0f / colors.size
+  private val SCALING_FACTOR = 1.0f / colors.size
   val jetWashScales = colors.mapIndexed { index, _ -> SCALING_FACTOR * (index + 1) }
       .toFloatArray()
 

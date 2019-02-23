@@ -74,7 +74,7 @@ open class NormandyUI : BasicProgressBarUI() {
           val parent = component.parent
           val backgroundColor = if (parent != null) parent.background else UIUtil.getPanelBackground()
           val tintedBackgroundColor =
-              if (ColorUtil.isDark(backgroundColor)) ColorUtil.brighter(backgroundColor, 4)
+              if (ColorUtil.isDark(backgroundColor)) ColorUtil.brighter(backgroundColor, 5)
               else ColorUtil.darker(backgroundColor, 2)
           graphic.color = tintedBackgroundColor
           val R = JBUI.scale(8f)
