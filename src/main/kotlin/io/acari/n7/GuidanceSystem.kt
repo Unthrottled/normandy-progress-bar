@@ -2,12 +2,11 @@ package io.acari.n7
 
 import com.intellij.util.ui.JBUI
 
-
 const val DEFAULT_VELOCITY_FROM_CITADEL = 2f
 const val DEFAULT_DISTANCE_FROM_CITADEL = 0f
 val iconWidth = NormandyUI.NORMANDY_TO_CITADEL.iconWidth
 
-object GuidanceSystem {
+class GuidanceSystem {
   private var distanceFromCitadel: Float = 120f
   private var velocityFromCitadel: Float = -1f
 

@@ -5,7 +5,6 @@ import com.intellij.util.ui.GraphicsUtil
 import com.intellij.util.ui.JBUI.Borders
 import com.intellij.util.ui.JBUI.scale
 import com.intellij.util.ui.UIUtil
-import io.acari.n7.GuidanceSystem.isHeadingToCitadel
 import io.acari.n7.theme.NormandyTheme
 import java.awt.Dimension
 import java.awt.Graphics
@@ -19,6 +18,8 @@ import javax.swing.plaf.ComponentUI
 import javax.swing.plaf.basic.BasicProgressBarUI
 
 open class NormandyUI : BasicProgressBarUI() {
+
+  private val guidanceSystem = GuidanceSystem()
 
   companion object {
     val NORMANDY = NormandyIconComponent.getNormandyIcon()
@@ -41,8 +42,8 @@ open class NormandyUI : BasicProgressBarUI() {
    *
    */
   override fun paintIndeterminate(g: Graphics, component: JComponent) {
-    drawNormandyProgress(g, component, { if (isHeadingToCitadel()) NORMANDY_TO_CITADEL else NORMANDY },
-        GuidanceSystem.calculateCurrentLocation())
+    drawNormandyProgress(g, component, { if (guidanceSystem.isHeadingToCitadel()) NORMANDY_TO_CITADEL else NORMANDY },
+        guidanceSystem.calculateCurrentLocation())
   }
 
   /**
@@ -53,7 +54,7 @@ open class NormandyUI : BasicProgressBarUI() {
    */
   override fun paintDeterminate(g: Graphics, component: JComponent) {
     drawNormandyProgress(g, component, { NORMANDY }) { componentWidth, componentHeight, offset ->
-      GuidanceSystem.reCalibrate()// Fixes the jumping between the two progress bars
+      guidanceSystem.reCalibrate()// Fixes the jumping between the two progress bars
 
       val insets = progressBar.insets
       val barRectWidth = componentWidth - (insets.right + insets.left)
