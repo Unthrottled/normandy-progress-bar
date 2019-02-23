@@ -12,8 +12,8 @@ object ExternalThemeIntegrations {
   val jetWashColor: Optional<String>
     get() = getExternalThemeFromConfig { it.externalContrailColor }
 
-  private fun getExternalThemeFromConfig(valueExtractor3000: (ConfigurationPersistence)->String): Optional<String> {
-    return ConfigurationPersistence.instance.filter { it.externalThemeSet != NOT_SET}
+  private fun getExternalThemeFromConfig(valueExtractor3000: (ConfigurationPersistence) -> String): Optional<String> {
+    return ConfigurationPersistence.instance.filter { it.externalThemeSet != NOT_SET }
         .filter { it.isAllowedToBeOverridden }
         .map(valueExtractor3000)
         .filter { it != NOT_SET }
@@ -22,11 +22,15 @@ object ExternalThemeIntegrations {
   fun consumeThemeChangedInformation(themeChangedInformation: ThemeChangedInformation) {
 
     ConfigurationPersistence.instance.ifPresent {
-      it.externalSecondaryColor = "#${themeChangedInformation.contrastColor}"
+      it.externalSecondaryColor = "#${getSecondaryColorFromTheme(themeChangedInformation)}"
       it.externalContrailColor = "#${themeChangedInformation.accentColor}"
       it.externalThemeSet = themeChangedInformation.externalTheme.name
     }
   }
+
+  private fun getSecondaryColorFromTheme(themeChangedInformation: ThemeChangedInformation) =
+      if (themeChangedInformation.isDark) themeChangedInformation.contrastColor
+      else themeChangedInformation.foregroundColor
 
   fun consumeAccentChangedInformation(accentChangedInformation: AccentChangedInformation) {
     ConfigurationPersistence.instance.ifPresent {
