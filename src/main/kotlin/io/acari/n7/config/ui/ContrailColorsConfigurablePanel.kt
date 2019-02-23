@@ -48,11 +48,11 @@ class ContrailColorsConfigurablePanel : JPanel(), Disposable {
 
 
     val localPanel = JPanel(BorderLayout())
-    localPanel.border = IdeBorderFactory.createTitledBorder("Local colors", false)
+    localPanel.border = IdeBorderFactory.createTitledBorder("Local contrailColors", false)
     mainPanel.add(localPanel)
 
 
-    myLocalTable.getEmptyText().setText("No local colors")
+    myLocalTable.getEmptyText().setText("No local contrailColors")
   }
 
   override fun dispose() {}

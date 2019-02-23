@@ -106,7 +106,7 @@ open class NormandyUI : BasicProgressBarUI() {
               0f,
               componentHeight.toFloat(),
               NormandyTheme.contrailScales,
-              NormandyTheme.colors
+              NormandyTheme.contrailColors
                   .map { contrailColorFunction -> contrailColorFunction(tintedBackgroundColor) } // Allows transparency
                   .toTypedArray()
           )
