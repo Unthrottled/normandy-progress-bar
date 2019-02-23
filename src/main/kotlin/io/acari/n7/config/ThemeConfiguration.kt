@@ -15,7 +15,7 @@ object ThemeConfiguration {
       return getChanges({ it.secondaryThemeColor }) { ExternalThemeIntegrations.secondaryThemeColor }
     }
 
-  val jetWashColor: Optional<String>
+  val contrailColor: Optional<String>
     get() {
       return getChanges({ it.jetWashColor }) { ExternalThemeIntegrations.jetWashColor }
     }

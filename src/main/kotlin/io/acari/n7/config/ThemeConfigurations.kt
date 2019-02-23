@@ -4,7 +4,7 @@ import io.acari.n7.theme.ExternalTheme
 import java.awt.Color
 
 data class ThemeConfigurations(
-    val borderColor: Color = ThemeDefaults.borderColor,
+    val contrail: Color = ThemeDefaults.contrail,
     val primaryColor: Color = ThemeDefaults.primaryColor,
     val secondaryColor: Color = ThemeDefaults.secondaryColor,
     val shouldOverride: Boolean = true,

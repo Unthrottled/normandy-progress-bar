@@ -40,8 +40,8 @@ import javax.swing.border.TitledBorder
 class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
 
   private var content: JPanel? = null
-  private var borderColorLabel: JLabel? = null
-  private var borderColor: ColorPanel? = null
+  private var contrailColorLabel: JLabel? = null
+  private var contrailColor: ColorPanel? = null
   private var primaryColorLabel: JLabel? = null
   private var primaryColor: ColorPanel? = null
   private var secondaryColorLabel: JLabel? = null
@@ -53,7 +53,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
 
   fun isModified(): Boolean =
       themeConfigurations.shouldOverride != shouldOverride ||
-          themeConfigurations.borderColor != getBorderColor() ||
+          themeConfigurations.contrail != getContrailColor() ||
           themeConfigurations.primaryColor != getPrimaryColor() ||
           themeConfigurations.secondaryColor != getSecondaryColor()
 
@@ -71,14 +71,14 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
     resetTabDefaultsBtn!!.addActionListener { e ->
       setSecondary(ThemeDefaults.secondaryColor)
       setPrimaryColor(ThemeDefaults.primaryColor)
-      setBorderColor(ThemeDefaults.borderColor)
+      setContrailColor(ThemeDefaults.contrail)
     }
   }
 
   private fun loadConfigs(themeConfigurations: ThemeConfigurations) {
     setPrimaryColor(themeConfigurations.primaryColor)
     setSecondary(themeConfigurations.secondaryColor)
-    setBorderColor(themeConfigurations.borderColor)
+    setContrailColor(themeConfigurations.contrail)
     shouldOverride = themeConfigurations.shouldOverride
   }
 
@@ -86,12 +86,12 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
     return content
   }
 
-  fun getBorderColor(): Color? {
-    return borderColor!!.selectedColor
+  fun getContrailColor(): Color? {
+    return contrailColor!!.selectedColor
   }
 
-  private fun setBorderColor(borderColor: Color) {
-    this.borderColor!!.selectedColor = borderColor
+  private fun setContrailColor(contrailColor: Color) {
+    this.contrailColor!!.selectedColor = contrailColor
   }
 
   fun getPrimaryColor(): Color? {
@@ -114,8 +114,8 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
   private fun initComponents() {
     content = JPanel()
     val panel1 = JPanel()
-    borderColorLabel = JLabel()
-    borderColor = ColorPanel()
+    contrailColorLabel = JLabel()
+    contrailColor = ColorPanel()
     primaryColorLabel = JLabel()
     primaryColor = ColorPanel()
     secondaryColorLabel = JLabel()
@@ -138,17 +138,17 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
         panel1.border = TitledBorder(EtchedBorder(), "Normandy Theme Customization")
         panel1.layout = GridLayoutManager(18, 2, Insets(0, 3, 0, 0), -1, -1)
 
-        //---- borderColorLabel ----
-//        borderColorLabel!!.text = "Border Color"
-//        borderColorLabel!!.toolTipText = "The progress bar border color."
-//        panel1.add(borderColorLabel!!, GridConstraints(3, 0, 1, 1,
-//            GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
-//            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-//            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-//        panel1.add(borderColor!!, GridConstraints(3, 1, 1, 1,
-//            GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
-//            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-//            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
+        //---- contrailColorLabel ----
+        contrailColorLabel!!.text = "Contrail Color"
+        contrailColorLabel!!.toolTipText = "Choose the color of Normandy's contrail."
+        panel1.add(contrailColorLabel!!, GridConstraints(3, 0, 1, 1,
+            GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
+        panel1.add(contrailColor!!, GridConstraints(3, 1, 1, 1,
+            GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
         //---- primaryColorLabel ----
         primaryColorLabel!!.text = "Normandy's Primary Color"

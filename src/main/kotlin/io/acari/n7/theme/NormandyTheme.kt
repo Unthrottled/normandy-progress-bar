@@ -1,12 +1,11 @@
 package io.acari.n7.theme
 
 import com.intellij.ui.ColorUtil
-import com.intellij.ui.Gray
 import io.acari.n7.config.ThemeConfiguration
 import java.awt.Color
 
 object NormandyTheme {
-  val jetWashColor = { _: Color -> ColorUtil.fromHex(ThemeConfiguration.jetWashColor.orElse("#A47FD8")) }
+  val jetWashColor = { _: Color -> ColorUtil.fromHex(ThemeConfiguration.contrailColor.orElse("#A47FD8")) }
   val outerJetWashColor = { _: Color -> ColorUtil.fromHex("#C0DADD") }
   val backgroundColorFunction = { backgroundColor: Color -> backgroundColor }
 

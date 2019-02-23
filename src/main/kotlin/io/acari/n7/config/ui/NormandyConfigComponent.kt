@@ -38,7 +38,7 @@ class NormandyConfigComponent : SearchableConfigurable {
     ConfigurationPersistence.instance
         .ifPresent {
           it.isAllowedToBeOverridden = normandyForm.shouldOverride
-          it.borderColor = ColorUtil.toHexString(normandyForm.getBorderColor())
+          it.borderColor = ColorUtil.toHexString(normandyForm.getContrailColor())
           it.primaryThemeColor = ColorUtil.toHexString(normandyForm.getPrimaryColor())
           it.secondaryThemeColor = ColorUtil.toHexString(normandyForm.getSecondaryColor())
           normandyForm = NormandyForm(configToThemConfig(it))
