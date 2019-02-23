@@ -22,7 +22,7 @@ class NormandyConfigComponent : SearchableConfigurable {
 
   private fun configToThemConfig(it: ConfigurationPersistence): ThemeConfigurations {
     return ThemeConfigurations(
-        com.intellij.ui.ColorUtil.fromHex(it.borderColor),
+        com.intellij.ui.ColorUtil.fromHex(it.contrailColor),
         com.intellij.ui.ColorUtil.fromHex(it.primaryThemeColor),
         com.intellij.ui.ColorUtil.fromHex(it.secondaryThemeColor),
         it.isAllowedToBeOverridden,
@@ -38,7 +38,7 @@ class NormandyConfigComponent : SearchableConfigurable {
     ConfigurationPersistence.instance
         .ifPresent {
           it.isAllowedToBeOverridden = normandyForm.shouldOverride
-          it.borderColor = ColorUtil.toHexString(normandyForm.getContrailColor())
+          it.contrailColor = ColorUtil.toHexString(normandyForm.getContrailColor())
           it.primaryThemeColor = ColorUtil.toHexString(normandyForm.getPrimaryColor())
           it.secondaryThemeColor = ColorUtil.toHexString(normandyForm.getSecondaryColor())
           normandyForm = NormandyForm(configToThemConfig(it))

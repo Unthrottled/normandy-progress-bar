@@ -15,9 +15,7 @@ class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersisten
   // They are public so they can be serialized
   var primaryThemeColor = "#FFFFFF"
   var secondaryThemeColor = "#000000"
-  var jetWash = "#a38dbe,#d6f5f8,#a38dbe,#d6f5f8,#a38dbe,TRANSPARENT,TRANSPARENT,#a38dbe,#d6f5f8,#a38dbe,#d6f5f8,#a38dbe"
-  var borderColor = "#EFEFEF"
-  var jetWashColor = "#A47FD8"
+  var contrailColor = "#A47FD8"
   var isAllowedToBeOverridden = true
 
   var externalSecondaryColor = NOT_SET

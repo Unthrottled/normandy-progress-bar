@@ -138,42 +138,41 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
         panel1.border = TitledBorder(EtchedBorder(), "Normandy Theme Customization")
         panel1.layout = GridLayoutManager(18, 2, Insets(0, 3, 0, 0), -1, -1)
 
-        //---- contrailColorLabel ----
-        contrailColorLabel!!.text = "Contrail Color"
-        contrailColorLabel!!.toolTipText = "Choose the color of Normandy's contrail."
-        panel1.add(contrailColorLabel!!, GridConstraints(3, 0, 1, 1,
-            GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-        panel1.add(contrailColor!!, GridConstraints(3, 1, 1, 1,
-            GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-
         //---- primaryColorLabel ----
-        primaryColorLabel!!.text = "Normandy's Primary Color"
+        primaryColorLabel!!.text = "Primary Color"
         primaryColorLabel!!.toolTipText = "The upper half of the Normandy"
-        panel1.add(primaryColorLabel!!, GridConstraints(4, 0, 1, 1,
+        panel1.add(primaryColorLabel!!, GridConstraints(3, 0, 1, 1,
             GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-        panel1.add(primaryColor!!, GridConstraints(4, 1, 1, 1,
+        panel1.add(primaryColor!!, GridConstraints(3, 1, 1, 1,
             GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
         //---- secondaryColor ----
-        secondaryColorLabel!!.text = "Normandy's Secondary Color"
+        secondaryColorLabel!!.text = "Secondary Color"
         secondaryColorLabel!!.toolTipText = "The lower half of the Normandy."
-        panel1.add(secondaryColorLabel!!, GridConstraints(5, 0, 1, 1,
+        panel1.add(secondaryColorLabel!!, GridConstraints(4, 0, 1, 1,
             GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-        panel1.add(secondaryColor!!, GridConstraints(5, 1, 1, 1,
+        panel1.add(secondaryColor!!, GridConstraints(4, 1, 1, 1,
             GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
+        //---- contrailColorLabel ----
+        contrailColorLabel!!.text = "Contrail Color"
+        contrailColorLabel!!.toolTipText = "Choose the color of Normandy's contrail."
+        panel1.add(contrailColorLabel!!, GridConstraints(5, 0, 1, 1,
+            GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
+        panel1.add(contrailColor!!, GridConstraints(5, 1, 1, 1,
+            GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
         //---- shouldOverrideCheckbox ----
         shouldOverrideCheckbox!!.label = "Allow Theme Override"
