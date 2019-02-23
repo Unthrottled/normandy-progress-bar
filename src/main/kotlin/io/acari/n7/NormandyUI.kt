@@ -2,12 +2,15 @@ package io.acari.n7
 
 import com.intellij.ui.ColorUtil
 import com.intellij.util.ui.GraphicsUtil
-import com.intellij.util.ui.JBUI
+import com.intellij.util.ui.JBUI.Borders
 import com.intellij.util.ui.JBUI.scale
 import com.intellij.util.ui.UIUtil
 import io.acari.n7.GuidanceSystem.isHeadingToCitadel
 import io.acari.n7.theme.NormandyTheme
-import java.awt.*
+import java.awt.Dimension
+import java.awt.Graphics
+import java.awt.Graphics2D
+import java.awt.LinearGradientPaint
 import java.awt.geom.RoundRectangle2D
 import java.util.*
 import javax.swing.Icon
@@ -22,7 +25,7 @@ open class NormandyUI : BasicProgressBarUI() {
     val NORMANDY_TO_CITADEL = NormandyIconComponent.getNormandyToCitadelIcon()
 
     fun createUi(jComponent: JComponent): ComponentUI {
-      jComponent.border = JBUI.Borders.empty().asUIResource()
+      jComponent.border = Borders.empty().asUIResource()
       return NormandyUI()
     }
   }
@@ -32,11 +35,22 @@ open class NormandyUI : BasicProgressBarUI() {
   override fun getPreferredSize(c: JComponent?): Dimension =
       Dimension(super.getPreferredSize(c).width, scale(25))
 
+  /**
+   * Draws the progress bar that has no known completion duration.
+   * So the Normandy just flies back and forth between destinations.
+   *
+   */
   override fun paintIndeterminate(g: Graphics, component: JComponent) {
     drawNormandyProgress(g, component, { if (isHeadingToCitadel()) NORMANDY_TO_CITADEL else NORMANDY },
         GuidanceSystem.calculateCurrentLocation())
   }
 
+  /**
+   * Draws the progress bar that has a known completion duration.
+   * So when the normandy completes the trip from the Citadel to Omega,
+   * then the task as been complete.
+   *
+   */
   override fun paintDeterminate(g: Graphics, component: JComponent) {
     drawNormandyProgress(g, component, { NORMANDY }) { componentWidth, componentHeight, offset ->
       GuidanceSystem.reCalibrate()// Fixes the jumping between the two progress bars
@@ -47,8 +61,8 @@ open class NormandyUI : BasicProgressBarUI() {
       val amountFull = getAmountFull(insets, barRectWidth, barRectHeight)
 
       val startingX = 2f * offset
-      val lengthOfContrail = amountFull - JBUI.scale(5f)
-      val distanceBetweenCitadelAndNormandy = amountFull - scale(5)
+      val lengthOfContrail = amountFull - scale(5f)
+      val distanceBetweenCitadelAndNormandy = lengthOfContrail.toInt()
       NormandyPositionData(startingX, lengthOfContrail, distanceBetweenCitadelAndNormandy)
     }
   }
@@ -57,32 +71,36 @@ open class NormandyUI : BasicProgressBarUI() {
                                    positionDataFunction: (Int, Int, Float) -> NormandyPositionData) {
     getCorrectGraphic(g)
         .ifPresent { dimensionsAndGraphic ->
-          val graphic = dimensionsAndGraphic.third
+          val drawableGraphic = dimensionsAndGraphic.third
 
           val componentWidth = component.width
           val preferredHeight = component.preferredSize.height
-          val componentHeight = if (component.height - preferredHeight % 2 != 0) preferredHeight + 1 else preferredHeight
+          val componentHeight =
+              if (component.height - preferredHeight % 2 != 0) preferredHeight + 1
+              else preferredHeight
 
           if (component.isOpaque) {
-            graphic.fillRect(0, 0, componentWidth, componentHeight)
+            drawableGraphic.fillRect(0, 0, componentWidth, componentHeight)
           }
 
-          val graphicsConfig = GraphicsUtil.setupAAPainting(graphic)
+          val graphicsConfig = GraphicsUtil.setupAAPainting(drawableGraphic)
 
-          //SET BACKGROUND
-          val parent = component.parent
-          val backgroundColor = if (parent != null) parent.background else UIUtil.getPanelBackground()
+          //SET Progress bar BACKGROUND (ie Space!)
+          val progressBarParent = component.parent
+          val backgroundColor =
+              if (progressBarParent != null) progressBarParent.background
+              else UIUtil.getPanelBackground()
           val tintedBackgroundColor =
               if (ColorUtil.isDark(backgroundColor)) ColorUtil.brighter(backgroundColor, 5)
               else ColorUtil.darker(backgroundColor, 2)
-          graphic.color = tintedBackgroundColor
-          val R = JBUI.scale(8f)
-          val off = JBUI.scale(1f)
-          graphic.fill(RoundRectangle2D.Float(off, off, componentWidth.toFloat() - 2f * off - off, componentHeight.toFloat() - 2f * off - off, R, R))
+          drawableGraphic.color = tintedBackgroundColor
 
+          val borderRadius = scale(8f)
+          val offset = scale(1f)
+          drawableGraphic.fill(RoundRectangle2D.Float(offset, offset, componentWidth.toFloat() - 2f * offset - offset, componentHeight.toFloat() - 2f * offset - offset, borderRadius, borderRadius))
 
           //Draw Contrail Background
-          graphic.paint = LinearGradientPaint(0f,
+          drawableGraphic.paint = LinearGradientPaint(0f,
               scale(0f),
               0f,
               componentHeight.toFloat(),
@@ -93,14 +111,15 @@ open class NormandyUI : BasicProgressBarUI() {
           )
 
           val (startingX, lengthOfContrail, distanceBetweenCitadelAndNormandy) =
-              positionDataFunction(componentWidth, componentHeight, off)
+              positionDataFunction(componentWidth, componentHeight, offset)
 
-          graphic.fill(RoundRectangle2D.Float(startingX, 2f * off,
-              lengthOfContrail, componentHeight - JBUI.scale(5f),
-              JBUI.scale(7f), JBUI.scale(7f)))
+          val contrailBorderRadius = scale(7f)
+          drawableGraphic.fill(RoundRectangle2D.Float(startingX, 2f * offset,
+              lengthOfContrail, componentHeight - scale(5f),
+              contrailBorderRadius, contrailBorderRadius))
 
-          //Draw Normandy
-          getNormandyIcon().paintIcon(progressBar, graphic, distanceBetweenCitadelAndNormandy, scale(0))
+          //Draw the Normandy!
+          getNormandyIcon().paintIcon(progressBar, drawableGraphic, distanceBetweenCitadelAndNormandy, scale(0))
 
           graphicsConfig.restore()
         }
