@@ -2,6 +2,7 @@ package io.acari.n7.theme
 
 import io.acari.n7.config.ConfigurationPersistence
 import io.acari.n7.config.NOT_SET
+import io.acari.n7.config.toOptional
 import java.util.*
 
 object ExternalThemeIntegrations {
@@ -22,19 +23,31 @@ object ExternalThemeIntegrations {
   fun consumeThemeChangedInformation(themeChangedInformation: ThemeChangedInformation) {
 
     ConfigurationPersistence.instance.ifPresent {
-      it.externalSecondaryColor = "#${getSecondaryColorFromTheme(themeChangedInformation)}"
-      it.externalContrailColor = "#${themeChangedInformation.accentColor}"
+      it.externalSecondaryColor = getSecondaryColorFromTheme(themeChangedInformation)
+      it.externalContrailColor = getAccentColorFromTheme(themeChangedInformation)
       it.externalThemeSet = themeChangedInformation.externalTheme.name
     }
   }
 
   private fun getSecondaryColorFromTheme(themeChangedInformation: ThemeChangedInformation) =
-      if (themeChangedInformation.isDark) themeChangedInformation.contrastColor
-      else themeChangedInformation.foregroundColor
+      convertToHex(themeChangedInformation.isDark.toOptional()
+        .map {
+          if (it) themeChangedInformation.contrastColor
+          else themeChangedInformation.foregroundColor
+        }
+        .filter(Objects::nonNull))
+
+  private fun getAccentColorFromTheme(themeChangedInformation: Accentable) =
+      convertToHex(themeChangedInformation.accentColor.toOptional())
+
+  private fun convertToHex(hex: Optional<String?>) =
+      hex.map { "#${it!!}" }
+          .orElse(NOT_SET)
+
 
   fun consumeAccentChangedInformation(accentChangedInformation: AccentChangedInformation) {
     ConfigurationPersistence.instance.ifPresent {
-      it.externalContrailColor = "#${accentChangedInformation.accentColor}"
+      it.externalContrailColor = getAccentColorFromTheme(accentChangedInformation)
       it.externalThemeSet = accentChangedInformation.externalTheme.name
     }
   }
