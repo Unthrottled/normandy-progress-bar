@@ -1,9 +1,11 @@
 HARD:
-- Configurable Jetwash.
+- Configurable Contrail. (Post MVP)
+
 - Auto Theming
+    - should primary and secondary colors be changed by the theme?
 
 EZ:
-- Better light theme integrations.
+- Form needs to updated when checking and unchecking the override box.
 
 Final:
 - Refracture codebase
