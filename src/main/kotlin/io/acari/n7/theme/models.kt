@@ -1,13 +1,13 @@
 package io.acari.n7.theme
 
-data class ThemeChangedInformation(val isDark: Boolean?,
-                                   override val accentColor: String?,
-                                   val contrastColor: String?,
-                                   val foregroundColor: String?,
-                                   val externalTheme: ExternalTheme): HasAccent
+data class ThemeDeltas(val isDark: Boolean?,
+                       override val accentColor: String?,
+                       val contrastColor: String?,
+                       val foregroundColor: String?,
+                       val externalTheme: ExternalTheme): HasAccent
 
-data class AccentChangedInformation(override val accentColor: String?,
-                                    val externalTheme: ExternalTheme): HasAccent
+data class AccentDelta(override val accentColor: String?,
+                       val externalTheme: ExternalTheme): HasAccent
 
 interface HasAccent {
   val accentColor: String?

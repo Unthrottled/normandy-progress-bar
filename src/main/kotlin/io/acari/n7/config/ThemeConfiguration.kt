@@ -1,6 +1,6 @@
 package io.acari.n7.config
 
-import io.acari.n7.theme.ExternalThemeIntegrations
+import io.acari.n7.theme.ExternalThemeConfigurations
 import java.util.*
 
 object ThemeConfiguration {
@@ -12,12 +12,12 @@ object ThemeConfiguration {
 
   val secondaryThemeColor: Optional<String>
     get() {
-      return getChanges({ it.secondaryThemeColor }) { ExternalThemeIntegrations.secondaryThemeColor }
+      return getChanges({ it.secondaryThemeColor }) { ExternalThemeConfigurations.secondaryThemeColor }
     }
 
   val contrailColor: Optional<String>
     get() {
-      return getChanges({ it.contrailColor }) { ExternalThemeIntegrations.contrailColor }
+      return getChanges({ it.contrailColor }) { ExternalThemeConfigurations.contrailColor }
     }
 
   private fun <T> getChanges(userConfiguration: (ConfigurationPersistence) -> T, externalConfiguration: () -> Optional<T>): Optional<T> =
