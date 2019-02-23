@@ -7,7 +7,6 @@ import io.acari.n7.theme.ExternalTheme
 import io.acari.n7.theme.ExternalThemeIntegrations
 import io.acari.n7.theme.ThemeChangedInformation
 
-
 const val DOKI_DOKI = "io.acari.DDLCTheme"
 const val MATERIAL_UI = "com.chrisrm.idea.MaterialThemeUI"
 

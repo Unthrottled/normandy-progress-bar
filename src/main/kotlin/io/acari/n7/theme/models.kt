@@ -4,12 +4,12 @@ data class ThemeChangedInformation(val isDark: Boolean?,
                                    override val accentColor: String?,
                                    val contrastColor: String?,
                                    val foregroundColor: String?,
-                                   val externalTheme: ExternalTheme): Accentable
+                                   val externalTheme: ExternalTheme): HasAccent
 
 data class AccentChangedInformation(override val accentColor: String?,
-                                    val externalTheme: ExternalTheme): Accentable
+                                    val externalTheme: ExternalTheme): HasAccent
 
-interface Accentable {
+interface HasAccent {
   val accentColor: String?
 }
 

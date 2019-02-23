@@ -37,7 +37,7 @@ object ExternalThemeIntegrations {
         }
         .filter(Objects::nonNull))
 
-  private fun getAccentColorFromTheme(themeChangedInformation: Accentable) =
+  private fun getAccentColorFromTheme(themeChangedInformation: HasAccent) =
       convertToHex(themeChangedInformation.accentColor.toOptional())
 
   private fun convertToHex(hex: Optional<String?>) =
