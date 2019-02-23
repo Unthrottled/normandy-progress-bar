@@ -2,9 +2,6 @@ HARD:
 - Configurable Contrail. (Post MVP)
 
 EZ:
-- Null Safety
-- SVG borked?
-
 
 Final:
 - Refracture codebase
