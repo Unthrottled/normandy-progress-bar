@@ -7,28 +7,21 @@ import com.intellij.util.messages.MessageBusConnection
 import io.acari.java.n7.NormandyUIFactory
 import javax.swing.UIManager
 
-/**
- * Forged in the flames of battle by alex.
- */
-
-
 class NormandyComponent : BaseComponent {
 
-    lateinit var messageBus: MessageBusConnection
-    override fun initComponent() {
-        messageBus = ApplicationManager.getApplication().messageBus.connect()
-        setNormandyUI()
-        LafManager.getInstance().addLafManagerListener { setNormandyUI() }
-    }
+  private val messageBus: MessageBusConnection = ApplicationManager.getApplication().messageBus.connect()
 
-    private fun setNormandyUI() {
-        UIManager.put("ProgressBarUI", NormandyUIFactory::class.java.name)
-        UIManager.getDefaults().put(NormandyUIFactory::class.java.name, NormandyUIFactory::class.java)
-    }
+  override fun initComponent() {
+    makeNormandyAsProgressBar()
+    LafManager.getInstance().addLafManagerListener { makeNormandyAsProgressBar() }
+  }
 
-    override fun disposeComponent() {
-        if (this::messageBus.isInitialized) {
-            messageBus.disconnect()
-        }
-    }
+  private fun makeNormandyAsProgressBar() {
+    UIManager.put("ProgressBarUI", NormandyUIFactory::class.java.name)
+    UIManager.getDefaults()[NormandyUIFactory::class.java.name] = NormandyUIFactory::class.java
+  }
+
+  override fun disposeComponent() {
+    messageBus.disconnect()
+  }
 }
