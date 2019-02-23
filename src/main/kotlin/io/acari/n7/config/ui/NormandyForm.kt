@@ -139,16 +139,16 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
         panel1.layout = GridLayoutManager(18, 2, Insets(0, 3, 0, 0), -1, -1)
 
         //---- borderColorLabel ----
-        borderColorLabel!!.text = "Border Color"
-        borderColorLabel!!.toolTipText = "The progress bar border color."
-        panel1.add(borderColorLabel!!, GridConstraints(3, 0, 1, 1,
-            GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-        panel1.add(borderColor!!, GridConstraints(3, 1, 1, 1,
-            GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
+//        borderColorLabel!!.text = "Border Color"
+//        borderColorLabel!!.toolTipText = "The progress bar border color."
+//        panel1.add(borderColorLabel!!, GridConstraints(3, 0, 1, 1,
+//            GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
+//            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
+//            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
+//        panel1.add(borderColor!!, GridConstraints(3, 1, 1, 1,
+//            GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
+//            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
+//            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
         //---- primaryColorLabel ----
         primaryColorLabel!!.text = "Normandy's Primary Color"

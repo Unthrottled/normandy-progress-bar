@@ -28,8 +28,6 @@ open class NormandyUI : BasicProgressBarUI() {
     }
   }
 
-  private val borderColor: Color = NormandyTheme.borderColor()
-
   override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
 
   override fun getPreferredSize(c: JComponent?): Dimension =

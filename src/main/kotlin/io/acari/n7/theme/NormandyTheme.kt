@@ -19,11 +19,6 @@ object NormandyTheme {
   val jetWashScales = colors.mapIndexed { index, _ -> SCALING_FACTOR * (index + 1) }
       .toFloatArray()
 
-
-  fun borderColor(): Color = ThemeConfiguration.borderColor
-      .map(ColorUtil::fromHex)
-      .orElseGet { Gray._240 }
-
   fun primaryColorString(): String =
       ThemeConfiguration.primaryThemeColor
           .orElseGet { ColorUtil.toHex(Color.CYAN) }

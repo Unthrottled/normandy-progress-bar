@@ -15,11 +15,6 @@ object ThemeConfiguration {
       return getChanges({ it.secondaryThemeColor }) { ExternalThemeIntegrations.secondaryThemeColor }
     }
 
-  val borderColor: Optional<String>
-    get() {
-      return getChanges({ it.borderColor }) { Optional.empty() }
-    }
-
   val jetWashColor: Optional<String>
     get() {
       return getChanges({ it.jetWashColor }) { ExternalThemeIntegrations.jetWashColor }
