@@ -1,10 +1,9 @@
-package io.acari.n7
+package io.acari.n7.integration
 
 import com.google.gson.Gson
 import com.intellij.compiler.server.CustomBuilderMessageHandler
 import io.acari.n7.config.AccentDelta
 import io.acari.n7.config.ExternalTheme
-import io.acari.n7.config.ExternalThemeDeltaIntegration
 import io.acari.n7.config.ThemeDeltas
 
 const val DOKI_DOKI = "io.acari.DDLCTheme"

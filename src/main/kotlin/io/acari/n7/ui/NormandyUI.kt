@@ -1,11 +1,12 @@
-package io.acari.n7
+package io.acari.n7.ui
 
 import com.intellij.ui.ColorUtil
 import com.intellij.util.ui.GraphicsUtil
 import com.intellij.util.ui.JBUI.Borders
 import com.intellij.util.ui.JBUI.scale
 import com.intellij.util.ui.UIUtil
-import io.acari.n7.config.NormandyTheme
+import io.acari.n7.theme.NormandyTheme
+import io.acari.n7.icon.NormandyIconComponent
 import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.Graphics2D

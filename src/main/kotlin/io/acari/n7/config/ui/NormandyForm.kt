@@ -3,8 +3,8 @@ package io.acari.n7.config.ui
 import com.intellij.ui.ColorPanel
 import com.intellij.uiDesigner.core.GridConstraints
 import com.intellij.uiDesigner.core.GridLayoutManager
-import io.acari.n7.config.ThemeDefaults
-import io.acari.n7.config.ThemeConfigurations
+import io.acari.n7.theme.ThemeDefaults
+import io.acari.n7.theme.ThemeConfigurations
 import io.acari.n7.config.ExternalTheme
 import java.awt.Color
 import java.awt.Insets

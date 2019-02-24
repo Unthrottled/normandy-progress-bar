@@ -1,7 +1,7 @@
 package io.acari.java.n7;
 
 
-import io.acari.n7.NormandyUI;
+import io.acari.n7.ui.NormandyUI;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;

@@ -1,4 +1,4 @@
-package io.acari.n7
+package io.acari.n7.icon
 
 import com.intellij.util.SVGLoader
 import java.util.*
@@ -18,7 +18,7 @@ object SvgLoaderHacker {
           .filter { !(it is NormandyColorPatcher) }
           .map {
             val otherPatcher = it as SVGLoader.SvgColorPatcher
-            this.otherColorPatcher = otherPatcher
+            otherColorPatcher = otherPatcher
             otherPatcher
           }
           .map { Optional.of(it) }

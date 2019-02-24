@@ -17,7 +17,7 @@
   <depends>com.intellij.modules.lang</depends>
   -->
   <extensions defaultExtensionNs="com.intellij">
-    <applicationService serviceImplementation="io.acari.n7.config.util.ConfigurationPersistence"/>
+    <applicationService serviceImplementation="io.acari.n7.config.io.acari.n7.util.ConfigurationPersistence"/>
     <applicationConfigurable instance="io.acari.n7.config.ui.NormandyConfigComponent"
                              groupId="appearance"
                              id="io.acari.n7.config"/>
@@ -28,7 +28,7 @@
     <implementation-class>io.acari.n7.NormandyComponent</implementation-class>
   </component>
   <component>
-    <implementation-class>io.acari.n7.NormandyIntegrationComponent</implementation-class>
+    <implementation-class>io.acari.n7.integration.NormandyIntegrationComponent</implementation-class>
   </component>
 </application-components>
   

@@ -1,4 +1,4 @@
-package io.acari.n7
+package io.acari.n7.integration
 
 import com.intellij.compiler.server.CustomBuilderMessageHandler
 import com.intellij.ide.AppLifecycleListener
@@ -10,6 +10,8 @@ import com.intellij.util.SVGLoader
 import com.intellij.util.messages.MessageBusConnection
 import io.acari.n7.config.CONFIGURATION_TOPIC
 import io.acari.n7.config.NormandyConfigurationSubscriber
+import io.acari.n7.icon.NormandyColorPatcher
+import io.acari.n7.icon.SvgLoaderHacker
 
 class NormandyIntegrationComponent : BaseComponent {
 

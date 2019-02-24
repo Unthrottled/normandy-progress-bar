@@ -1,4 +1,4 @@
-package io.acari.n7.config
+package io.acari.n7.theme
 
 import javax.swing.plaf.ColorUIResource
 

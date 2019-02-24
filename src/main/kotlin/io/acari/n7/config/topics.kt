@@ -1,6 +1,7 @@
 package io.acari.n7.config
 
 import com.intellij.util.messages.Topic
+import io.acari.n7.theme.ThemeConfigurations
 
 val CONFIGURATION_TOPIC: Topic<NormandyConfigurationListener> = Topic.create("Normandy Progress Bar UI Configuration Changed", NormandyConfigurationListener::class.java)
 

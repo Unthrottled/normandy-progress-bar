@@ -1,4 +1,4 @@
-package io.acari.n7
+package io.acari.n7.util
 
 import java.util.*
 

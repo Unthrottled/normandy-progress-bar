@@ -1,4 +1,4 @@
-package io.acari.n7
+package io.acari.n7.ui
 
 import com.intellij.util.ui.JBUI.*
 
@@ -36,7 +36,8 @@ class GuidanceSystem {
 
         val distanceBetweenCitadelAndNormandy = distanceFromCitadel - scale(5f)
         val headingToCitadel = isHeadingToCitadel()
-        val startingX = if (headingToCitadel) { distanceBetweenCitadelAndNormandy + iconWidth } else 2f * offset
+        val startingX = if (headingToCitadel) { distanceBetweenCitadelAndNormandy + iconWidth
+        } else 2f * offset
         val distanceBetweenNormandyAndOmega = componentWidth - distanceBetweenCitadelAndNormandy
         val lengthOfContrail = if (headingToCitadel) distanceBetweenNormandyAndOmega else distanceBetweenCitadelAndNormandy - iconWidth
         val positionOfNormandy = if (headingToCitadel) distanceBetweenCitadelAndNormandy else distanceBetweenCitadelAndNormandy - iconWidth

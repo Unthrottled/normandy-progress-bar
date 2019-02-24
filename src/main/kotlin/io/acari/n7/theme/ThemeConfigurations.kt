@@ -1,5 +1,6 @@
-package io.acari.n7.config
+package io.acari.n7.theme
 
+import io.acari.n7.config.ExternalTheme
 import java.awt.Color
 
 data class ThemeConfigurations(

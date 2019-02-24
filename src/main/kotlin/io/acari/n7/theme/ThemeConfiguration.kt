@@ -1,7 +1,8 @@
-package io.acari.n7.config
+package io.acari.n7.theme
 
-import io.acari.n7.config.util.ConfigurationPersistence
-import io.acari.n7.toOptional
+import io.acari.n7.config.ConfigurationPersistence
+import io.acari.n7.integration.ExternalThemeConfigurations
+import io.acari.n7.util.toOptional
 import java.util.*
 
 object ThemeConfiguration {

@@ -3,8 +3,8 @@ package io.acari.n7.config.ui
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.options.SearchableConfigurable
 import io.acari.n7.config.CONFIGURATION_TOPIC
-import io.acari.n7.config.util.ConfigurationPersistence
-import io.acari.n7.config.ThemeConfigurations
+import io.acari.n7.config.ConfigurationPersistence
+import io.acari.n7.theme.ThemeConfigurations
 import io.acari.n7.config.ExternalTheme
 import org.jdesktop.swingx.color.ColorUtil
 import javax.swing.JComponent

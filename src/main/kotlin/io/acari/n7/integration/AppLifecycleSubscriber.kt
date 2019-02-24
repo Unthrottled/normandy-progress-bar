@@ -1,4 +1,4 @@
-package io.acari.n7
+package io.acari.n7.integration
 
 import com.intellij.ide.AppLifecycleListener
 import com.intellij.openapi.project.Project
