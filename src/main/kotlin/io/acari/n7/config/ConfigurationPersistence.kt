@@ -47,7 +47,4 @@ class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersisten
   }
 }
 
-fun <T> T?.toOptional(): Optional<T> = Optional.ofNullable(this)
-
-
 const val NOT_SET = "NOT_SET"

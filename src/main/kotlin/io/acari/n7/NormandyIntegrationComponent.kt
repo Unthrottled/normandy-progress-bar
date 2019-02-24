@@ -9,7 +9,7 @@ import com.intellij.openapi.progress.util.ProgressWindow
 import com.intellij.util.SVGLoader
 import com.intellij.util.messages.MessageBusConnection
 import io.acari.n7.config.CONFIGURATION_TOPIC
-import io.acari.n7.config.NormandyConfigurationSubcriber
+import io.acari.n7.config.NormandyConfigurationSubscriber
 
 class NormandyIntegrationComponent : BaseComponent {
 
@@ -49,7 +49,7 @@ class NormandyIntegrationComponent : BaseComponent {
    *
    */
   private fun subscribeToTopics() {
-    messageBus.subscribe(CONFIGURATION_TOPIC, NormandyConfigurationSubcriber { setSVGColorPatcher() })
+    messageBus.subscribe(CONFIGURATION_TOPIC, NormandyConfigurationSubscriber { setSVGColorPatcher() })
 
     messageBus.subscribe(ProgressWindow.TOPIC, ProgressWindow.Listener { setSVGColorPatcher() })
 

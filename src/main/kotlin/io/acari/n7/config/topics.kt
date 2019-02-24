@@ -6,7 +6,7 @@ val CONFIGURATION_TOPIC: Topic<NormandyConfigurationListener> = Topic.create("No
 
 interface NormandyConfigurationListener : BaseListener<ThemeConfigurations>
 
-class NormandyConfigurationSubcriber(consumer: (ThemeConfigurations) -> Unit) :
+class NormandyConfigurationSubscriber(consumer: (ThemeConfigurations) -> Unit) :
     NormandyConfigurationListener, ASubscriber<ThemeConfigurations>(consumer)
 
 interface BaseListener<T> {
