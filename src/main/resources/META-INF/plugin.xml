@@ -8,14 +8,10 @@
       The SSV Normandy SR-1 traveling at FTL becomes your progress bar.
     ]]></description>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
   <idea-version since-build="183.4588.61"/>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-       on how to target different products -->
-  <!-- uncomment to enable plugin in all products
   <depends>com.intellij.modules.lang</depends>
-  -->
+
   <extensions defaultExtensionNs="com.intellij">
     <applicationService serviceImplementation="io.acari.n7.config.ConfigurationPersistence"/>
     <applicationConfigurable instance="io.acari.n7.config.ui.NormandyConfigComponent"
