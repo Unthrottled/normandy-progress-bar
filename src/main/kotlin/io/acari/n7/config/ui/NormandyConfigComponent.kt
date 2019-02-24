@@ -14,26 +14,18 @@ class NormandyConfigComponent : SearchableConfigurable {
     const val CONFIG_ID = "io.acari.n7.config.theme"
   }
 
-  private var normandyForm = {
-    val themeConfigurations = ConfigurationPersistence.instance
-        .map { configToThemConfig(it) }.orElseGet { ThemeConfigurations() }
-    NormandyForm(themeConfigurations)
-  }()
-
-  private fun configToThemConfig(it: ConfigurationPersistence): ThemeConfigurations {
-    return ThemeConfigurations(
-        com.intellij.ui.ColorUtil.fromHex(it.contrailColor),
-        com.intellij.ui.ColorUtil.fromHex(it.primaryThemeColor),
-        com.intellij.ui.ColorUtil.fromHex(it.secondaryThemeColor),
-        it.isAllowedToBeOverridden,
-        ExternalTheme.byName(it.externalThemeSet)
-    )
-  }
+  private var normandyForm =
+      NormandyForm(ConfigurationPersistence.instance
+          .map { configToThemConfig(it) }
+          .orElseGet { ThemeConfigurations() })
 
   override fun getId(): String = CONFIG_ID
 
   override fun getDisplayName(): String = "SSV Normandy Configuration"
 
+  /**
+   * When ever the user accepts changes to the configuration.
+   */
   override fun apply() {
     ConfigurationPersistence.instance
         .ifPresent {
@@ -48,11 +40,23 @@ class NormandyConfigComponent : SearchableConfigurable {
         }
   }
 
-  override fun createComponent(): JComponent? {
-    return normandyForm.getContent()
-  }
+  override fun createComponent(): JComponent? = normandyForm.getContent()
 
+  /**
+   * Helps with the reset link that comes in the upper right hand corner, or the apply button.
+   * I dunno which it helps, I just made it does the do ¯\_(ツ)_/¯
+   */
   override fun isModified(): Boolean = normandyForm.isModified()
+
+  private fun configToThemConfig(it: ConfigurationPersistence): ThemeConfigurations {
+    return ThemeConfigurations(
+        com.intellij.ui.ColorUtil.fromHex(it.contrailColor),
+        com.intellij.ui.ColorUtil.fromHex(it.primaryThemeColor),
+        com.intellij.ui.ColorUtil.fromHex(it.secondaryThemeColor),
+        it.isAllowedToBeOverridden,
+        ExternalTheme.byName(it.externalThemeSet)
+    )
+  }
 
 }
 
