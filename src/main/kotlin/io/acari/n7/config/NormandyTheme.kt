@@ -1,7 +1,6 @@
-package io.acari.n7.config.theme
+package io.acari.n7.config
 
 import com.intellij.ui.ColorUtil
-import io.acari.n7.config.ThemeConfiguration
 import java.awt.Color
 
 object NormandyTheme {

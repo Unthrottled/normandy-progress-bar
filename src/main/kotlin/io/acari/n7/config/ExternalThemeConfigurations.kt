@@ -1,7 +1,7 @@
-package io.acari.n7.config.theme
+package io.acari.n7.config
 
-import io.acari.n7.config.ConfigurationPersistence
-import io.acari.n7.config.NOT_SET
+import io.acari.n7.config.util.ConfigurationPersistence
+import io.acari.n7.config.util.NOT_SET
 import java.util.*
 
 object ExternalThemeConfigurations {

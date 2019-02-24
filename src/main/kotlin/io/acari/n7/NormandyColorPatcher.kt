@@ -1,7 +1,7 @@
 package io.acari.n7
 
 import com.intellij.util.SVGLoader
-import io.acari.n7.config.theme.NormandyTheme
+import io.acari.n7.config.NormandyTheme
 import org.w3c.dom.Element
 
 class NormandyColorPatcher(private val otherColorPatcher: SVGLoader.SvgColorPatcher = SVGLoader.SvgColorPatcher {}) : SVGLoader.SvgColorPatcher {

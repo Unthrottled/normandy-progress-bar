@@ -5,7 +5,7 @@ import com.intellij.uiDesigner.core.GridConstraints
 import com.intellij.uiDesigner.core.GridLayoutManager
 import io.acari.n7.config.ThemeDefaults
 import io.acari.n7.config.ThemeConfigurations
-import io.acari.n7.config.theme.ExternalTheme
+import io.acari.n7.config.ExternalTheme
 import java.awt.Color
 import java.awt.Insets
 import javax.swing.*
@@ -46,7 +46,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
     loadConfigs(themeConfigurations)
 
     // Reset tab defaults
-    resetTabDefaultsBtn.addActionListener { e ->
+    resetTabDefaultsBtn.addActionListener {
       setSecondary(ThemeDefaults.secondaryColor)
       setPrimaryColor(ThemeDefaults.primaryColor)
       setContrailColor(ThemeDefaults.contrail)
@@ -153,7 +153,6 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
         //---- shouldOverrideCheckbox ----
-        shouldOverrideCheckbox.label = "Allow Theme Override"
         shouldOverrideCheckbox.text = "Allow Theme Override"
         shouldOverrideCheckbox.toolTipText = "Allow other application to override your theme."
         shouldOverrideCheckbox.addItemListener {

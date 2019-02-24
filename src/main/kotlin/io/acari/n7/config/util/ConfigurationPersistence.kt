@@ -1,4 +1,4 @@
-package io.acari.n7.config
+package io.acari.n7.config.util
 
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.ServiceManager

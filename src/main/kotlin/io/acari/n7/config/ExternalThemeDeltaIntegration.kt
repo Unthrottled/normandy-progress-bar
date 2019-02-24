@@ -1,7 +1,7 @@
-package io.acari.n7.config.theme
+package io.acari.n7.config
 
-import io.acari.n7.config.ConfigurationPersistence
-import io.acari.n7.config.NOT_SET
+import io.acari.n7.config.util.ConfigurationPersistence
+import io.acari.n7.config.util.NOT_SET
 import io.acari.n7.toOptional
 import java.util.*
 
@@ -23,11 +23,11 @@ object ExternalThemeDeltaIntegration {
 
   private fun getSecondaryColorFromTheme(themeDeltas: ThemeDeltas) =
       convertToHex(themeDeltas.isDark.toOptional()
-        .map {
-          if (it) themeDeltas.contrastColor
-          else themeDeltas.foregroundColor
-        }
-        .filter(Objects::nonNull))
+          .map {
+            if (it) themeDeltas.contrastColor
+            else themeDeltas.foregroundColor
+          }
+          .filter(Objects::nonNull))
 
   private fun getAccentColorFromTheme(themeChangedInformation: HasAccent) =
       convertToHex(themeChangedInformation.accentColor.toOptional())
