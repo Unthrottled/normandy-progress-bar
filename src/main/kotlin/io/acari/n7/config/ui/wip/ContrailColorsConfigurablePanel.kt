@@ -1,9 +1,11 @@
-package io.acari.n7.config.ui
+package io.acari.n7.config.ui.wip
 
 import com.intellij.ide.ui.UISettings
 import com.intellij.openapi.Disposable
 import com.intellij.ui.IdeBorderFactory
 import com.intellij.util.ui.JBUI
+import io.acari.n7.config.ui.wip.ContrailColorConfiguration
+import io.acari.n7.config.ui.wip.FileColorSettingsTable
 
 import javax.swing.*
 import java.awt.*

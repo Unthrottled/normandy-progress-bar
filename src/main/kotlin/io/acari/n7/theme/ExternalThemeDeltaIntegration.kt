@@ -2,7 +2,7 @@ package io.acari.n7.theme
 
 import io.acari.n7.config.ConfigurationPersistence
 import io.acari.n7.config.NOT_SET
-import io.acari.n7.config.toOptional
+import io.acari.n7.toOptional
 import java.util.*
 
 object ExternalThemeDeltaIntegration {

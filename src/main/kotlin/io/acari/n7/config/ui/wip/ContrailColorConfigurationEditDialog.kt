@@ -1,4 +1,4 @@
-package io.acari.n7.config.ui
+package io.acari.n7.config.ui.wip
 
 import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.psi.search.scope.packageSet.NamedScope
@@ -6,6 +6,7 @@ import com.intellij.ui.ComboboxSpeedSearch
 import com.intellij.ui.tabs.ColorSelectionComponent
 import com.intellij.util.ArrayUtil
 import com.intellij.util.ui.JBUI
+import io.acari.n7.config.ui.wip.ContrailColorConfiguration
 
 import javax.swing.*
 import java.awt.*

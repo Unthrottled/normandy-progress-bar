@@ -1,4 +1,4 @@
-package io.acari.n7.config.ui
+package io.acari.n7.config.ui.wip
 
 import com.intellij.ui.ColorUtil
 import com.intellij.ui.table.JBTable

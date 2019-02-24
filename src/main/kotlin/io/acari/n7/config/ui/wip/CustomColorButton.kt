@@ -1,10 +1,13 @@
-package io.acari.n7.config.ui
+package io.acari.n7.config.ui.wip
 
 import com.intellij.ui.ColorChooser
 import com.intellij.ui.ColorUtil
 import com.intellij.ui.JBColor
 import com.intellij.ui.tabs.ColorButtonBase
 import com.intellij.util.ui.UIUtil
+import io.acari.n7.config.ui.wip.ColorButton
+import io.acari.n7.config.ui.wip.ColorSelectionComponent
+import io.acari.n7.config.ui.wip.stateChanged
 import java.awt.Color
 import java.awt.event.ActionEvent
 import javax.swing.plaf.ButtonUI
