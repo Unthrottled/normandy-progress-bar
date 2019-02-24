@@ -49,7 +49,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
     resetTabDefaultsBtn.addActionListener {
       setSecondary(ThemeDefaults.secondaryColor)
       setPrimaryColor(ThemeDefaults.primaryColor)
-      setContrailColor(ThemeDefaults.contrail)
+      setContrailColor(ThemeDefaults.contrailColor)
     }
   }
 

@@ -4,7 +4,7 @@ import com.intellij.ui.ColorUtil
 import java.awt.Color
 
 object NormandyTheme {
-  private val contrailColor = { _: Color -> ColorUtil.fromHex(ThemeConfiguration.contrailColor.orElse("#A47FD8")) }
+  private val contrailColor = { _: Color -> ColorUtil.fromHex(ThemeConfiguration.contrailColor) }
   private val outerContrailColor = { backgroundColor: Color -> backgroundColor }
   private val backgroundColorFunction = { backgroundColor: Color -> backgroundColor }
 
@@ -19,9 +19,7 @@ object NormandyTheme {
 
   fun primaryColorString(): String =
       ThemeConfiguration.primaryThemeColor
-          .orElseGet { ColorUtil.toHex(Color.CYAN) }
 
   fun secondaryColorString(): String =
       ThemeConfiguration.secondaryThemeColor
-          .orElseGet { ColorUtil.toHex(Color.PINK) }
 }

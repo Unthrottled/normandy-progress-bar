@@ -4,7 +4,9 @@ import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.ServiceManager
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
+import com.intellij.ui.ColorUtil
 import com.intellij.util.xmlb.XmlSerializerUtil
+import io.acari.n7.theme.ThemeDefaults
 
 import java.util.Optional
 
@@ -13,9 +15,9 @@ import java.util.Optional
 class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersistence>, Cloneable {
 
   // They are public so they can be serialized
-  var primaryThemeColor = "#FFFFFF"
-  var secondaryThemeColor = "#000000"
-  var contrailColor = "#A47FD8"
+  var primaryThemeColor = "#${ColorUtil.toHex(ThemeDefaults.primaryColor)}"
+  var secondaryThemeColor = "#${ColorUtil.toHex(ThemeDefaults.secondaryColor)}"
+  var contrailColor = "#${ColorUtil.toHex(ThemeDefaults.contrailColor)}"
   var isAllowedToBeOverridden = true
 
   var externalSecondaryColor = NOT_SET
