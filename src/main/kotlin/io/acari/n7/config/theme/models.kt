@@ -1,4 +1,4 @@
-package io.acari.n7.theme
+package io.acari.n7.config.theme
 
 data class ThemeDeltas(val isDark: Boolean?,
                        override val accentColor: String?,

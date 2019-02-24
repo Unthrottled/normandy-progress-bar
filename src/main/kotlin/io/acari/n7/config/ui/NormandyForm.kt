@@ -5,7 +5,7 @@ import com.intellij.uiDesigner.core.GridConstraints
 import com.intellij.uiDesigner.core.GridLayoutManager
 import io.acari.n7.config.ThemeDefaults
 import io.acari.n7.config.ThemeConfigurations
-import io.acari.n7.theme.ExternalTheme
+import io.acari.n7.config.theme.ExternalTheme
 import java.awt.Color
 import java.awt.Insets
 import javax.swing.*

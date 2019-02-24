@@ -1,4 +1,4 @@
-package io.acari.n7.theme
+package io.acari.n7.config.theme
 
 import io.acari.n7.config.ConfigurationPersistence
 import io.acari.n7.config.NOT_SET

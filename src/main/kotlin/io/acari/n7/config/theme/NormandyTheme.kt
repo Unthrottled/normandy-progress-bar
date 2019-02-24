@@ -1,4 +1,4 @@
-package io.acari.n7.theme
+package io.acari.n7.config.theme
 
 import com.intellij.ui.ColorUtil
 import io.acari.n7.config.ThemeConfiguration

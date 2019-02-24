@@ -5,7 +5,7 @@ import com.intellij.util.ui.GraphicsUtil
 import com.intellij.util.ui.JBUI.Borders
 import com.intellij.util.ui.JBUI.scale
 import com.intellij.util.ui.UIUtil
-import io.acari.n7.theme.NormandyTheme
+import io.acari.n7.config.theme.NormandyTheme
 import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.Graphics2D
