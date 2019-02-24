@@ -12,18 +12,21 @@ import javax.swing.*
 import javax.swing.border.EtchedBorder
 import javax.swing.border.TitledBorder
 
+/**
+ * Most of is code converted from an automatic form generation engine, so pls forgive.
+ */
 class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
 
-  private var content: JPanel? = null
-  private var contrailColorLabel: JLabel? = null
-  private var contrailColor: ColorPanel? = null
-  private var primaryColorLabel: JLabel? = null
-  private var primaryColor: ColorPanel? = null
-  private var secondaryColorLabel: JLabel? = null
-  private var externalThemeLabel: JLabel? = null
-  private var secondaryColor: ColorPanel? = null
-  private var resetTabDefaultsBtn: JButton? = null
-  private var shouldOverrideCheckbox: JCheckBox? = null
+  private lateinit var content: JPanel
+  private lateinit var contrailColorLabel: JLabel
+  private lateinit var contrailColor: ColorPanel
+  private lateinit var primaryColorLabel: JLabel
+  private lateinit var primaryColor: ColorPanel
+  private lateinit var secondaryColorLabel: JLabel
+  private lateinit var externalThemeLabel: JLabel
+  private lateinit var secondaryColor: ColorPanel
+  private lateinit var resetTabDefaultsBtn: JButton
+  private lateinit var shouldOverrideCheckbox: JCheckBox
 
 
   fun isModified(): Boolean =
@@ -33,9 +36,9 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
           themeConfigurations.secondaryColor != getSecondaryColor()
 
   var shouldOverride: Boolean
-    get() = shouldOverrideCheckbox!!.isSelected
+    get() = shouldOverrideCheckbox.isSelected
     private set(shouldOverride) {
-      shouldOverrideCheckbox!!.isSelected = shouldOverride
+      shouldOverrideCheckbox.isSelected = shouldOverride
     }
 
   init {
@@ -43,7 +46,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
     loadConfigs(themeConfigurations)
 
     // Reset tab defaults
-    resetTabDefaultsBtn!!.addActionListener { e ->
+    resetTabDefaultsBtn.addActionListener { e ->
       setSecondary(ThemeDefaults.secondaryColor)
       setPrimaryColor(ThemeDefaults.primaryColor)
       setContrailColor(ThemeDefaults.contrail)
@@ -62,27 +65,27 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
   }
 
   fun getContrailColor(): Color? {
-    return contrailColor!!.selectedColor
+    return contrailColor.selectedColor
   }
 
   private fun setContrailColor(contrailColor: Color) {
-    this.contrailColor!!.selectedColor = contrailColor
+    this.contrailColor.selectedColor = contrailColor
   }
 
   fun getPrimaryColor(): Color? {
-    return primaryColor!!.selectedColor
+    return primaryColor.selectedColor
   }
 
   fun getSecondaryColor(): Color? {
-    return secondaryColor!!.selectedColor
+    return secondaryColor.selectedColor
   }
 
   private fun setPrimaryColor(primaryColor: Color) {
-    this.primaryColor!!.selectedColor = primaryColor
+    this.primaryColor.selectedColor = primaryColor
   }
 
   private fun setSecondary(primaryColor: Color) {
-    this.secondaryColor!!.selectedColor = primaryColor
+    this.secondaryColor.selectedColor = primaryColor
   }
 
 
@@ -102,11 +105,11 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
 
     //======== content ========
     run {
-      content!!.autoscrolls = true
-      content!!.isRequestFocusEnabled = false
-      content!!.verifyInputWhenFocusTarget = false
-      content!!.border = null
-      content!!.layout = GridLayoutManager(3, 1, Insets(0, 0, 0, 0), -1, -1)
+      content.autoscrolls = true
+      content.isRequestFocusEnabled = false
+      content.verifyInputWhenFocusTarget = false
+      content.border = null
+      content.layout = GridLayoutManager(3, 1, Insets(0, 0, 0, 0), -1, -1)
 
       //======== panel1 ========
       run {
@@ -114,63 +117,63 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
         panel1.layout = GridLayoutManager(18, 2, Insets(0, 3, 0, 0), -1, -1)
 
         //---- primaryColorLabel ----
-        primaryColorLabel!!.text = "Primary Color"
-        primaryColorLabel!!.toolTipText = "The upper half of the Normandy"
-        panel1.add(primaryColorLabel!!, GridConstraints(3, 0, 1, 1,
+        primaryColorLabel.text = "Primary Color"
+        primaryColorLabel.toolTipText = "The upper half of the Normandy"
+        panel1.add(primaryColorLabel, GridConstraints(3, 0, 1, 1,
             GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-        panel1.add(primaryColor!!, GridConstraints(3, 1, 1, 1,
+        panel1.add(primaryColor, GridConstraints(3, 1, 1, 1,
             GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
         //---- secondaryColor ----
-        secondaryColorLabel!!.text = "Secondary Color"
-        secondaryColorLabel!!.toolTipText = "The lower half of the Normandy."
-        panel1.add(secondaryColorLabel!!, GridConstraints(4, 0, 1, 1,
+        secondaryColorLabel.text = "Secondary Color"
+        secondaryColorLabel.toolTipText = "The lower half of the Normandy."
+        panel1.add(secondaryColorLabel, GridConstraints(4, 0, 1, 1,
             GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-        panel1.add(secondaryColor!!, GridConstraints(4, 1, 1, 1,
+        panel1.add(secondaryColor, GridConstraints(4, 1, 1, 1,
             GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
         //---- contrailColorLabel ----
-        contrailColorLabel!!.text = "Contrail Color"
-        contrailColorLabel!!.toolTipText = "Choose the color of Normandy's contrail."
-        panel1.add(contrailColorLabel!!, GridConstraints(5, 0, 1, 1,
+        contrailColorLabel.text = "Contrail Color"
+        contrailColorLabel.toolTipText = "Choose the color of Normandy's contrail."
+        panel1.add(contrailColorLabel, GridConstraints(5, 0, 1, 1,
             GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
-        panel1.add(contrailColor!!, GridConstraints(5, 1, 1, 1,
+        panel1.add(contrailColor, GridConstraints(5, 1, 1, 1,
             GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
         //---- shouldOverrideCheckbox ----
-        shouldOverrideCheckbox!!.label = "Allow Theme Override"
-        shouldOverrideCheckbox!!.text = "Allow Theme Override"
-        shouldOverrideCheckbox!!.toolTipText = "Allow other application to override your theme."
-        shouldOverrideCheckbox!!.addItemListener {
+        shouldOverrideCheckbox.label = "Allow Theme Override"
+        shouldOverrideCheckbox.text = "Allow Theme Override"
+        shouldOverrideCheckbox.toolTipText = "Allow other application to override your theme."
+        shouldOverrideCheckbox.addItemListener {
           removeOldMessage(panel1)
           displayOverride(it.stateChange == 1, panel1)
         }
-        panel1.add(shouldOverrideCheckbox!!, GridConstraints(7, 1, 1, 1,
+        panel1.add(shouldOverrideCheckbox, GridConstraints(7, 1, 1, 1,
             GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
       }
-      content!!.add(panel1, GridConstraints(0, 0, 1, 1,
+      content.add(panel1, GridConstraints(0, 0, 1, 1,
           GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH,
           GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
           GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
 
       //---- resetTabDefaultsBtn ----
-      resetTabDefaultsBtn!!.text = "Restore Defaults"
-      resetTabDefaultsBtn!!.toolTipText = "Restore Defaults"
-      panel1.add(resetTabDefaultsBtn!!, GridConstraints(17, 0, 1, 1,
+      resetTabDefaultsBtn.text = "Restore Defaults"
+      resetTabDefaultsBtn.toolTipText = "Restore Defaults"
+      panel1.add(resetTabDefaultsBtn, GridConstraints(17, 0, 1, 1,
           GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
           GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
           GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
@@ -180,22 +183,18 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
   private fun displayOverride(shouldShow: Boolean, panel1: JPanel) {
     if(themeConfigurations.externalTheme != ExternalTheme.NOT_SET
         && shouldShow){
-      externalThemeLabel!!.text = "${themeConfigurations.externalTheme.displayName} is set to override!"
-      externalThemeLabel!!.toolTipText = "The lower half of the Normandy."
-      panel1.add(externalThemeLabel!!, GridConstraints(8, 1, 1, 1,
+      externalThemeLabel.text = "${themeConfigurations.externalTheme.displayName} is set to override!"
+      externalThemeLabel.toolTipText = "The lower half of the Normandy."
+      panel1.add(externalThemeLabel, GridConstraints(8, 1, 1, 1,
           GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
           GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
           GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
     }
   }
 
-  private fun removeOldMessage(panel1: JPanel) {
-    try {
-      panel1.remove(8)
-    } catch (e: Throwable) {
-
-    }
-  }
+  private fun removeOldMessage(panel1: JPanel) = try {
+    panel1.remove(8)
+  } catch (e: Throwable) { }
 
 }
 
