@@ -3,9 +3,10 @@ package io.acari.n7.config.ui
 import com.intellij.ui.ColorPanel
 import com.intellij.uiDesigner.core.GridConstraints
 import com.intellij.uiDesigner.core.GridLayoutManager
-import io.acari.n7.theme.ThemeDefaults
-import io.acari.n7.theme.ThemeConfigurations
 import io.acari.n7.config.ExternalTheme
+import io.acari.n7.integration.ExternalThemeConfigurations
+import io.acari.n7.theme.ThemeConfigurations
+import io.acari.n7.theme.ThemeDefaults
 import java.awt.Color
 import java.awt.Insets
 import javax.swing.*
@@ -155,10 +156,18 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
         //---- shouldOverrideCheckbox ----
         shouldOverrideCheckbox.text = "Allow Theme Override"
         shouldOverrideCheckbox.toolTipText = "Allow other application to override your theme."
-        shouldOverrideCheckbox.addItemListener {
-          removeOldMessage(panel1)
-          displayOverride(it.stateChange == 1, panel1)
+
+        val overrideEnabled = ExternalThemeConfigurations.isEnabled
+        if (overrideEnabled) {
+          shouldOverrideCheckbox.addItemListener {
+            removeOldMessage(panel1)
+            displayOverride(it.stateChange == 1, panel1)
+          }
+        } else {
+          shouldOverrideCheckbox.isEnabled = overrideEnabled
+          createMessage("Theme override not available on this IDE, yet.", panel1)
         }
+
         panel1.add(shouldOverrideCheckbox, GridConstraints(7, 1, 1, 1,
             GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
@@ -180,20 +189,26 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
   }
 
   private fun displayOverride(shouldShow: Boolean, panel1: JPanel) {
-    if(themeConfigurations.externalTheme != ExternalTheme.NOT_SET
-        && shouldShow){
-      externalThemeLabel.text = "${themeConfigurations.externalTheme.displayName} is set to override!"
-      externalThemeLabel.toolTipText = "The lower half of the Normandy."
-      panel1.add(externalThemeLabel, GridConstraints(8, 1, 1, 1,
-          GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
-          GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-          GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
+    if (themeConfigurations.externalTheme != ExternalTheme.NOT_SET
+        && shouldShow) {
+      val s = "${themeConfigurations.externalTheme.displayName} is set to override!"
+      createMessage(s, panel1)
     }
+  }
+
+  private fun createMessage(message: String, panel1: JPanel) {
+    externalThemeLabel.text = message
+    externalThemeLabel.toolTipText = "The lower half of the Normandy."
+    panel1.add(externalThemeLabel, GridConstraints(8, 1, 1, 1,
+        GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
+        GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
+        GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
   }
 
   private fun removeOldMessage(panel1: JPanel) = try {
     panel1.remove(8)
-  } catch (e: Throwable) { }
+  } catch (e: Throwable) {
+  }
 
 }
 

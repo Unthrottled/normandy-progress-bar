@@ -57,7 +57,7 @@ class NormandyIntegrationComponent : BaseComponent {
 
     messageBus.subscribe(ProgressWindow.TOPIC, ProgressWindow.Listener { setSVGColorPatcher() })
 
-    LegacySupportUtility.invokeClassSafely("com.intellij.compiler.server.CustomBuilderMessageHandler") {
+    LegacySupportUtility.invokeClassSafely(OVERRIDE_CLASS) {
       //Only available for Intellij, should contribute code to allow for all.
       messageBus.subscribe(CustomBuilderMessageHandler.TOPIC, ExternalThemeListener { setSVGColorPatcher() })
     }
