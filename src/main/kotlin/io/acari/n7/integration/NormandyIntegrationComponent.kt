@@ -12,6 +12,7 @@ import io.acari.n7.config.CONFIGURATION_TOPIC
 import io.acari.n7.config.NormandyConfigurationSubscriber
 import io.acari.n7.icon.NormandyColorPatcher
 import io.acari.n7.icon.SvgLoaderHacker
+import io.acari.n7.util.LegacySupportUtility
 
 class NormandyIntegrationComponent : BaseComponent {
 
@@ -22,6 +23,7 @@ class NormandyIntegrationComponent : BaseComponent {
     init {
       setSVGColorPatcher()
     }
+
     /**
      * Enables the ability to color the Normandy and Alliance Icon.
      */
@@ -55,7 +57,10 @@ class NormandyIntegrationComponent : BaseComponent {
 
     messageBus.subscribe(ProgressWindow.TOPIC, ProgressWindow.Listener { setSVGColorPatcher() })
 
-    messageBus.subscribe(CustomBuilderMessageHandler.TOPIC, ExternalThemeListener { setSVGColorPatcher() })
+    LegacySupportUtility.invokeClassSafely("com.intellij.compiler.server.CustomBuilderMessageHandler") {
+      //Only available for Intellij, should contribute code to allow for all.
+      messageBus.subscribe(CustomBuilderMessageHandler.TOPIC, ExternalThemeListener { setSVGColorPatcher() })
+    }
 
     messageBus.subscribe(AppLifecycleListener.TOPIC, AppLifecycleSubscriber { setSVGColorPatcher() })
 
