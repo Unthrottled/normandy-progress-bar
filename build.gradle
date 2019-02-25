@@ -37,6 +37,7 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 intellij {
+    version '183.5429.30'
     alternativeIdePath idePath
 }
 patchPluginXml {
