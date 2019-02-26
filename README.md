@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://raw.githubusercontent.com/cyclic-reference/normandy-progress-bar/master/src/main/resources/normandy.png" alt="SSV Normandy"></img>
+<img src="https://raw.githubusercontent.com/cyclic-reference/normandy-progress-bar/master/assets/normandy.gif" alt="SSV Normandy"></img>
 </div>
 
 ---
