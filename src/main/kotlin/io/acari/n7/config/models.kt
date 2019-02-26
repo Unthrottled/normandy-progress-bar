@@ -4,6 +4,7 @@ data class ThemeDeltas(val isDark: Boolean?,
                        override val accentColor: String?,
                        val contrastColor: String?,
                        val foregroundColor: String?,
+                       val treeSelectionBackground: String?,
                        val externalTheme: ExternalTheme): HasAccent
 
 data class AccentDelta(override val accentColor: String?,
