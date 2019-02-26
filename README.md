@@ -13,7 +13,8 @@ Your progress bar becomes the SSV Normandy SR-1 traveling at FTL.
 ### Default Look
 ![default](assets/default.png)
 
-### [More images](assets/images.md)
+[More images](assets/images.md)
+---
 
 Plugin page:
 https://plugins.jetbrains.com/plugin/10804-doki-doki-literature-club-theme
