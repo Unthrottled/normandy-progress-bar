@@ -27,7 +27,7 @@ object ExternalThemeDeltaIntegration {
   private fun getSecondaryColorFromTheme(themeDeltas: ThemeDeltas) =
       convertToHex(themeDeltas.isDark.toOptional()
           .map {
-            if (it) themeDeltas.contrastColor
+            if (it) themeDeltas.treeSelectionBackground ?: themeDeltas.contrastColor
             else themeDeltas.foregroundColor
           }
           .filter(Objects::nonNull))
