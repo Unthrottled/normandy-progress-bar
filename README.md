@@ -4,7 +4,7 @@
 
 ---
 <div align="center">
-    <h2> I'm Commander Shepard and this is my favorite plugin.</h2>
+    <h2> "I'm Commander Shepard and this is my favorite progress bar on the internet."</h2>
 </div>
 
 ---
