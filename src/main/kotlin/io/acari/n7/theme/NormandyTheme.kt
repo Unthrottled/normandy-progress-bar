@@ -8,11 +8,11 @@ object NormandyTheme {
   private val outerContrailColor = { backgroundColor: Color -> backgroundColor }
   private val backgroundColorFunction = { backgroundColor: Color -> backgroundColor }
 
-  val contrailColors = arrayOf(outerContrailColor, contrailColor,
+  val contrailColors = arrayOf(contrailColor, outerContrailColor,
       outerContrailColor, contrailColor,
       outerContrailColor, backgroundColorFunction, backgroundColorFunction, backgroundColorFunction, outerContrailColor,
       contrailColor, outerContrailColor,
-      contrailColor, outerContrailColor, contrailColor, outerContrailColor)
+      contrailColor, outerContrailColor, outerContrailColor, contrailColor)
   private val CONTRAIL_SCALING_FACTOR = 1.0f / contrailColors.size
   val contrailScales = contrailColors.mapIndexed { index, _ -> CONTRAIL_SCALING_FACTOR * (index + 1) }
       .toFloatArray()
