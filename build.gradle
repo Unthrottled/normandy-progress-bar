@@ -20,7 +20,7 @@ apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'kotlin'
 
 group 'io.acari'
-version '1.0.0'
+version '1.1.0'
 
 repositories {
     mavenCentral()
@@ -41,6 +41,11 @@ compileTestKotlin {
 intellij {
     version '183.5429.30'
     alternativeIdePath idePath
+
+    publishPlugin {
+        username intellijPublishUsername
+        password intellijPublishPassword
+    }
 }
 
 markdownToHtml {
