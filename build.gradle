@@ -56,4 +56,5 @@ markdownToHtml {
 patchPluginXml {
     changeNotes file("$projectDir/docs/CHANGELOG.html").text
     sinceBuild System.getenv("pluginSinceBuild") ?: sinceBuildP
+    untilBuild System.getenv("pluginUntilBuild") ?: untilBuildP
 }
