@@ -41,6 +41,11 @@ compileTestKotlin {
 intellij {
     version '183.5429.30'
     alternativeIdePath idePath
+
+    publishPlugin {
+        username intellijPublishUsername
+        password intellijPublishPassword
+    }
 }
 
 markdownToHtml {
