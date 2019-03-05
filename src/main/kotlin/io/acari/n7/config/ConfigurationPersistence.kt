@@ -24,6 +24,8 @@ class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersisten
   var externalContrailColor = NOT_SET
   var externalThemeSet = NOT_SET
 
+  var version = NOT_SET
+
   public override fun clone(): Any {
     return XmlSerializerUtil.createCopy(this)
   }
