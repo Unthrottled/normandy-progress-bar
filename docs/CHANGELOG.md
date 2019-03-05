@@ -1,5 +1,11 @@
 # Changelog
 ---- 
+
+# 1.2.0
+
+- Actually supporting JetBrains 2019 Build! (I know I said I did it last time, I lied...)
+- Added Notifications for updates.
+
 # 1.1.0
 
 - 2019 Build Support
