@@ -20,15 +20,21 @@
                              id="io.acari.n7.config"/>
   </extensions>
 
-<application-components>
-  <component>
-    <implementation-class>io.acari.n7.NormandyComponent</implementation-class>
-  </component>
-  <component>
-    <implementation-class>io.acari.n7.integration.NormandyIntegrationComponent</implementation-class>
-  </component>
-</application-components>
-  
+  <application-components>
+    <component>
+      <implementation-class>io.acari.n7.NormandyComponent</implementation-class>
+    </component>
+    <component>
+      <implementation-class>io.acari.n7.integration.NormandyIntegrationComponent</implementation-class>
+    </component>
+  </application-components>
+
+  <project-components>
+    <component>
+      <implementation-class>io.acari.n7.notification.UpdateComponent</implementation-class>
+    </component>
+  </project-components>
+
   <actions>
     <action class="io.acari.n7.actions.ConfigAction"
             id="Config Action"
@@ -39,5 +45,5 @@
       <add-to-group group-id="ChangeScheme" anchor="last"/>
     </action>
   </actions>
-  
+
 </idea-plugin>

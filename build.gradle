@@ -20,7 +20,7 @@ apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'kotlin'
 
 group 'io.acari'
-version '1.1.0'
+version '1.2.0'
 
 repositories {
     mavenCentral()
