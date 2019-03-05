@@ -1,4 +1,4 @@
-package io.acari.n7
+package io.acari.n7.notification
 
 import com.intellij.ide.BrowserUtil
 import com.intellij.notification.Notification
