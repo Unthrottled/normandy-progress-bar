@@ -18,11 +18,19 @@ class NormandyColorPatcher(private val otherColorPatcher: SVGLoader.SvgColorPatc
     when(themedPrimaryAttribute){
       "fill"-> svg.setAttribute("fill", NormandyTheme.primaryColorString())
       "stroke"-> svg.setAttribute("stroke", NormandyTheme.primaryColorString())
+      "both"-> {
+        svg.setAttribute("stroke", NormandyTheme.primaryColorString())
+        svg.setAttribute("fill", NormandyTheme.primaryColorString())
+      }
     }
 
     when(themedSecondaryAttribute){
       "fill"-> svg.setAttribute("fill", NormandyTheme.secondaryColorString())
       "stroke"-> svg.setAttribute("stroke", NormandyTheme.secondaryColorString())
+      "both"-> {
+        svg.setAttribute("stroke", NormandyTheme.secondaryColorString())
+        svg.setAttribute("fill", NormandyTheme.secondaryColorString())
+      }
     }
 
     val nodes = svg.childNodes
