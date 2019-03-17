@@ -16,10 +16,7 @@ class NormandyColorPatcher(private val otherColorPatcher: SVGLoader.SvgColorPatc
     val themedSecondaryAttribute = svg.getAttribute("themedSecondary")
 
     when(themedPrimaryAttribute){
-      "fill"-> {
-        svg.setAttribute("fill", NormandyTheme.primaryColorString())
-        svg.setAttribute("stroke", "#000000")
-      }
+      "fill"-> svg.setAttribute("fill", NormandyTheme.primaryColorString())
       "stroke"-> svg.setAttribute("stroke", NormandyTheme.primaryColorString())
       "both"-> {
         svg.setAttribute("stroke", NormandyTheme.primaryColorString())
@@ -28,10 +25,7 @@ class NormandyColorPatcher(private val otherColorPatcher: SVGLoader.SvgColorPatc
     }
 
     when(themedSecondaryAttribute){
-      "fill"-> {
-        svg.setAttribute("fill", NormandyTheme.secondaryColorString())
-        svg.setAttribute("stroke", "#000000")
-      }
+      "fill"-> svg.setAttribute("fill", NormandyTheme.secondaryColorString())
       "stroke"-> svg.setAttribute("stroke", NormandyTheme.secondaryColorString())
       "both"-> {
         svg.setAttribute("stroke", NormandyTheme.secondaryColorString())
