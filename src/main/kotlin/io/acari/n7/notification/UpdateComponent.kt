@@ -5,14 +5,12 @@ import com.intellij.openapi.project.Project
 
 import io.acari.n7.config.ConfigurationPersistence
 
-const val VERSION = "v1.2.0"
+const val VERSION = "v1.2.1"
 val UPDATE_MESSAGE =
     """
           <br/>
-          JetBrains 2019 Build Support!<br><br>
-          Now supports any JetBrains IDE on the 2019 build! (I know I said I did it last time, I lied...)<br><br>
-          Added Notifications for updates.<br><br>
-          Material UI theme integration is the next feature to be worked, stay tuned!<br>
+          Addressed the issue where only the port side of the normandy had dark outlines.<br><br>
+          Material UI theme integration is still the next functional feature to be worked, I am waiting for my changes to be put in intellij.<br>
           <br>See <a href="https://github.com/cyclic-reference/normandy-progress-bar/blob/master/docs/CHANGELOG.md">Changelog</a> for more details.
         """.trimIndent()
 

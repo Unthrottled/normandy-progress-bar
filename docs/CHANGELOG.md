@@ -1,6 +1,11 @@
 # Changelog
 ---- 
 
+# 1.2.1
+
+- Addressed the issue where only the port side of the normandy had dark outlines.
+    - Fixed by removing the outlines together, because there is  a bug in the Idea SVG icon renderer.
+
 # 1.2.0
 
 - Actually supporting JetBrains 2019 Build! (I know I said I did it last time, I lied...)
