@@ -9,8 +9,7 @@ const val VERSION = "v1.2.1"
 val UPDATE_MESSAGE =
     """
           <br/>
-          Addressed the issue where only the port side of the normandy had dark outlines.<br><br>
-          Material UI theme integration is still the next functional feature to be worked, I am waiting for my changes to be put in intellij.<br>
+          Addressed the issue where only the port side of the Normandy had dark outlines.<br>
           <br>See <a href="https://github.com/cyclic-reference/normandy-progress-bar/blob/master/docs/CHANGELOG.md">Changelog</a> for more details.
         """.trimIndent()
 
