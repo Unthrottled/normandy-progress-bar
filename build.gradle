@@ -39,7 +39,9 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 intellij {
-    version '183.5429.30'
+    type 'IU'
+    version 'LATEST-EAP-SNAPSHOT'
+    alternativeIdePath idePath
     alternativeIdePath idePath
 
     publishPlugin {

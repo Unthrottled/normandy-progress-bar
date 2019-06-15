@@ -1,13 +1,13 @@
 package io.acari.n7.icon
 
-import com.intellij.util.SVGLoader
+import com.intellij.util.SVGLoader.SvgColorPatcher
 import io.acari.n7.theme.NormandyTheme
 import org.w3c.dom.Element
 
-class NormandyColorPatcher(private val otherColorPatcher: SVGLoader.SvgColorPatcher = SVGLoader.SvgColorPatcher {}) : SVGLoader.SvgColorPatcher {
+class NormandyColorPatcher(private val otherColorPatcher: (Element) ->Unit = {} ) : SvgColorPatcher {
 
   override fun patchColors(svg: Element) {
-    otherColorPatcher.patchColors(svg)
+    otherColorPatcher(svg)
     patchChildren(svg)
   }
 
