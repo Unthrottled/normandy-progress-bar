@@ -5,7 +5,6 @@ import io.acari.n7.config.NOT_SET
 import io.acari.n7.util.LegacySupportUtility
 import java.util.*
 
-const val OVERRIDE_CLASS = "com.intellij.compiler.server.CustomBuilderMessageHandler"
 
 object ExternalThemeConfigurations {
   val secondaryThemeColor: Optional<String>
@@ -15,7 +14,7 @@ object ExternalThemeConfigurations {
     get() = getExternalThemeFromConfig { it.externalContrailColor }
 
   val isEnabled: Boolean
-    get() = LegacySupportUtility.orGetLegacy(OVERRIDE_CLASS, { true }, { false })
+    get() = false
 
   private fun getExternalThemeFromConfig(valueExtractor3000: (ConfigurationPersistence) -> String): Optional<String> =
       ConfigurationPersistence.instance.filter { it.externalThemeSet != NOT_SET }

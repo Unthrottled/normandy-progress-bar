@@ -1,6 +1,5 @@
 package io.acari.n7.integration
 
-import com.intellij.compiler.server.CustomBuilderMessageHandler
 import com.intellij.ide.AppLifecycleListener
 import com.intellij.ide.ui.LafManager
 import com.intellij.openapi.application.ApplicationManager
@@ -12,7 +11,6 @@ import io.acari.n7.config.CONFIGURATION_TOPIC
 import io.acari.n7.config.NormandyConfigurationSubscriber
 import io.acari.n7.icon.NormandyColorPatcher
 import io.acari.n7.icon.SvgLoaderHacker
-import io.acari.n7.util.LegacySupportUtility
 
 class NormandyIntegrationComponent : BaseComponent {
 
@@ -39,11 +37,6 @@ class NormandyIntegrationComponent : BaseComponent {
 
       messageBus.subscribe(ProgressWindow.TOPIC, ProgressWindow.Listener { setSVGColorPatcher() })
 
-    LegacySupportUtility.invokeClassSafely(OVERRIDE_CLASS) {
-      //Only available for Intellij, should contribute code to allow for all.
-      messageBus.subscribe(CustomBuilderMessageHandler.TOPIC, ExternalThemeListener { setSVGColorPatcher() })
-    }
-
       messageBus.subscribe(AppLifecycleListener.TOPIC, AppLifecycleSubscriber { setSVGColorPatcher() })
     }
 
@@ -53,7 +46,7 @@ class NormandyIntegrationComponent : BaseComponent {
      */
     private fun setSVGColorPatcher() {
       SVGLoader.setColorPatcher(SvgLoaderHacker.collectOtherPatcher()
-          .map { NormandyColorPatcher(it) }
+          .map { patcher -> NormandyColorPatcher{ element -> patcher.patchColors(element)} }
           .orElseGet { NormandyColorPatcher() })
     }
 
