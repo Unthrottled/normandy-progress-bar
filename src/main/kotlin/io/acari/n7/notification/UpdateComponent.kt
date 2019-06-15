@@ -5,11 +5,15 @@ import com.intellij.openapi.project.Project
 
 import io.acari.n7.config.ConfigurationPersistence
 
-const val VERSION = "v1.2.1"
+const val VERSION = "v1.3.0"
 val UPDATE_MESSAGE =
     """
-          <br/>
-          Addressed the issue where only the port side of the Normandy had dark outlines.<br>
+      What's New?<br>
+      <ul>
+      <li>2019.2 Build Support!</li>
+      <li>Theme integrations temporarily unsupported now. （ﾉ´д｀）</li>
+      <br>
+      Thanks again for downloading <b>Normandy Progress Bar UI</b>! •‿•<br>
           <br>See <a href="https://github.com/cyclic-reference/normandy-progress-bar/blob/master/docs/CHANGELOG.md">Changelog</a> for more details.
         """.trimIndent()
 

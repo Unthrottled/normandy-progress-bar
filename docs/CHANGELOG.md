@@ -1,6 +1,12 @@
 # Changelog
 ---- 
 
+# 1.3.0
+
+- 2019.2 Build Support!
+- Theme integrations temporarily unsupported now. （ﾉ´д｀）
+    - They will be back in a future release.
+
 # 1.2.1
 
 - Addressed the issue where only the port side of the normandy had dark outlines.
