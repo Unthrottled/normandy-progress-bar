@@ -23,7 +23,8 @@ object NormandyTheme {
           { ColorUtil.fromHex("FFEE00")},
           { ColorUtil.fromHex("4DE94C")},
           { ColorUtil.fromHex("3783FF")},
-          { ColorUtil.fromHex("4815AA")}
+          { ColorUtil.fromHex("4815AA")},
+          { ColorUtil.fromHex("901DAA")}
       )
     } else {
       arrayOf(contrailColor, outerContrailColor,
