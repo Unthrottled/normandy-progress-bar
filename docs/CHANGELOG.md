@@ -1,6 +1,11 @@
 # Changelog
 ---- 
 
+# 1.4.0
+
+- Rainbow Mode!
+    - Satisfy the need for RGB with a full color spectrum experience!   
+
 # 1.3.0
 
 - 2019.2 Build Support!
