@@ -16,7 +16,7 @@ class NormandyConfigComponent : SearchableConfigurable {
 
   private var normandyForm =
       NormandyForm(ConfigurationPersistence.instance
-          .map { configToThemConfig(it) }
+          .map { configToThemeConfig(it) }
           .orElseGet { ThemeConfigurations() })
 
   override fun getId(): String = CONFIG_ID
@@ -33,10 +33,11 @@ class NormandyConfigComponent : SearchableConfigurable {
           it.contrailColor = ColorUtil.toHexString(normandyForm.getContrailColor())
           it.primaryThemeColor = ColorUtil.toHexString(normandyForm.getPrimaryColor())
           it.secondaryThemeColor = ColorUtil.toHexString(normandyForm.getSecondaryColor())
-          normandyForm = NormandyForm(configToThemConfig(it))
+          it.isRainbowMode = normandyForm.isRainbowMode
+          normandyForm = NormandyForm(configToThemeConfig(it))
           ApplicationManager.getApplication().messageBus
               .syncPublisher(CONFIGURATION_TOPIC)
-              .consumeChanges(configToThemConfig(it))
+              .consumeChanges(configToThemeConfig(it))
         }
   }
 
@@ -48,11 +49,12 @@ class NormandyConfigComponent : SearchableConfigurable {
    */
   override fun isModified(): Boolean = normandyForm.isModified()
 
-  private fun configToThemConfig(it: ConfigurationPersistence): ThemeConfigurations {
+  private fun configToThemeConfig(it: ConfigurationPersistence): ThemeConfigurations {
     return ThemeConfigurations(
         com.intellij.ui.ColorUtil.fromHex(it.contrailColor),
         com.intellij.ui.ColorUtil.fromHex(it.primaryThemeColor),
         com.intellij.ui.ColorUtil.fromHex(it.secondaryThemeColor),
+        it.isRainbowMode,
         it.isAllowedToBeOverridden,
         ExternalTheme.byName(it.externalThemeSet)
     )

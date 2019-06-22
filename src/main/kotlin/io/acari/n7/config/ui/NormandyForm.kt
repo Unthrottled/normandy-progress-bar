@@ -28,18 +28,26 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
   private lateinit var secondaryColor: ColorPanel
   private lateinit var resetTabDefaultsBtn: JButton
   private lateinit var shouldOverrideCheckbox: JCheckBox
+  private lateinit var rainbowModeCheckbox: JCheckBox
 
 
   fun isModified(): Boolean =
       themeConfigurations.shouldOverride != shouldOverride ||
           themeConfigurations.contrail != getContrailColor() ||
           themeConfigurations.primaryColor != getPrimaryColor() ||
+          themeConfigurations.isRainbowMode != isRainbowMode ||
           themeConfigurations.secondaryColor != getSecondaryColor()
 
   var shouldOverride: Boolean
     get() = shouldOverrideCheckbox.isSelected
     private set(shouldOverride) {
       shouldOverrideCheckbox.isSelected = shouldOverride
+    }
+
+  var isRainbowMode: Boolean
+    get() = rainbowModeCheckbox.isSelected
+    private set(shouldOverride) {
+      rainbowModeCheckbox.isSelected = shouldOverride
     }
 
   init {
@@ -59,6 +67,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
     setSecondary(themeConfigurations.secondaryColor)
     setContrailColor(themeConfigurations.contrail)
     shouldOverride = themeConfigurations.shouldOverride
+    isRainbowMode = themeConfigurations.isRainbowMode
   }
 
   fun getContent(): JComponent? {
@@ -102,6 +111,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
     secondaryColor = ColorPanel()
     resetTabDefaultsBtn = JButton()
     shouldOverrideCheckbox = JCheckBox()
+    rainbowModeCheckbox = JCheckBox()
 
 
     //======== content ========
@@ -169,6 +179,15 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
         }
 
         panel1.add(shouldOverrideCheckbox, GridConstraints(7, 1, 1, 1,
+            GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
+
+        //---- rainbowModeCheckbox ----
+        rainbowModeCheckbox.text = "Rainbow Mode"
+        rainbowModeCheckbox.toolTipText = "Enhanced RGB experience"
+
+        panel1.add(rainbowModeCheckbox, GridConstraints(9, 1, 1, 1,
             GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))

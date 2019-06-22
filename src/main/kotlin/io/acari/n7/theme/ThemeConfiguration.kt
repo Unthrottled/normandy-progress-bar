@@ -8,6 +8,11 @@ import java.util.*
 
 object ThemeConfiguration {
 
+  val isRainbowMode: Boolean
+  get() = ConfigurationPersistence.instance
+      .map { it.isRainbowMode }
+      .orElseGet { false }
+
   val primaryThemeColor: String
     get() {
       return getCorrectColor({ it.primaryThemeColor })
