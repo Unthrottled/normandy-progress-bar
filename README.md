@@ -23,7 +23,7 @@ https://plugins.jetbrains.com/plugin/10804-doki-doki-literature-club-theme
 
 - [Doki-Doki Literature Club Theme](https://github.com/cyclic-reference/ddlc-jetbrains-theme)
 
-*Auto theming integration only works in the Intellij IDE at the moment.
+*Auto theming integration is currently not available at the moment.
 
 #### Contributions and fun ideas are encouraged!
 
