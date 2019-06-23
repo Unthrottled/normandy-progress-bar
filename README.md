@@ -17,13 +17,13 @@ Your progress bar becomes the SSV Normandy SR-1 traveling at FTL.
 ---
 
 Plugin page:
-https://plugins.jetbrains.com/plugin/10804-doki-doki-literature-club-theme
+https://plugins.jetbrains.com/plugin/12025-ssv-normandy-progress-bar
 
 ## Plugin's that work with this plugin*
 
 - [Doki-Doki Literature Club Theme](https://github.com/cyclic-reference/ddlc-jetbrains-theme)
 
-*Auto theming integration is currently not available at the moment.
+***Auto theming integration is currently not available at the moment.** (It will be back, eventually!)
 
 #### Contributions and fun ideas are encouraged!
 
