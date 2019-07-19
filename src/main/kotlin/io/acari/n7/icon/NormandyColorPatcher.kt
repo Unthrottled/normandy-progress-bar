@@ -25,7 +25,7 @@ class NormandyColorPatcher(private val otherColorPatcher: (Element) ->Unit = {} 
     }
 
     val themedSecondaryAttribute = svg.getAttribute("themedSecondary")
-    if(ThemeConfiguration.isRainbowMode){
+    if(themedSecondaryAttribute.isNotBlank() && ThemeConfiguration.isRainbowMode){
       when(themedSecondaryAttribute){
         "fill"-> svg.setAttribute("fill", NormandyTheme.secondaryColorString())
         "stroke"-> svg.setAttribute("stroke", NormandyTheme.secondaryColorString())
