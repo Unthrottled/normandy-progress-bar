@@ -1,6 +1,11 @@
 # Changelog
 ---- 
 
+# 1.4.1
+
+- Better 2019.2 build support!
+    - Fixes the issue with configurations not being persisted.  
+
 # 1.4.0
 
 - Rainbow Mode!
