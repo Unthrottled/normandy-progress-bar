@@ -8,6 +8,7 @@ data class ThemeConfigurations(
     val primaryColor: Color = ThemeDefaults.primaryColor,
     val secondaryColor: Color = ThemeDefaults.secondaryColor,
     val isRainbowMode: Boolean = false,
+    val isTransparentBackground: Boolean = false,
     val shouldOverride: Boolean = true,
     val externalTheme: ExternalTheme = ExternalTheme.NOT_SET
 )

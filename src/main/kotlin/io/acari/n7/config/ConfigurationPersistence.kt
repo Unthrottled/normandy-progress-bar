@@ -19,6 +19,7 @@ class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersisten
   var secondaryThemeColor = "#${ColorUtil.toHex(ThemeDefaults.secondaryColor)}"
   var contrailColor = "#${ColorUtil.toHex(ThemeDefaults.contrailColor)}"
   var isRainbowMode = false
+  var isTransparentBackground = false
   var isAllowedToBeOverridden = true
 
   var externalSecondaryColor = NOT_SET
