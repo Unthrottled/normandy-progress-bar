@@ -37,6 +37,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
           themeConfigurations.contrail != getContrailColor() ||
           themeConfigurations.primaryColor != getPrimaryColor() ||
           themeConfigurations.isRainbowMode != isRainbowMode ||
+          themeConfigurations.isTransparentBackground != isTransparentBackground ||
           themeConfigurations.secondaryColor != getSecondaryColor()
 
   var shouldOverride: Boolean
