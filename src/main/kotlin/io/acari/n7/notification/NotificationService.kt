@@ -34,7 +34,7 @@ object NotificationService {
   }
 
   private fun showNotification(project: Project, notification: Notification) {
-    val frame = WindowManager.getInstance().getIdeFrame(project)
+    val frame = WindowManager.getInstance().getIdeFrame(project)!!
     val bounds = frame.component.bounds
     val target = RelativePoint(frame.component, Point(bounds.x + bounds.width, 0))
     try {

@@ -29,6 +29,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
   private lateinit var resetTabDefaultsBtn: JButton
   private lateinit var shouldOverrideCheckbox: JCheckBox
   private lateinit var rainbowModeCheckbox: JCheckBox
+  private lateinit var transparentBackgroundModeCheckbox: JCheckBox
 
 
   fun isModified(): Boolean =
@@ -36,6 +37,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
           themeConfigurations.contrail != getContrailColor() ||
           themeConfigurations.primaryColor != getPrimaryColor() ||
           themeConfigurations.isRainbowMode != isRainbowMode ||
+          themeConfigurations.isTransparentBackground != isTransparentBackground ||
           themeConfigurations.secondaryColor != getSecondaryColor()
 
   var shouldOverride: Boolean
@@ -48,6 +50,12 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
     get() = rainbowModeCheckbox.isSelected
     private set(shouldOverride) {
       rainbowModeCheckbox.isSelected = shouldOverride
+    }
+
+  var isTransparentBackground: Boolean
+    get() = transparentBackgroundModeCheckbox.isSelected
+    private set(shouldOverride) {
+      transparentBackgroundModeCheckbox.isSelected = shouldOverride
     }
 
   init {
@@ -112,6 +120,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
     resetTabDefaultsBtn = JButton()
     shouldOverrideCheckbox = JCheckBox()
     rainbowModeCheckbox = JCheckBox()
+    transparentBackgroundModeCheckbox = JCheckBox()
 
 
     //======== content ========
@@ -188,6 +197,15 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
         rainbowModeCheckbox.toolTipText = "Enhanced RGB experience"
 
         panel1.add(rainbowModeCheckbox, GridConstraints(9, 1, 1, 1,
+            GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))
+
+        //---- rainbowModeCheckbox ----
+        transparentBackgroundModeCheckbox.text = "Transparent Background Mode"
+        transparentBackgroundModeCheckbox.toolTipText = "A clear background"
+
+        panel1.add(transparentBackgroundModeCheckbox, GridConstraints(10, 1, 1, 1,
             GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null))

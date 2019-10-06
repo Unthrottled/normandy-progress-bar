@@ -34,6 +34,7 @@ class NormandyConfigComponent : SearchableConfigurable {
           it.primaryThemeColor = ColorUtil.toHexString(normandyForm.getPrimaryColor())
           it.secondaryThemeColor = ColorUtil.toHexString(normandyForm.getSecondaryColor())
           it.isRainbowMode = normandyForm.isRainbowMode
+          it.isTransparentBackground = normandyForm.isTransparentBackground
           normandyForm = NormandyForm(configToThemeConfig(it))
           ApplicationManager.getApplication().messageBus
               .syncPublisher(CONFIGURATION_TOPIC)
@@ -55,6 +56,7 @@ class NormandyConfigComponent : SearchableConfigurable {
         com.intellij.ui.ColorUtil.fromHex(it.primaryThemeColor),
         com.intellij.ui.ColorUtil.fromHex(it.secondaryThemeColor),
         it.isRainbowMode,
+        it.isTransparentBackground,
         it.isAllowedToBeOverridden,
         ExternalTheme.byName(it.externalThemeSet)
     )

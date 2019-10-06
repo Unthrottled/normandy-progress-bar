@@ -13,6 +13,11 @@ object ThemeConfiguration {
       .map { it.isRainbowMode }
       .orElseGet { false }
 
+  val isTransparentBackground: Boolean
+  get() = ConfigurationPersistence.instance
+      .map { it.isTransparentBackground }
+      .orElseGet { false }
+
   val primaryThemeColor: String
     get() {
       return getCorrectColor({ it.primaryThemeColor })

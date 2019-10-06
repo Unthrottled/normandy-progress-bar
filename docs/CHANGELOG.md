@@ -1,6 +1,10 @@
 # Changelog
 ---- 
 
+# 1.5.0
+
+- You can now make the background transparent.
+
 # 1.4.1
 
 - Better 2019.2 build support!
