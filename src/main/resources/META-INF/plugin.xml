@@ -18,6 +18,7 @@
     <applicationConfigurable instance="io.acari.n7.config.ui.NormandyConfigComponent"
                              groupId="appearance"
                              id="io.acari.n7.config"/>
+    <errorHandler implementation="io.acari.n7.integration.SlackReporter"/>
   </extensions>
 
   <application-components>

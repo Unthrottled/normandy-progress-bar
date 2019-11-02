@@ -9,6 +9,7 @@ import io.acari.n7.theme.ThemeConfigurations
 import io.acari.n7.theme.ThemeDefaults
 import java.awt.Color
 import java.awt.Insets
+import java.lang.RuntimeException
 import javax.swing.*
 import javax.swing.border.EtchedBorder
 import javax.swing.border.TitledBorder
