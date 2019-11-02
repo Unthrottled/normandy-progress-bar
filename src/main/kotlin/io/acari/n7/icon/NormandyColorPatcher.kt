@@ -1,7 +1,6 @@
 package io.acari.n7.icon
 
 import com.intellij.util.SVGLoader
-import com.intellij.util.SVGLoader.SvgColorPatcher
 import io.acari.n7.theme.NormandyTheme
 import io.acari.n7.theme.ThemeConfiguration
 import org.w3c.dom.Element
