@@ -10,7 +10,8 @@ val UPDATE_MESSAGE =
     """
       What's New?<br>
       <ul>
-      <li>You can now make the background transparent</li>
+      <li>Backgrounds can be made transparent!</li>
+      <li>Report exceptions anonymously!</li>
       <br>
       Thanks again for downloading <b>Normandy Progress Bar UI</b>! •‿•<br>
           <br>See <a href="https://github.com/cyclic-reference/normandy-progress-bar/blob/master/docs/CHANGELOG.md">Changelog</a> for more details.
