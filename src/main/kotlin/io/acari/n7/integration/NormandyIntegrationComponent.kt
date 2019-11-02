@@ -38,7 +38,7 @@ class NormandyIntegrationComponent : BaseComponent {
      * Enables the ability to color the Normandy and Alliance Icon.
      */
     private fun setSVGColorPatcher() {
-      SVGLoader.setColorPatcher(SvgLoaderHacker.collectOtherPatcher()
+      SVGLoader.setColorPatcherProvider(SvgLoaderHacker.collectOtherPatcher()
           .map { patcher -> NormandyColorPatcher{ element -> patcher.patchColors(element)} }
           .orElseGet { NormandyColorPatcher() })
     }
