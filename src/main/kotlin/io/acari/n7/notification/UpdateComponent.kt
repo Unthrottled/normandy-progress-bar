@@ -5,7 +5,7 @@ import com.intellij.openapi.project.Project
 
 import io.acari.n7.config.ConfigurationPersistence
 
-const val VERSION = "v1.5.0"
+const val VERSION = "v1.6.0"
 val UPDATE_MESSAGE =
     """
       What's New?<br>
