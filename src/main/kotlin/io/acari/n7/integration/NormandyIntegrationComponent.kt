@@ -14,15 +14,8 @@ import io.acari.n7.icon.SvgLoaderHacker
 
 class NormandyIntegrationComponent : BaseComponent {
 
-  companion object {
+  private val messageBus: MessageBusConnection = ApplicationManager.getApplication().messageBus.connect()
 
-    private val messageBus: MessageBusConnection = ApplicationManager.getApplication().messageBus.connect()
-
-    init {
-      setSVGColorPatcher()
-      subscribeToTopics()
-
-    }
 
     /**
      * Subscribes to a bunch of topics to avoid any other plugin from
@@ -50,10 +43,10 @@ class NormandyIntegrationComponent : BaseComponent {
           .orElseGet { NormandyColorPatcher() })
     }
 
-  }
 
   override fun initComponent() {
     setSVGColorPatcher()
+    subscribeToTopics()
     LafManager.getInstance().addLafManagerListener { setSVGColorPatcher() }
   }
 
