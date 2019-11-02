@@ -5,19 +5,19 @@ import java.util.*
 
 object SvgLoaderHacker {
 
-  private lateinit var otherColorPatcher: SVGLoader.SvgElementColorPatcher
+  private lateinit var otherColorPatcher: SVGLoader.SvgElementColorPatcherProvider
 
-  fun collectOtherPatcher(): Optional<SVGLoader.SvgElementColorPatcher> =
+  fun collectOtherPatcher(): Optional<SVGLoader.SvgElementColorPatcherProvider> =
       Optional.ofNullable(SVGLoader::class.java.declaredFields
           .firstOrNull { it.name == "ourColorPatcher" })
           .map { ourColorPatcherField ->
             ourColorPatcherField.isAccessible = true
             ourColorPatcherField.get(null)
           }
-          .filter { it is SVGLoader.SvgElementColorPatcher }
+          .filter { it is SVGLoader.SvgElementColorPatcherProvider }
           .filter { it !is NormandyColorPatcher }
           .map {
-            val otherPatcher = it as SVGLoader.SvgElementColorPatcher
+            val otherPatcher = it as SVGLoader.SvgElementColorPatcherProvider
             otherColorPatcher = otherPatcher
             otherPatcher
           }
@@ -25,7 +25,7 @@ object SvgLoaderHacker {
           .orElseGet { useFallBackPatcher() }
 
 
-  private fun useFallBackPatcher(): Optional<SVGLoader.SvgElementColorPatcher> =
+  private fun useFallBackPatcher(): Optional<SVGLoader.SvgElementColorPatcherProvider> =
       if (this::otherColorPatcher.isInitialized) Optional.of(otherColorPatcher)
       else Optional.empty()
 
