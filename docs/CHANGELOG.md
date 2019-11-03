@@ -1,6 +1,11 @@
 # Changelog
 ---- 
 
+# 1.6.0
+
+- Report exceptions anonymously!
+- Better 2019.3 Support. 
+
 # 1.5.0
 
 - You can now make the background transparent.

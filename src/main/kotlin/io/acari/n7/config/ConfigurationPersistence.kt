@@ -45,6 +45,10 @@ class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersisten
     XmlSerializerUtil.copyBean(state, this)
   }
 
+  override fun toString(): String {
+    return "ConfigurationPersistence(primaryThemeColor='$primaryThemeColor', secondaryThemeColor='$secondaryThemeColor', contrailColor='$contrailColor', isRainbowMode=$isRainbowMode, isTransparentBackground=$isTransparentBackground, isAllowedToBeOverridden=$isAllowedToBeOverridden, externalSecondaryColor='$externalSecondaryColor', externalContrailColor='$externalContrailColor', externalThemeSet='$externalThemeSet', version='$version')"
+  }
+
   companion object {
 
     @JvmStatic
