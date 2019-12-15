@@ -29,8 +29,8 @@ open class NormandyUI : BasicProgressBarUI() {
 
     @JvmStatic
     @Suppress("ACCIDENTAL_OVERRIDE", "UNUSED", "UNUSED_PARAMETER")
-    fun createUi(jComponent: JComponent): ComponentUI {
-      jComponent.border = Borders.empty().asUIResource()
+    fun createUI(c: JComponent?): ComponentUI {
+      c?.border = Borders.empty().asUIResource()
       return NormandyUI()
     }
   }
