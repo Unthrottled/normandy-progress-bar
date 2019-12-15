@@ -27,6 +27,8 @@ open class NormandyUI : BasicProgressBarUI() {
     val NORMANDY = NormandyIconComponent.getNormandyIcon()
     val NORMANDY_TO_CITADEL = NormandyIconComponent.getNormandyToCitadelIcon()
 
+    @JvmStatic
+    @Suppress("ACCIDENTAL_OVERRIDE", "UNUSED", "UNUSED_PARAMETER")
     fun createUi(jComponent: JComponent): ComponentUI {
       jComponent.border = Borders.empty().asUIResource()
       return NormandyUI()
