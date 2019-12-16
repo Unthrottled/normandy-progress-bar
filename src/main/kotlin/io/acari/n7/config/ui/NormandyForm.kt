@@ -2,13 +2,19 @@ package io.acari.n7.config.ui
 
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ModalityState
+import com.intellij.openapi.wm.impl.customFrameDecorations.style.StyleProperty
 import com.intellij.ui.ColorPanel
 import com.intellij.ui.layout.panel
+import com.intellij.ui.scale.JBUIScale
+import com.intellij.ui.tabs.JBTabsBorder
 import com.intellij.util.Alarm
 import io.acari.n7.theme.ThemeConfigurations
 import io.acari.n7.theme.ThemeDefaults
+import java.awt.BorderLayout
 import java.awt.Color
+import java.awt.Dimension
 import javax.swing.*
+import javax.swing.border.Border
 
 /**
  * Most of is code converted from an automatic form generation engine, so pls forgive.
@@ -27,6 +33,9 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations): Dispos
     val contrailColor = ColorPanel()
     val progressBar = createLoadingIndicator(true, Color.GREEN, false)!!
     return panel {
+      row {
+        progressBar()
+      }
       titledRow("Normandy Theme Customization"){
         titledRow("Color Customization") {
           row {
@@ -67,15 +76,10 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations): Dispos
           ThemeDefaults.contrailColor
         }
       }
-      row {
-        progressBar()
-      }
     }
   }
 
   private fun createLoadingIndicator(indeterminate: Boolean, foreground: Color, modeless: Boolean): JComponent? {
-    val text = if (indeterminate) "indeterminate" else "determinate"
-    val label = JLabel(text)
     val progress = JProgressBar(0, 100)
     progress.isIndeterminate = indeterminate
     progress.value = 0
@@ -85,13 +89,9 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations): Dispos
     }
     alarm.addRequest(createRunnable(progress), 200, ModalityState.any())
 
-    val panel = JPanel()
-    panel.layout = BoxLayout(panel, BoxLayout.Y_AXIS)
-    panel.add(label)
-    panel.add(progress)
-    panel.add(Box.createVerticalStrut(5))
+    progress.preferredSize = Dimension(500, JBUIScale.scale(25))
 
-    return panel
+    return progress
   }
 
   private fun createRunnable(progress: JProgressBar): () -> Unit {
