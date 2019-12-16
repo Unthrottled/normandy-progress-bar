@@ -29,12 +29,13 @@ class NormandyConfigComponent : SearchableConfigurable {
   override fun apply() {
     ConfigurationPersistence.instance
         .ifPresent {
-          it.isAllowedToBeOverridden = normandyForm.shouldOverride
-          it.contrailColor = ColorUtil.toHexString(normandyForm.getContrailColor())
-          it.primaryThemeColor = ColorUtil.toHexString(normandyForm.getPrimaryColor())
-          it.secondaryThemeColor = ColorUtil.toHexString(normandyForm.getSecondaryColor())
-          it.isRainbowMode = normandyForm.isRainbowMode
-          it.isTransparentBackground = normandyForm.isTransparentBackground
+          it.isAllowedToBeOverridden = normandyForm.myThemeConfigurations.shouldOverride
+          it.contrailColor = ColorUtil.toHexString(normandyForm.myThemeConfigurations.contrail)
+          it.primaryThemeColor = ColorUtil.toHexString(normandyForm.myThemeConfigurations.primaryColor)
+          it.secondaryThemeColor = ColorUtil.toHexString(normandyForm.myThemeConfigurations.secondaryColor)
+          it.isRainbowMode = normandyForm.myThemeConfigurations.isRainbowMode
+          it.isTransparentBackground = normandyForm.myThemeConfigurations.isTransparentBackground
+          normandyForm.dispose()
           normandyForm = NormandyForm(configToThemeConfig(it))
           ApplicationManager.getApplication().messageBus
               .syncPublisher(CONFIGURATION_TOPIC)

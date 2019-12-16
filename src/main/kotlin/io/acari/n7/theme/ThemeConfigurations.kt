@@ -4,11 +4,11 @@ import io.acari.n7.config.ExternalTheme
 import java.awt.Color
 
 data class ThemeConfigurations(
-    val contrail: Color = ThemeDefaults.contrailColor,
-    val primaryColor: Color = ThemeDefaults.primaryColor,
-    val secondaryColor: Color = ThemeDefaults.secondaryColor,
-    val isRainbowMode: Boolean = false,
-    val isTransparentBackground: Boolean = false,
-    val shouldOverride: Boolean = true,
-    val externalTheme: ExternalTheme = ExternalTheme.NOT_SET
+    var contrail: Color = ThemeDefaults.contrailColor,
+    var primaryColor: Color = ThemeDefaults.primaryColor,
+    var secondaryColor: Color = ThemeDefaults.secondaryColor,
+    var isRainbowMode: Boolean = false,
+    var isTransparentBackground: Boolean = false,
+    var shouldOverride: Boolean = true,
+    var externalTheme: ExternalTheme = ExternalTheme.NOT_SET
 )
