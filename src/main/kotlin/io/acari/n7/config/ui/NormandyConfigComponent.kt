@@ -14,14 +14,23 @@ class NormandyConfigComponent : SearchableConfigurable {
     const val CONFIG_ID = "io.acari.n7.config.theme"
   }
 
+  private var initialConfig = ConfigurationPersistence.instance
+      .map { configToThemeConfig(it) }
+      .orElseGet { ThemeConfigurations() }
+
   private var normandyForm =
-      NormandyForm(ConfigurationPersistence.instance
-          .map { configToThemeConfig(it) }
-          .orElseGet { ThemeConfigurations() })
+      NormandyForm(initialConfig)
 
   override fun getId(): String = CONFIG_ID
 
   override fun getDisplayName(): String = "SSV Normandy Configuration"
+
+  override fun cancel() {
+    ConfigurationPersistence.instance
+        .ifPresent {
+          applyConfigurations(it, initialConfig)
+        }
+  }
 
   /**
    * When ever the user accepts changes to the configuration.
@@ -29,18 +38,25 @@ class NormandyConfigComponent : SearchableConfigurable {
   override fun apply() {
     ConfigurationPersistence.instance
         .ifPresent {
-          it.isAllowedToBeOverridden = normandyForm.myThemeConfigurations.shouldOverride
-          it.contrailColor = ColorUtil.toHexString(normandyForm.myThemeConfigurations.contrail)
-          it.primaryThemeColor = ColorUtil.toHexString(normandyForm.myThemeConfigurations.primaryColor)
-          it.secondaryThemeColor = ColorUtil.toHexString(normandyForm.myThemeConfigurations.secondaryColor)
-          it.isRainbowMode = normandyForm.myThemeConfigurations.isRainbowMode
-          it.isTransparentBackground = normandyForm.myThemeConfigurations.isTransparentBackground
+          val config = normandyForm.myThemeConfigurations
+          initialConfig = config
+          applyConfigurations(it, config)
+
           normandyForm.dispose()
           normandyForm = NormandyForm(configToThemeConfig(it))
-          ApplicationManager.getApplication().messageBus
-              .syncPublisher(CONFIGURATION_TOPIC)
-              .consumeChanges(configToThemeConfig(it))
         }
+  }
+
+  private fun applyConfigurations(it: ConfigurationPersistence, config: ThemeConfigurations) {
+    it.isAllowedToBeOverridden = config.shouldOverride
+    it.contrailColor = ColorUtil.toHexString(config.contrail)
+    it.primaryThemeColor = ColorUtil.toHexString(config.primaryColor)
+    it.secondaryThemeColor = ColorUtil.toHexString(config.secondaryColor)
+    it.isRainbowMode = config.isRainbowMode
+    it.isTransparentBackground = config.isTransparentBackground
+    ApplicationManager.getApplication().messageBus
+        .syncPublisher(CONFIGURATION_TOPIC)
+        .consumeChanges(configToThemeConfig(it))
   }
 
   override fun createComponent(): JComponent? = normandyForm.getContent()
