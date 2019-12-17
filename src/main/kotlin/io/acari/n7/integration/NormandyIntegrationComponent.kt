@@ -1,7 +1,7 @@
 package io.acari.n7.integration
 
 import com.intellij.ide.AppLifecycleListener
-import com.intellij.ide.ui.LafManager
+import com.intellij.ide.ui.LafManagerListener
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.BaseComponent
 import com.intellij.openapi.progress.util.ProgressWindow
@@ -32,6 +32,8 @@ class NormandyIntegrationComponent : BaseComponent, DumbAware {
     messageBus.subscribe(ProgressWindow.TOPIC, ProgressWindow.Listener { setSVGColorPatcher() })
 
     messageBus.subscribe(AppLifecycleListener.TOPIC, AppLifecycleSubscriber { setSVGColorPatcher() })
+
+    messageBus.subscribe(LafManagerListener.TOPIC, LafManagerListener { setSVGColorPatcher() })
   }
 
 
@@ -54,7 +56,6 @@ class NormandyIntegrationComponent : BaseComponent, DumbAware {
   override fun initComponent() {
     setSVGColorPatcher()
     subscribeToTopics()
-    LafManager.getInstance().addLafManagerListener { setSVGColorPatcher() }
   }
 
   override fun disposeComponent() {
