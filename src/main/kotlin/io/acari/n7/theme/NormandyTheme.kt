@@ -1,6 +1,7 @@
 package io.acari.n7.theme
 
 import com.intellij.ui.ColorUtil
+import com.intellij.ui.Gray
 import java.awt.Color
 
 
@@ -29,7 +30,7 @@ object NormandyTheme {
 
   private val contrailColor = { _: Color -> ColorUtil.fromHex(ThemeConfiguration.contrailColor) }
   private val outerContrailColor = { backgroundColor: Color -> backgroundColor }
-  private val backgroundColorFunction = { backgroundColor: Color -> backgroundColor }
+  private val backgroundColorFunction = { backgroundColor: Color -> backgroundColor  }
 
   val contrailColors: Array<(Color) -> Color>
     get() = if (ThemeConfiguration.isRainbowMode) {

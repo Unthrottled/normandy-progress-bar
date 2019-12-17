@@ -1,12 +1,13 @@
 package io.acari.n7.theme
 
 import com.intellij.ui.ColorUtil
-import com.intellij.ui.JBColor.namedColor
 import io.acari.n7.config.ConfigurationPersistence
 import io.acari.n7.integration.ExternalThemeConfigurations
 import io.acari.n7.util.toHexString
 import io.acari.n7.util.toOptional
+import java.awt.Color
 import java.util.*
+import javax.swing.UIManager
 
 object ThemeConfiguration {
 
@@ -37,9 +38,15 @@ object ThemeConfiguration {
   val contrailColor: String
     get() {
       return getCorrectColor({ it.contrailColor })
-      { namedColor("Doki.Accent.color",
-          namedColor("material.tab.borderColor", ThemeDefaults.contrailColor)).toHexString()
-          .toOptional() }
+      {
+        val defaults = UIManager.getLookAndFeelDefaults()
+        val themeAccent = defaults["Doki.Accent.color"]
+            ?: defaults["material.tab.borderColor"]
+        themeAccent.toOptional()
+            .filter { it is Color }
+            .map { it as Color }
+            .map { it.toHexString() }
+      }
           .orElseGet { "#${ColorUtil.toHex(ThemeDefaults.contrailColor)}" }
     }
 
