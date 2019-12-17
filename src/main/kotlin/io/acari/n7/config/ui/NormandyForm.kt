@@ -79,20 +79,33 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations): Dispos
       }
       titledRow("Appearance Options"){
         row {
-          checkBox("Use Theme Accent")
+          checkBox("Use Theme Accent", myThemeConfigurations.shouldOverride,
+              actionListener = { _, component ->
+                myThemeConfigurations.shouldOverride = component.isSelected
+                ConfigurationManager.applyConfigurations(myThemeConfigurations){}
+              })
         }
         row {
-          checkBox("Rainbow Mode")
+          checkBox("Rainbow Mode", myThemeConfigurations.isRainbowMode,
+              actionListener = { _, component ->
+                myThemeConfigurations.isRainbowMode = component.isSelected
+                ConfigurationManager.applyConfigurations(myThemeConfigurations){}
+              })
         }
         row {
-          checkBox("Transparent Background")
+          checkBox("Transparent Background", myThemeConfigurations.isTransparentBackground,
+              actionListener = { _, component ->
+                myThemeConfigurations.isTransparentBackground = component.isSelected
+                ConfigurationManager.applyConfigurations(myThemeConfigurations){}
+              })
         }
       }
       row {
         button("Restore Defaults"){
-          ThemeDefaults.secondaryColor
-          ThemeDefaults.primaryColor
-          ThemeDefaults.contrailColor
+          myThemeConfigurations.primaryColor = ThemeDefaults.primaryColor
+          myThemeConfigurations.secondaryColor = ThemeDefaults.secondaryColor
+          myThemeConfigurations.contrail = ThemeDefaults.contrailColor
+          ConfigurationManager.applyConfigurations(myThemeConfigurations){}
         }
       }
     }
