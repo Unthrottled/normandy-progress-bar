@@ -10,6 +10,7 @@ import com.intellij.ui.tabs.JBTabsBorder
 import com.intellij.util.Alarm
 import io.acari.n7.theme.ThemeConfigurations
 import io.acari.n7.theme.ThemeDefaults
+import io.acari.n7.util.toHexString
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.Dimension
@@ -29,8 +30,26 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations): Dispos
 
   fun getContent(): JComponent? {
     val primaryColor = ColorPanel()
+    primaryColor.selectedColor = themeConfigurations.primaryColor
+    primaryColor.addActionListener{
+      myThemeConfigurations.primaryColor = primaryColor.selectedColor!!
+      ConfigurationManager.applyConfigurations(myThemeConfigurations){}
+    }
+
     val secondaryColor = ColorPanel()
+    secondaryColor.selectedColor = themeConfigurations.secondaryColor
+    secondaryColor.addActionListener{
+      myThemeConfigurations.secondaryColor = secondaryColor.selectedColor!!
+      ConfigurationManager.applyConfigurations(myThemeConfigurations){}
+    }
+
     val contrailColor = ColorPanel()
+    contrailColor.selectedColor = themeConfigurations.contrail
+    contrailColor.addActionListener{
+      myThemeConfigurations.contrail = contrailColor.selectedColor!!
+      ConfigurationManager.applyConfigurations(myThemeConfigurations){}
+    }
+
     val progressBar = createLoadingIndicator(true, Color.GREEN, false)!!
     return panel {
       row {

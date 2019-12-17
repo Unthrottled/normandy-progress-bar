@@ -1,12 +1,9 @@
 package io.acari.n7.config.ui
 
-import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.options.SearchableConfigurable
-import io.acari.n7.config.CONFIGURATION_TOPIC
 import io.acari.n7.config.ConfigurationPersistence
+import io.acari.n7.config.ui.ConfigurationManager.configToThemeConfig
 import io.acari.n7.theme.ThemeConfigurations
-import io.acari.n7.config.ExternalTheme
-import org.jdesktop.swingx.color.ColorUtil
 import javax.swing.JComponent
 
 class NormandyConfigComponent : SearchableConfigurable {
@@ -26,37 +23,19 @@ class NormandyConfigComponent : SearchableConfigurable {
   override fun getDisplayName(): String = "SSV Normandy Configuration"
 
   override fun cancel() {
-    ConfigurationPersistence.instance
-        .ifPresent {
-          applyConfigurations(it, initialConfig)
-        }
+    ConfigurationManager.applyConfigurations(initialConfig) {}
   }
 
   /**
    * When ever the user accepts changes to the configuration.
    */
   override fun apply() {
-    ConfigurationPersistence.instance
-        .ifPresent {
-          val config = normandyForm.myThemeConfigurations
-          initialConfig = config
-          applyConfigurations(it, config)
-
-          normandyForm.dispose()
-          normandyForm = NormandyForm(configToThemeConfig(it))
-        }
-  }
-
-  private fun applyConfigurations(it: ConfigurationPersistence, config: ThemeConfigurations) {
-    it.isAllowedToBeOverridden = config.shouldOverride
-    it.contrailColor = ColorUtil.toHexString(config.contrail)
-    it.primaryThemeColor = ColorUtil.toHexString(config.primaryColor)
-    it.secondaryThemeColor = ColorUtil.toHexString(config.secondaryColor)
-    it.isRainbowMode = config.isRainbowMode
-    it.isTransparentBackground = config.isTransparentBackground
-    ApplicationManager.getApplication().messageBus
-        .syncPublisher(CONFIGURATION_TOPIC)
-        .consumeChanges(configToThemeConfig(it))
+    ConfigurationManager.applyConfigurations(normandyForm.myThemeConfigurations) {
+      val config = normandyForm.myThemeConfigurations
+      initialConfig = config
+      normandyForm.dispose()
+      normandyForm = NormandyForm(config)
+    }
   }
 
   override fun createComponent(): JComponent? = normandyForm.getContent()
@@ -67,17 +46,4 @@ class NormandyConfigComponent : SearchableConfigurable {
    */
   override fun isModified(): Boolean = normandyForm.isModified()
 
-  private fun configToThemeConfig(it: ConfigurationPersistence): ThemeConfigurations {
-    return ThemeConfigurations(
-        com.intellij.ui.ColorUtil.fromHex(it.contrailColor),
-        com.intellij.ui.ColorUtil.fromHex(it.primaryThemeColor),
-        com.intellij.ui.ColorUtil.fromHex(it.secondaryThemeColor),
-        it.isRainbowMode,
-        it.isTransparentBackground,
-        it.isAllowedToBeOverridden,
-        ExternalTheme.byName(it.externalThemeSet)
-    )
-  }
-
 }
-
