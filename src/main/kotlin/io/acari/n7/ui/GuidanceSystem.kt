@@ -1,6 +1,6 @@
 package io.acari.n7.ui
 
-import com.intellij.util.ui.JBUI.*
+import com.intellij.ui.scale.JBUIScale.scale
 
 const val DEFAULT_VELOCITY_FROM_CITADEL = 2f
 const val DEFAULT_DISTANCE_FROM_CITADEL = 0f

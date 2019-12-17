@@ -79,7 +79,9 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations): Dispos
       }
       titledRow("Appearance Options"){
         row {
-          checkBox("Use Theme Accent", myThemeConfigurations.shouldOverride,
+          checkBox("Use Theme Accent",
+              myThemeConfigurations.shouldOverride,
+              comment = "If your current theme has a concept of an accent, then use that color.",
               actionListener = { _, component ->
                 myThemeConfigurations.shouldOverride = component.isSelected
                 ConfigurationManager.applyConfigurations(myThemeConfigurations){}

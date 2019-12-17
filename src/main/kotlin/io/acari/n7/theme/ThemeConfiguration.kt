@@ -1,8 +1,10 @@
 package io.acari.n7.theme
 
 import com.intellij.ui.ColorUtil
+import com.intellij.ui.JBColor.namedColor
 import io.acari.n7.config.ConfigurationPersistence
 import io.acari.n7.integration.ExternalThemeConfigurations
+import io.acari.n7.util.toHexString
 import io.acari.n7.util.toOptional
 import java.util.*
 
@@ -35,7 +37,9 @@ object ThemeConfiguration {
   val contrailColor: String
     get() {
       return getCorrectColor({ it.contrailColor })
-      { ExternalThemeConfigurations.contrailColor }
+      { namedColor("Doki.Accent.color",
+          namedColor("material.tab.borderColor", ThemeDefaults.contrailColor)).toHexString()
+          .toOptional() }
           .orElseGet { "#${ColorUtil.toHex(ThemeDefaults.contrailColor)}" }
     }
 
@@ -45,7 +49,8 @@ object ThemeConfiguration {
    * Normandy theme default for the current attribute.
    *
    */
-  private fun <T> getCorrectColor(userConfiguration: (ConfigurationPersistence) -> T, externalConfiguration: () -> Optional<T>): Optional<T> =
+  private fun <T> getCorrectColor(userConfiguration: (ConfigurationPersistence) -> T,
+                                  externalConfiguration: () -> Optional<T>): Optional<T> =
       ConfigurationPersistence.instance
           .flatMap {
             if (it.isAllowedToBeOverridden) externalConfiguration()
