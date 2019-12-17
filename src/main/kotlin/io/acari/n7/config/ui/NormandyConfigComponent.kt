@@ -26,6 +26,10 @@ class NormandyConfigComponent : SearchableConfigurable {
     ConfigurationManager.applyConfigurations(initialConfig) {}
   }
 
+  override fun reset() {
+    ConfigurationManager.applyConfigurations(initialConfig) {}
+  }
+
   /**
    * When ever the user accepts changes to the configuration.
    */
