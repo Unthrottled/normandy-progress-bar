@@ -1,29 +1,23 @@
 package io.acari.n7.config.ui
 
 import com.intellij.openapi.Disposable
-import com.intellij.openapi.application.ModalityState
-import com.intellij.openapi.wm.impl.customFrameDecorations.style.StyleProperty
 import com.intellij.ui.ColorPanel
 import com.intellij.ui.layout.panel
 import com.intellij.ui.scale.JBUIScale
-import com.intellij.ui.tabs.JBTabsBorder
 import com.intellij.util.Alarm
 import io.acari.n7.theme.ThemeConfigurations
 import io.acari.n7.theme.ThemeDefaults
-import io.acari.n7.util.toHexString
-import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.Dimension
-import javax.swing.*
-import javax.swing.border.Border
+import javax.swing.JComponent
+import javax.swing.JProgressBar
 
 /**
  * Most of is code converted from an automatic form generation engine, so pls forgive.
  */
-class NormandyForm(private val themeConfigurations: ThemeConfigurations): Disposable {
+class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
 
   val myThemeConfigurations = themeConfigurations.copy()
-  private val alarm: Alarm = Alarm(this)
 
   fun isModified(): Boolean =
       myThemeConfigurations != themeConfigurations
@@ -125,9 +119,5 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations): Dispos
     progress.preferredSize = Dimension(500, JBUIScale.scale(25))
 
     return progress
-  }
-
-  override fun dispose() {
-    alarm.dispose()
   }
 }

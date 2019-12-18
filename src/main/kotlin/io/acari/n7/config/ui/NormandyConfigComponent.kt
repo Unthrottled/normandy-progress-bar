@@ -37,7 +37,6 @@ class NormandyConfigComponent : SearchableConfigurable {
     ConfigurationManager.applyConfigurations(normandyForm.myThemeConfigurations) {
       val config = normandyForm.myThemeConfigurations
       initialConfig = config
-      normandyForm.dispose()
       normandyForm = NormandyForm(config)
     }
   }
