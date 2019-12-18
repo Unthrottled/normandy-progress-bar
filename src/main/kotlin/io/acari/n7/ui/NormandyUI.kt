@@ -129,9 +129,13 @@ open class NormandyUI : BasicProgressBarUI() {
           val (startingX, lengthOfContrail, distanceBetweenCitadelAndNormandy) =
               positionDataFunction(componentWidth, componentHeight, offset)
 
+          val contrailRadius =
+              if (ThemeConfiguration.isTransparentBackground) 0f
+              else borderRadius
+
           drawableGraphic.fill(RoundRectangle2D.Float(startingX, 2f * offset,
               lengthOfContrail, componentHeight - scale(5f),
-              borderRadius, borderRadius))
+              contrailRadius, contrailRadius))
 
           //Draw the Normandy!
           getNormandyIcon()
