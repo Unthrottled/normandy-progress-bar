@@ -100,9 +100,11 @@ open class NormandyUI : BasicProgressBarUI() {
               if (progressBarParent != null) progressBarParent.background
               else UIUtil.getPanelBackground()
           val tintedBackgroundColor =
-              if (ThemeConfiguration.isTransparentBackground) backgroundColor
-              else if (ColorUtil.isDark(backgroundColor)) ColorUtil.brighter(backgroundColor, 5)
-              else ColorUtil.darker(backgroundColor, 2)
+              when {
+                ThemeConfiguration.isTransparentBackground -> backgroundColor
+                ColorUtil.isDark(backgroundColor) -> ColorUtil.brighter(backgroundColor, 5)
+                else -> ColorUtil.darker(backgroundColor, 2)
+              }
           drawableGraphic.color = tintedBackgroundColor
 
           val borderRadius = scale(8f)

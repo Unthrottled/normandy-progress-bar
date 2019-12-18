@@ -121,20 +121,10 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations): Dispos
     if (modeless) {
       progress.putClientProperty("ProgressBar.stripeWidth", 2)
     }
-    alarm.addRequest(createRunnable(progress), 200, ModalityState.any())
 
     progress.preferredSize = Dimension(500, JBUIScale.scale(25))
 
     return progress
-  }
-
-  private fun createRunnable(progress: JProgressBar): () -> Unit {
-    return {
-      if (progress.value < progress.maximum) {
-        progress.value += 1
-        alarm.addRequest(createRunnable(progress), 100)
-      }
-    }
   }
 
   override fun dispose() {

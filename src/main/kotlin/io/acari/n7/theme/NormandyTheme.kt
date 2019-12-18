@@ -1,7 +1,6 @@
 package io.acari.n7.theme
 
 import com.intellij.ui.ColorUtil
-import com.intellij.ui.Gray
 import java.awt.Color
 
 
