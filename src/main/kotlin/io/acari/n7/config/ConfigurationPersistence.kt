@@ -20,7 +20,7 @@ class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersisten
   var contrailColor = "#${ColorUtil.toHex(ThemeDefaults.contrailColor)}"
   var isRainbowMode = false
   var isTransparentBackground = false
-  var useThemeAccent = true
+  var useThemeAccent = false
 
   var externalSecondaryColor = NOT_SET
   var externalContrailColor = NOT_SET
