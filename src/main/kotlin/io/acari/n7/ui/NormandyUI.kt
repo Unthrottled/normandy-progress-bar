@@ -130,7 +130,7 @@ open class NormandyUI : BasicProgressBarUI() {
               positionDataFunction(componentWidth, componentHeight, offset)
 
           val contrailRadius =
-              if (ThemeConfiguration.isTransparentBackground) 0f
+              if (ThemeConfiguration.isTransparentBackground) scale(10f)
               else borderRadius
 
           drawableGraphic.fill(RoundRectangle2D.Float(startingX, 2f * offset,
