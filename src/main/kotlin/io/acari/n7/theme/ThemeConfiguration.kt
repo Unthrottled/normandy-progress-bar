@@ -3,8 +3,11 @@ package io.acari.n7.theme
 import com.intellij.ui.ColorUtil
 import io.acari.n7.config.ConfigurationPersistence
 import io.acari.n7.integration.ExternalThemeConfigurations
+import io.acari.n7.util.toHexString
 import io.acari.n7.util.toOptional
+import java.awt.Color
 import java.util.*
+import javax.swing.UIManager
 
 object ThemeConfiguration {
 
@@ -35,7 +38,15 @@ object ThemeConfiguration {
   val contrailColor: String
     get() {
       return getCorrectColor({ it.contrailColor })
-      { ExternalThemeConfigurations.contrailColor }
+      {
+        val defaults = UIManager.getLookAndFeelDefaults()
+        val themeAccent = defaults["Doki.Accent.color"]
+            ?: defaults["material.tab.borderColor"]
+        themeAccent.toOptional()
+            .filter { it is Color }
+            .map { it as Color }
+            .map { it.toHexString() }
+      }
           .orElseGet { "#${ColorUtil.toHex(ThemeDefaults.contrailColor)}" }
     }
 
@@ -45,10 +56,11 @@ object ThemeConfiguration {
    * Normandy theme default for the current attribute.
    *
    */
-  private fun <T> getCorrectColor(userConfiguration: (ConfigurationPersistence) -> T, externalConfiguration: () -> Optional<T>): Optional<T> =
+  private fun <T> getCorrectColor(userConfiguration: (ConfigurationPersistence) -> T,
+                                  externalConfiguration: () -> Optional<T>): Optional<T> =
       ConfigurationPersistence.instance
           .flatMap {
-            if (it.isAllowedToBeOverridden) externalConfiguration()
+            if (it.useThemeAccent) externalConfiguration()
                 .map { externalConfig -> externalConfig.toOptional() }
                 .orElseGet { userConfiguration(it).toOptional() }
             else userConfiguration(it).toOptional()

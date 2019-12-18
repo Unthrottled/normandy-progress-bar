@@ -29,7 +29,7 @@ object NormandyTheme {
 
   private val contrailColor = { _: Color -> ColorUtil.fromHex(ThemeConfiguration.contrailColor) }
   private val outerContrailColor = { backgroundColor: Color -> backgroundColor }
-  private val backgroundColorFunction = { backgroundColor: Color -> backgroundColor }
+  private val backgroundColorFunction = { backgroundColor: Color -> backgroundColor  }
 
   val contrailColors: Array<(Color) -> Color>
     get() = if (ThemeConfiguration.isRainbowMode) {

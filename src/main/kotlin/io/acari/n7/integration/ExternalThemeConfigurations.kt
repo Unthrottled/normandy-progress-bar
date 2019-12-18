@@ -2,7 +2,6 @@ package io.acari.n7.integration
 
 import io.acari.n7.config.ConfigurationPersistence
 import io.acari.n7.config.NOT_SET
-import io.acari.n7.util.LegacySupportUtility
 import java.util.*
 
 
@@ -18,7 +17,7 @@ object ExternalThemeConfigurations {
 
   private fun getExternalThemeFromConfig(valueExtractor3000: (ConfigurationPersistence) -> String): Optional<String> =
       ConfigurationPersistence.instance.filter { it.externalThemeSet != NOT_SET }
-          .filter { it.isAllowedToBeOverridden }
+          .filter { it.useThemeAccent }
           .map(valueExtractor3000)
           .filter { it != NOT_SET }
 }

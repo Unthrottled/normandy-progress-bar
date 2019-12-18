@@ -1,12 +1,12 @@
 package io.acari.n7.ui
 
 import com.intellij.ui.ColorUtil
+import com.intellij.ui.scale.JBUIScale.scale
 import com.intellij.util.ui.GraphicsUtil
 import com.intellij.util.ui.JBUI.Borders
-import com.intellij.ui.scale.JBUIScale.scale
 import com.intellij.util.ui.UIUtil
-import io.acari.n7.theme.NormandyTheme
 import io.acari.n7.icon.NormandyIconComponent
+import io.acari.n7.theme.NormandyTheme
 import io.acari.n7.theme.ThemeConfiguration
 import java.awt.Dimension
 import java.awt.Graphics
@@ -27,8 +27,10 @@ open class NormandyUI : BasicProgressBarUI() {
     val NORMANDY = NormandyIconComponent.getNormandyIcon()
     val NORMANDY_TO_CITADEL = NormandyIconComponent.getNormandyToCitadelIcon()
 
-    fun createUi(jComponent: JComponent): ComponentUI {
-      jComponent.border = Borders.empty().asUIResource()
+    @JvmStatic
+    @Suppress("ACCIDENTAL_OVERRIDE", "UNUSED", "UNUSED_PARAMETER")
+    fun createUI(c: JComponent?): ComponentUI {
+      c?.border = Borders.empty().asUIResource()
       return NormandyUI()
     }
   }
@@ -44,7 +46,10 @@ open class NormandyUI : BasicProgressBarUI() {
    *
    */
   override fun paintIndeterminate(g: Graphics, component: JComponent) {
-    drawNormandyProgress(g, component, { if (guidanceSystem.isHeadingToCitadel()) NORMANDY_TO_CITADEL else NORMANDY },
+    drawNormandyProgress(g, component, {
+      if (guidanceSystem.isHeadingToCitadel()) NORMANDY_TO_CITADEL
+      else NORMANDY
+    },
         guidanceSystem.calculateCurrentLocation())
   }
 
@@ -55,7 +60,8 @@ open class NormandyUI : BasicProgressBarUI() {
    *
    */
   override fun paintDeterminate(g: Graphics, component: JComponent) {
-    drawNormandyProgress(g, component, { NORMANDY }) { componentWidth, componentHeight, offset ->
+    drawNormandyProgress(g, component, { NORMANDY })
+    { componentWidth, componentHeight, offset ->
       guidanceSystem.reCalibrate()// Fixes the jumping between the two progress bars
 
       val insets = progressBar.insets
@@ -94,14 +100,20 @@ open class NormandyUI : BasicProgressBarUI() {
               if (progressBarParent != null) progressBarParent.background
               else UIUtil.getPanelBackground()
           val tintedBackgroundColor =
-              if (ThemeConfiguration.isTransparentBackground) backgroundColor
-              else if (ColorUtil.isDark(backgroundColor)) ColorUtil.brighter(backgroundColor, 5)
-              else ColorUtil.darker(backgroundColor, 2)
+              when {
+                ThemeConfiguration.isTransparentBackground -> backgroundColor
+                ColorUtil.isDark(backgroundColor) -> ColorUtil.brighter(backgroundColor, 5)
+                else -> ColorUtil.darker(backgroundColor, 2)
+              }
           drawableGraphic.color = tintedBackgroundColor
 
           val borderRadius = scale(8f)
           val offset = scale(1f)
-          drawableGraphic.fill(RoundRectangle2D.Float(offset, offset, componentWidth.toFloat() - 2f * offset - offset, componentHeight.toFloat() - 2f * offset - offset, borderRadius, borderRadius))
+          drawableGraphic.fill(RoundRectangle2D.Float(offset, offset,
+              componentWidth.toFloat() - 2f * offset - offset,
+              componentHeight.toFloat() - 2f * offset - offset,
+              borderRadius,
+              borderRadius))
 
           //Draw Contrail Background
           drawableGraphic.paint = LinearGradientPaint(0f,
@@ -117,12 +129,22 @@ open class NormandyUI : BasicProgressBarUI() {
           val (startingX, lengthOfContrail, distanceBetweenCitadelAndNormandy) =
               positionDataFunction(componentWidth, componentHeight, offset)
 
+          val contrailRadius =
+              if (ThemeConfiguration.isTransparentBackground) scale(10f)
+              else borderRadius
+
           drawableGraphic.fill(RoundRectangle2D.Float(startingX, 2f * offset,
               lengthOfContrail, componentHeight - scale(5f),
-              borderRadius, borderRadius))
+              contrailRadius, contrailRadius))
 
           //Draw the Normandy!
-          getNormandyIcon().paintIcon(progressBar, drawableGraphic, distanceBetweenCitadelAndNormandy, scale(0))
+          getNormandyIcon()
+              .paintIcon(
+                  progressBar,
+                  drawableGraphic,
+                  distanceBetweenCitadelAndNormandy,
+                  scale(0)
+              )
 
           graphicsConfig.restore()
         }

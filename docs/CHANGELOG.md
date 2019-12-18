@@ -1,6 +1,14 @@
 # Changelog
 ---- 
 
+# 1.7.0
+
+- Able to adjust configurations while the ide is indexing.
+- Re-Designed the Settings Menu.
+- Restored some theme integrations.
+    - Tries to use the theme accent as contrail when enabled.
+- Contrail stays inside background now.
+
 # 1.6.0
 
 - Report exceptions anonymously!

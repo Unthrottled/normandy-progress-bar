@@ -1,10 +1,11 @@
 package io.acari.n7.integration
 
 import com.intellij.ide.AppLifecycleListener
-import com.intellij.ide.ui.LafManager
+import com.intellij.ide.ui.LafManagerListener
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.BaseComponent
 import com.intellij.openapi.progress.util.ProgressWindow
+import com.intellij.openapi.project.DumbAware
 import com.intellij.util.SVGLoader
 import com.intellij.util.messages.MessageBusConnection
 import io.acari.n7.config.CONFIGURATION_TOPIC
@@ -12,7 +13,7 @@ import io.acari.n7.config.NormandyConfigurationSubscriber
 import io.acari.n7.icon.NormandyColorPatcher
 import io.acari.n7.icon.SvgLoaderHacker
 
-class NormandyIntegrationComponent : BaseComponent {
+class NormandyIntegrationComponent : BaseComponent, DumbAware {
 
   private val messageBus: MessageBusConnection = ApplicationManager.getApplication().messageBus.connect()
 
@@ -31,6 +32,8 @@ class NormandyIntegrationComponent : BaseComponent {
     messageBus.subscribe(ProgressWindow.TOPIC, ProgressWindow.Listener { setSVGColorPatcher() })
 
     messageBus.subscribe(AppLifecycleListener.TOPIC, AppLifecycleSubscriber { setSVGColorPatcher() })
+
+    messageBus.subscribe(LafManagerListener.TOPIC, LafManagerListener { setSVGColorPatcher() })
   }
 
 
@@ -53,7 +56,6 @@ class NormandyIntegrationComponent : BaseComponent {
   override fun initComponent() {
     setSVGColorPatcher()
     subscribeToTopics()
-    LafManager.getInstance().addLafManagerListener { setSVGColorPatcher() }
   }
 
   override fun disposeComponent() {

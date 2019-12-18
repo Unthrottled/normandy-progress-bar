@@ -28,7 +28,7 @@ import java.util.stream.Collectors
 class SlackReporter : ErrorReportSubmitter() {
   companion object {
     private val httpClient = HttpClients.createMinimal()
-    private const val slackWebhook = "https://hooks.slack.com/services/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"
+    private const val errorReportingURL = "https://doki.api.acari.io/slack/error"
     private val gson = GsonBuilder().create()
   }
 
@@ -36,7 +36,7 @@ class SlackReporter : ErrorReportSubmitter() {
 
   override fun submit(events: Array<out IdeaLoggingEvent>, additionalInfo: String?, parentComponent: Component, consumer: Consumer<SubmittedReportInfo>): Boolean {
     return try {
-      val httpPost = HttpPost(slackWebhook)
+      val httpPost = HttpPost(errorReportingURL)
       val eventMessages = events.map {
         """_Message_: ${it.message}
           |_Throwable Text_: ${it.throwableText}""".trimMargin()

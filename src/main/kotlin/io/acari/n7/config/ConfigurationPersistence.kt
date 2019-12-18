@@ -20,7 +20,7 @@ class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersisten
   var contrailColor = "#${ColorUtil.toHex(ThemeDefaults.contrailColor)}"
   var isRainbowMode = false
   var isTransparentBackground = false
-  var isAllowedToBeOverridden = true
+  var useThemeAccent = false
 
   var externalSecondaryColor = NOT_SET
   var externalContrailColor = NOT_SET
@@ -46,7 +46,7 @@ class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersisten
   }
 
   override fun toString(): String {
-    return "ConfigurationPersistence(primaryThemeColor='$primaryThemeColor', secondaryThemeColor='$secondaryThemeColor', contrailColor='$contrailColor', isRainbowMode=$isRainbowMode, isTransparentBackground=$isTransparentBackground, isAllowedToBeOverridden=$isAllowedToBeOverridden, externalSecondaryColor='$externalSecondaryColor', externalContrailColor='$externalContrailColor', externalThemeSet='$externalThemeSet', version='$version')"
+    return "ConfigurationPersistence(primaryThemeColor='$primaryThemeColor', secondaryThemeColor='$secondaryThemeColor', contrailColor='$contrailColor', isRainbowMode=$isRainbowMode, isTransparentBackground=$isTransparentBackground, useThemeAccent=$useThemeAccent, externalSecondaryColor='$externalSecondaryColor', externalContrailColor='$externalContrailColor', externalThemeSet='$externalThemeSet', version='$version')"
   }
 
   companion object {
