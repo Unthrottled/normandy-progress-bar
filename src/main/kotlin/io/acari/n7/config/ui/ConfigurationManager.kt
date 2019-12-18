@@ -13,7 +13,7 @@ object ConfigurationManager {
   fun applyConfigurations(config: ThemeConfigurations, onApply: ()->Unit) {
     ConfigurationPersistence.instance
         .ifPresent {
-          it.isAllowedToBeOverridden = config.shouldOverride
+          it.useThemeAccent = config.shouldUseThemeAccents
           it.contrailColor = config.contrail.toHexString()
           it.primaryThemeColor = config.primaryColor.toHexString()
           it.secondaryThemeColor = config.secondaryColor.toHexString()
@@ -33,7 +33,7 @@ object ConfigurationManager {
         it.secondaryThemeColor.toColor(),
         it.isRainbowMode,
         it.isTransparentBackground,
-        it.isAllowedToBeOverridden,
+        it.useThemeAccent,
         ExternalTheme.byName(it.externalThemeSet)
     )
   }

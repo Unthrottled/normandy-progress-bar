@@ -1,10 +1,8 @@
 package io.acari.n7.config.ui
 
-import com.intellij.openapi.Disposable
 import com.intellij.ui.ColorPanel
 import com.intellij.ui.layout.panel
 import com.intellij.ui.scale.JBUIScale
-import com.intellij.util.Alarm
 import io.acari.n7.theme.ThemeConfigurations
 import io.acari.n7.theme.ThemeDefaults
 import java.awt.Color
@@ -74,10 +72,10 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
       titledRow("Appearance Options"){
         row {
           checkBox("Use Theme Accent",
-              myThemeConfigurations.shouldOverride,
+              myThemeConfigurations.shouldUseThemeAccents,
               comment = "If your current theme has a concept of an accent, then use that color.",
               actionListener = { _, component ->
-                myThemeConfigurations.shouldOverride = component.isSelected
+                myThemeConfigurations.shouldUseThemeAccents = component.isSelected
                 ConfigurationManager.applyConfigurations(myThemeConfigurations){}
               })
         }

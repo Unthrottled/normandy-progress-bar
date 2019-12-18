@@ -60,7 +60,7 @@ object ThemeConfiguration {
                                   externalConfiguration: () -> Optional<T>): Optional<T> =
       ConfigurationPersistence.instance
           .flatMap {
-            if (it.isAllowedToBeOverridden) externalConfiguration()
+            if (it.useThemeAccent) externalConfiguration()
                 .map { externalConfig -> externalConfig.toOptional() }
                 .orElseGet { userConfiguration(it).toOptional() }
             else userConfiguration(it).toOptional()

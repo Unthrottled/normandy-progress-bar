@@ -9,6 +9,6 @@ data class ThemeConfigurations(
     var secondaryColor: Color = ThemeDefaults.secondaryColor,
     var isRainbowMode: Boolean = false,
     var isTransparentBackground: Boolean = false,
-    var shouldOverride: Boolean = true,
+    var shouldUseThemeAccents: Boolean = true,
     var externalTheme: ExternalTheme = ExternalTheme.NOT_SET
 )
