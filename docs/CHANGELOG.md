@@ -1,6 +1,10 @@
 # Changelog
 ---- 
 
+# 1.8.0
+
+- 2020.1 Build Support
+
 # 1.7.0
 
 - Able to adjust configurations while the ide is indexing.

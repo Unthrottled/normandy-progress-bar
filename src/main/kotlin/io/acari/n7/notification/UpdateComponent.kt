@@ -5,13 +5,12 @@ import com.intellij.openapi.project.Project
 
 import io.acari.n7.config.ConfigurationPersistence
 
-const val VERSION = "v1.7.0"
+const val VERSION = "v1.8.0"
 val UPDATE_MESSAGE =
     """
       What's New?<br>
       <ul>
-      <li>Enhanced Settings Menu.</li>
-      <li>Restored some theme integrations.</li>
+      <li>2020.1 Build Support</li>
       <br>
       Thanks again for downloading <b>Normandy Progress Bar UI</b>! •‿•<br>
           <br>See <a href="https://github.com/cyclic-reference/normandy-progress-bar/blob/master/docs/CHANGELOG.md">Changelog</a> for more details.
