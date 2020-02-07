@@ -1,6 +1,11 @@
 # Changelog
 ---- 
 
+# 1.8.1
+
+- Fixed settings not showing up in 2020.1 EAP builds.
+  - Thanks for reporting the issue!
+
 # 1.8.0
 
 - 2020.1 Build Support
