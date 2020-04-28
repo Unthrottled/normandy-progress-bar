@@ -26,6 +26,9 @@
       <implementation-class>io.acari.n7.NormandyComponent</implementation-class>
     </component>
     <component>
+      <implementation-class>io.acari.n7.notification.UpdateComponent</implementation-class>
+    </component>
+    <component>
       <implementation-class>io.acari.n7.integration.NormandyIntegrationComponent</implementation-class>
     </component>
   </application-components>
