@@ -8,7 +8,7 @@ repositories {
     mavenCentral()
 }
 
-group 'io.acari'
+group 'io.unthrottled'
 version '1.8.1'
 
 dependencies {

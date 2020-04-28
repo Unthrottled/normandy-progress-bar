@@ -2,11 +2,11 @@
   <id>io.acari.normandy.progress.bar</id>
   <name>SSV Normandy Progress Bar</name>
   <version>1.0</version>
-  <vendor email="alexsimons9999@gmail.com" url="https://acari.io">cyclic-reference</vendor>
+  <vendor email="alexsimons9999@gmail.com" url="https://unthrottled.io">Unthrottled</vendor>
 
   <description><![CDATA[
       Your progress bar becomes the SSV Normandy SR-1 traveling at FTL.<br/><br/>
-      <div align="center"><img src="https://raw.githubusercontent.com/cyclic-reference/normandy-progress-bar/master/src/main/resources/normandy.png" alt="SSV Normandy"></img></div>
+      <div align="center"><img src="https://raw.githubusercontent.com/Unthrottled/normandy-progress-bar/master/src/main/resources/normandy.png" alt="SSV Normandy"></img></div>
     ]]></description>
 
   <idea-version since-build="201.0"/>
@@ -14,33 +14,33 @@
   <depends>com.intellij.modules.lang</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <applicationService serviceImplementation="io.acari.n7.config.ConfigurationPersistence"/>
-    <applicationConfigurable instance="io.acari.n7.config.ui.NormandyConfigComponent"
+    <applicationService serviceImplementation="io.unthrottled.n7.config.ConfigurationPersistence"/>
+    <applicationConfigurable instance="io.unthrottled.n7.config.ui.NormandyConfigComponent"
                              groupId="appearance"
-                             id="io.acari.n7.config"/>
-    <errorHandler implementation="io.acari.n7.integration.SlackReporter"/>
+                             id="io.unthrottled.n7.config"/>
+    <errorHandler implementation="io.unthrottled.n7.integration.SlackReporter"/>
   </extensions>
 
   <application-components>
     <component>
-      <implementation-class>io.acari.n7.NormandyComponent</implementation-class>
+      <implementation-class>io.unthrottled.n7.NormandyComponent</implementation-class>
     </component>
     <component>
-      <implementation-class>io.acari.n7.notification.UpdateComponent</implementation-class>
+      <implementation-class>io.unthrottled.n7.notification.UpdateComponent</implementation-class>
     </component>
     <component>
-      <implementation-class>io.acari.n7.integration.NormandyIntegrationComponent</implementation-class>
+      <implementation-class>io.unthrottled.n7.integration.NormandyIntegrationComponent</implementation-class>
     </component>
   </application-components>
 
   <project-components>
     <component>
-      <implementation-class>io.acari.n7.notification.UpdateComponent</implementation-class>
+      <implementation-class>io.unthrottled.n7.notification.UpdateComponent</implementation-class>
     </component>
   </project-components>
 
   <actions>
-    <action class="io.acari.n7.actions.ConfigAction"
+    <action class="io.unthrottled.n7.actions.ConfigAction"
             id="Config Action"
             text="SSV Normandy Configuration"
             icon="/alliance.svg">
