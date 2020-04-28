@@ -10,7 +10,6 @@ import io.acari.n7.theme.ThemeDefaults
 
 import java.util.Optional
 
-
 @State(name = "NormandyConfig", storages = [Storage("normandy_theme.xml")])
 class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersistence>, Cloneable {
 

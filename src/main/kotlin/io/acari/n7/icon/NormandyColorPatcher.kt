@@ -7,7 +7,7 @@ import org.w3c.dom.Element
 import java.net.URL
 
 class NormandyColorPatcher(
-    private val otherColorPatcherProvider: (URL?) -> (Element) -> Unit = { {} }
+  private val otherColorPatcherProvider: (URL?) -> (Element) -> Unit = { {} }
 ) : SVGLoader.SvgElementColorPatcherProvider {
   override fun forURL(url: URL?): SVGLoader.SvgElementColorPatcher {
     val self = this
@@ -23,8 +23,9 @@ class NormandyColorPatcher(
     }
   }
 
-  fun patchColors(svg: Element,
-                  otherPatcher: (Element) -> Unit
+  fun patchColors(
+    svg: Element,
+    otherPatcher: (Element) -> Unit
   ) {
     otherPatcher(svg)
     patchChildren(svg,

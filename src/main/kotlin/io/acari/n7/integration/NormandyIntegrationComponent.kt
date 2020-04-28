@@ -17,7 +17,6 @@ class NormandyIntegrationComponent : BaseComponent, DumbAware {
 
   private val messageBus: MessageBusConnection = ApplicationManager.getApplication().messageBus.connect()
 
-
   /**
    * Subscribes to a bunch of topics to avoid any other plugin from
    * overriding the svg color patcher. Thankfully the Normandy's color patcher
@@ -36,7 +35,6 @@ class NormandyIntegrationComponent : BaseComponent, DumbAware {
     messageBus.subscribe(LafManagerListener.TOPIC, LafManagerListener { setSVGColorPatcher() })
   }
 
-
   /**
    * Enables the ability to color the Normandy and Alliance Icon.
    */
@@ -52,7 +50,6 @@ class NormandyIntegrationComponent : BaseComponent, DumbAware {
         .orElseGet { NormandyColorPatcher() })
   }
 
-
   override fun initComponent() {
     setSVGColorPatcher()
     subscribeToTopics()
@@ -62,4 +59,3 @@ class NormandyIntegrationComponent : BaseComponent, DumbAware {
     messageBus.disconnect()
   }
 }
-

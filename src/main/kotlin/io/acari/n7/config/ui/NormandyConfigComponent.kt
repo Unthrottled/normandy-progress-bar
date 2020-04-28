@@ -48,5 +48,4 @@ class NormandyConfigComponent : SearchableConfigurable {
    * I dunno which it helps, I just made it does the do ¯\_(ツ)_/¯
    */
   override fun isModified(): Boolean = normandyForm.isModified()
-
 }

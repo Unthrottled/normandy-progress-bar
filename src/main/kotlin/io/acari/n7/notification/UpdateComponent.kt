@@ -28,4 +28,3 @@ class UpdateComponent(private val project: Project) : ProjectComponent {
         }
   }
 }
-
