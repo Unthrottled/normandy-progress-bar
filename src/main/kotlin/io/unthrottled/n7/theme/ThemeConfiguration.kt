@@ -7,6 +7,7 @@ import io.unthrottled.n7.util.toHexString
 import io.unthrottled.n7.util.toOptional
 import java.awt.Color
 import java.util.*
+import java.util.Optional.of
 import javax.swing.UIManager
 
 object ThemeConfiguration {
@@ -60,7 +61,7 @@ object ThemeConfiguration {
       ConfigurationPersistence.instance
           .flatMap {
             if (it.useThemeAccent) externalConfiguration()
-                .map { externalConfig -> externalConfig.toOptional() }
+                .map { externalConfig -> of(externalConfig) }
                 .orElseGet { userConfiguration(it).toOptional() }
             else userConfiguration(it).toOptional()
           }
