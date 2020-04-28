@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://raw.githubusercontent.com/cyclic-reference/normandy-progress-bar/master/assets/normandy.gif" alt="SSV Normandy"></img>
+<img src="https://raw.githubusercontent.com/Unthrottled/normandy-progress-bar/master/assets/normandy.gif" alt="SSV Normandy"></img>
 </div>
 
 ---
@@ -21,7 +21,7 @@ https://plugins.jetbrains.com/plugin/12025-ssv-normandy-progress-bar
 
 ## Plugin's that work with this plugin*
 
-- [Doki-Doki Literature Club Theme](https://github.com/cyclic-reference/ddlc-jetbrains-theme)
+- [Doki-Doki Literature Club Theme](https://github.com/Unthrottled/ddlc-jetbrains-theme)
 
 ***Auto theming integration is currently not available at the moment.** (It will be back, eventually!)
 
