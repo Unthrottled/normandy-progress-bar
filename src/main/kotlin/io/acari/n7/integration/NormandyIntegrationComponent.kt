@@ -4,7 +4,6 @@ import com.intellij.ide.AppLifecycleListener
 import com.intellij.ide.ui.LafManagerListener
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.components.BaseComponent
 import com.intellij.openapi.progress.util.ProgressWindow
 import com.intellij.openapi.project.DumbAware
 import com.intellij.util.SVGLoader

@@ -3,7 +3,6 @@ package io.acari.n7
 import com.intellij.ide.ui.LafManagerListener
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.components.BaseComponent
 import com.intellij.openapi.project.DumbAware
 import com.intellij.util.messages.MessageBusConnection
 import io.acari.n7.ui.NormandyUI
