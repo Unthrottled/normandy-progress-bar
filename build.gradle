@@ -1,34 +1,25 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven { url 'http://dl.bintray.com/content/aalmiray/kordamp' }
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin"
-        classpath 'org.kordamp:markdown-gradle-plugin:1.0.0'
-    }
-}
-
 plugins {
-    id 'org.jetbrains.intellij' version '0.4.10'
-    id 'org.jetbrains.kotlin.jvm' version '1.3.21'
+    id 'org.jetbrains.intellij' version '0.4.16'
+    id "org.jetbrains.kotlin.jvm" version "1.3.72"
+    id 'org.kordamp.gradle.markdown' version '2.0.0'
+    id "org.jlleitschuh.gradle.ktlint" version "8.2.0"
 }
-
-apply plugin: 'org.kordamp.markdown.convert'
-apply plugin: 'org.jetbrains.intellij'
-apply plugin: 'kotlin'
-
-group 'io.acari'
-version '1.8.1'
-
 repositories {
     mavenCentral()
 }
 
+group 'io.acari'
+version '1.8.1'
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "com.google.code.gson:gson:2.8.5"
+}
 
+intellij {
+  version '2020.1'
+  type 'IU'
+  alternativeIdePath idePath
 }
 
 compileKotlin {
@@ -36,16 +27,6 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
-}
-intellij {
-    type 'IU'
-    version 'LATEST-EAP-SNAPSHOT'
-    alternativeIdePath idePath
-
-    publishPlugin {
-        username intellijPublishUsername
-        password intellijPublishPassword
-    }
 }
 
 markdownToHtml {

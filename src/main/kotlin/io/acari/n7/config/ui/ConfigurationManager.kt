@@ -10,7 +10,7 @@ import io.acari.n7.util.toHexString
 
 object ConfigurationManager {
 
-  fun applyConfigurations(config: ThemeConfigurations, onApply: ()->Unit) {
+  fun applyConfigurations(config: ThemeConfigurations, onApply: () -> Unit) {
     ConfigurationPersistence.instance
         .ifPresent {
           it.useThemeAccent = config.shouldUseThemeAccents

@@ -23,22 +23,19 @@ object ThemeConfiguration {
 
   val primaryThemeColor: String
     get() {
-      return getCorrectColor({ it.primaryThemeColor })
-      { Optional.empty() }
+      return getCorrectColor({ it.primaryThemeColor }) { Optional.empty() }
           .orElseGet { "#${ColorUtil.toHex(ThemeDefaults.primaryColor)}" }
     }
 
   val secondaryThemeColor: String
     get() {
-      return getCorrectColor({ it.secondaryThemeColor })
-      { ExternalThemeConfigurations.secondaryThemeColor }
+      return getCorrectColor({ it.secondaryThemeColor }) { ExternalThemeConfigurations.secondaryThemeColor }
           .orElseGet { "#${ColorUtil.toHex(ThemeDefaults.secondaryColor)}" }
     }
 
   val contrailColor: String
     get() {
-      return getCorrectColor({ it.contrailColor })
-      {
+      return getCorrectColor({ it.contrailColor }) {
         val defaults = UIManager.getLookAndFeelDefaults()
         val themeAccent = defaults["Doki.Accent.color"]
             ?: defaults["material.tab.borderColor"]
@@ -56,8 +53,10 @@ object ThemeConfiguration {
    * Normandy theme default for the current attribute.
    *
    */
-  private fun <T> getCorrectColor(userConfiguration: (ConfigurationPersistence) -> T,
-                                  externalConfiguration: () -> Optional<T>): Optional<T> =
+  private fun <T> getCorrectColor(
+    userConfiguration: (ConfigurationPersistence) -> T,
+    externalConfiguration: () -> Optional<T>
+  ): Optional<T> =
       ConfigurationPersistence.instance
           .flatMap {
             if (it.useThemeAccent) externalConfiguration()
@@ -65,5 +64,4 @@ object ThemeConfiguration {
                 .orElseGet { userConfiguration(it).toOptional() }
             else userConfiguration(it).toOptional()
           }
-
 }

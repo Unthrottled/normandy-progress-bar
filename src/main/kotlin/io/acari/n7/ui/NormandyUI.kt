@@ -60,9 +60,8 @@ open class NormandyUI : BasicProgressBarUI() {
    *
    */
   override fun paintDeterminate(g: Graphics, component: JComponent) {
-    drawNormandyProgress(g, component, { NORMANDY })
-    { componentWidth, componentHeight, offset ->
-      guidanceSystem.reCalibrate()// Fixes the jumping between the two progress bars
+    drawNormandyProgress(g, component, { NORMANDY }) { componentWidth, componentHeight, offset ->
+      guidanceSystem.reCalibrate() // Fixes the jumping between the two progress bars
 
       val insets = progressBar.insets
       val barRectWidth = componentWidth - (insets.right + insets.left)
@@ -76,8 +75,12 @@ open class NormandyUI : BasicProgressBarUI() {
     }
   }
 
-  private fun drawNormandyProgress(g: Graphics, component: JComponent, getNormandyIcon: () -> Icon,
-                                   positionDataFunction: (Int, Int, Float) -> NormandyPositionData) {
+  private fun drawNormandyProgress(
+    g: Graphics,
+    component: JComponent,
+    getNormandyIcon: () -> Icon,
+    positionDataFunction: (Int, Int, Float) -> NormandyPositionData
+  ) {
     getCorrectGraphic(g)
         .ifPresent { dimensionsAndGraphic ->
           val drawableGraphic = dimensionsAndGraphic.third
@@ -94,7 +97,7 @@ open class NormandyUI : BasicProgressBarUI() {
 
           val graphicsConfig = GraphicsUtil.setupAAPainting(drawableGraphic)
 
-          //SET Progress bar BACKGROUND (ie Space!)
+          // SET Progress bar BACKGROUND (ie Space!)
           val progressBarParent = component.parent
           val backgroundColor =
               if (progressBarParent != null) progressBarParent.background
@@ -115,7 +118,7 @@ open class NormandyUI : BasicProgressBarUI() {
               borderRadius,
               borderRadius))
 
-          //Draw Contrail Background
+          // Draw Contrail Background
           drawableGraphic.paint = LinearGradientPaint(0f,
               scale(0f),
               0f,
@@ -137,7 +140,7 @@ open class NormandyUI : BasicProgressBarUI() {
               lengthOfContrail, componentHeight - scale(5f),
               contrailRadius, contrailRadius))
 
-          //Draw the Normandy!
+          // Draw the Normandy!
           getNormandyIcon()
               .paintIcon(
                   progressBar,

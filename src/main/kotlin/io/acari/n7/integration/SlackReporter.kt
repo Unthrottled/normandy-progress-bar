@@ -104,7 +104,6 @@ class SlackReporter : ErrorReportSubmitter() {
         "Non-Bundled Plugins: " + Arrays.stream(PluginManagerCore.getPlugins()).filter { p -> !p.isBundled && p.isEnabled }
         .map { p -> p.pluginId.idString }.collect(Collectors.joining(","))
   }
-
 }
 
 data class SlackMessage(val text: String)

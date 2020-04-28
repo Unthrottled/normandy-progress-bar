@@ -4,7 +4,6 @@ import io.acari.n7.config.ConfigurationPersistence
 import io.acari.n7.config.NOT_SET
 import java.util.*
 
-
 object ExternalThemeConfigurations {
   val secondaryThemeColor: Optional<String>
     get() = getExternalThemeFromConfig { it.externalSecondaryColor }

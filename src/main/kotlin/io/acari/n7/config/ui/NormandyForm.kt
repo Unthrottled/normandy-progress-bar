@@ -23,23 +23,23 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
   fun getContent(): JComponent? {
     val primaryColor = ColorPanel()
     primaryColor.selectedColor = themeConfigurations.primaryColor
-    primaryColor.addActionListener{
+    primaryColor.addActionListener {
       myThemeConfigurations.primaryColor = primaryColor.selectedColor!!
-      ConfigurationManager.applyConfigurations(myThemeConfigurations){}
+      ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
     }
 
     val secondaryColor = ColorPanel()
     secondaryColor.selectedColor = themeConfigurations.secondaryColor
-    secondaryColor.addActionListener{
+    secondaryColor.addActionListener {
       myThemeConfigurations.secondaryColor = secondaryColor.selectedColor!!
-      ConfigurationManager.applyConfigurations(myThemeConfigurations){}
+      ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
     }
 
     val contrailColor = ColorPanel()
     contrailColor.selectedColor = themeConfigurations.contrail
-    contrailColor.addActionListener{
+    contrailColor.addActionListener {
       myThemeConfigurations.contrail = contrailColor.selectedColor!!
-      ConfigurationManager.applyConfigurations(myThemeConfigurations){}
+      ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
     }
 
     val progressBar = createLoadingIndicator(true, Color.GREEN, false)!!
@@ -47,7 +47,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
       row {
         progressBar()
       }
-      titledRow("Normandy Theme Customization"){
+      titledRow("Normandy Theme Customization") {
         titledRow("Color Customization") {
           row {
             cell {
@@ -69,37 +69,37 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
           }
         }
       }
-      titledRow("Appearance Options"){
+      titledRow("Appearance Options") {
         row {
           checkBox("Use Theme Accent",
               myThemeConfigurations.shouldUseThemeAccents,
               comment = "If your current theme has a concept of an accent, then use that color.",
               actionListener = { _, component ->
                 myThemeConfigurations.shouldUseThemeAccents = component.isSelected
-                ConfigurationManager.applyConfigurations(myThemeConfigurations){}
+                ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
               })
         }
         row {
           checkBox("Rainbow Mode", myThemeConfigurations.isRainbowMode,
               actionListener = { _, component ->
                 myThemeConfigurations.isRainbowMode = component.isSelected
-                ConfigurationManager.applyConfigurations(myThemeConfigurations){}
+                ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
               })
         }
         row {
           checkBox("Transparent Background", myThemeConfigurations.isTransparentBackground,
               actionListener = { _, component ->
                 myThemeConfigurations.isTransparentBackground = component.isSelected
-                ConfigurationManager.applyConfigurations(myThemeConfigurations){}
+                ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
               })
         }
       }
       row {
-        button("Restore Defaults"){
+        button("Restore Defaults") {
           myThemeConfigurations.primaryColor = ThemeDefaults.primaryColor
           myThemeConfigurations.secondaryColor = ThemeDefaults.secondaryColor
           myThemeConfigurations.contrail = ThemeDefaults.contrailColor
-          ConfigurationManager.applyConfigurations(myThemeConfigurations){}
+          ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
         }
       }
     }

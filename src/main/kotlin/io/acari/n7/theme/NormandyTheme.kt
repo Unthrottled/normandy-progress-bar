@@ -3,7 +3,6 @@ package io.acari.n7.theme
 import com.intellij.ui.ColorUtil
 import java.awt.Color
 
-
 object NormandyTheme {
   val RED_COLOR_STRING = "F60000"
   val RED = ColorUtil.fromHex(RED_COLOR_STRING)
@@ -20,21 +19,21 @@ object NormandyTheme {
   val VIOLET_COLOR_STRING = "901DAA"
   val VIOLET = ColorUtil.fromHex(VIOLET_COLOR_STRING)
 
-  private val pastelRainbow = arrayOf({_:Color -> ColorUtil.fromHex("FF9AA2")},
-      { ColorUtil.fromHex("FFB7B2")},
-      { ColorUtil.fromHex("FFDAC1")},
-      { ColorUtil.fromHex("E2F0CB")},
-      { ColorUtil.fromHex("B5EAD7")},
-      { ColorUtil.fromHex("C7CEEA")})
+  private val pastelRainbow = arrayOf({ _: Color -> ColorUtil.fromHex("FF9AA2") },
+      { ColorUtil.fromHex("FFB7B2") },
+      { ColorUtil.fromHex("FFDAC1") },
+      { ColorUtil.fromHex("E2F0CB") },
+      { ColorUtil.fromHex("B5EAD7") },
+      { ColorUtil.fromHex("C7CEEA") })
 
   private val contrailColor = { _: Color -> ColorUtil.fromHex(ThemeConfiguration.contrailColor) }
   private val outerContrailColor = { backgroundColor: Color -> backgroundColor }
-  private val backgroundColorFunction = { backgroundColor: Color -> backgroundColor  }
+  private val backgroundColorFunction = { backgroundColor: Color -> backgroundColor }
 
   val contrailColors: Array<(Color) -> Color>
     get() = if (ThemeConfiguration.isRainbowMode) {
       arrayOf(
-          {_:Color -> RED },
+          { _: Color -> RED },
           { ORANGE },
           { YELLOW },
           { GREEN },

@@ -1,30 +1,33 @@
 package io.acari.n7.util
 
-
 object LegacySupportUtility {
 
-    fun invokeClassSafely(clasName: String, runSafely: ()->Unit) {
+    fun invokeClassSafely(clasName: String, runSafely: () -> Unit) {
         try {
             Class.forName(clasName)
-            runSafely()// :|
+            runSafely() // :|
         } catch (ignored: Throwable) {
         }
     }
 
-    fun orRunLegacy(clasName: String,
-                    runCurrent: ()->Unit,
-                    runLegacy: ()->Unit) {
+    fun orRunLegacy(
+      clasName: String,
+      runCurrent: () -> Unit,
+      runLegacy: () -> Unit
+    ) {
         try {
             Class.forName(clasName)
-            runCurrent()// :|
+            runCurrent() // :|
         } catch (ignored: Throwable) {
             runLegacy()
         }
     }
 
-    fun <T> orGetLegacy(clazz: String,
-                        runSafely: () -> T,
-                        orElseGet: () -> T) =
+    fun <T> orGetLegacy(
+      clazz: String,
+      runSafely: () -> T,
+      orElseGet: () -> T
+    ) =
             try {
                 Class.forName(clazz)
                 runSafely()
@@ -32,12 +35,13 @@ object LegacySupportUtility {
                 orElseGet()
             }
 
-
-    fun <C, T> invokeMethodSafely(clazz: Class<C>,
-                                  method: String,
-                                  runSafely: () -> T,
-                                  orElseGet: () -> T,
-                                  vararg paratemers: Class<*>) =
+    fun <C, T> invokeMethodSafely(
+      clazz: Class<C>,
+      method: String,
+      runSafely: () -> T,
+      orElseGet: () -> T,
+      vararg paratemers: Class<*>
+    ) =
             try {
                 clazz.getDeclaredMethod(method, *paratemers)
                 runSafely()
@@ -45,11 +49,13 @@ object LegacySupportUtility {
                 orElseGet()
             }
 
-    fun <C> invokeVoidMethodSafely(clazz: Class<C>,
-                                   method: String,
-                                   runSafely: ()->Unit,
-                                   orElseGet: ()->Unit,
-                                   vararg parameters: Class<*>) =
+    fun <C> invokeVoidMethodSafely(
+      clazz: Class<C>,
+      method: String,
+      runSafely: () -> Unit,
+      orElseGet: () -> Unit,
+      vararg parameters: Class<*>
+    ) =
             try {
                 clazz.getDeclaredMethod(method, *parameters)
                 runSafely()
@@ -57,10 +63,12 @@ object LegacySupportUtility {
                 orElseGet()
             }
 
-    fun <C, T> useFieldSafely(clazz: Class<C>,
-                              method: String,
-                              runSafely: () -> T,
-                              orElseGet: () -> T) =
+    fun <C, T> useFieldSafely(
+      clazz: Class<C>,
+      method: String,
+      runSafely: () -> T,
+      orElseGet: () -> T
+    ) =
             try {
                 clazz.getDeclaredField(method)
                 runSafely()
@@ -68,4 +76,3 @@ object LegacySupportUtility {
                 orElseGet()
             }
 }
-
