@@ -8,6 +8,7 @@ import com.intellij.util.ui.UIUtil
 import io.unthrottled.n7.icon.NormandyIconComponent
 import io.unthrottled.n7.theme.NormandyTheme
 import io.unthrottled.n7.theme.ThemeConfiguration
+import io.unthrottled.n7.util.toColor
 import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.Graphics2D
@@ -105,6 +106,7 @@ open class NormandyUI : BasicProgressBarUI() {
           val tintedBackgroundColor =
               when {
                 ThemeConfiguration.isTransparentBackground -> backgroundColor
+                ThemeConfiguration.isCustomBackground -> ThemeConfiguration.backgroundColor.toColor()
                 ColorUtil.isDark(backgroundColor) -> ColorUtil.brighter(backgroundColor, 5)
                 else -> ColorUtil.darker(backgroundColor, 2)
               }

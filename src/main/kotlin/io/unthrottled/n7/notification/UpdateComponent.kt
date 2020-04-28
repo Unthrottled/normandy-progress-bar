@@ -7,13 +7,13 @@ import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.project.ProjectManagerListener
 import io.unthrottled.n7.config.ConfigurationPersistence
 
-const val VERSION = "v1.8.1"
+const val VERSION = "v1.9.0"
 val UPDATE_MESSAGE =
   """
       What's New?<br>
       <ul>
-      <li>Fixed settings in 2020.1-EAP.
-            <ul><li>Thanks for reporting the issue!</li></ul></li>
+        <li>You can change the color of the background!</li>
+      </ul>
       <br>
       Thanks again for downloading <b>Normandy Progress Bar UI</b>! •‿•<br>
           <br>See <a href="https://github.com/Unthrottled/normandy-progress-bar/blob/master/docs/CHANGELOG.md">Changelog</a> for more details.

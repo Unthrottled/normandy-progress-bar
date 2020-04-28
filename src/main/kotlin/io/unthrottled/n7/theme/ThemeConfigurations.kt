@@ -7,6 +7,8 @@ data class ThemeConfigurations(
   var contrail: Color = ThemeDefaults.contrailColor,
   var primaryColor: Color = ThemeDefaults.primaryColor,
   var secondaryColor: Color = ThemeDefaults.secondaryColor,
+  var backgroundColor: Color = ThemeDefaults.backgroundColor,
+  var isCustomBackground: Boolean = false,
   var isRainbowMode: Boolean = false,
   var isTransparentBackground: Boolean = false,
   var shouldUseThemeAccents: Boolean = true,
