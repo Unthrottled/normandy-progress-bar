@@ -2,8 +2,8 @@ package io.acari.n7.integration
 
 import com.intellij.ide.AppLifecycleListener
 import com.intellij.ide.ui.LafManagerListener
+import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.components.BaseComponent
 import com.intellij.openapi.progress.util.ProgressWindow
 import com.intellij.openapi.project.DumbAware
 import com.intellij.util.SVGLoader
@@ -13,7 +13,7 @@ import io.acari.n7.config.NormandyConfigurationSubscriber
 import io.acari.n7.icon.NormandyColorPatcher
 import io.acari.n7.icon.SvgLoaderHacker
 
-class NormandyIntegrationComponent : BaseComponent, DumbAware {
+class NormandyIntegrationComponent : Disposable, DumbAware {
 
   private val messageBus: MessageBusConnection = ApplicationManager.getApplication().messageBus.connect()
 
@@ -50,12 +50,12 @@ class NormandyIntegrationComponent : BaseComponent, DumbAware {
         .orElseGet { NormandyColorPatcher() })
   }
 
-  override fun initComponent() {
+  init {
     setSVGColorPatcher()
     subscribeToTopics()
   }
 
-  override fun disposeComponent() {
+  override fun dispose() {
     messageBus.disconnect()
   }
 }
