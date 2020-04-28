@@ -1,6 +1,7 @@
 package io.acari.n7
 
 import com.intellij.ide.ui.LafManagerListener
+import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.BaseComponent
 import com.intellij.openapi.project.DumbAware
@@ -8,11 +9,11 @@ import com.intellij.util.messages.MessageBusConnection
 import io.acari.n7.ui.NormandyUI
 import javax.swing.UIManager
 
-class NormandyComponent : BaseComponent, DumbAware {
+class NormandyComponent : Disposable, DumbAware {
 
   private val messageBus: MessageBusConnection = ApplicationManager.getApplication().messageBus.connect()
 
-  override fun initComponent() {
+  init {
     makeNormandyAsProgressBar()
     messageBus.subscribe(LafManagerListener.TOPIC, LafManagerListener {
       makeNormandyAsProgressBar()
@@ -24,7 +25,7 @@ class NormandyComponent : BaseComponent, DumbAware {
     UIManager.getDefaults()[NormandyUI::class.java.name] = NormandyUI::class.java
   }
 
-  override fun disposeComponent() {
+  override fun dispose() {
     messageBus.disconnect()
   }
 }
