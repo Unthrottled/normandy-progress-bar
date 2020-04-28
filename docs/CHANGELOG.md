@@ -1,6 +1,10 @@
 # Changelog
 ---- 
 
+# 1.9.0
+
+- You can now configure the background color the Normandy flies behind!
+
 # 1.8.1
 
 - Fixed settings not showing up in 2020.1 EAP builds.
