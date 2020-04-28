@@ -10,9 +10,6 @@ import java.awt.Dimension
 import javax.swing.JComponent
 import javax.swing.JProgressBar
 
-/**
- * Most of is code converted from an automatic form generation engine, so pls forgive.
- */
 class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
 
   val myThemeConfigurations = themeConfigurations.copy()
@@ -42,6 +39,13 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
       ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
     }
 
+    val customBackgroundColor = ColorPanel()
+    customBackgroundColor.selectedColor = themeConfigurations.backgroundColor
+    customBackgroundColor.addActionListener {
+      myThemeConfigurations.backgroundColor = customBackgroundColor.selectedColor!!
+      ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
+    }
+
     val progressBar = createLoadingIndicator(true, Color.GREEN, false)!!
     return panel {
       row {
@@ -65,6 +69,17 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
             cell {
               label("Contrail Color")
               contrailColor()
+            }
+          }
+          row {
+            cell {
+              label("Background Color")
+              customBackgroundColor()
+              checkBox("Enable", myThemeConfigurations.isCustomBackground,
+                actionListener = { _, component ->
+                  myThemeConfigurations.isCustomBackground = component.isSelected
+                  ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
+                })
             }
           }
         }

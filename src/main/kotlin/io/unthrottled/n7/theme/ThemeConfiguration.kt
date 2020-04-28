@@ -7,6 +7,7 @@ import io.unthrottled.n7.util.toHexString
 import io.unthrottled.n7.util.toOptional
 import java.awt.Color
 import java.util.*
+import java.util.Optional.empty
 import java.util.Optional.of
 import javax.swing.UIManager
 
@@ -22,9 +23,14 @@ object ThemeConfiguration {
       .map { it.isTransparentBackground }
       .orElseGet { false }
 
+  val isCustomBackground: Boolean
+  get() = ConfigurationPersistence.instance
+      .map { it.isCustomBackground }
+      .orElseGet { false }
+
   val primaryThemeColor: String
     get() {
-      return getCorrectColor({ it.primaryThemeColor }) { Optional.empty() }
+      return getCorrectColor({ it.primaryThemeColor }) { empty() }
           .orElseGet { "#${ColorUtil.toHex(ThemeDefaults.primaryColor)}" }
     }
 
@@ -34,11 +40,18 @@ object ThemeConfiguration {
           .orElseGet { "#${ColorUtil.toHex(ThemeDefaults.secondaryColor)}" }
     }
 
+  val backgroundColor: String
+    get() {
+      return getCorrectColor({ it.backgroundColor }) { empty() }
+          .orElseGet { "#${ColorUtil.toHex(ThemeDefaults.secondaryColor)}" }
+    }
+
   val contrailColor: String
     get() {
       return getCorrectColor({ it.contrailColor }) {
         val defaults = UIManager.getLookAndFeelDefaults()
         val themeAccent = defaults["Doki.Accent.color"]
+            ?: defaults["LiveIndicator.color"]
             ?: defaults["material.tab.borderColor"]
         themeAccent.toOptional()
             .filter { it is Color }

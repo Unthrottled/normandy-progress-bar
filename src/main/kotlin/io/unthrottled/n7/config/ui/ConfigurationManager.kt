@@ -17,6 +17,8 @@ object ConfigurationManager {
           it.contrailColor = config.contrail.toHexString()
           it.primaryThemeColor = config.primaryColor.toHexString()
           it.secondaryThemeColor = config.secondaryColor.toHexString()
+          it.backgroundColor = config.backgroundColor.toHexString()
+          it.isCustomBackground = config.isCustomBackground
           it.isRainbowMode = config.isRainbowMode
           it.isTransparentBackground = config.isTransparentBackground
           ApplicationManager.getApplication().messageBus
@@ -31,6 +33,8 @@ object ConfigurationManager {
         it.contrailColor.toColor(),
         it.primaryThemeColor.toColor(),
         it.secondaryThemeColor.toColor(),
+        it.backgroundColor.toColor(),
+        it.isCustomBackground,
         it.isRainbowMode,
         it.isTransparentBackground,
         it.useThemeAccent,

@@ -17,6 +17,8 @@ class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersisten
   var primaryThemeColor = "#${ColorUtil.toHex(ThemeDefaults.primaryColor)}"
   var secondaryThemeColor = "#${ColorUtil.toHex(ThemeDefaults.secondaryColor)}"
   var contrailColor = "#${ColorUtil.toHex(ThemeDefaults.contrailColor)}"
+  var backgroundColor = "#${ColorUtil.toHex(ThemeDefaults.backgroundColor)}"
+  var isCustomBackground = false
   var isRainbowMode = false
   var isTransparentBackground = false
   var useThemeAccent = false
