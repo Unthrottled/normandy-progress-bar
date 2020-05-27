@@ -1,6 +1,10 @@
 # Changelog
 ---- 
 
+# 1.9.1
+
+- 2020.2 Build Support.
+
 # 1.9.0
 
 - You can now configure the background color the Normandy flies behind!
