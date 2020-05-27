@@ -7,12 +7,12 @@ import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.project.ProjectManagerListener
 import io.unthrottled.n7.config.ConfigurationPersistence
 
-const val VERSION = "v1.9.0"
+const val VERSION = "v1.9.1"
 val UPDATE_MESSAGE =
   """
       What's New?<br>
       <ul>
-        <li>You can change the color of the background!</li>
+        <li>2020.2 Build Support</li>
       </ul>
       <br>
       Thanks again for downloading <b>Normandy Progress Bar UI</b>! •‿•<br>
