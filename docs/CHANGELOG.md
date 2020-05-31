@@ -1,6 +1,10 @@
 # Changelog
 ---- 
 
+# 1.9.2 [Non-Functional]
+
+- Increased maintainability of plugin version.
+
 # 1.9.1
 
 - 2020.2 Build Support.
