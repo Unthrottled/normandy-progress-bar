@@ -53,7 +53,6 @@ class UpdateComponent : Disposable {
       .toOptional()
       .map { it.version }
 
-
   override fun dispose() {
     connection.dispose()
   }
