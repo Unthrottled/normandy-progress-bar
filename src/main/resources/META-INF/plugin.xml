@@ -9,7 +9,7 @@
       <div align="center"><img src="https://raw.githubusercontent.com/cyclic-reference/normandy-progress-bar/master/assets/normandy.gif" alt="SSV Normandy"></img></div>
     ]]></description>
 
-  <idea-version since-build="201.0"/>
+  <idea-version since-build="201.1174"/>
 
   <depends>com.intellij.modules.lang</depends>
 
