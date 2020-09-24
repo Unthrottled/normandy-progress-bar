@@ -23,6 +23,8 @@ class ConfigurationPersistence : PersistentStateComponent<ConfigurationPersisten
   var isTransparentBackground = false
   var useThemeAccent = false
 
+  var userId: String = ""
+
   var externalSecondaryColor = NOT_SET
   var externalContrailColor = NOT_SET
   var externalThemeSet = NOT_SET
