@@ -46,4 +46,4 @@ patchPluginXml {
     untilBuild System.getenv("pluginUntilBuild") ?: untilBuildP
 }
 
-tasks.patchPluginXml.dependsOn("markdownToHtml")
+//tasks.patchPluginXml.dependsOn("markdownToHtml")
