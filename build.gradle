@@ -1,7 +1,7 @@
 plugins {
     id 'org.jetbrains.intellij' version '0.4.16'
     id "org.jetbrains.kotlin.jvm" version "1.4.0"
-    id 'org.kordamp.gradle.markdown' version '2.0.0'
+    id 'org.kordamp.gradle.markdown' version '2.2.0'
     id "org.jlleitschuh.gradle.ktlint" version "8.2.0"
 }
 repositories {
@@ -9,7 +9,7 @@ repositories {
 }
 
 group 'io.unthrottled'
-version '1.9.2'
+version '1.9.3'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
@@ -36,12 +36,14 @@ compileTestKotlin {
 }
 
 markdownToHtml {
-    sourceDir new File("$projectDir/docs")
-    outputDir new File("$projectDir/docs")
+    sourceDir new File("$rootDir/docs")
+    outputDir new File("$rootDir/docs")
 }
 
 patchPluginXml {
-    changeNotes file("$projectDir/docs/CHANGELOG.html").text
+    changeNotes file("$rootDir/docs/CHANGELOG.html").text
     sinceBuild System.getenv("pluginSinceBuild") ?: sinceBuildP
     untilBuild System.getenv("pluginUntilBuild") ?: untilBuildP
 }
+
+tasks.patchPluginXml.dependsOn("markdownToHtml")

@@ -13,11 +13,12 @@ import java.util.Optional
 
 const val PLUGIN_ID = "io.acari.normandy.progress.bar"
 
+// todo: fancy notification.
 val UPDATE_MESSAGE =
   """
       What's New?<br>
       <ul>
-        <li>2020.2 Build Support</li>
+        <li>2020.3 Build Support</li>
       </ul>
       <br>
       Thanks again for downloading <b>Normandy Progress Bar UI</b>! •‿•<br>
