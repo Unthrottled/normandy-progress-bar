@@ -1,6 +1,10 @@
-<div align="center">
-<img src="https://raw.githubusercontent.com/Unthrottled/normandy-progress-bar/master/assets/normandy.gif" alt="SSV Normandy"></img>
-</div>
+Normandy Progress Bar
+---
+
+![Downloads](https://img.shields.io/jetbrains/plugin/d/12025)
+![Rating](https://img.shields.io/jetbrains/plugin/r/rating/12025)
+![Version](https://img.shields.io/jetbrains/plugin/v/12025)
+![Build](https://github.com/Unthrottled/normandy-progress-bar/workflows/Release/badge.svg)
 
 ---
 <div align="center">
@@ -8,7 +12,8 @@
 </div>
 
 ---
-Your progress bar becomes the SSV Normandy SR-1 traveling at FTL.
+
+Make your JetBrains IDE's progress bar become the SSV Normandy SR-1 traveling at faster than light speeds.
 
 ### Default Look
 ![default](assets/default.png)
@@ -29,3 +34,8 @@ https://plugins.jetbrains.com/plugin/12025-ssv-normandy-progress-bar
 
 Enjoy!
 ---
+
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/Unthrottled/normandy-progress-bar/master/assets/normandy.gif" alt="SSV Normandy"></img>
+</div>

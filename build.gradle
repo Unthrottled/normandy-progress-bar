@@ -23,9 +23,15 @@ configurations {
 }
 
 intellij {
-  version 'LATEST-EAP-SNAPSHOT'
+  version '2020.2'
   type 'IU'
   alternativeIdePath idePath
+
+  if(System.getenv().getOrDefault("ENV", "") == "DEV") {
+    plugins (
+      'io.acari.DDLCTheme:10.0.0'
+    )
+  }
 }
 
 compileKotlin {
