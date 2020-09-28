@@ -13,7 +13,10 @@ Normandy Progress Bar
 
 ---
 
-![Loading Bar Preview](./assets/normandy_preview.gif)
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Unthrottled/normandy-progress-bar/master/assets/normandy_preview.gif" alt="SSV Normandy Progress Bar"></img>
+</div>
+
 
 Make your JetBrains IDE's progress bar become the SSV Normandy SR-1 traveling at faster than light speeds.
 
