@@ -13,22 +13,29 @@ Normandy Progress Bar
 
 ---
 
+![Loading Bar Preview](./assets/normandy_preview.gif)
+
 Make your JetBrains IDE's progress bar become the SSV Normandy SR-1 traveling at faster than light speeds.
 
-### Default Look
-![default](assets/default.png)
+## Configuration
 
-[More images](assets/images.md)
+You have the ability to customize the look of your new progress bar.
+You can find the settings menu via `Tools | SSV Normandy configuration` or the icon in the toolbar:
+
+![How to get to configuration](./assets/config.png)
+
+#### Customizations
+
+![Customizations](./assets/customization.gif)
+
 ---
 
-Plugin page:
-https://plugins.jetbrains.com/plugin/12025-ssv-normandy-progress-bar
+## Plugin's that work with this plugin
 
-## Plugin's that work with this plugin*
+The progress bar has the ability to pick of accents from these themes:
 
-- [Doki-Doki Literature Club Theme](https://github.com/Unthrottled/ddlc-jetbrains-theme)
-
-***Auto theming integration is currently not available at the moment.** (It will be back, eventually!)
+- [The Doki Theme](https://plugins.jetbrains.com/plugin/10804-the-doki-theme)
+- [Material UI](https://plugins.jetbrains.com/plugin/8006-material-theme-ui)
 
 #### Contributions and fun ideas are encouraged!
 
