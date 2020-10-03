@@ -1,6 +1,10 @@
 # Changelog
 ---- 
 
+# 1.9.4 [Enhancement]
+
+- Enhanced plugin update notification.
+
 # 1.9.3 [Maintenance]
 
 - 2020.3 Build Support.

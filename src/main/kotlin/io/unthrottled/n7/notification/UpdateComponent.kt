@@ -7,13 +7,13 @@ import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.project.ProjectManagerListener
+import com.intellij.openapi.startup.StartupManager
 import io.unthrottled.n7.config.ConfigurationPersistence
 import io.unthrottled.n7.util.toOptional
 import java.util.Optional
 
 const val PLUGIN_ID = "io.acari.normandy.progress.bar"
 
-// todo: fancy notification.
 val UPDATE_MESSAGE =
   """
       What's New?<br>
@@ -21,8 +21,12 @@ val UPDATE_MESSAGE =
         <li>2020.3 Build Support</li>
       </ul>
       <br>
-      Thanks again for downloading <b>Normandy Progress Bar UI</b>! •‿•<br>
-          <br>See <a href="https://github.com/Unthrottled/normandy-progress-bar/blob/master/docs/CHANGELOG.md">Changelog</a> for more details.
+      <br>Please see the <a href="https://github.com/Unthrottled/normandy-progress-bar/blob/master/docs/CHANGELOG.md">Changelog</a> for more details.
+      Thanks for downloading!
+      <br><br>
+      <img alt='Thanks for downloading!' src="https://raw.githubusercontent.com/Unthrottled/normandy-progress-bar/master/assets/normandy.gif" width='256'>
+       <br><br><br><br><br><br><br><br>
+       Thanks!
         """.trimIndent()
 
 class UpdateComponent : Disposable {
@@ -43,7 +47,9 @@ class UpdateComponent : Disposable {
           .ifPresent { configAndVersion ->
             val (config, currentVersion) = configAndVersion
             config.version = currentVersion
-            NotificationService.showUserUpdates(project, currentVersion)
+            StartupManager.getInstance(project).runWhenProjectIsInitialized {
+              NotificationService.showUserUpdates(project, currentVersion)
+            }
           }
       }
     })
