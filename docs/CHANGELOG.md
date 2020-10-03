@@ -1,6 +1,10 @@
 # Changelog
 ---- 
 
+# 1.9.5 [Non-Functional]
+
+- Increased maintainability of plugin release documentation.
+
 # 1.9.4 [Enhancement]
 
 - Enhanced plugin update notification.

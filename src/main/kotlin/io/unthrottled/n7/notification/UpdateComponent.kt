@@ -22,6 +22,7 @@ val UPDATE_MESSAGE =
       </ul>
       <br>
       <br>Please see the <a href="https://github.com/Unthrottled/normandy-progress-bar/blob/master/docs/CHANGELOG.md">Changelog</a> for more details.
+      <br>
       Thanks for downloading!
       <br><br>
       <img alt='Thanks for downloading!' src="https://raw.githubusercontent.com/Unthrottled/normandy-progress-bar/master/assets/normandy.gif" width='256'>
