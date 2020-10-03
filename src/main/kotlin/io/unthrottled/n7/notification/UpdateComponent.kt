@@ -13,7 +13,6 @@ import java.util.Optional
 
 const val PLUGIN_ID = "io.acari.normandy.progress.bar"
 
-// todo: fancy notification.
 val UPDATE_MESSAGE =
   """
       What's New?<br>
@@ -21,8 +20,12 @@ val UPDATE_MESSAGE =
         <li>2020.3 Build Support</li>
       </ul>
       <br>
-      Thanks again for downloading <b>Normandy Progress Bar UI</b>! •‿•<br>
-          <br>See <a href="https://github.com/Unthrottled/normandy-progress-bar/blob/master/docs/CHANGELOG.md">Changelog</a> for more details.
+      <br>Please see the <a href="https://github.com/Unthrottled/normandy-progress-bar/blob/master/docs/CHANGELOG.md">Changelog</a> for more details.
+      Thanks for downloading!
+      <br><br>
+      <img alt='Thanks for downloading!' src="https://raw.githubusercontent.com/Unthrottled/normandy-progress-bar/master/assets/normandy.gif" width='256'>
+       <br><br><br><br><br><br><br><br>
+       Thanks!
         """.trimIndent()
 
 class UpdateComponent : Disposable {

@@ -6,7 +6,7 @@
 
   <description><![CDATA[
       Your progress bar becomes the SSV Normandy SR-1 traveling at FTL.<br/><br/>
-      <div align="center"><img src="https://raw.githubusercontent.com/cyclic-reference/normandy-progress-bar/master/assets/normandy.gif" alt="SSV Normandy"></img></div>
+      <img src="https://raw.githubusercontent.com/Unthrottled/normandy-progress-bar/master/assets/normandy_preview.gif" width="400" alt="SSV Normandy"/>
     ]]></description>
 
   <idea-version since-build="201.1174"/>
@@ -15,6 +15,7 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <applicationService serviceImplementation="io.unthrottled.n7.config.ConfigurationPersistence"/>
+    <applicationService serviceImplementation="io.unthrottled.n7.service.ApplicationService"/>
     <applicationConfigurable instance="io.unthrottled.n7.config.ui.NormandyConfigComponent"
                              groupId="appearance"
                              id="io.unthrottled.n7.config"/>

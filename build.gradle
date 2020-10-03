@@ -9,7 +9,7 @@ repositories {
 }
 
 group 'io.unthrottled'
-version '1.9.3'
+version '1.9.4'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
