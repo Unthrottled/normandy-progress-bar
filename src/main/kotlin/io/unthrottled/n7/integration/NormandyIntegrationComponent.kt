@@ -47,14 +47,13 @@ class NormandyIntegrationComponent : AppLifecycleListener, DynamicPluginListener
    */
   private fun setSVGColorPatcher() {
     SVGLoader.setColorPatcherProvider(SvgLoaderHacker.collectOtherPatcher()
-        .map { patcher ->
-          NormandyColorPatcher { url ->
-            { element ->
-              patcher.forURL(url)?.patchColors(element)
-            }
-          }
-        }
-        .orElseGet { NormandyColorPatcher() })
+      .map { patcherProvider ->
+        NormandyColorPatcher(patcherProvider)
+      }
+      .orElseGet {
+        NormandyColorPatcher(object : SVGLoader.SvgElementColorPatcherProvider {
+        })
+      })
   }
 
   init {
