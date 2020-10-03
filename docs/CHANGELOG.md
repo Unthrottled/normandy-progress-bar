@@ -1,6 +1,10 @@
 # Changelog
 ---- 
 
+# 1.9.6 [Enhancement]
+
+- Plugin can be installed without having to restart the IDE.
+
 # 1.9.5 [Non-Functional]
 
 - Increased maintainability of plugin release documentation.

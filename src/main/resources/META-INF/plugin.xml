@@ -5,11 +5,12 @@
   <vendor email="alexsimons9999@gmail.com" url="https://unthrottled.io">Unthrottled</vendor>
 
   <description><![CDATA[
-      Your progress bar becomes the SSV Normandy SR-1 traveling at FTL.<br/><br/>
-      <img src="https://raw.githubusercontent.com/Unthrottled/normandy-progress-bar/master/assets/normandy_preview.gif" width="400" alt="SSV Normandy"/>
+    Your progress bar becomes the SSV Normandy SR-1 traveling at FTL.<br/><br/>
+    <img src="https://raw.githubusercontent.com/Unthrottled/normandy-progress-bar/master/assets/normandy_preview.gif"
+         width="400" alt="SSV Normandy"/>
     ]]></description>
 
-  <idea-version since-build="201.3803.71"/>
+  <idea-version since-build="201.4515.24"/>
 
   <depends>com.intellij.modules.lang</depends>
 
@@ -22,23 +23,20 @@
     <errorHandler implementation="io.unthrottled.n7.integration.ErrorReporter"/>
   </extensions>
 
-  <application-components>
-    <component>
-      <implementation-class>io.unthrottled.n7.NormandyComponent</implementation-class>
-    </component>
-    <component>
-      <implementation-class>io.unthrottled.n7.notification.UpdateComponent</implementation-class>
-    </component>
-    <component>
-      <implementation-class>io.unthrottled.n7.integration.NormandyIntegrationComponent</implementation-class>
-    </component>
-  </application-components>
 
-  <project-components>
-    <component>
-      <implementation-class>io.unthrottled.n7.notification.UpdateComponent</implementation-class>
-    </component>
-  </project-components>
+  <applicationListeners>
+    <listener class="io.unthrottled.n7.integration.NormandyIntegrationComponent"
+              topic="com.intellij.ide.AppLifecycleListener"/>
+    <listener class="io.unthrottled.n7.NormandyComponent"
+              topic="com.intellij.ide.ui.LafManagerListener"/>
+    <listener class="io.unthrottled.n7.integration.NormandyIntegrationComponent"
+              topic="com.intellij.ide.plugins.DynamicPluginListener" />
+  </applicationListeners>
+
+  <projectListeners>
+    <listener class="io.unthrottled.n7.notification.UpdateComponent"
+              topic="com.intellij.openapi.project.ProjectManagerListener"/>
+  </projectListeners>
 
   <actions>
     <action class="io.unthrottled.n7.actions.ConfigAction"

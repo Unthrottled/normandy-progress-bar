@@ -1,3 +1,4 @@
+- Plugin can be installed without having to restart the IDE.
 - 2020.3 build support.
 - Enhanced plugin update notification.
 

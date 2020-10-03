@@ -2,7 +2,7 @@ package io.unthrottled.n7.ui
 
 import com.intellij.ui.scale.JBUIScale.scale
 
-const val DEFAULT_VELOCITY_FROM_CITADEL = 6f
+const val DEFAULT_VELOCITY_FROM_CITADEL = 2f
 const val DEFAULT_DISTANCE_FROM_CITADEL = 0f
 val iconWidth = NormandyUI.NORMANDY_TO_CITADEL.iconWidth
 
