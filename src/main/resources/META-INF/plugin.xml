@@ -9,7 +9,7 @@
       <img src="https://raw.githubusercontent.com/Unthrottled/normandy-progress-bar/master/assets/normandy_preview.gif" width="400" alt="SSV Normandy"/>
     ]]></description>
 
-  <idea-version since-build="201.1174"/>
+  <idea-version since-build="201.3803.71"/>
 
   <depends>com.intellij.modules.lang</depends>
 

@@ -7,6 +7,7 @@ import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.project.ProjectManagerListener
+import com.intellij.openapi.startup.StartupManager
 import io.unthrottled.n7.config.ConfigurationPersistence
 import io.unthrottled.n7.util.toOptional
 import java.util.Optional
@@ -46,7 +47,9 @@ class UpdateComponent : Disposable {
           .ifPresent { configAndVersion ->
             val (config, currentVersion) = configAndVersion
             config.version = currentVersion
-            NotificationService.showUserUpdates(project, currentVersion)
+            StartupManager.getInstance(project).runWhenProjectIsInitialized {
+              NotificationService.showUserUpdates(project, currentVersion)
+            }
           }
       }
     })
