@@ -10,7 +10,7 @@
          width="400" alt="SSV Normandy"/>
     ]]></description>
 
-  <idea-version since-build="201.4515.24"/>
+  <idea-version since-build="203"/>
 
   <depends>com.intellij.modules.lang</depends>
 
