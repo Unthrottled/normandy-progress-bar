@@ -7,11 +7,19 @@ import org.w3c.dom.Element
 import java.net.URL
 
 class NormandyColorPatcher(
-  private val otherColorPatcherProvider: (URL?) -> (Element) -> Unit = { {} }
+  private val otherColorPatcherProvider: SVGLoader.SvgElementColorPatcherProvider
 ) : SVGLoader.SvgElementColorPatcherProvider {
-  override fun forURL(url: URL?): SVGLoader.SvgElementColorPatcher {
+
+  override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher =
+    buildHackedPatcher(otherColorPatcherProvider.forPath(path))
+
+  override fun forURL(url: URL?): SVGLoader.SvgElementColorPatcher =
+    buildHackedPatcher(otherColorPatcherProvider.forURL(url))
+
+  private fun buildHackedPatcher(
+    otherPatcher: SVGLoader.SvgElementColorPatcher?
+  ): SVGLoader.SvgElementColorPatcher {
     val self = this
-    val otherPatcher = otherColorPatcherProvider(url)
     return object : SVGLoader.SvgElementColorPatcher {
       override fun patchColors(svg: Element) {
         self.patchColors(svg, otherPatcher)
@@ -25,17 +33,14 @@ class NormandyColorPatcher(
 
   fun patchColors(
     svg: Element,
-    otherPatcher: (Element) -> Unit
+    otherPatcher: SVGLoader.SvgElementColorPatcher?
   ) {
-    otherPatcher(svg)
-    patchChildren(svg,
-        otherPatcher)
+    otherPatcher?.patchColors(svg)
+    patchChildren(svg, otherPatcher)
   }
 
-  private fun patchChildren(svg: Element, otherPatcher: (Element) -> Unit) {
-    val themedPrimaryAttribute = svg.getAttribute("themedPrimary")
-
-    when (themedPrimaryAttribute) {
+  private fun patchChildren(svg: Element, otherPatcher: SVGLoader.SvgElementColorPatcher?) {
+    when (svg.getAttribute("themedPrimary")) {
       "fill" -> svg.setAttribute("fill", NormandyTheme.primaryColorString())
       "stroke" -> svg.setAttribute("stroke", NormandyTheme.primaryColorString())
       "both" -> {

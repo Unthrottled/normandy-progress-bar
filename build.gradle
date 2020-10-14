@@ -9,7 +9,7 @@ repositories {
 }
 
 group 'io.unthrottled'
-version '1.9.6'
+version '1.9.7'
 
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
@@ -23,7 +23,7 @@ configurations {
 }
 
 intellij {
-  version '2020.2'
+  version 'LATEST-EAP-SNAPSHOT'
   type 'IU'
   alternativeIdePath idePath
 
