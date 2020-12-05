@@ -9,7 +9,7 @@ repositories {
 }
 
 group 'io.unthrottled'
-version '1.9.7'
+version '1.9.8'
 
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
@@ -29,7 +29,7 @@ intellij {
 
   if (System.getenv().getOrDefault("ENV", "") == "DEV") {
     plugins(
-      'io.acari.DDLCTheme:10.0.0'
+      'io.acari.DDLCTheme:11.3.1'
     )
   }
 }

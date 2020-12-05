@@ -1,6 +1,14 @@
 # Changelog
 ---- 
 
+# 1.9.8 [Compatibility Fix]
+
+- Fixed fatal startup issue on 2020.2.X when certain other plugins are present.
+
+# 1.9.7 [Bug Fix]
+
+- Fixes the issue with not letting the UI LAF SVG color patcher to not change the tones of action buttons/checkboxes/other UI components.
+
 # 1.9.6 [Enhancement]
 
 - Plugin can be installed without having to restart the IDE.
