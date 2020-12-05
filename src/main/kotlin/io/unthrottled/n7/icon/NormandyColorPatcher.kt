@@ -3,6 +3,8 @@ package io.unthrottled.n7.icon
 import com.intellij.util.SVGLoader
 import io.unthrottled.n7.theme.NormandyTheme
 import io.unthrottled.n7.theme.ThemeConfiguration
+import io.unthrottled.n7.util.runSafely
+import io.unthrottled.n7.util.runSafelyWithResult
 import org.w3c.dom.Element
 import java.net.URL
 
@@ -11,10 +13,22 @@ class NormandyColorPatcher(
 ) : SVGLoader.SvgElementColorPatcherProvider {
 
   override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher =
-    buildHackedPatcher(otherColorPatcherProvider.forPath(path))
+    buildHackedPatcher(
+      runSafelyWithResult({
+        otherColorPatcherProvider.forPath(path)
+      }) {
+        null
+      }
+    )
 
   override fun forURL(url: URL?): SVGLoader.SvgElementColorPatcher =
-    buildHackedPatcher(otherColorPatcherProvider.forURL(url))
+    buildHackedPatcher(
+      runSafelyWithResult({
+        otherColorPatcherProvider.forURL(url)
+      }) {
+        null
+      }
+    )
 
   private fun buildHackedPatcher(
     otherPatcher: SVGLoader.SvgElementColorPatcher?
@@ -35,7 +49,9 @@ class NormandyColorPatcher(
     svg: Element,
     otherPatcher: SVGLoader.SvgElementColorPatcher?
   ) {
-    otherPatcher?.patchColors(svg)
+    runSafely({
+      otherPatcher?.patchColors(svg)
+    })
     patchChildren(svg, otherPatcher)
   }
 

@@ -16,6 +16,7 @@ import io.unthrottled.n7.config.NormandyConfigurationSubscriber
 import io.unthrottled.n7.icon.NormandyColorPatcher
 import io.unthrottled.n7.icon.SvgLoaderHacker
 import io.unthrottled.n7.notification.PLUGIN_ID
+import java.net.URL
 
 class NormandyIntegrationComponent : AppLifecycleListener, DynamicPluginListener, Disposable, DumbAware {
 
@@ -52,6 +53,7 @@ class NormandyIntegrationComponent : AppLifecycleListener, DynamicPluginListener
       }
       .orElseGet {
         NormandyColorPatcher(object : SVGLoader.SvgElementColorPatcherProvider {
+          override fun forURL(url: URL?): SVGLoader.SvgElementColorPatcher? = null
         })
       })
   }
