@@ -7,15 +7,17 @@ import com.intellij.openapi.project.ProjectManagerListener
 import com.intellij.openapi.startup.StartupManager
 import io.unthrottled.n7.config.ConfigurationPersistence
 import io.unthrottled.n7.util.toOptional
+import org.intellij.lang.annotations.Language
 import java.util.Optional
 
 const val PLUGIN_ID = "io.acari.normandy.progress.bar"
 
+@Language("HTML")
 val UPDATE_MESSAGE =
   """
       What's New?<br>
       <ul>
-        <li>2020.3 Build Support</li>
+        <li>2021.1 Build Support</li>
       </ul>
       <br>
       <br>Please see the <a href="https://github.com/Unthrottled/normandy-progress-bar/blob/master/docs/CHANGELOG.md">Changelog</a> for more details.

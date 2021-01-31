@@ -1,6 +1,10 @@
 # Changelog
 ---- 
 
+# 1.9.9 [Maintenance]
+
+- 2020.3 Build Support.
+
 # 1.9.8 [Compatibility Fix]
 
 - Fixed fatal startup issue on 2020.2.X when certain other plugins are present.
