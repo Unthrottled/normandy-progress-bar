@@ -15,7 +15,7 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
   val myThemeConfigurations = themeConfigurations.copy()
 
   fun isModified(): Boolean =
-      myThemeConfigurations != themeConfigurations
+    myThemeConfigurations != themeConfigurations
 
   fun getContent(): JComponent? {
     val primaryColor = ColorPanel()
@@ -75,38 +75,46 @@ class NormandyForm(private val themeConfigurations: ThemeConfigurations) {
             cell {
               label("Background Color")
               customBackgroundColor()
-              checkBox("Enable", myThemeConfigurations.isCustomBackground,
+              checkBox(
+                "Enable", myThemeConfigurations.isCustomBackground,
                 actionListener = { _, component ->
                   myThemeConfigurations.isCustomBackground = component.isSelected
                   ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
-                })
+                }
+              )
             }
           }
         }
       }
       titledRow("Appearance Options") {
         row {
-          checkBox("Use Theme Accent",
-              myThemeConfigurations.shouldUseThemeAccents,
-              comment = "If your current theme has a concept of an accent, then use that color.",
-              actionListener = { _, component ->
-                myThemeConfigurations.shouldUseThemeAccents = component.isSelected
-                ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
-              })
+          checkBox(
+            "Use Theme Accent",
+            myThemeConfigurations.shouldUseThemeAccents,
+            comment = "If your current theme has a concept of an accent, then use that color.",
+            actionListener = { _, component ->
+              myThemeConfigurations.shouldUseThemeAccents = component.isSelected
+              ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
+            }
+          )
         }
         row {
-          checkBox("Rainbow Mode", myThemeConfigurations.isRainbowMode,
-              actionListener = { _, component ->
-                myThemeConfigurations.isRainbowMode = component.isSelected
-                ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
-              })
+          checkBox(
+            "Rainbow Mode", myThemeConfigurations.isRainbowMode,
+            actionListener = { _, component ->
+              myThemeConfigurations.isRainbowMode = component.isSelected
+              ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
+            }
+          )
         }
         row {
-          checkBox("Transparent Background", myThemeConfigurations.isTransparentBackground,
-              actionListener = { _, component ->
-                myThemeConfigurations.isTransparentBackground = component.isSelected
-                ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
-              })
+          checkBox(
+            "Transparent Background", myThemeConfigurations.isTransparentBackground,
+            actionListener = { _, component ->
+              myThemeConfigurations.isTransparentBackground = component.isSelected
+              ConfigurationManager.applyConfigurations(myThemeConfigurations) {}
+            }
+          )
         }
       }
       row {

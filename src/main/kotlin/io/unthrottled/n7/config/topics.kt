@@ -8,7 +8,7 @@ val CONFIGURATION_TOPIC: Topic<NormandyConfigurationListener> = Topic.create("No
 interface NormandyConfigurationListener : BaseListener<ThemeConfigurations>
 
 class NormandyConfigurationSubscriber(consumer: (ThemeConfigurations) -> Unit) :
-    NormandyConfigurationListener, ASubscriber<ThemeConfigurations>(consumer)
+  NormandyConfigurationListener, ASubscriber<ThemeConfigurations>(consumer)
 
 interface BaseListener<T> {
   fun consumeChanges(delta: T)

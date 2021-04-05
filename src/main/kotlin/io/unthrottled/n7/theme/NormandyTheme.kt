@@ -19,12 +19,14 @@ object NormandyTheme {
   val VIOLET_COLOR_STRING = "901DAA"
   val VIOLET = ColorUtil.fromHex(VIOLET_COLOR_STRING)
 
-  private val pastelRainbow = arrayOf({ _: Color -> ColorUtil.fromHex("FF9AA2") },
-      { ColorUtil.fromHex("FFB7B2") },
-      { ColorUtil.fromHex("FFDAC1") },
-      { ColorUtil.fromHex("E2F0CB") },
-      { ColorUtil.fromHex("B5EAD7") },
-      { ColorUtil.fromHex("C7CEEA") })
+  private val pastelRainbow = arrayOf(
+    { _: Color -> ColorUtil.fromHex("FF9AA2") },
+    { ColorUtil.fromHex("FFB7B2") },
+    { ColorUtil.fromHex("FFDAC1") },
+    { ColorUtil.fromHex("E2F0CB") },
+    { ColorUtil.fromHex("B5EAD7") },
+    { ColorUtil.fromHex("C7CEEA") }
+  )
 
   private val contrailColor = { _: Color -> ColorUtil.fromHex(ThemeConfiguration.contrailColor) }
   private val outerContrailColor = { backgroundColor: Color -> backgroundColor }
@@ -33,33 +35,35 @@ object NormandyTheme {
   val contrailColors: Array<(Color) -> Color>
     get() = if (ThemeConfiguration.isRainbowMode) {
       arrayOf(
-          { _: Color -> RED },
-          { ORANGE },
-          { YELLOW },
-          { GREEN },
-          { BLUE },
-          { INDIGO },
-          { VIOLET }
+        { _: Color -> RED },
+        { ORANGE },
+        { YELLOW },
+        { GREEN },
+        { BLUE },
+        { INDIGO },
+        { VIOLET }
       )
     } else {
-      arrayOf(contrailColor, outerContrailColor,
-          outerContrailColor, contrailColor,
-          outerContrailColor, backgroundColorFunction, backgroundColorFunction, backgroundColorFunction, outerContrailColor,
-          contrailColor, outerContrailColor,
-          contrailColor, outerContrailColor, outerContrailColor, contrailColor)
+      arrayOf(
+        contrailColor, outerContrailColor,
+        outerContrailColor, contrailColor,
+        outerContrailColor, backgroundColorFunction, backgroundColorFunction, backgroundColorFunction, outerContrailColor,
+        contrailColor, outerContrailColor,
+        contrailColor, outerContrailColor, outerContrailColor, contrailColor
+      )
     }
 
   val contrailScales: FloatArray
     get() {
       val contrailScalingFactor = 1.0f / contrailColors.size
       return contrailColors
-          .mapIndexed { index, _ -> contrailScalingFactor * (index + 1) }
-          .toFloatArray()
+        .mapIndexed { index, _ -> contrailScalingFactor * (index + 1) }
+        .toFloatArray()
     }
 
   fun primaryColorString(): String =
-      ThemeConfiguration.primaryThemeColor
+    ThemeConfiguration.primaryThemeColor
 
   fun secondaryColorString(): String =
-      ThemeConfiguration.secondaryThemeColor
+    ThemeConfiguration.secondaryThemeColor
 }

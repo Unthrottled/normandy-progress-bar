@@ -14,7 +14,7 @@ import java.awt.Graphics
 import java.awt.Graphics2D
 import java.awt.LinearGradientPaint
 import java.awt.geom.RoundRectangle2D
-import java.util.*
+import java.util.Optional
 import javax.swing.Icon
 import javax.swing.JComponent
 import javax.swing.plaf.ComponentUI
@@ -39,7 +39,7 @@ open class NormandyUI : BasicProgressBarUI() {
   override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
 
   override fun getPreferredSize(c: JComponent?): Dimension =
-      Dimension(super.getPreferredSize(c).width, scale(25))
+    Dimension(super.getPreferredSize(c).width, scale(25))
 
   /**
    * Draws the progress bar that has no known completion duration.
@@ -47,11 +47,14 @@ open class NormandyUI : BasicProgressBarUI() {
    *
    */
   override fun paintIndeterminate(g: Graphics, component: JComponent) {
-    drawNormandyProgress(g, component, {
-      if (guidanceSystem.isHeadingToCitadel()) NORMANDY_TO_CITADEL
-      else NORMANDY
-    },
-        guidanceSystem.calculateCurrentLocation())
+    drawNormandyProgress(
+      g, component,
+      {
+        if (guidanceSystem.isHeadingToCitadel()) NORMANDY_TO_CITADEL
+        else NORMANDY
+      },
+      guidanceSystem.calculateCurrentLocation()
+    )
   }
 
   /**
@@ -83,85 +86,97 @@ open class NormandyUI : BasicProgressBarUI() {
     positionDataFunction: (Int, Int, Float) -> NormandyPositionData
   ) {
     getCorrectGraphic(g)
-        .ifPresent { dimensionsAndGraphic ->
-          val drawableGraphic = dimensionsAndGraphic.third
+      .ifPresent { dimensionsAndGraphic ->
+        val drawableGraphic = dimensionsAndGraphic.third
 
-          val componentWidth = component.width
-          val preferredHeight = component.preferredSize.height
-          val componentHeight =
-              if (component.height - preferredHeight % 2 != 0) preferredHeight + 1
-              else preferredHeight
+        val componentWidth = component.width
+        val preferredHeight = component.preferredSize.height
+        val componentHeight =
+          if (component.height - preferredHeight % 2 != 0) preferredHeight + 1
+          else preferredHeight
 
-          if (component.isOpaque) {
-            drawableGraphic.fillRect(0, 0, componentWidth, componentHeight)
+        if (component.isOpaque) {
+          drawableGraphic.fillRect(0, 0, componentWidth, componentHeight)
+        }
+
+        val graphicsConfig = GraphicsUtil.setupAAPainting(drawableGraphic)
+
+        // SET Progress bar BACKGROUND (ie Space!)
+        val progressBarParent = component.parent
+        val backgroundColor =
+          if (progressBarParent != null) progressBarParent.background
+          else UIUtil.getPanelBackground()
+        val tintedBackgroundColor =
+          when {
+            ThemeConfiguration.isTransparentBackground -> backgroundColor
+            ThemeConfiguration.isCustomBackground -> ThemeConfiguration.backgroundColor.toColor()
+            ColorUtil.isDark(backgroundColor) -> ColorUtil.brighter(backgroundColor, 5)
+            else -> ColorUtil.darker(backgroundColor, 2)
           }
+        drawableGraphic.color = tintedBackgroundColor
 
-          val graphicsConfig = GraphicsUtil.setupAAPainting(drawableGraphic)
+        val borderRadius = scale(8f)
+        val offset = scale(1f)
+        drawableGraphic.fill(
+          RoundRectangle2D.Float(
+            offset, offset,
+            componentWidth.toFloat() - 2f * offset - offset,
+            componentHeight.toFloat() - 2f * offset - offset,
+            borderRadius,
+            borderRadius
+          )
+        )
 
-          // SET Progress bar BACKGROUND (ie Space!)
-          val progressBarParent = component.parent
-          val backgroundColor =
-              if (progressBarParent != null) progressBarParent.background
-              else UIUtil.getPanelBackground()
-          val tintedBackgroundColor =
-              when {
-                ThemeConfiguration.isTransparentBackground -> backgroundColor
-                ThemeConfiguration.isCustomBackground -> ThemeConfiguration.backgroundColor.toColor()
-                ColorUtil.isDark(backgroundColor) -> ColorUtil.brighter(backgroundColor, 5)
-                else -> ColorUtil.darker(backgroundColor, 2)
-              }
-          drawableGraphic.color = tintedBackgroundColor
+        // Draw Contrail Background
+        drawableGraphic.paint = LinearGradientPaint(
+          0f,
+          scale(0f),
+          0f,
+          componentHeight.toFloat(),
+          NormandyTheme.contrailScales,
+          NormandyTheme.contrailColors
+            .map { contrailColorFunction -> contrailColorFunction(tintedBackgroundColor) } // Allows transparency
+            .toTypedArray()
+        )
 
-          val borderRadius = scale(8f)
-          val offset = scale(1f)
-          drawableGraphic.fill(RoundRectangle2D.Float(offset, offset,
-              componentWidth.toFloat() - 2f * offset - offset,
-              componentHeight.toFloat() - 2f * offset - offset,
-              borderRadius,
-              borderRadius))
+        val (startingX, lengthOfContrail, distanceBetweenCitadelAndNormandy) =
+          positionDataFunction(componentWidth, componentHeight, offset)
 
-          // Draw Contrail Background
-          drawableGraphic.paint = LinearGradientPaint(0f,
-              scale(0f),
-              0f,
-              componentHeight.toFloat(),
-              NormandyTheme.contrailScales,
-              NormandyTheme.contrailColors
-                  .map { contrailColorFunction -> contrailColorFunction(tintedBackgroundColor) } // Allows transparency
-                  .toTypedArray()
+        val contrailRadius =
+          if (ThemeConfiguration.isTransparentBackground) scale(10f)
+          else borderRadius
+
+        drawableGraphic.fill(
+          RoundRectangle2D.Float(
+            startingX, 2f * offset,
+            lengthOfContrail, componentHeight - scale(5f),
+            contrailRadius, contrailRadius
+          )
+        )
+
+        // Draw the Normandy!
+        getNormandyIcon()
+          .paintIcon(
+            progressBar,
+            drawableGraphic,
+            distanceBetweenCitadelAndNormandy,
+            scale(0)
           )
 
-          val (startingX, lengthOfContrail, distanceBetweenCitadelAndNormandy) =
-              positionDataFunction(componentWidth, componentHeight, offset)
-
-          val contrailRadius =
-              if (ThemeConfiguration.isTransparentBackground) scale(10f)
-              else borderRadius
-
-          drawableGraphic.fill(RoundRectangle2D.Float(startingX, 2f * offset,
-              lengthOfContrail, componentHeight - scale(5f),
-              contrailRadius, contrailRadius))
-
-          // Draw the Normandy!
-          getNormandyIcon()
-              .paintIcon(
-                  progressBar,
-                  drawableGraphic,
-                  distanceBetweenCitadelAndNormandy,
-                  scale(0)
-              )
-
-          graphicsConfig.restore()
-        }
+        graphicsConfig.restore()
+      }
   }
 
-  private fun getCorrectGraphic(g: Graphics): Optional<Triple<Int, Int, Graphics2D>> = Optional.of(g)
+  private fun getCorrectGraphic(g: Graphics): Optional<Triple<Int, Int, Graphics2D>> =
+    Optional.of(g)
       .filter { it is Graphics2D }
       .map { it as Graphics2D }
       .map {
         val insets = progressBar.insets
-        Triple(progressBar.width - (insets.right + insets.left),
-            progressBar.height - (insets.top + insets.bottom), it)
+        Triple(
+          progressBar.width - (insets.right + insets.left),
+          progressBar.height - (insets.top + insets.bottom), it
+        )
       }
       .filter { it.first > 0 || it.second > 0 }
 }
