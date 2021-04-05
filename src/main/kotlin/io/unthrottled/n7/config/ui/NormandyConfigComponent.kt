@@ -12,11 +12,11 @@ class NormandyConfigComponent : SearchableConfigurable {
   }
 
   private var initialConfig = ConfigurationPersistence.instance
-      .map { configToThemeConfig(it) }
-      .orElseGet { ThemeConfigurations() }
+    .map { configToThemeConfig(it) }
+    .orElseGet { ThemeConfigurations() }
 
   private var normandyForm =
-      NormandyForm(initialConfig)
+    NormandyForm(initialConfig)
 
   override fun getId(): String = CONFIG_ID
 

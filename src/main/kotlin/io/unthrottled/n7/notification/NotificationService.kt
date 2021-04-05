@@ -51,10 +51,13 @@ object NotificationService {
       val ideFrame =
         WindowManager.getInstance().getIdeFrame(project) ?: WindowManager.getInstance().allProjectFrames.first()
       val frameBounds = ideFrame.component.bounds
-      val notificationPosition = RelativePoint(ideFrame.component, Point(
-        frameBounds.x + frameBounds.width,
-        0
-      ))
+      val notificationPosition = RelativePoint(
+        ideFrame.component,
+        Point(
+          frameBounds.x + frameBounds.width,
+          0
+        )
+      )
       val balloon = NotificationsManagerImpl.createBalloon(
         ideFrame,
         updateNotification,

@@ -12,6 +12,6 @@ import io.unthrottled.n7.config.ui.NormandyConfigComponent
 class ConfigAction : AnAction(), DumbAware {
   override fun actionPerformed(event: AnActionEvent) {
     ShowSettingsUtil.getInstance()
-        .showSettingsDialog(event.project, NormandyConfigComponent::class.java)
+      .showSettingsDialog(event.project, NormandyConfigComponent::class.java)
   }
 }

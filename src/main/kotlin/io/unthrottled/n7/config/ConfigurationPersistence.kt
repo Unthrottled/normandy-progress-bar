@@ -7,7 +7,6 @@ import com.intellij.openapi.components.Storage
 import com.intellij.ui.ColorUtil
 import com.intellij.util.xmlb.XmlSerializerUtil
 import io.unthrottled.n7.theme.ThemeDefaults
-
 import java.util.Optional
 
 @State(name = "NormandyConfig", storages = [Storage("normandy_theme.xml")])

@@ -2,7 +2,7 @@ package io.unthrottled.n7.integration
 
 import io.unthrottled.n7.config.ConfigurationPersistence
 import io.unthrottled.n7.config.NOT_SET
-import java.util.*
+import java.util.Optional
 
 object ExternalThemeConfigurations {
   val secondaryThemeColor: Optional<String>
@@ -15,8 +15,8 @@ object ExternalThemeConfigurations {
     get() = false
 
   private fun getExternalThemeFromConfig(valueExtractor3000: (ConfigurationPersistence) -> String): Optional<String> =
-      ConfigurationPersistence.instance.filter { it.externalThemeSet != NOT_SET }
-          .filter { it.useThemeAccent }
-          .map(valueExtractor3000)
-          .filter { it != NOT_SET }
+    ConfigurationPersistence.instance.filter { it.externalThemeSet != NOT_SET }
+      .filter { it.useThemeAccent }
+      .map(valueExtractor3000)
+      .filter { it != NOT_SET }
 }

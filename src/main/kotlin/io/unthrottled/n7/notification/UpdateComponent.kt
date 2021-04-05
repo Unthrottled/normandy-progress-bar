@@ -27,7 +27,7 @@ val UPDATE_MESSAGE =
       <img alt='Thanks for downloading!' src="https://raw.githubusercontent.com/Unthrottled/normandy-progress-bar/master/assets/normandy.gif" width='256'>
        <br><br><br><br><br><br><br><br>
        Thanks!
-        """.trimIndent()
+  """.trimIndent()
 
 class UpdateComponent : ProjectManagerListener {
 
