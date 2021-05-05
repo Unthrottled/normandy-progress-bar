@@ -20,6 +20,7 @@ import javax.swing.JComponent
 import javax.swing.plaf.ComponentUI
 import javax.swing.plaf.basic.BasicProgressBarUI
 
+@Suppress("ACCIDENTAL_OVERRIDE")
 open class NormandyUI : BasicProgressBarUI() {
 
   private val guidanceSystem = GuidanceSystem()
@@ -29,7 +30,7 @@ open class NormandyUI : BasicProgressBarUI() {
     val NORMANDY_TO_CITADEL = NormandyIconComponent.getNormandyToCitadelIcon()
 
     @JvmStatic
-    @Suppress("ACCIDENTAL_OVERRIDE", "UNUSED", "UNUSED_PARAMETER")
+    @Suppress( "UNUSED", "UNUSED_PARAMETER")
     fun createUI(c: JComponent?): ComponentUI {
       c?.border = Borders.empty().asUIResource()
       return NormandyUI()
