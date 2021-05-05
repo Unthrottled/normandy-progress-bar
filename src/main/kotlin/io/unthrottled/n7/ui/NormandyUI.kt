@@ -30,7 +30,7 @@ open class NormandyUI : BasicProgressBarUI() {
     val NORMANDY_TO_CITADEL = NormandyIconComponent.getNormandyToCitadelIcon()
 
     @JvmStatic
-    @Suppress( "UNUSED", "UNUSED_PARAMETER")
+    @Suppress("UNUSED", "UNUSED_PARAMETER")
     fun createUI(c: JComponent?): ComponentUI {
       c?.border = Borders.empty().asUIResource()
       return NormandyUI()
