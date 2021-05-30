@@ -28,7 +28,7 @@ configurations {
 
 intellij {
   version.set('LATEST-EAP-SNAPSHOT')
-  type.set('IU')
+  type.set('IC')
   if (System.getenv().getOrDefault("ENV", "") == "DEV") {
     plugins.set(
       Collections.emptyList()
