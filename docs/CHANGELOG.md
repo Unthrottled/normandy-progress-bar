@@ -1,6 +1,10 @@
 # Changelog
 ---- 
 
+# 1.9.10 [Maintenance]
+
+- 2021.2 Build Support
+
 # 1.9.9 [Maintenance]
 
 - 2020.3 Build Support.

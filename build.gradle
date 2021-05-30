@@ -1,5 +1,9 @@
+def properties(String key) {
+  return project.findProperty(key).toString()
+}
+
 plugins {
-  id 'org.jetbrains.intellij' version '0.7.3'
+  id 'org.jetbrains.intellij' version '1.0'
   id "org.jetbrains.kotlin.jvm" version "1.5.10"
   id 'org.kordamp.gradle.markdown' version '2.2.0'
   id "org.jlleitschuh.gradle.ktlint" version "10.0.0"
@@ -9,7 +13,7 @@ repositories {
 }
 
 group 'io.unthrottled'
-version '1.9.9'
+version '1.9.10'
 
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
@@ -23,13 +27,12 @@ configurations {
 }
 
 intellij {
-  version 'LATEST-EAP-SNAPSHOT'
-  type 'IU'
-  alternativeIdePath idePath
-
+  version.set('LATEST-EAP-SNAPSHOT')
+  type.set('IC')
   if (System.getenv().getOrDefault("ENV", "") == "DEV") {
-    plugins(
-//      'io.acari.DDLCTheme:11.3.1'
+    plugins.set(
+      Collections.emptyList()
+//      Collections.singletonList('io.acari.DDLCTheme:15.1.0')
     )
   }
 }
@@ -46,13 +49,20 @@ markdownToHtml {
   outputDir file("$projectDir/build/html")
 }
 
-patchPluginXml {
+tasks.runIde {
+  idePath = properties("idePath")
+  if (!idePath.isEmpty()) {
+    ideDir.set(file(idePath))
+  }
+}
+
+tasks.patchPluginXml {
   def releaseNotes = "$projectDir/build/html/RELEASE-NOTES.html"
   if (file(releaseNotes).exists()) {
-    changeNotes file(releaseNotes).text
+    changeNotes.set(file(releaseNotes).text)
   }
-  sinceBuild System.getenv("pluginSinceBuild") ?: sinceBuildP
-  untilBuild System.getenv("pluginUntilBuild") ?: untilBuildP
+  sinceBuild.set(System.getenv("pluginSinceBuild") ?: sinceBuildP)
+  untilBuild.set(System.getenv("pluginUntilBuild") ?: untilBuildP)
 }
 
 tasks.patchPluginXml.dependsOn("markdownToHtml")
