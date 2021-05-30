@@ -34,10 +34,10 @@ object NotificationService {
     showNotification(
       project,
       notificationGroup.createNotification(
-        "SSV Normandy Progress Bar updated to $currentVersion",
         UPDATE_MESSAGE,
         NotificationType.INFORMATION
       )
+        .setTitle("SSV Normandy Progress Bar updated to $currentVersion")
         .setListener(NotificationListener.UrlOpeningListener(false))
         .setIcon(NOTIFICATION_ICON)
     )
