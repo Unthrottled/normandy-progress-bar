@@ -10,6 +10,7 @@ import com.intellij.openapi.application.ex.ApplicationInfoEx
 import com.intellij.openapi.application.impl.ApplicationInfoImpl
 import com.intellij.openapi.diagnostic.ErrorReportSubmitter
 import com.intellij.openapi.diagnostic.IdeaLoggingEvent
+import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.diagnostic.SubmittedReportInfo
 import com.intellij.openapi.util.SystemInfo
 import com.intellij.openapi.util.io.FileUtilRt
@@ -23,6 +24,7 @@ import io.sentry.SentryOptions
 import io.sentry.protocol.Message
 import io.sentry.protocol.User
 import io.unthrottled.n7.config.ConfigurationPersistence
+import io.unthrottled.n7.util.runSafely
 import java.awt.Component
 import java.lang.management.ManagementFactory
 import java.text.SimpleDateFormat
@@ -34,21 +36,7 @@ class ErrorReporter : ErrorReportSubmitter() {
   override fun getReportActionText(): String = "Report Anonymously"
 
   companion object {
-    init {
-      Sentry.init { options: SentryOptions ->
-        options.dsn = RestClient.performGet(
-          "https://jetbrains.assets.unthrottled.io/normandy-progress-bar/sentry-dsn.txt"
-        )
-          .map { it.trim() }
-          .orElse("https://3ce22b47ebe4491bac9c5a61b8985566@o403546.ingest.sentry.io/5439944?maxmessagelength=50000")
-      }
-      Sentry.setUser(
-        User().apply {
-          this.id = ConfigurationPersistence.instance.map { it.userId }.orElse("lul dunno")
-        }
-      )
-    }
-
+    private val log = Logger.getInstance(this::class.java)
     private val gson = GsonBuilder().setPrettyPrinting().create()
   }
 
@@ -60,6 +48,22 @@ class ErrorReporter : ErrorReportSubmitter() {
   ): Boolean {
     ApplicationManager.getApplication()
       .executeOnPooledThread {
+        Sentry.setUser(
+          User().apply {
+            this.id = ConfigurationPersistence.instance.map { it.userId }.orElse("lul dunno")
+          }
+        )
+        runSafely({
+          Sentry.init { options: SentryOptions ->
+            options.dsn = RestClient.performGet(
+              "https://jetbrains.assets.unthrottled.io/normandy-progress-bar/sentry-dsn.txt"
+            )
+              .map { it.trim() }
+              .orElse("https://3ce22b47ebe4491bac9c5a61b8985566@o403546.ingest.sentry.io/5439944?maxmessagelength=50000")
+          }
+        }) {
+          log.warn("Unable to initialize sentry for raisins", it)
+        }
         events.forEach {
           Sentry.captureEvent(
             addSystemInfo(
