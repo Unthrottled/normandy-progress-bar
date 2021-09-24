@@ -21,6 +21,7 @@
                              groupId="appearance"
                              id="io.unthrottled.n7.config"/>
     <errorHandler implementation="io.unthrottled.n7.integration.ErrorReporter"/>
+    <notificationGroup displayType="BALLOON" id="normandy.progress.bar.updates" toolWindowId="normandy.progress.bar.updates" isLogByDefault="false" icon="NormandyIcons.PLUGIN_LOGO" />
   </extensions>
 
 

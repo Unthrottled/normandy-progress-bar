@@ -1,8 +1,7 @@
 package io.unthrottled.n7.notification
 
 import com.intellij.notification.Notification
-import com.intellij.notification.NotificationDisplayType
-import com.intellij.notification.NotificationGroup
+import com.intellij.notification.NotificationGroupManager
 import com.intellij.notification.NotificationListener
 import com.intellij.notification.NotificationType
 import com.intellij.notification.impl.NotificationsManagerImpl
@@ -22,13 +21,8 @@ object NotificationService {
   )
 
   private val notificationGroup =
-    NotificationGroup(
-      "normandy.progress.bar.updates",
-      NotificationDisplayType.BALLOON,
-      false,
-      "normandy.progress.bar.updates",
-      NOTIFICATION_ICON
-    )
+    NotificationGroupManager.getInstance()
+      .getNotificationGroup("normandy.progress.bar.updates")
 
   fun showUserUpdates(project: Project, currentVersion: String) {
     showNotification(
