@@ -1,7 +1,6 @@
 package io.unthrottled.n7.icon
 
 import com.intellij.util.SVGLoader
-import io.ktor.utils.io.core.toByteArray
 import io.unthrottled.n7.config.ConfigurationPersistence
 import io.unthrottled.n7.theme.NormandyTheme
 import io.unthrottled.n7.theme.ThemeConfiguration
