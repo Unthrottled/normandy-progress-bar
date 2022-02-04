@@ -8,7 +8,6 @@ import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.progress.util.ProgressWindow
 import com.intellij.openapi.project.DumbAware
-import com.intellij.openapi.project.Project
 import com.intellij.util.SVGLoader
 import com.intellij.util.messages.MessageBusConnection
 import io.unthrottled.n7.config.CONFIGURATION_TOPIC
@@ -38,7 +37,7 @@ class NormandyIntegrationComponent : AppLifecycleListener, DynamicPluginListener
     messageBus.subscribe(LafManagerListener.TOPIC, LafManagerListener { setSVGColorPatcher() })
   }
 
-  override fun appStarting(projectFromCommandLine: Project?) {
+  override fun appFrameCreated(commandLineArgs: MutableList<String>) {
     setSVGColorPatcher()
     subscribeToTopics()
   }
