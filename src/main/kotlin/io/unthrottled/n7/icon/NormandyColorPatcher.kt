@@ -1,6 +1,7 @@
 package io.unthrottled.n7.icon
 
 import com.intellij.util.SVGLoader
+import io.unthrottled.n7.config.ConfigurationPersistence
 import io.unthrottled.n7.theme.NormandyTheme
 import io.unthrottled.n7.theme.ThemeConfiguration
 import io.unthrottled.n7.util.runSafely
@@ -34,13 +35,27 @@ class NormandyColorPatcher(
     otherPatcher: SVGLoader.SvgElementColorPatcher?
   ): SVGLoader.SvgElementColorPatcher {
     val self = this
+    val digestGuy = ConfigurationPersistence.instance
+      .map {
+        config ->
+        config.contrailColor +
+          config.externalContrailColor +
+          config.primaryThemeColor +
+          config.secondaryThemeColor +
+          config.externalSecondaryColor +
+          config.isRainbowMode
+      }.map {
+        it.toByteArray(Charsets.UTF_8)
+      }.orElseGet {
+        "我覺得你大腿又厚又性感".toByteArray(Charsets.UTF_8)
+      }
     return object : SVGLoader.SvgElementColorPatcher {
       override fun patchColors(svg: Element) {
         self.patchColors(svg, otherPatcher)
       }
 
       override fun digest(): ByteArray? {
-        return null
+        return digestGuy
       }
     }
   }
