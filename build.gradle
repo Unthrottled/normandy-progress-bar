@@ -29,9 +29,11 @@ configurations {
 intellij {
   version.set('LATEST-EAP-SNAPSHOT')
   type.set('IU')
-  plugins.set(
-    Collections.singletonList('io.acari.DDLCTheme:74.1-1.0.2')
-  )
+// todo: add conditional application of plugins
+// based on environment.
+//  plugins.set(
+//    Collections.singletonList('io.acari.DDLCTheme:74.1-1.0.2')
+//  )
 }
 
 compileKotlin {
