@@ -13,7 +13,7 @@ repositories {
 }
 
 group 'io.unthrottled'
-version '1.9.13'
+version '1.9.14'
 
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
@@ -29,8 +29,7 @@ configurations {
 intellij {
   version.set('LATEST-EAP-SNAPSHOT')
   type.set('IU')
-// todo: add conditional application of plugins
-// based on environment.
+  // todo: re-enable when Doki supports 2022.2
 //  plugins.set(
 //    Collections.singletonList('io.acari.DDLCTheme:74.1-1.0.2')
 //  )
