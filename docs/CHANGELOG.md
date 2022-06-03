@@ -1,6 +1,10 @@
 Changelog
 ---- 
 
+# 1.9.14 [Maintenance]
+
+- 2022.2 Build Support
+
 # 1.9.13 [Patcher Support]
 
 - SVGs patched by other plugins are now considered when icons are cached.
