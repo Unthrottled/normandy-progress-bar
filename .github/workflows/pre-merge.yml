@@ -27,5 +27,5 @@ jobs:
         ide-versions: |
           ideaIC:2020.3
           ideaIU:2020.3
-          ideaIC:LATEST-EAP-SNAPSHOT
-          ideaIU:LATEST-EAP-SNAPSHOT
+          ideaIC:2022.1.2
+          ideaIU:2022.1.2

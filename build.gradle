@@ -3,7 +3,7 @@ def properties(String key) {
 }
 
 plugins {
-  id 'org.jetbrains.intellij' version '1.5.3'
+  id 'org.jetbrains.intellij' version '1.6.0'
   id "org.jetbrains.kotlin.jvm" version "1.6.21"
   id 'org.kordamp.gradle.markdown' version '2.2.0'
   id "org.jlleitschuh.gradle.ktlint" version "10.3.0"
@@ -29,9 +29,11 @@ configurations {
 intellij {
   version.set('LATEST-EAP-SNAPSHOT')
   type.set('IU')
-  plugins.set(
-    Collections.singletonList('io.acari.DDLCTheme:74.1-1.0.2')
-  )
+// todo: add conditional application of plugins
+// based on environment.
+//  plugins.set(
+//    Collections.singletonList('io.acari.DDLCTheme:74.1-1.0.2')
+//  )
 }
 
 compileKotlin {
