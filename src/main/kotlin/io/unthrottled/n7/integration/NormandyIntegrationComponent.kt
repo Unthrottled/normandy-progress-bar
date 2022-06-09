@@ -15,7 +15,6 @@ import io.unthrottled.n7.config.NormandyConfigurationSubscriber
 import io.unthrottled.n7.icon.NormandyColorPatcher
 import io.unthrottled.n7.icon.SvgLoaderHacker
 import io.unthrottled.n7.notification.PLUGIN_ID
-import java.net.URL
 
 class NormandyIntegrationComponent : AppLifecycleListener, DynamicPluginListener, Disposable, DumbAware {
 
