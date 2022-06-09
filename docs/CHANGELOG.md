@@ -1,6 +1,10 @@
 Changelog
 ---- 
 
+# 1.10.0 [EAP Support]
+
+- Plugin only supports 2022.2 builds or greater now.
+
 # 1.9.14 [Maintenance]
 
 - 2022.2 Build Support

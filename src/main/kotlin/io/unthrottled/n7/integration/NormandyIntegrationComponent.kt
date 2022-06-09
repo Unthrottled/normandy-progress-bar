@@ -46,14 +46,16 @@ class NormandyIntegrationComponent : AppLifecycleListener, DynamicPluginListener
    * Enables the ability to color the Normandy and Alliance Icon.
    */
   private fun setSVGColorPatcher() {
-    SVGLoader.setColorPatcherProvider(
+    SVGLoader.setContextColorPatcher(
       SvgLoaderHacker.collectOtherPatcher()
         .map { patcherProvider ->
           NormandyColorPatcher(patcherProvider)
         }
         .orElseGet {
           NormandyColorPatcher(object : SVGLoader.SvgElementColorPatcherProvider {
-            override fun forURL(url: URL?): SVGLoader.SvgElementColorPatcher? = null
+            override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher? {
+              return null
+            }
           })
         }
     )

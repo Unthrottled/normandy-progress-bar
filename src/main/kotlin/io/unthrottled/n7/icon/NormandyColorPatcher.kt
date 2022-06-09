@@ -23,15 +23,6 @@ class NormandyColorPatcher(
       }
     )
 
-  override fun forURL(url: URL?): SVGLoader.SvgElementColorPatcher =
-    buildHackedPatcher(
-      runSafelyWithResult({
-        otherColorPatcherProvider.forURL(url)
-      }) {
-        null
-      }
-    )
-
   private fun buildHackedPatcher(
     otherPatcher: SVGLoader.SvgElementColorPatcher?
   ): SVGLoader.SvgElementColorPatcher {
