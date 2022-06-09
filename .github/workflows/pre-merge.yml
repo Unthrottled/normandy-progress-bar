@@ -22,10 +22,11 @@ jobs:
       run: chmod +x gradlew
     - name: Perform quality check
       run: ./gradlew clean check buildPlugin
-    - uses: ChrisCarini/intellij-platform-plugin-verifier-action@v1.2.1
-      with:
-        ide-versions: |
-          ideaIC:2020.3
-          ideaIU:2020.3
-          ideaIC:2022.1.2
-          ideaIU:2022.1.2
+#      todo: bring back when 2022.2 is available
+#    - uses: ChrisCarini/intellij-platform-plugin-verifier-action@v1.2.1
+#      with:
+#        ide-versions: |
+#          ideaIC:2020.3
+#          ideaIU:2020.3
+#          ideaIC:2022.1.2
+#          ideaIU:2022.1.2
