@@ -8,7 +8,6 @@ import io.unthrottled.n7.theme.ThemeConfiguration
 import io.unthrottled.n7.util.runSafely
 import io.unthrottled.n7.util.runSafelyWithResult
 import org.w3c.dom.Element
-import java.net.URL
 
 class NormandyColorPatcher(
   private val otherColorPatcherProvider: SVGLoader.SvgElementColorPatcherProvider
@@ -18,15 +17,6 @@ class NormandyColorPatcher(
     buildHackedPatcher(
       runSafelyWithResult({
         otherColorPatcherProvider.forPath(path)
-      }) {
-        null
-      }
-    )
-
-  override fun forURL(url: URL?): SVGLoader.SvgElementColorPatcher =
-    buildHackedPatcher(
-      runSafelyWithResult({
-        otherColorPatcherProvider.forURL(url)
       }) {
         null
       }

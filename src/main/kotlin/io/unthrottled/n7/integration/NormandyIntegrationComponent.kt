@@ -15,7 +15,6 @@ import io.unthrottled.n7.config.NormandyConfigurationSubscriber
 import io.unthrottled.n7.icon.NormandyColorPatcher
 import io.unthrottled.n7.icon.SvgLoaderHacker
 import io.unthrottled.n7.notification.PLUGIN_ID
-import java.net.URL
 
 class NormandyIntegrationComponent : AppLifecycleListener, DynamicPluginListener, Disposable, DumbAware {
 
@@ -46,14 +45,16 @@ class NormandyIntegrationComponent : AppLifecycleListener, DynamicPluginListener
    * Enables the ability to color the Normandy and Alliance Icon.
    */
   private fun setSVGColorPatcher() {
-    SVGLoader.setColorPatcherProvider(
+    SVGLoader.setContextColorPatcher(
       SvgLoaderHacker.collectOtherPatcher()
         .map { patcherProvider ->
           NormandyColorPatcher(patcherProvider)
         }
         .orElseGet {
           NormandyColorPatcher(object : SVGLoader.SvgElementColorPatcherProvider {
-            override fun forURL(url: URL?): SVGLoader.SvgElementColorPatcher? = null
+            override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher? {
+              return null
+            }
           })
         }
     )
