@@ -13,7 +13,7 @@ repositories {
 }
 
 group 'io.unthrottled'
-version '1.10.0'
+version '1.11.0'
 
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
@@ -36,10 +36,10 @@ intellij {
 }
 
 compileKotlin {
-  kotlinOptions.jvmTarget = "11"
+  kotlinOptions.jvmTarget = "17"
 }
 compileTestKotlin {
-  kotlinOptions.jvmTarget = "11"
+  kotlinOptions.jvmTarget = "17"
 }
 
 markdownToHtml {

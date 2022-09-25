@@ -1,6 +1,10 @@
 Changelog
 ---- 
 
+# 1.11.0 [2022.3 Support]
+
+- Added 2022.3 Build Support
+
 # 1.10.0 [EAP Support]
 
 - Plugin only supports 2022.2 builds or greater now.
