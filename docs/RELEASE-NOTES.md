@@ -1,3 +1,3 @@
-- Plugin only supports 2022.2 builds or greater now.
+- Added 2022.3 Build Support
 
 Please see the <a href="https://github.com/Unthrottled/normandy-progress-bar/blob/master/docs/CHANGELOG.md">Changelog</a> for more information.
