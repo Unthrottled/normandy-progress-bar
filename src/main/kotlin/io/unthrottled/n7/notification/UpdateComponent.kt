@@ -17,7 +17,7 @@ val UPDATE_MESSAGE =
   """
       What's New?<br>
       <ul>
-        <li>Added support for 2022.3 Builds.</li>
+        <li>Migrated configuration settings UI to not use deprecated APIs.</li>
       </ul>
       <br>
       <br>Please see the <a href="https://github.com/Unthrottled/normandy-progress-bar/blob/master/docs/CHANGELOG.md">Changelog</a> for more details.

@@ -1,5 +1,8 @@
 Changelog
 ---- 
+# 1.11.1 [Config UI Migration]
+
+- Migrated configuration settings UI to not use deprecated APIs.
 
 # 1.11.0 [2022.3 Support]
 
