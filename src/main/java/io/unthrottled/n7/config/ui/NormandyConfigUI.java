@@ -99,21 +99,25 @@ public class NormandyConfigUI {
   }
 
   private void initializeComponents() {
+    customBackgroundCheckbox.setSelected(myThemeConfigurations.isCustomBackground());
     customBackgroundCheckbox.addActionListener(a -> {
       myThemeConfigurations.setCustomBackground(customBackgroundCheckbox.isSelected());
       ConfigurationManager.INSTANCE.applyConfigurations(myThemeConfigurations, () -> {});
     });
 
+    useThemeAccentCheckBox.setSelected(myThemeConfigurations.getShouldUseThemeAccents());
     useThemeAccentCheckBox.addActionListener(a -> {
       myThemeConfigurations.setShouldUseThemeAccents(useThemeAccentCheckBox.isSelected());
       ConfigurationManager.INSTANCE.applyConfigurations(myThemeConfigurations, () -> {});
     });
 
+    rainbowModeCheckBox.setSelected(myThemeConfigurations.isRainbowMode());
     rainbowModeCheckBox.addActionListener(a -> {
       myThemeConfigurations.setRainbowMode(rainbowModeCheckBox.isSelected());
       ConfigurationManager.INSTANCE.applyConfigurations(myThemeConfigurations, () -> {});
     });
 
+    transparentBackgroundCheckBox.setSelected(myThemeConfigurations.isTransparentBackground());
     transparentBackgroundCheckBox.addActionListener(a -> {
       myThemeConfigurations.setTransparentBackground(transparentBackgroundCheckBox.isSelected());
       ConfigurationManager.INSTANCE.applyConfigurations(myThemeConfigurations, () -> {});
