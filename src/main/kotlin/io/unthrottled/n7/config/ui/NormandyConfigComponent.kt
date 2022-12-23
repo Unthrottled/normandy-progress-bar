@@ -34,8 +34,8 @@ class NormandyConfigComponent : SearchableConfigurable {
    * When ever the user accepts changes to the configuration.
    */
   override fun apply() {
-    ConfigurationManager.applyConfigurations(normandyForm.myThemeConfigurations) {
-      val config = normandyForm.myThemeConfigurations
+    ConfigurationManager.applyConfigurations(normandyForm.themeConfigs()) {
+      val config = normandyForm.themeConfigs()
       initialConfig = config
       normandyForm = NormandyForm(config)
     }
