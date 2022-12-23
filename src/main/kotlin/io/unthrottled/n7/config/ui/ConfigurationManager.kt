@@ -10,7 +10,7 @@ import io.unthrottled.n7.util.toHexString
 
 object ConfigurationManager {
 
-  fun applyConfigurations(config: ThemeConfigurations, onApply: () -> Unit) {
+  fun applyConfigurations(config: ThemeConfigurations, onApply: Runnable) {
     ConfigurationPersistence.instance
       .ifPresent {
         it.useThemeAccent = config.shouldUseThemeAccents
@@ -24,7 +24,7 @@ object ConfigurationManager {
         ApplicationManager.getApplication().messageBus
           .syncPublisher(CONFIGURATION_TOPIC)
           .consumeChanges(config)
-        onApply()
+        onApply.run()
       }
   }
 

@@ -13,4 +13,6 @@ data class ThemeConfigurations(
   var isTransparentBackground: Boolean = false,
   var shouldUseThemeAccents: Boolean = true,
   var externalTheme: ExternalTheme = ExternalTheme.NOT_SET
-)
+) {
+  fun duplicate() = copy()
+}
