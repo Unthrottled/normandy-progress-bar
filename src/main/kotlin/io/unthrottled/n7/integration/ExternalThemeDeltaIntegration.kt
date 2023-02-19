@@ -29,8 +29,11 @@ object ExternalThemeDeltaIntegration {
     convertToHex(
       themeDeltas.isDark.toOptional()
         .map {
-          if (it) themeDeltas.treeSelectionBackground ?: themeDeltas.contrastColor
-          else themeDeltas.foregroundColor
+          if (it) {
+            themeDeltas.treeSelectionBackground ?: themeDeltas.contrastColor
+          } else {
+            themeDeltas.foregroundColor
+          }
         }
         .filter(Objects::nonNull)
     )

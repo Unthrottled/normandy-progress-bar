@@ -49,10 +49,14 @@ open class NormandyUI : BasicProgressBarUI() {
    */
   override fun paintIndeterminate(g: Graphics, component: JComponent) {
     drawNormandyProgress(
-      g, component,
+      g,
+      component,
       {
-        if (guidanceSystem.isHeadingToCitadel()) NORMANDY_TO_CITADEL
-        else NORMANDY
+        if (guidanceSystem.isHeadingToCitadel()) {
+          NORMANDY_TO_CITADEL
+        } else {
+          NORMANDY
+        }
       },
       guidanceSystem.calculateCurrentLocation()
     )
@@ -93,8 +97,11 @@ open class NormandyUI : BasicProgressBarUI() {
         val componentWidth = component.width
         val preferredHeight = component.preferredSize.height
         val componentHeight =
-          if (component.height - preferredHeight % 2 != 0) preferredHeight + 1
-          else preferredHeight
+          if (component.height - preferredHeight % 2 != 0) {
+            preferredHeight + 1
+          } else {
+            preferredHeight
+          }
 
         if (component.isOpaque) {
           drawableGraphic.fillRect(0, 0, componentWidth, componentHeight)
@@ -105,8 +112,11 @@ open class NormandyUI : BasicProgressBarUI() {
         // SET Progress bar BACKGROUND (ie Space!)
         val progressBarParent = component.parent
         val backgroundColor =
-          if (progressBarParent != null) progressBarParent.background
-          else UIUtil.getPanelBackground()
+          if (progressBarParent != null) {
+            progressBarParent.background
+          } else {
+            UIUtil.getPanelBackground()
+          }
         val tintedBackgroundColor =
           when {
             ThemeConfiguration.isTransparentBackground -> backgroundColor
@@ -120,7 +130,8 @@ open class NormandyUI : BasicProgressBarUI() {
         val offset = scale(1f)
         drawableGraphic.fill(
           RoundRectangle2D.Float(
-            offset, offset,
+            offset,
+            offset,
             componentWidth.toFloat() - 2f * offset - offset,
             componentHeight.toFloat() - 2f * offset - offset,
             borderRadius,
@@ -144,14 +155,20 @@ open class NormandyUI : BasicProgressBarUI() {
           positionDataFunction(componentWidth, componentHeight, offset)
 
         val contrailRadius =
-          if (ThemeConfiguration.isTransparentBackground) scale(10f)
-          else borderRadius
+          if (ThemeConfiguration.isTransparentBackground) {
+            scale(10f)
+          } else {
+            borderRadius
+          }
 
         drawableGraphic.fill(
           RoundRectangle2D.Float(
-            startingX, 2f * offset,
-            lengthOfContrail, componentHeight - scale(5f),
-            contrailRadius, contrailRadius
+            startingX,
+            2f * offset,
+            lengthOfContrail,
+            componentHeight - scale(5f),
+            contrailRadius,
+            contrailRadius
           )
         )
 
@@ -176,7 +193,8 @@ open class NormandyUI : BasicProgressBarUI() {
         val insets = progressBar.insets
         Triple(
           progressBar.width - (insets.right + insets.left),
-          progressBar.height - (insets.top + insets.bottom), it
+          progressBar.height - (insets.top + insets.bottom),
+          it
         )
       }
       .filter { it.first > 0 || it.second > 0 }
