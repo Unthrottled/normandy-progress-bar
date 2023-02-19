@@ -27,6 +27,9 @@ object SvgLoaderHacker {
       .orElseGet { useFallBackPatcher() }
 
   private fun useFallBackPatcher(): Optional<SVGLoader.SvgElementColorPatcherProvider> =
-    if (this::otherColorPatcher.isInitialized) Optional.of(otherColorPatcher)
-    else Optional.empty()
+    if (this::otherColorPatcher.isInitialized) {
+      Optional.of(otherColorPatcher)
+    } else {
+      Optional.empty()
+    }
 }

@@ -37,14 +37,23 @@ class GuidanceSystem {
     val headingToCitadel = isHeadingToCitadel()
     val whiteSpaceOffset = scale(2f) // the reversed normandy has a bit of whitespace in the front so when it is flipped the nozzles do not match the contrails
     val startingX =
-      if (headingToCitadel) distanceBetweenCitadelAndNormandy + iconWidth - whiteSpaceOffset
-      else 2f * offset
+      if (headingToCitadel) {
+        distanceBetweenCitadelAndNormandy + iconWidth - whiteSpaceOffset
+      } else {
+        2f * offset
+      }
     val lengthOfContrail =
-      if (headingToCitadel) componentWidth - distanceBetweenCitadelAndNormandy - iconWidth
-      else distanceBetweenCitadelAndNormandy - iconWidth
+      if (headingToCitadel) {
+        componentWidth - distanceBetweenCitadelAndNormandy - iconWidth
+      } else {
+        distanceBetweenCitadelAndNormandy - iconWidth
+      }
     val positionOfNormandy =
-      if (headingToCitadel) distanceBetweenCitadelAndNormandy
-      else distanceBetweenCitadelAndNormandy - iconWidth
+      if (headingToCitadel) {
+        distanceBetweenCitadelAndNormandy
+      } else {
+        distanceBetweenCitadelAndNormandy - iconWidth
+      }
 
     NormandyPositionData(
       startingX,
